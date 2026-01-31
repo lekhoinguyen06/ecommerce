@@ -34,7 +34,6 @@ export class AuthService {
         if (error.code === 'P2002')
           throw new ConflictException('Email already exist');
       }
-      console.log('Register user error');
       throw error;
     }
   }
@@ -49,7 +48,7 @@ export class AuthService {
 
       if (!user) throw new UnauthorizedException('Account does not exist');
 
-      const isPasswordMatch = this.hashingService.compare(
+      const isPasswordMatch = await this.hashingService.compare(
         body.password,
         user.password,
       );
@@ -87,5 +86,35 @@ export class AuthService {
       },
     });
     return { accessToken, refreshToken };
+  }
+
+  async refreshToken(refreshToken: string) {
+    try {
+      // Validate token
+      const { userId } =
+        await this.tokenService.verifyRefreshToken(refreshToken);
+
+      await this.prismaService.refreshToken.findFirstOrThrow({
+        where: {
+          token: refreshToken,
+        },
+      });
+
+      // Remove existing refreshToken
+      await this.prismaService.refreshToken.delete({
+        where: {
+          token: refreshToken,
+        },
+      });
+
+      // Create new accessToken and refreshToken
+      return await this.generateTokens({ userId });
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === 'P2025')
+          throw new UnauthorizedException('Refresh token has been revoked');
+      }
+      throw error;
+    }
   }
 }

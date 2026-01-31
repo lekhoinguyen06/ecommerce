@@ -37,3 +37,10 @@ export class LoginResDTO {
   accessToken: string;
   refreshToken: string;
 }
+
+export class RefreshTokenBodyDTO {
+  @IsString()
+  refreshToken: string;
+}
+
+export class RefreshTokenResDTO extends LoginResDTO {}
