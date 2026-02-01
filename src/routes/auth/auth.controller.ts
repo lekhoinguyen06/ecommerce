@@ -15,8 +15,9 @@ import {
   RefreshTokenBodyDTO,
   RefreshTokenResDTO,
 } from './auth.dto';
-import { AccessTokenGuard } from 'src/shared/guards/access-token.guard';
-
+import { Auth } from 'src/shared/decorators/auth.decorator';
+import { AuthType, GuardCondition } from 'src/shared/constants/auth.constant';
+import { AuthenticationGuard } from 'src/shared/guards/authentication.guard';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -32,7 +33,8 @@ export class AuthController {
   }
 
   @Post('refresh-token')
-  @UseGuards(AccessTokenGuard)
+  @Auth([AuthType.Bearer, AuthType.APIKey], { condition: GuardCondition.And })
+  @UseGuards(AuthenticationGuard)
   @HttpCode(HttpStatus.OK)
   async refreshToken(@Body() body: RefreshTokenBodyDTO) {
     return new RefreshTokenResDTO(
