@@ -7,6 +7,8 @@ import {
   LoginResDTO,
   RefreshTokenBodyDTO,
   RefreshTokenResDTO,
+  LogoutBodyDTO,
+  LogoutResDTO,
 } from './auth.dto';
 import { Auth } from 'src/shared/decorators/auth.decorator';
 import { AuthType, GuardCondition } from 'src/shared/constants/auth.constant';
@@ -31,5 +33,10 @@ export class AuthController {
     return new RefreshTokenResDTO(
       await this.authService.refreshToken(body.refreshToken),
     );
+  }
+
+  @Post('logout')
+  async logout(@Body() body: LogoutBodyDTO) {
+    return new LogoutResDTO(await this.authService.logout(body.refreshToken));
   }
 }

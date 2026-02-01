@@ -96,7 +96,7 @@ export class AuthService {
       const { userId } =
         await this.tokenService.verifyRefreshToken(refreshToken);
 
-      await this.prismaService.refreshToken.findFirstOrThrow({
+      await this.prismaService.refreshToken.findUniqueOrThrow({
         where: {
           token: refreshToken,
         },
@@ -116,6 +116,28 @@ export class AuthService {
         throw new UnauthorizedException('Refresh token has been revoked');
       }
       throw error;
+    }
+  }
+
+  async logout(refreshToken: string) {
+    try {
+      // Validate token
+      await this.tokenService.verifyRefreshToken(refreshToken);
+
+      // Remove refreshToken
+      await this.prismaService.refreshToken.delete({
+        where: {
+          token: refreshToken,
+        },
+      });
+
+      // Create new accessToken and refreshToken
+      return { message: 'Logout successful' };
+    } catch (error) {
+      if (isRequiredRecordNotFoundPrisma2025Error(error)) {
+        throw new UnauthorizedException('Refresh token has been revoked');
+      }
+      throw new UnauthorizedException();
     }
   }
 }

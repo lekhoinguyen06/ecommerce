@@ -7,7 +7,7 @@ export function isUniqueConstraintPrisma2002Error(
 ): error is Prisma.PrismaClientKnownRequestError {
   return (
     error instanceof Prisma.PrismaClientKnownRequestError &&
-    error.code === '2002'
+    error.code === 'P2002'
   );
 }
 
@@ -16,6 +16,6 @@ export function isRequiredRecordNotFoundPrisma2025Error(
 ): error is Prisma.PrismaClientKnownRequestError {
   return (
     error instanceof Prisma.PrismaClientKnownRequestError &&
-    error.code === '2025'
+    error.code === 'P2025'
   );
 }

@@ -10,7 +10,7 @@ import { AuthenticationGuard } from './guards/authentication.guard';
 
 const sharedServices = [PrismaService, HashingService, TokenService];
 
-const guardModules = [
+const guardProviders = [
   APIKeyGuard,
   AccessTokenGuard,
   {
@@ -22,7 +22,7 @@ const guardModules = [
 @Global()
 @Module({
   imports: [JwtModule],
-  providers: [...sharedServices, ...guardModules],
+  providers: [...sharedServices, ...guardProviders],
   exports: sharedServices,
 })
 export class SharedModule {}
