@@ -39,22 +39,28 @@ export class AuthenticationGuard implements CanActivate {
       (authType: string) => this.authTypeMap[authType],
     );
 
+    let error = new UnauthorizedException();
+
     if (authTypeValue.options.condition === GuardCondition.Or) {
       for (const guard of guards) {
-        const canActivate = await guard.canActivate(context);
+        const canActivate = await Promise.resolve(
+          guard.canActivate(context),
+        ).catch((e) => {
+          error = e;
+          return false;
+        });
         if (canActivate) return true;
       }
-      throw new UnauthorizedException('a');
+      throw error;
     }
 
     if (authTypeValue.options.condition === GuardCondition.And) {
       for (const guard of guards) {
-        const canActivate = await guard.canActivate(context);
-        if (!canActivate) throw new UnauthorizedException('b');
+        await guard.canActivate(context);
       }
       return true;
     }
 
-    throw new UnauthorizedException('c');
+    throw error;
   }
 }
