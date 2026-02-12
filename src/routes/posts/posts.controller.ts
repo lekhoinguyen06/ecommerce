@@ -8,47 +8,59 @@ import {
   Delete,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
-import { CreatePostDto } from './dto/create-post.dto';
-import { UpdatePostDto } from './dto/update-post.dto';
 import { ActiveUser } from 'src/shared/decorators/active-user.decorator';
 import { Auth } from 'src/shared/decorators/auth.decorator';
 import { AuthType } from 'src/shared/constants/auth.constant';
-import { GetPostItemDto } from './posts.dto';
+import {
+  CreatePostBodyDTO,
+  GetPostItemDTO,
+  UpdatePostBodyDTO,
+} from './posts.dto';
 
 @Controller('posts')
+@Auth([AuthType.Bearer])
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
   @Post()
-  @Auth([AuthType.Bearer])
-  create(
-    @Body() createPostDto: CreatePostDto,
+  async create(
+    @Body() body: CreatePostBodyDTO,
     @ActiveUser('userId') userId: number,
   ) {
-    createPostDto.authorId = userId;
-    return this.postsService.create(createPostDto);
+    return new GetPostItemDTO(await this.postsService.create(userId, body));
   }
 
   @Get()
-  @Auth([AuthType.Bearer])
-  findAll(@ActiveUser('userId') userId: number) {
+  async findAll(@ActiveUser('userId') userId: number) {
     return this.postsService
       .findAll(userId)
-      .then((posts) => posts.map((post) => new GetPostItemDto(post)));
+      .then((posts) => posts.map((post) => new GetPostItemDTO(post)));
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.postsService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return new GetPostItemDTO(await this.postsService.findOne(Number(id)));
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
-    return this.postsService.update(updatePostDto);
+  async update(
+    @Param('id') id: string,
+    @Body() body: UpdatePostBodyDTO,
+    @ActiveUser('userId') userId: number,
+  ) {
+    return new GetPostItemDTO(
+      await this.postsService.update({
+        postId: Number(id),
+        authorId: userId,
+        body,
+      }),
+    );
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.postsService.remove(+id);
+  async delete(@Param('id') id: string, @ActiveUser('userId') userId: number) {
+    return new GetPostItemDTO(
+      await this.postsService.delete(Number(id), userId),
+    );
   }
 }
