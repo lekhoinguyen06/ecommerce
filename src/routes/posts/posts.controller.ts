@@ -12,14 +12,15 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { ActiveUser } from 'src/shared/decorators/active-user.decorator';
 import { Auth } from 'src/shared/decorators/auth.decorator';
-import { AuthType, GuardCondition } from 'src/shared/constants/auth.constant';
+import { AuthType } from 'src/shared/constants/auth.constant';
+import { GetPostItemDto } from './posts.dto';
 
 @Controller('posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
   @Post()
-  @Auth([AuthType.Bearer], { condition: GuardCondition.And })
+  @Auth([AuthType.Bearer])
   create(
     @Body() createPostDto: CreatePostDto,
     @ActiveUser('userId') userId: number,
@@ -29,8 +30,11 @@ export class PostsController {
   }
 
   @Get()
-  findAll() {
-    return this.postsService.findAll();
+  @Auth([AuthType.Bearer])
+  findAll(@ActiveUser('userId') userId: number) {
+    return this.postsService
+      .findAll(userId)
+      .then((posts) => posts.map((post) => new GetPostItemDto(post)));
   }
 
   @Get(':id')

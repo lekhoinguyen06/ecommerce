@@ -16,8 +16,17 @@ export class PostsService {
     });
   }
 
-  findAll() {
-    return this.prisma.post.findMany();
+  findAll(userId: number) {
+    return this.prisma.post.findMany({
+      where: { authorId: userId },
+      include: {
+        author: {
+          omit: {
+            password: true,
+          },
+        },
+      },
+    });
   }
 
   findOne(id: number) {
