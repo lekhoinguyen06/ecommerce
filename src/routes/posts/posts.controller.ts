@@ -10,13 +10,21 @@ import {
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { ActiveUser } from 'src/shared/decorators/active-user.decorator';
+import { Auth } from 'src/shared/decorators/auth.decorator';
+import { AuthType, GuardCondition } from 'src/shared/constants/auth.constant';
 
 @Controller('posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
   @Post()
-  create(@Body() createPostDto: CreatePostDto) {
+  @Auth([AuthType.Bearer], { condition: GuardCondition.And })
+  create(
+    @Body() createPostDto: CreatePostDto,
+    @ActiveUser('userId') userId: number,
+  ) {
+    createPostDto.authorId = userId;
     return this.postsService.create(createPostDto);
   }
 
