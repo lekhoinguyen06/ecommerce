@@ -17,9 +17,9 @@ const config: runtime.GetPrismaClientConfig = {
   previewFeatures: [],
   clientVersion: '7.2.0',
   engineVersion: '0c8ef2ce45c83248ab3df073180d5eda9e8be7a3',
-  activeProvider: 'sqlite',
+  activeProvider: 'postgresql',
   inlineSchema:
-    '// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider     = "prisma-client"\n  output       = "../src/generated/prisma"\n  moduleFormat = "cjs"\n}\n\ndatasource db {\n  provider = "sqlite"\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  email     String   @unique\n  name      String\n  password  String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  posts         Post[]\n  refreshTokens RefreshToken[]\n}\n\nmodel Post {\n  id        Int      @id @default(autoincrement())\n  title     String\n  content   String\n  authorId  Int\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  author User @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: NoAction)\n}\n\nmodel RefreshToken {\n  token     String   @id @unique\n  userId    Int\n  createdAt DateTime @default(now())\n  expiresAt DateTime\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)\n}\n',
+    'generator client {\n  provider     = "prisma-client"\n  output       = "../src/generated/prisma"\n  moduleFormat = "cjs"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nenum OrderStatus {\n  PENDING_CONFIRMATION\n  PENDING_PICKUP\n  PENDING_DELIVERY\n  DELIVERED\n  RETURNED\n  CANCELLED\n}\n\nenum VerificationCodeType {\n  REGISTER\n  FORGOT_PASSWORD\n}\n\nenum UserStatus {\n  ACTIVE\n  BLOCKED\n}\n\nenum HTTPMethod {\n  GET\n  POST\n  PUT\n  DELETE\n  PATCH\n  OPTIONS\n  HEAD\n}\n\nmodel Language {\n  id   Int    @id @default(autoincrement())\n  name String\n  code String @unique\n\n  createdById Int?\n  updatedById Int?\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  createdBy User? @relation("LanguageCreatedBy", fields: [createdById], references: [id])\n  updatedBy User? @relation("LanguageUpdatedBy", fields: [updatedById], references: [id])\n\n  userTranslations     UserTranslation[]\n  productTranslations  ProductTranslation[]\n  categoryTranslations CategoryTranslation[]\n  brandTranslations    BrandTranslation[]\n\n  @@index([createdById])\n  @@index([updatedById])\n}\n\nmodel User {\n  id          Int        @id @default(autoincrement())\n  email       String     @unique\n  name        String\n  password    String\n  phoneNumber String\n  avatar      String?\n  totpSecret  String?\n  status      UserStatus @default(ACTIVE)\n  roleId      Int\n\n  createdById Int?\n  updatedById Int?\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  role      Role  @relation("UserRole", fields: [roleId], references: [id])\n  createdBy User? @relation("UserCreatedBy", fields: [createdById], references: [id])\n  updatedBy User? @relation("UserUpdatedBy", fields: [updatedById], references: [id])\n\n  // Self-relations for audit trail\n  createdUsers User[] @relation("UserCreatedBy")\n  updatedUsers User[] @relation("UserUpdatedBy")\n\n  // Relations to other tables\n  userTranslations UserTranslation[]\n  refreshTokens    RefreshToken[]\n  // messages Message[]\n  sentMessages     Message[]         @relation("MessageFromUser")\n  receivedMessages Message[]         @relation("MessageToUser")\n  reviews          Review[]\n  cartItems        CartItem[]\n  orders           Order[]\n\n  // Audit trail relations\n  createdLanguages            Language[]            @relation("LanguageCreatedBy")\n  updatedLanguages            Language[]            @relation("LanguageUpdatedBy")\n  createdPermissions          Permission[]          @relation("PermissionCreatedBy")\n  updatedPermissions          Permission[]          @relation("PermissionUpdatedBy")\n  createdRoles                Role[]                @relation("RoleCreatedBy")\n  updatedRoles                Role[]                @relation("RoleUpdatedBy")\n  createdProducts             Product[]             @relation("ProductCreatedBy")\n  updatedProducts             Product[]             @relation("ProductUpdatedBy")\n  createdProductTranslations  ProductTranslation[]  @relation("ProductTranslationCreatedBy")\n  updatedProductTranslations  ProductTranslation[]  @relation("ProductTranslationUpdatedBy")\n  createdCategories           Category[]            @relation("CategoryCreatedBy")\n  updatedCategories           Category[]            @relation("CategoryUpdatedBy")\n  createdCategoryTranslations CategoryTranslation[] @relation("CategoryTranslationCreatedBy")\n  updatedCategoryTranslations CategoryTranslation[] @relation("CategoryTranslationUpdatedBy")\n  createdVariants             Variant[]             @relation("VariantCreatedBy")\n  updatedVariants             Variant[]             @relation("VariantUpdatedBy")\n  createdVariantOptions       VariantOption[]       @relation("VariantOptionCreatedBy")\n  updatedVariantOptions       VariantOption[]       @relation("VariantOptionUpdatedBy")\n  createdSKUs                 SKU[]                 @relation("SKUCreatedBy")\n  updatedSKUs                 SKU[]                 @relation("SKUUpdatedBy")\n  createdBrands               Brand[]               @relation("BrandCreatedBy")\n  updatedBrands               Brand[]               @relation("BrandUpdatedBy")\n  createdBrandTranslations    BrandTranslation[]    @relation("BrandTranslationCreatedBy")\n  updatedBrandTranslations    BrandTranslation[]    @relation("BrandTranslationUpdatedBy")\n  createdOrders               Order[]               @relation("OrderCreatedBy")\n  updatedOrders               Order[]               @relation("OrderUpdatedBy")\n\n  createdUserTranslations UserTranslation[] @relation("UserTranslationCreatedBy")\n  updatedUserTranslations UserTranslation[] @relation("UserTranslationUpdatedBy")\n\n  @@index([roleId])\n  @@index([createdById])\n  @@index([updatedById])\n}\n\nmodel UserTranslation {\n  id          Int     @id @default(autoincrement())\n  userId      Int\n  languageId  Int\n  address     String?\n  description String?\n\n  createdById Int?\n  updatedById Int?\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  user      User     @relation(fields: [userId], references: [id])\n  language  Language @relation(fields: [languageId], references: [id])\n  createdBy User?    @relation("UserTranslationCreatedBy", fields: [createdById], references: [id])\n  updatedBy User?    @relation("UserTranslationUpdatedBy", fields: [updatedById], references: [id])\n\n  @@index([userId])\n  @@index([languageId])\n  @@index([createdById])\n  @@index([updatedById])\n}\n\nmodel VerificationCode {\n  id    Int                  @id @default(autoincrement())\n  email String\n  code  String\n  type  VerificationCodeType\n\n  expiresAt DateTime\n  createdAt DateTime @default(now())\n\n  @@index([email, code, type])\n  @@index([expiresAt])\n}\n\nmodel RefreshToken {\n  token     String   @unique\n  userId    Int\n  expiresAt DateTime\n  createdAt DateTime @default(now())\n\n  user User @relation(fields: [userId], references: [id])\n\n  @@index([expiresAt])\n  @@index([userId])\n}\n\nmodel Permission {\n  id          Int        @id @default(autoincrement())\n  name        String\n  description String\n  path        String\n  method      HTTPMethod\n\n  createdById Int?\n  updatedById Int?\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  createdBy User? @relation("PermissionCreatedBy", fields: [createdById], references: [id])\n  updatedBy User? @relation("PermissionUpdatedBy", fields: [updatedById], references: [id])\n\n  roles PermissionsRoles[]\n\n  @@index([createdById])\n  @@index([updatedById])\n}\n\nmodel Role {\n  id          Int     @id @default(autoincrement())\n  name        String  @unique\n  description String\n  isActive    Boolean @default(true)\n\n  createdById Int?\n  updatedById Int?\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  createdBy User? @relation("RoleCreatedBy", fields: [createdById], references: [id])\n  updatedBy User? @relation("RoleUpdatedBy", fields: [updatedById], references: [id])\n\n  users       User[]             @relation("UserRole")\n  permissions PermissionsRoles[]\n\n  @@index([createdById])\n  @@index([updatedById])\n}\n\nmodel Brand {\n  id   Int     @id @default(autoincrement())\n  logo String?\n\n  createdById Int?\n  updatedById Int?\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  createdBy User? @relation("BrandCreatedBy", fields: [createdById], references: [id])\n  updatedBy User? @relation("BrandUpdatedBy", fields: [updatedById], references: [id])\n\n  products     Product[]\n  translations BrandTranslation[]\n\n  @@index([createdById])\n  @@index([updatedById])\n}\n\nmodel BrandTranslation {\n  id          Int    @id @default(autoincrement())\n  brandId     Int\n  languageId  Int\n  name        String\n  description String\n\n  createdById Int?\n  updatedById Int?\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  brand     Brand    @relation(fields: [brandId], references: [id])\n  language  Language @relation(fields: [languageId], references: [id])\n  createdBy User?    @relation("BrandTranslationCreatedBy", fields: [createdById], references: [id])\n  updatedBy User?    @relation("BrandTranslationUpdatedBy", fields: [updatedById], references: [id])\n\n  @@index([brandId])\n  @@index([languageId])\n  @@index([createdById])\n  @@index([updatedById])\n}\n\nmodel Product {\n  id            Int    @id @default(autoincrement())\n  base_price    Float\n  virtual_price Float\n  brandId       Int\n  images        String\n\n  createdById Int?\n  updatedById Int?\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  brand     Brand @relation(fields: [brandId], references: [id])\n  createdBy User? @relation("ProductCreatedBy", fields: [createdById], references: [id])\n  updatedBy User? @relation("ProductUpdatedBy", fields: [updatedById], references: [id])\n\n  translations ProductTranslation[]\n  variants     Variant[]\n  skus         SKU[]\n  reviews      Review[]\n  categories   ProductsCategories[]\n\n  @@index([brandId])\n  @@index([createdById])\n  @@index([updatedById])\n}\n\nmodel ProductTranslation {\n  id          Int    @id @default(autoincrement())\n  productId   Int\n  languageId  Int\n  name        String\n  description String\n\n  createdById Int?\n  updatedById Int?\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  product   Product  @relation(fields: [productId], references: [id])\n  language  Language @relation(fields: [languageId], references: [id])\n  createdBy User?    @relation("ProductTranslationCreatedBy", fields: [createdById], references: [id])\n  updatedBy User?    @relation("ProductTranslationUpdatedBy", fields: [updatedById], references: [id])\n\n  @@index([productId])\n  @@index([languageId])\n  @@index([createdById])\n  @@index([updatedById])\n}\n\nmodel Category {\n  id               Int  @id @default(autoincrement())\n  parentCategoryId Int?\n\n  createdById Int?\n  updatedById Int?\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  parentCategory Category?  @relation("CategoryParent", fields: [parentCategoryId], references: [id])\n  subCategories  Category[] @relation("CategoryParent")\n  createdBy      User?      @relation("CategoryCreatedBy", fields: [createdById], references: [id])\n  updatedBy      User?      @relation("CategoryUpdatedBy", fields: [updatedById], references: [id])\n\n  translations CategoryTranslation[]\n  products     ProductsCategories[]\n\n  @@index([parentCategoryId])\n  @@index([createdById])\n  @@index([updatedById])\n}\n\nmodel CategoryTranslation {\n  id          Int    @id @default(autoincrement())\n  categoryId  Int\n  languageId  Int\n  name        String\n  description String\n\n  createdById Int?\n  updatedById Int?\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  category  Category @relation(fields: [categoryId], references: [id])\n  language  Language @relation(fields: [languageId], references: [id])\n  createdBy User?    @relation("CategoryTranslationCreatedBy", fields: [createdById], references: [id])\n  updatedBy User?    @relation("CategoryTranslationUpdatedBy", fields: [updatedById], references: [id])\n\n  @@index([categoryId])\n  @@index([languageId])\n  @@index([createdById])\n  @@index([updatedById])\n}\n\nmodel Variant {\n  id        Int    @id @default(autoincrement())\n  name      String\n  productId Int\n\n  createdById Int?\n  updatedById Int?\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  product   Product @relation(fields: [productId], references: [id])\n  createdBy User?   @relation("VariantCreatedBy", fields: [createdById], references: [id])\n  updatedBy User?   @relation("VariantUpdatedBy", fields: [updatedById], references: [id])\n\n  options VariantOption[]\n\n  @@index([productId])\n  @@index([createdById])\n  @@index([updatedById])\n}\n\nmodel VariantOption {\n  id        Int    @id @default(autoincrement())\n  value     String\n  variantId Int\n\n  createdById Int?\n  updatedById Int?\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  variant   Variant @relation(fields: [variantId], references: [id])\n  createdBy User?   @relation("VariantOptionCreatedBy", fields: [createdById], references: [id])\n  updatedBy User?   @relation("VariantOptionUpdatedBy", fields: [updatedById], references: [id])\n\n  skus SkusVariantOptions[]\n\n  @@index([variantId])\n  @@index([createdById])\n  @@index([updatedById])\n}\n\nmodel SKU {\n  id        Int    @id @default(autoincrement())\n  value     String\n  price     Float\n  stock     Int\n  images    String\n  productId Int\n\n  createdById Int?\n  updatedById Int?\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  product   Product @relation(fields: [productId], references: [id])\n  createdBy User?   @relation("SKUCreatedBy", fields: [createdById], references: [id])\n  updatedBy User?   @relation("SKUUpdatedBy", fields: [updatedById], references: [id])\n\n  cartItems        CartItem[]\n  productSnapshots ProductSKUSnapshot[]\n  variantOptions   SkusVariantOptions[]\n\n  @@index([productId])\n  @@index([createdById])\n  @@index([updatedById])\n}\n\nmodel CartItem {\n  id       Int @id @default(autoincrement())\n  quantity Int\n  skuId    Int\n  userId   Int\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  sku  SKU  @relation(fields: [skuId], references: [id])\n  user User @relation(fields: [userId], references: [id])\n\n  @@index([skuId])\n  @@index([userId])\n}\n\nmodel ProductSKUSnapshot {\n  id          Int    @id @default(autoincrement())\n  productName String\n  price       Float\n  images      String\n  skuValue    String\n  skuId       Int\n  orderId     Int\n\n  createdAt DateTime @default(now())\n\n  sku   SKU   @relation(fields: [skuId], references: [id])\n  order Order @relation(fields: [orderId], references: [id])\n\n  @@index([skuId])\n  @@index([orderId])\n}\n\nmodel Order {\n  id     Int         @id @default(autoincrement())\n  userId Int\n  status OrderStatus\n\n  createdById Int?\n  updatedById Int?\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  user      User  @relation(fields: [userId], references: [id])\n  createdBy User? @relation("OrderCreatedBy", fields: [createdById], references: [id])\n  updatedBy User? @relation("OrderUpdatedBy", fields: [updatedById], references: [id])\n\n  productSnapshots ProductSKUSnapshot[]\n\n  @@index([userId])\n  @@index([createdById])\n  @@index([updatedById])\n}\n\nmodel Review {\n  id        Int    @id @default(autoincrement())\n  content   String\n  rating    Int\n  productId Int\n  userId    Int\n\n  deletedAt DateTime?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  product Product @relation(fields: [productId], references: [id])\n  user    User    @relation(fields: [userId], references: [id])\n\n  @@index([productId])\n  @@index([userId])\n}\n\nmodel PaymentTransaction {\n  id                 Int      @id @default(autoincrement())\n  gateway            String\n  transactionDate    DateTime @default(now())\n  accountNumber      String\n  subAccount         String?\n  amountIn           Int      @default(0)\n  amountOut          Int      @default(0)\n  accumulated        Int      @default(0)\n  code               String?\n  transactionContent String?\n  referenceNumber    String?\n  body               String?\n\n  createdAt DateTime @default(now())\n}\n\nmodel Message {\n  id         Int    @id @default(autoincrement())\n  fromUserId Int\n  toUserId   Int\n  content    String\n\n  readAt    DateTime?\n  createdAt DateTime  @default(now())\n\n  fromUser User @relation("MessageFromUser", fields: [fromUserId], references: [id])\n  toUser   User @relation("MessageToUser", fields: [toUserId], references: [id])\n\n  @@index([fromUserId])\n  @@index([toUserId])\n}\n\n// ==================== Junction Tables ====================\n\nmodel ProductsCategories {\n  product_id  Int\n  category_id Int\n\n  product  Product  @relation(fields: [product_id], references: [id])\n  category Category @relation(fields: [category_id], references: [id])\n\n  @@id([product_id, category_id])\n  @@index([category_id])\n}\n\nmodel PermissionsRoles {\n  permission_id Int\n  role_id       Int\n\n  permission Permission @relation(fields: [permission_id], references: [id])\n  role       Role       @relation(fields: [role_id], references: [id])\n\n  @@id([permission_id, role_id])\n  @@index([role_id])\n}\n\nmodel SkusVariantOptions {\n  sku_id            Int\n  variant_option_id Int\n\n  sku           SKU           @relation(fields: [sku_id], references: [id])\n  variantOption VariantOption @relation(fields: [variant_option_id], references: [id])\n\n  @@id([sku_id, variant_option_id])\n  @@index([variant_option_id])\n}\n',
   runtimeDataModel: {
     models: {},
     enums: {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
 };
 
 config.runtimeDataModel = JSON.parse(
-  '{"models":{"User":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"email","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"password","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"posts","kind":"object","type":"Post","relationName":"PostToUser"},{"name":"refreshTokens","kind":"object","type":"RefreshToken","relationName":"RefreshTokenToUser"}],"dbName":null},"Post":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"title","kind":"scalar","type":"String"},{"name":"content","kind":"scalar","type":"String"},{"name":"authorId","kind":"scalar","type":"Int"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"author","kind":"object","type":"User","relationName":"PostToUser"}],"dbName":null},"RefreshToken":{"fields":[{"name":"token","kind":"scalar","type":"String"},{"name":"userId","kind":"scalar","type":"Int"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"expiresAt","kind":"scalar","type":"DateTime"},{"name":"user","kind":"object","type":"User","relationName":"RefreshTokenToUser"}],"dbName":null}},"enums":{},"types":{}}',
+  '{"models":{"Language":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"name","kind":"scalar","type":"String"},{"name":"code","kind":"scalar","type":"String"},{"name":"createdById","kind":"scalar","type":"Int"},{"name":"updatedById","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"createdBy","kind":"object","type":"User","relationName":"LanguageCreatedBy"},{"name":"updatedBy","kind":"object","type":"User","relationName":"LanguageUpdatedBy"},{"name":"userTranslations","kind":"object","type":"UserTranslation","relationName":"LanguageToUserTranslation"},{"name":"productTranslations","kind":"object","type":"ProductTranslation","relationName":"LanguageToProductTranslation"},{"name":"categoryTranslations","kind":"object","type":"CategoryTranslation","relationName":"CategoryTranslationToLanguage"},{"name":"brandTranslations","kind":"object","type":"BrandTranslation","relationName":"BrandTranslationToLanguage"}],"dbName":null},"User":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"email","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"password","kind":"scalar","type":"String"},{"name":"phoneNumber","kind":"scalar","type":"String"},{"name":"avatar","kind":"scalar","type":"String"},{"name":"totpSecret","kind":"scalar","type":"String"},{"name":"status","kind":"enum","type":"UserStatus"},{"name":"roleId","kind":"scalar","type":"Int"},{"name":"createdById","kind":"scalar","type":"Int"},{"name":"updatedById","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"role","kind":"object","type":"Role","relationName":"UserRole"},{"name":"createdBy","kind":"object","type":"User","relationName":"UserCreatedBy"},{"name":"updatedBy","kind":"object","type":"User","relationName":"UserUpdatedBy"},{"name":"createdUsers","kind":"object","type":"User","relationName":"UserCreatedBy"},{"name":"updatedUsers","kind":"object","type":"User","relationName":"UserUpdatedBy"},{"name":"userTranslations","kind":"object","type":"UserTranslation","relationName":"UserToUserTranslation"},{"name":"refreshTokens","kind":"object","type":"RefreshToken","relationName":"RefreshTokenToUser"},{"name":"sentMessages","kind":"object","type":"Message","relationName":"MessageFromUser"},{"name":"receivedMessages","kind":"object","type":"Message","relationName":"MessageToUser"},{"name":"reviews","kind":"object","type":"Review","relationName":"ReviewToUser"},{"name":"cartItems","kind":"object","type":"CartItem","relationName":"CartItemToUser"},{"name":"orders","kind":"object","type":"Order","relationName":"OrderToUser"},{"name":"createdLanguages","kind":"object","type":"Language","relationName":"LanguageCreatedBy"},{"name":"updatedLanguages","kind":"object","type":"Language","relationName":"LanguageUpdatedBy"},{"name":"createdPermissions","kind":"object","type":"Permission","relationName":"PermissionCreatedBy"},{"name":"updatedPermissions","kind":"object","type":"Permission","relationName":"PermissionUpdatedBy"},{"name":"createdRoles","kind":"object","type":"Role","relationName":"RoleCreatedBy"},{"name":"updatedRoles","kind":"object","type":"Role","relationName":"RoleUpdatedBy"},{"name":"createdProducts","kind":"object","type":"Product","relationName":"ProductCreatedBy"},{"name":"updatedProducts","kind":"object","type":"Product","relationName":"ProductUpdatedBy"},{"name":"createdProductTranslations","kind":"object","type":"ProductTranslation","relationName":"ProductTranslationCreatedBy"},{"name":"updatedProductTranslations","kind":"object","type":"ProductTranslation","relationName":"ProductTranslationUpdatedBy"},{"name":"createdCategories","kind":"object","type":"Category","relationName":"CategoryCreatedBy"},{"name":"updatedCategories","kind":"object","type":"Category","relationName":"CategoryUpdatedBy"},{"name":"createdCategoryTranslations","kind":"object","type":"CategoryTranslation","relationName":"CategoryTranslationCreatedBy"},{"name":"updatedCategoryTranslations","kind":"object","type":"CategoryTranslation","relationName":"CategoryTranslationUpdatedBy"},{"name":"createdVariants","kind":"object","type":"Variant","relationName":"VariantCreatedBy"},{"name":"updatedVariants","kind":"object","type":"Variant","relationName":"VariantUpdatedBy"},{"name":"createdVariantOptions","kind":"object","type":"VariantOption","relationName":"VariantOptionCreatedBy"},{"name":"updatedVariantOptions","kind":"object","type":"VariantOption","relationName":"VariantOptionUpdatedBy"},{"name":"createdSKUs","kind":"object","type":"SKU","relationName":"SKUCreatedBy"},{"name":"updatedSKUs","kind":"object","type":"SKU","relationName":"SKUUpdatedBy"},{"name":"createdBrands","kind":"object","type":"Brand","relationName":"BrandCreatedBy"},{"name":"updatedBrands","kind":"object","type":"Brand","relationName":"BrandUpdatedBy"},{"name":"createdBrandTranslations","kind":"object","type":"BrandTranslation","relationName":"BrandTranslationCreatedBy"},{"name":"updatedBrandTranslations","kind":"object","type":"BrandTranslation","relationName":"BrandTranslationUpdatedBy"},{"name":"createdOrders","kind":"object","type":"Order","relationName":"OrderCreatedBy"},{"name":"updatedOrders","kind":"object","type":"Order","relationName":"OrderUpdatedBy"},{"name":"createdUserTranslations","kind":"object","type":"UserTranslation","relationName":"UserTranslationCreatedBy"},{"name":"updatedUserTranslations","kind":"object","type":"UserTranslation","relationName":"UserTranslationUpdatedBy"}],"dbName":null},"UserTranslation":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"userId","kind":"scalar","type":"Int"},{"name":"languageId","kind":"scalar","type":"Int"},{"name":"address","kind":"scalar","type":"String"},{"name":"description","kind":"scalar","type":"String"},{"name":"createdById","kind":"scalar","type":"Int"},{"name":"updatedById","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"user","kind":"object","type":"User","relationName":"UserToUserTranslation"},{"name":"language","kind":"object","type":"Language","relationName":"LanguageToUserTranslation"},{"name":"createdBy","kind":"object","type":"User","relationName":"UserTranslationCreatedBy"},{"name":"updatedBy","kind":"object","type":"User","relationName":"UserTranslationUpdatedBy"}],"dbName":null},"VerificationCode":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"email","kind":"scalar","type":"String"},{"name":"code","kind":"scalar","type":"String"},{"name":"type","kind":"enum","type":"VerificationCodeType"},{"name":"expiresAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"}],"dbName":null},"RefreshToken":{"fields":[{"name":"token","kind":"scalar","type":"String"},{"name":"userId","kind":"scalar","type":"Int"},{"name":"expiresAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"user","kind":"object","type":"User","relationName":"RefreshTokenToUser"}],"dbName":null},"Permission":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"name","kind":"scalar","type":"String"},{"name":"description","kind":"scalar","type":"String"},{"name":"path","kind":"scalar","type":"String"},{"name":"method","kind":"enum","type":"HTTPMethod"},{"name":"createdById","kind":"scalar","type":"Int"},{"name":"updatedById","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"createdBy","kind":"object","type":"User","relationName":"PermissionCreatedBy"},{"name":"updatedBy","kind":"object","type":"User","relationName":"PermissionUpdatedBy"},{"name":"roles","kind":"object","type":"PermissionsRoles","relationName":"PermissionToPermissionsRoles"}],"dbName":null},"Role":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"name","kind":"scalar","type":"String"},{"name":"description","kind":"scalar","type":"String"},{"name":"isActive","kind":"scalar","type":"Boolean"},{"name":"createdById","kind":"scalar","type":"Int"},{"name":"updatedById","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"createdBy","kind":"object","type":"User","relationName":"RoleCreatedBy"},{"name":"updatedBy","kind":"object","type":"User","relationName":"RoleUpdatedBy"},{"name":"users","kind":"object","type":"User","relationName":"UserRole"},{"name":"permissions","kind":"object","type":"PermissionsRoles","relationName":"PermissionsRolesToRole"}],"dbName":null},"Brand":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"logo","kind":"scalar","type":"String"},{"name":"createdById","kind":"scalar","type":"Int"},{"name":"updatedById","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"createdBy","kind":"object","type":"User","relationName":"BrandCreatedBy"},{"name":"updatedBy","kind":"object","type":"User","relationName":"BrandUpdatedBy"},{"name":"products","kind":"object","type":"Product","relationName":"BrandToProduct"},{"name":"translations","kind":"object","type":"BrandTranslation","relationName":"BrandToBrandTranslation"}],"dbName":null},"BrandTranslation":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"brandId","kind":"scalar","type":"Int"},{"name":"languageId","kind":"scalar","type":"Int"},{"name":"name","kind":"scalar","type":"String"},{"name":"description","kind":"scalar","type":"String"},{"name":"createdById","kind":"scalar","type":"Int"},{"name":"updatedById","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"brand","kind":"object","type":"Brand","relationName":"BrandToBrandTranslation"},{"name":"language","kind":"object","type":"Language","relationName":"BrandTranslationToLanguage"},{"name":"createdBy","kind":"object","type":"User","relationName":"BrandTranslationCreatedBy"},{"name":"updatedBy","kind":"object","type":"User","relationName":"BrandTranslationUpdatedBy"}],"dbName":null},"Product":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"base_price","kind":"scalar","type":"Float"},{"name":"virtual_price","kind":"scalar","type":"Float"},{"name":"brandId","kind":"scalar","type":"Int"},{"name":"images","kind":"scalar","type":"String"},{"name":"createdById","kind":"scalar","type":"Int"},{"name":"updatedById","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"brand","kind":"object","type":"Brand","relationName":"BrandToProduct"},{"name":"createdBy","kind":"object","type":"User","relationName":"ProductCreatedBy"},{"name":"updatedBy","kind":"object","type":"User","relationName":"ProductUpdatedBy"},{"name":"translations","kind":"object","type":"ProductTranslation","relationName":"ProductToProductTranslation"},{"name":"variants","kind":"object","type":"Variant","relationName":"ProductToVariant"},{"name":"skus","kind":"object","type":"SKU","relationName":"ProductToSKU"},{"name":"reviews","kind":"object","type":"Review","relationName":"ProductToReview"},{"name":"categories","kind":"object","type":"ProductsCategories","relationName":"ProductToProductsCategories"}],"dbName":null},"ProductTranslation":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"productId","kind":"scalar","type":"Int"},{"name":"languageId","kind":"scalar","type":"Int"},{"name":"name","kind":"scalar","type":"String"},{"name":"description","kind":"scalar","type":"String"},{"name":"createdById","kind":"scalar","type":"Int"},{"name":"updatedById","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"product","kind":"object","type":"Product","relationName":"ProductToProductTranslation"},{"name":"language","kind":"object","type":"Language","relationName":"LanguageToProductTranslation"},{"name":"createdBy","kind":"object","type":"User","relationName":"ProductTranslationCreatedBy"},{"name":"updatedBy","kind":"object","type":"User","relationName":"ProductTranslationUpdatedBy"}],"dbName":null},"Category":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"parentCategoryId","kind":"scalar","type":"Int"},{"name":"createdById","kind":"scalar","type":"Int"},{"name":"updatedById","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"parentCategory","kind":"object","type":"Category","relationName":"CategoryParent"},{"name":"subCategories","kind":"object","type":"Category","relationName":"CategoryParent"},{"name":"createdBy","kind":"object","type":"User","relationName":"CategoryCreatedBy"},{"name":"updatedBy","kind":"object","type":"User","relationName":"CategoryUpdatedBy"},{"name":"translations","kind":"object","type":"CategoryTranslation","relationName":"CategoryToCategoryTranslation"},{"name":"products","kind":"object","type":"ProductsCategories","relationName":"CategoryToProductsCategories"}],"dbName":null},"CategoryTranslation":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"categoryId","kind":"scalar","type":"Int"},{"name":"languageId","kind":"scalar","type":"Int"},{"name":"name","kind":"scalar","type":"String"},{"name":"description","kind":"scalar","type":"String"},{"name":"createdById","kind":"scalar","type":"Int"},{"name":"updatedById","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"category","kind":"object","type":"Category","relationName":"CategoryToCategoryTranslation"},{"name":"language","kind":"object","type":"Language","relationName":"CategoryTranslationToLanguage"},{"name":"createdBy","kind":"object","type":"User","relationName":"CategoryTranslationCreatedBy"},{"name":"updatedBy","kind":"object","type":"User","relationName":"CategoryTranslationUpdatedBy"}],"dbName":null},"Variant":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"name","kind":"scalar","type":"String"},{"name":"productId","kind":"scalar","type":"Int"},{"name":"createdById","kind":"scalar","type":"Int"},{"name":"updatedById","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"product","kind":"object","type":"Product","relationName":"ProductToVariant"},{"name":"createdBy","kind":"object","type":"User","relationName":"VariantCreatedBy"},{"name":"updatedBy","kind":"object","type":"User","relationName":"VariantUpdatedBy"},{"name":"options","kind":"object","type":"VariantOption","relationName":"VariantToVariantOption"}],"dbName":null},"VariantOption":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"value","kind":"scalar","type":"String"},{"name":"variantId","kind":"scalar","type":"Int"},{"name":"createdById","kind":"scalar","type":"Int"},{"name":"updatedById","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"variant","kind":"object","type":"Variant","relationName":"VariantToVariantOption"},{"name":"createdBy","kind":"object","type":"User","relationName":"VariantOptionCreatedBy"},{"name":"updatedBy","kind":"object","type":"User","relationName":"VariantOptionUpdatedBy"},{"name":"skus","kind":"object","type":"SkusVariantOptions","relationName":"SkusVariantOptionsToVariantOption"}],"dbName":null},"SKU":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"value","kind":"scalar","type":"String"},{"name":"price","kind":"scalar","type":"Float"},{"name":"stock","kind":"scalar","type":"Int"},{"name":"images","kind":"scalar","type":"String"},{"name":"productId","kind":"scalar","type":"Int"},{"name":"createdById","kind":"scalar","type":"Int"},{"name":"updatedById","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"product","kind":"object","type":"Product","relationName":"ProductToSKU"},{"name":"createdBy","kind":"object","type":"User","relationName":"SKUCreatedBy"},{"name":"updatedBy","kind":"object","type":"User","relationName":"SKUUpdatedBy"},{"name":"cartItems","kind":"object","type":"CartItem","relationName":"CartItemToSKU"},{"name":"productSnapshots","kind":"object","type":"ProductSKUSnapshot","relationName":"ProductSKUSnapshotToSKU"},{"name":"variantOptions","kind":"object","type":"SkusVariantOptions","relationName":"SKUToSkusVariantOptions"}],"dbName":null},"CartItem":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"quantity","kind":"scalar","type":"Int"},{"name":"skuId","kind":"scalar","type":"Int"},{"name":"userId","kind":"scalar","type":"Int"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"sku","kind":"object","type":"SKU","relationName":"CartItemToSKU"},{"name":"user","kind":"object","type":"User","relationName":"CartItemToUser"}],"dbName":null},"ProductSKUSnapshot":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"productName","kind":"scalar","type":"String"},{"name":"price","kind":"scalar","type":"Float"},{"name":"images","kind":"scalar","type":"String"},{"name":"skuValue","kind":"scalar","type":"String"},{"name":"skuId","kind":"scalar","type":"Int"},{"name":"orderId","kind":"scalar","type":"Int"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"sku","kind":"object","type":"SKU","relationName":"ProductSKUSnapshotToSKU"},{"name":"order","kind":"object","type":"Order","relationName":"OrderToProductSKUSnapshot"}],"dbName":null},"Order":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"userId","kind":"scalar","type":"Int"},{"name":"status","kind":"enum","type":"OrderStatus"},{"name":"createdById","kind":"scalar","type":"Int"},{"name":"updatedById","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"user","kind":"object","type":"User","relationName":"OrderToUser"},{"name":"createdBy","kind":"object","type":"User","relationName":"OrderCreatedBy"},{"name":"updatedBy","kind":"object","type":"User","relationName":"OrderUpdatedBy"},{"name":"productSnapshots","kind":"object","type":"ProductSKUSnapshot","relationName":"OrderToProductSKUSnapshot"}],"dbName":null},"Review":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"content","kind":"scalar","type":"String"},{"name":"rating","kind":"scalar","type":"Int"},{"name":"productId","kind":"scalar","type":"Int"},{"name":"userId","kind":"scalar","type":"Int"},{"name":"deletedAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"product","kind":"object","type":"Product","relationName":"ProductToReview"},{"name":"user","kind":"object","type":"User","relationName":"ReviewToUser"}],"dbName":null},"PaymentTransaction":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"gateway","kind":"scalar","type":"String"},{"name":"transactionDate","kind":"scalar","type":"DateTime"},{"name":"accountNumber","kind":"scalar","type":"String"},{"name":"subAccount","kind":"scalar","type":"String"},{"name":"amountIn","kind":"scalar","type":"Int"},{"name":"amountOut","kind":"scalar","type":"Int"},{"name":"accumulated","kind":"scalar","type":"Int"},{"name":"code","kind":"scalar","type":"String"},{"name":"transactionContent","kind":"scalar","type":"String"},{"name":"referenceNumber","kind":"scalar","type":"String"},{"name":"body","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"}],"dbName":null},"Message":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"fromUserId","kind":"scalar","type":"Int"},{"name":"toUserId","kind":"scalar","type":"Int"},{"name":"content","kind":"scalar","type":"String"},{"name":"readAt","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"fromUser","kind":"object","type":"User","relationName":"MessageFromUser"},{"name":"toUser","kind":"object","type":"User","relationName":"MessageToUser"}],"dbName":null},"ProductsCategories":{"fields":[{"name":"product_id","kind":"scalar","type":"Int"},{"name":"category_id","kind":"scalar","type":"Int"},{"name":"product","kind":"object","type":"Product","relationName":"ProductToProductsCategories"},{"name":"category","kind":"object","type":"Category","relationName":"CategoryToProductsCategories"}],"dbName":null},"PermissionsRoles":{"fields":[{"name":"permission_id","kind":"scalar","type":"Int"},{"name":"role_id","kind":"scalar","type":"Int"},{"name":"permission","kind":"object","type":"Permission","relationName":"PermissionToPermissionsRoles"},{"name":"role","kind":"object","type":"Role","relationName":"PermissionsRolesToRole"}],"dbName":null},"SkusVariantOptions":{"fields":[{"name":"sku_id","kind":"scalar","type":"Int"},{"name":"variant_option_id","kind":"scalar","type":"Int"},{"name":"sku","kind":"object","type":"SKU","relationName":"SKUToSkusVariantOptions"},{"name":"variantOption","kind":"object","type":"VariantOption","relationName":"SkusVariantOptionsToVariantOption"}],"dbName":null}},"enums":{},"types":{}}',
 );
 
 async function decodeBase64AsWasm(
@@ -41,11 +41,11 @@ async function decodeBase64AsWasm(
 
 config.compilerWasm = {
   getRuntime: async () =>
-    await import('@prisma/client/runtime/query_compiler_bg.sqlite.js'),
+    await import('@prisma/client/runtime/query_compiler_bg.postgresql.js'),
 
   getQueryCompilerWasmModule: async () => {
     const { wasm } =
-      await import('@prisma/client/runtime/query_compiler_bg.sqlite.wasm-base64.js');
+      await import('@prisma/client/runtime/query_compiler_bg.postgresql.wasm-base64.js');
     return await decodeBase64AsWasm(wasm);
   },
 };
@@ -65,8 +65,8 @@ export interface PrismaClientConstructor {
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Users
-   * const users = await prisma.user.findMany()
+   * // Fetch zero or more Languages
+   * const languages = await prisma.language.findMany()
    * ```
    *
    * Read more in our [docs](https://pris.ly/d/client).
@@ -94,8 +94,8 @@ export interface PrismaClientConstructor {
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more Languages
+ * const languages = await prisma.language.findMany()
  * ```
  *
  * Read more in our [docs](https://pris.ly/d/client).
@@ -226,6 +226,16 @@ export interface PrismaClient<
   >;
 
   /**
+   * `prisma.language`: Exposes CRUD operations for the **Language** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Languages
+   * const languages = await prisma.language.findMany()
+   * ```
+   */
+  get language(): Prisma.LanguageDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
    * Example usage:
    * ```ts
@@ -236,14 +246,30 @@ export interface PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
-   * `prisma.post`: Exposes CRUD operations for the **Post** model.
+   * `prisma.userTranslation`: Exposes CRUD operations for the **UserTranslation** model.
    * Example usage:
    * ```ts
-   * // Fetch zero or more Posts
-   * const posts = await prisma.post.findMany()
+   * // Fetch zero or more UserTranslations
+   * const userTranslations = await prisma.userTranslation.findMany()
    * ```
    */
-  get post(): Prisma.PostDelegate<ExtArgs, { omit: OmitOpts }>;
+  get userTranslation(): Prisma.UserTranslationDelegate<
+    ExtArgs,
+    { omit: OmitOpts }
+  >;
+
+  /**
+   * `prisma.verificationCode`: Exposes CRUD operations for the **VerificationCode** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more VerificationCodes
+   * const verificationCodes = await prisma.verificationCode.findMany()
+   * ```
+   */
+  get verificationCode(): Prisma.VerificationCodeDelegate<
+    ExtArgs,
+    { omit: OmitOpts }
+  >;
 
   /**
    * `prisma.refreshToken`: Exposes CRUD operations for the **RefreshToken** model.
@@ -254,6 +280,233 @@ export interface PrismaClient<
    * ```
    */
   get refreshToken(): Prisma.RefreshTokenDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.permission`: Exposes CRUD operations for the **Permission** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Permissions
+   * const permissions = await prisma.permission.findMany()
+   * ```
+   */
+  get permission(): Prisma.PermissionDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.role`: Exposes CRUD operations for the **Role** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Roles
+   * const roles = await prisma.role.findMany()
+   * ```
+   */
+  get role(): Prisma.RoleDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.brand`: Exposes CRUD operations for the **Brand** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Brands
+   * const brands = await prisma.brand.findMany()
+   * ```
+   */
+  get brand(): Prisma.BrandDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.brandTranslation`: Exposes CRUD operations for the **BrandTranslation** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more BrandTranslations
+   * const brandTranslations = await prisma.brandTranslation.findMany()
+   * ```
+   */
+  get brandTranslation(): Prisma.BrandTranslationDelegate<
+    ExtArgs,
+    { omit: OmitOpts }
+  >;
+
+  /**
+   * `prisma.product`: Exposes CRUD operations for the **Product** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Products
+   * const products = await prisma.product.findMany()
+   * ```
+   */
+  get product(): Prisma.ProductDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.productTranslation`: Exposes CRUD operations for the **ProductTranslation** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more ProductTranslations
+   * const productTranslations = await prisma.productTranslation.findMany()
+   * ```
+   */
+  get productTranslation(): Prisma.ProductTranslationDelegate<
+    ExtArgs,
+    { omit: OmitOpts }
+  >;
+
+  /**
+   * `prisma.category`: Exposes CRUD operations for the **Category** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Categories
+   * const categories = await prisma.category.findMany()
+   * ```
+   */
+  get category(): Prisma.CategoryDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.categoryTranslation`: Exposes CRUD operations for the **CategoryTranslation** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more CategoryTranslations
+   * const categoryTranslations = await prisma.categoryTranslation.findMany()
+   * ```
+   */
+  get categoryTranslation(): Prisma.CategoryTranslationDelegate<
+    ExtArgs,
+    { omit: OmitOpts }
+  >;
+
+  /**
+   * `prisma.variant`: Exposes CRUD operations for the **Variant** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Variants
+   * const variants = await prisma.variant.findMany()
+   * ```
+   */
+  get variant(): Prisma.VariantDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.variantOption`: Exposes CRUD operations for the **VariantOption** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more VariantOptions
+   * const variantOptions = await prisma.variantOption.findMany()
+   * ```
+   */
+  get variantOption(): Prisma.VariantOptionDelegate<
+    ExtArgs,
+    { omit: OmitOpts }
+  >;
+
+  /**
+   * `prisma.sKU`: Exposes CRUD operations for the **SKU** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more SKUS
+   * const sKUS = await prisma.sKU.findMany()
+   * ```
+   */
+  get sKU(): Prisma.SKUDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.cartItem`: Exposes CRUD operations for the **CartItem** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more CartItems
+   * const cartItems = await prisma.cartItem.findMany()
+   * ```
+   */
+  get cartItem(): Prisma.CartItemDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.productSKUSnapshot`: Exposes CRUD operations for the **ProductSKUSnapshot** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more ProductSKUSnapshots
+   * const productSKUSnapshots = await prisma.productSKUSnapshot.findMany()
+   * ```
+   */
+  get productSKUSnapshot(): Prisma.ProductSKUSnapshotDelegate<
+    ExtArgs,
+    { omit: OmitOpts }
+  >;
+
+  /**
+   * `prisma.order`: Exposes CRUD operations for the **Order** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Orders
+   * const orders = await prisma.order.findMany()
+   * ```
+   */
+  get order(): Prisma.OrderDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.review`: Exposes CRUD operations for the **Review** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Reviews
+   * const reviews = await prisma.review.findMany()
+   * ```
+   */
+  get review(): Prisma.ReviewDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.paymentTransaction`: Exposes CRUD operations for the **PaymentTransaction** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more PaymentTransactions
+   * const paymentTransactions = await prisma.paymentTransaction.findMany()
+   * ```
+   */
+  get paymentTransaction(): Prisma.PaymentTransactionDelegate<
+    ExtArgs,
+    { omit: OmitOpts }
+  >;
+
+  /**
+   * `prisma.message`: Exposes CRUD operations for the **Message** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Messages
+   * const messages = await prisma.message.findMany()
+   * ```
+   */
+  get message(): Prisma.MessageDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.productsCategories`: Exposes CRUD operations for the **ProductsCategories** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more ProductsCategories
+   * const productsCategories = await prisma.productsCategories.findMany()
+   * ```
+   */
+  get productsCategories(): Prisma.ProductsCategoriesDelegate<
+    ExtArgs,
+    { omit: OmitOpts }
+  >;
+
+  /**
+   * `prisma.permissionsRoles`: Exposes CRUD operations for the **PermissionsRoles** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more PermissionsRoles
+   * const permissionsRoles = await prisma.permissionsRoles.findMany()
+   * ```
+   */
+  get permissionsRoles(): Prisma.PermissionsRolesDelegate<
+    ExtArgs,
+    { omit: OmitOpts }
+  >;
+
+  /**
+   * `prisma.skusVariantOptions`: Exposes CRUD operations for the **SkusVariantOptions** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more SkusVariantOptions
+   * const skusVariantOptions = await prisma.skusVariantOptions.findMany()
+   * ```
+   */
+  get skusVariantOptions(): Prisma.SkusVariantOptionsDelegate<
+    ExtArgs,
+    { omit: OmitOpts }
+  >;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

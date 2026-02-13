@@ -17,17 +17,127 @@ export { Prisma };
 export * as $Enums from './enums.js';
 export * from './enums.js';
 /**
+ * Model Language
+ *
+ */
+export type Language = Prisma.LanguageModel;
+/**
  * Model User
  *
  */
 export type User = Prisma.UserModel;
 /**
- * Model Post
+ * Model UserTranslation
  *
  */
-export type Post = Prisma.PostModel;
+export type UserTranslation = Prisma.UserTranslationModel;
+/**
+ * Model VerificationCode
+ *
+ */
+export type VerificationCode = Prisma.VerificationCodeModel;
 /**
  * Model RefreshToken
  *
  */
 export type RefreshToken = Prisma.RefreshTokenModel;
+/**
+ * Model Permission
+ *
+ */
+export type Permission = Prisma.PermissionModel;
+/**
+ * Model Role
+ *
+ */
+export type Role = Prisma.RoleModel;
+/**
+ * Model Brand
+ *
+ */
+export type Brand = Prisma.BrandModel;
+/**
+ * Model BrandTranslation
+ *
+ */
+export type BrandTranslation = Prisma.BrandTranslationModel;
+/**
+ * Model Product
+ *
+ */
+export type Product = Prisma.ProductModel;
+/**
+ * Model ProductTranslation
+ *
+ */
+export type ProductTranslation = Prisma.ProductTranslationModel;
+/**
+ * Model Category
+ *
+ */
+export type Category = Prisma.CategoryModel;
+/**
+ * Model CategoryTranslation
+ *
+ */
+export type CategoryTranslation = Prisma.CategoryTranslationModel;
+/**
+ * Model Variant
+ *
+ */
+export type Variant = Prisma.VariantModel;
+/**
+ * Model VariantOption
+ *
+ */
+export type VariantOption = Prisma.VariantOptionModel;
+/**
+ * Model SKU
+ *
+ */
+export type SKU = Prisma.SKUModel;
+/**
+ * Model CartItem
+ *
+ */
+export type CartItem = Prisma.CartItemModel;
+/**
+ * Model ProductSKUSnapshot
+ *
+ */
+export type ProductSKUSnapshot = Prisma.ProductSKUSnapshotModel;
+/**
+ * Model Order
+ *
+ */
+export type Order = Prisma.OrderModel;
+/**
+ * Model Review
+ *
+ */
+export type Review = Prisma.ReviewModel;
+/**
+ * Model PaymentTransaction
+ *
+ */
+export type PaymentTransaction = Prisma.PaymentTransactionModel;
+/**
+ * Model Message
+ *
+ */
+export type Message = Prisma.MessageModel;
+/**
+ * Model ProductsCategories
+ *
+ */
+export type ProductsCategories = Prisma.ProductsCategoriesModel;
+/**
+ * Model PermissionsRoles
+ *
+ */
+export type PermissionsRoles = Prisma.PermissionsRolesModel;
+/**
+ * Model SkusVariantOptions
+ *
+ */
+export type SkusVariantOptions = Prisma.SkusVariantOptionsModel;

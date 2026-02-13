@@ -28,10 +28,16 @@ export type AggregateUser = {
 
 export type UserAvgAggregateOutputType = {
   id: number | null;
+  roleId: number | null;
+  createdById: number | null;
+  updatedById: number | null;
 };
 
 export type UserSumAggregateOutputType = {
   id: number | null;
+  roleId: number | null;
+  createdById: number | null;
+  updatedById: number | null;
 };
 
 export type UserMinAggregateOutputType = {
@@ -39,6 +45,14 @@ export type UserMinAggregateOutputType = {
   email: string | null;
   name: string | null;
   password: string | null;
+  phoneNumber: string | null;
+  avatar: string | null;
+  totpSecret: string | null;
+  status: $Enums.UserStatus | null;
+  roleId: number | null;
+  createdById: number | null;
+  updatedById: number | null;
+  deletedAt: Date | null;
   createdAt: Date | null;
   updatedAt: Date | null;
 };
@@ -48,6 +62,14 @@ export type UserMaxAggregateOutputType = {
   email: string | null;
   name: string | null;
   password: string | null;
+  phoneNumber: string | null;
+  avatar: string | null;
+  totpSecret: string | null;
+  status: $Enums.UserStatus | null;
+  roleId: number | null;
+  createdById: number | null;
+  updatedById: number | null;
+  deletedAt: Date | null;
   createdAt: Date | null;
   updatedAt: Date | null;
 };
@@ -57,6 +79,14 @@ export type UserCountAggregateOutputType = {
   email: number;
   name: number;
   password: number;
+  phoneNumber: number;
+  avatar: number;
+  totpSecret: number;
+  status: number;
+  roleId: number;
+  createdById: number;
+  updatedById: number;
+  deletedAt: number;
   createdAt: number;
   updatedAt: number;
   _all: number;
@@ -64,10 +94,16 @@ export type UserCountAggregateOutputType = {
 
 export type UserAvgAggregateInputType = {
   id?: true;
+  roleId?: true;
+  createdById?: true;
+  updatedById?: true;
 };
 
 export type UserSumAggregateInputType = {
   id?: true;
+  roleId?: true;
+  createdById?: true;
+  updatedById?: true;
 };
 
 export type UserMinAggregateInputType = {
@@ -75,6 +111,14 @@ export type UserMinAggregateInputType = {
   email?: true;
   name?: true;
   password?: true;
+  phoneNumber?: true;
+  avatar?: true;
+  totpSecret?: true;
+  status?: true;
+  roleId?: true;
+  createdById?: true;
+  updatedById?: true;
+  deletedAt?: true;
   createdAt?: true;
   updatedAt?: true;
 };
@@ -84,6 +128,14 @@ export type UserMaxAggregateInputType = {
   email?: true;
   name?: true;
   password?: true;
+  phoneNumber?: true;
+  avatar?: true;
+  totpSecret?: true;
+  status?: true;
+  roleId?: true;
+  createdById?: true;
+  updatedById?: true;
+  deletedAt?: true;
   createdAt?: true;
   updatedAt?: true;
 };
@@ -93,6 +145,14 @@ export type UserCountAggregateInputType = {
   email?: true;
   name?: true;
   password?: true;
+  phoneNumber?: true;
+  avatar?: true;
+  totpSecret?: true;
+  status?: true;
+  roleId?: true;
+  createdById?: true;
+  updatedById?: true;
+  deletedAt?: true;
   createdAt?: true;
   updatedAt?: true;
   _all?: true;
@@ -196,6 +256,14 @@ export type UserGroupByOutputType = {
   email: string;
   name: string;
   password: string;
+  phoneNumber: string;
+  avatar: string | null;
+  totpSecret: string | null;
+  status: $Enums.UserStatus;
+  roleId: number;
+  createdById: number | null;
+  updatedById: number | null;
+  deletedAt: Date | null;
   createdAt: Date;
   updatedAt: Date;
   _count: UserCountAggregateOutputType | null;
@@ -225,10 +293,62 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<'User'> | string;
   name?: Prisma.StringFilter<'User'> | string;
   password?: Prisma.StringFilter<'User'> | string;
+  phoneNumber?: Prisma.StringFilter<'User'> | string;
+  avatar?: Prisma.StringNullableFilter<'User'> | string | null;
+  totpSecret?: Prisma.StringNullableFilter<'User'> | string | null;
+  status?: Prisma.EnumUserStatusFilter<'User'> | $Enums.UserStatus;
+  roleId?: Prisma.IntFilter<'User'> | number;
+  createdById?: Prisma.IntNullableFilter<'User'> | number | null;
+  updatedById?: Prisma.IntNullableFilter<'User'> | number | null;
+  deletedAt?: Prisma.DateTimeNullableFilter<'User'> | Date | string | null;
   createdAt?: Prisma.DateTimeFilter<'User'> | Date | string;
   updatedAt?: Prisma.DateTimeFilter<'User'> | Date | string;
-  posts?: Prisma.PostListRelationFilter;
+  role?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>;
+  createdBy?: Prisma.XOR<
+    Prisma.UserNullableScalarRelationFilter,
+    Prisma.UserWhereInput
+  > | null;
+  updatedBy?: Prisma.XOR<
+    Prisma.UserNullableScalarRelationFilter,
+    Prisma.UserWhereInput
+  > | null;
+  createdUsers?: Prisma.UserListRelationFilter;
+  updatedUsers?: Prisma.UserListRelationFilter;
+  userTranslations?: Prisma.UserTranslationListRelationFilter;
   refreshTokens?: Prisma.RefreshTokenListRelationFilter;
+  sentMessages?: Prisma.MessageListRelationFilter;
+  receivedMessages?: Prisma.MessageListRelationFilter;
+  reviews?: Prisma.ReviewListRelationFilter;
+  cartItems?: Prisma.CartItemListRelationFilter;
+  orders?: Prisma.OrderListRelationFilter;
+  createdLanguages?: Prisma.LanguageListRelationFilter;
+  updatedLanguages?: Prisma.LanguageListRelationFilter;
+  createdPermissions?: Prisma.PermissionListRelationFilter;
+  updatedPermissions?: Prisma.PermissionListRelationFilter;
+  createdRoles?: Prisma.RoleListRelationFilter;
+  updatedRoles?: Prisma.RoleListRelationFilter;
+  createdProducts?: Prisma.ProductListRelationFilter;
+  updatedProducts?: Prisma.ProductListRelationFilter;
+  createdProductTranslations?: Prisma.ProductTranslationListRelationFilter;
+  updatedProductTranslations?: Prisma.ProductTranslationListRelationFilter;
+  createdCategories?: Prisma.CategoryListRelationFilter;
+  updatedCategories?: Prisma.CategoryListRelationFilter;
+  createdCategoryTranslations?: Prisma.CategoryTranslationListRelationFilter;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationListRelationFilter;
+  createdVariants?: Prisma.VariantListRelationFilter;
+  updatedVariants?: Prisma.VariantListRelationFilter;
+  createdVariantOptions?: Prisma.VariantOptionListRelationFilter;
+  updatedVariantOptions?: Prisma.VariantOptionListRelationFilter;
+  createdSKUs?: Prisma.SKUListRelationFilter;
+  updatedSKUs?: Prisma.SKUListRelationFilter;
+  createdBrands?: Prisma.BrandListRelationFilter;
+  updatedBrands?: Prisma.BrandListRelationFilter;
+  createdBrandTranslations?: Prisma.BrandTranslationListRelationFilter;
+  updatedBrandTranslations?: Prisma.BrandTranslationListRelationFilter;
+  createdOrders?: Prisma.OrderListRelationFilter;
+  updatedOrders?: Prisma.OrderListRelationFilter;
+  createdUserTranslations?: Prisma.UserTranslationListRelationFilter;
+  updatedUserTranslations?: Prisma.UserTranslationListRelationFilter;
 };
 
 export type UserOrderByWithRelationInput = {
@@ -236,10 +356,56 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   password?: Prisma.SortOrder;
+  phoneNumber?: Prisma.SortOrder;
+  avatar?: Prisma.SortOrderInput | Prisma.SortOrder;
+  totpSecret?: Prisma.SortOrderInput | Prisma.SortOrder;
+  status?: Prisma.SortOrder;
+  roleId?: Prisma.SortOrder;
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder;
+  updatedById?: Prisma.SortOrderInput | Prisma.SortOrder;
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
-  posts?: Prisma.PostOrderByRelationAggregateInput;
+  role?: Prisma.RoleOrderByWithRelationInput;
+  createdBy?: Prisma.UserOrderByWithRelationInput;
+  updatedBy?: Prisma.UserOrderByWithRelationInput;
+  createdUsers?: Prisma.UserOrderByRelationAggregateInput;
+  updatedUsers?: Prisma.UserOrderByRelationAggregateInput;
+  userTranslations?: Prisma.UserTranslationOrderByRelationAggregateInput;
   refreshTokens?: Prisma.RefreshTokenOrderByRelationAggregateInput;
+  sentMessages?: Prisma.MessageOrderByRelationAggregateInput;
+  receivedMessages?: Prisma.MessageOrderByRelationAggregateInput;
+  reviews?: Prisma.ReviewOrderByRelationAggregateInput;
+  cartItems?: Prisma.CartItemOrderByRelationAggregateInput;
+  orders?: Prisma.OrderOrderByRelationAggregateInput;
+  createdLanguages?: Prisma.LanguageOrderByRelationAggregateInput;
+  updatedLanguages?: Prisma.LanguageOrderByRelationAggregateInput;
+  createdPermissions?: Prisma.PermissionOrderByRelationAggregateInput;
+  updatedPermissions?: Prisma.PermissionOrderByRelationAggregateInput;
+  createdRoles?: Prisma.RoleOrderByRelationAggregateInput;
+  updatedRoles?: Prisma.RoleOrderByRelationAggregateInput;
+  createdProducts?: Prisma.ProductOrderByRelationAggregateInput;
+  updatedProducts?: Prisma.ProductOrderByRelationAggregateInput;
+  createdProductTranslations?: Prisma.ProductTranslationOrderByRelationAggregateInput;
+  updatedProductTranslations?: Prisma.ProductTranslationOrderByRelationAggregateInput;
+  createdCategories?: Prisma.CategoryOrderByRelationAggregateInput;
+  updatedCategories?: Prisma.CategoryOrderByRelationAggregateInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationOrderByRelationAggregateInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationOrderByRelationAggregateInput;
+  createdVariants?: Prisma.VariantOrderByRelationAggregateInput;
+  updatedVariants?: Prisma.VariantOrderByRelationAggregateInput;
+  createdVariantOptions?: Prisma.VariantOptionOrderByRelationAggregateInput;
+  updatedVariantOptions?: Prisma.VariantOptionOrderByRelationAggregateInput;
+  createdSKUs?: Prisma.SKUOrderByRelationAggregateInput;
+  updatedSKUs?: Prisma.SKUOrderByRelationAggregateInput;
+  createdBrands?: Prisma.BrandOrderByRelationAggregateInput;
+  updatedBrands?: Prisma.BrandOrderByRelationAggregateInput;
+  createdBrandTranslations?: Prisma.BrandTranslationOrderByRelationAggregateInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationOrderByRelationAggregateInput;
+  createdOrders?: Prisma.OrderOrderByRelationAggregateInput;
+  updatedOrders?: Prisma.OrderOrderByRelationAggregateInput;
+  createdUserTranslations?: Prisma.UserTranslationOrderByRelationAggregateInput;
+  updatedUserTranslations?: Prisma.UserTranslationOrderByRelationAggregateInput;
 };
 
 export type UserWhereUniqueInput = Prisma.AtLeast<
@@ -251,10 +417,62 @@ export type UserWhereUniqueInput = Prisma.AtLeast<
     NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[];
     name?: Prisma.StringFilter<'User'> | string;
     password?: Prisma.StringFilter<'User'> | string;
+    phoneNumber?: Prisma.StringFilter<'User'> | string;
+    avatar?: Prisma.StringNullableFilter<'User'> | string | null;
+    totpSecret?: Prisma.StringNullableFilter<'User'> | string | null;
+    status?: Prisma.EnumUserStatusFilter<'User'> | $Enums.UserStatus;
+    roleId?: Prisma.IntFilter<'User'> | number;
+    createdById?: Prisma.IntNullableFilter<'User'> | number | null;
+    updatedById?: Prisma.IntNullableFilter<'User'> | number | null;
+    deletedAt?: Prisma.DateTimeNullableFilter<'User'> | Date | string | null;
     createdAt?: Prisma.DateTimeFilter<'User'> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<'User'> | Date | string;
-    posts?: Prisma.PostListRelationFilter;
+    role?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>;
+    createdBy?: Prisma.XOR<
+      Prisma.UserNullableScalarRelationFilter,
+      Prisma.UserWhereInput
+    > | null;
+    updatedBy?: Prisma.XOR<
+      Prisma.UserNullableScalarRelationFilter,
+      Prisma.UserWhereInput
+    > | null;
+    createdUsers?: Prisma.UserListRelationFilter;
+    updatedUsers?: Prisma.UserListRelationFilter;
+    userTranslations?: Prisma.UserTranslationListRelationFilter;
     refreshTokens?: Prisma.RefreshTokenListRelationFilter;
+    sentMessages?: Prisma.MessageListRelationFilter;
+    receivedMessages?: Prisma.MessageListRelationFilter;
+    reviews?: Prisma.ReviewListRelationFilter;
+    cartItems?: Prisma.CartItemListRelationFilter;
+    orders?: Prisma.OrderListRelationFilter;
+    createdLanguages?: Prisma.LanguageListRelationFilter;
+    updatedLanguages?: Prisma.LanguageListRelationFilter;
+    createdPermissions?: Prisma.PermissionListRelationFilter;
+    updatedPermissions?: Prisma.PermissionListRelationFilter;
+    createdRoles?: Prisma.RoleListRelationFilter;
+    updatedRoles?: Prisma.RoleListRelationFilter;
+    createdProducts?: Prisma.ProductListRelationFilter;
+    updatedProducts?: Prisma.ProductListRelationFilter;
+    createdProductTranslations?: Prisma.ProductTranslationListRelationFilter;
+    updatedProductTranslations?: Prisma.ProductTranslationListRelationFilter;
+    createdCategories?: Prisma.CategoryListRelationFilter;
+    updatedCategories?: Prisma.CategoryListRelationFilter;
+    createdCategoryTranslations?: Prisma.CategoryTranslationListRelationFilter;
+    updatedCategoryTranslations?: Prisma.CategoryTranslationListRelationFilter;
+    createdVariants?: Prisma.VariantListRelationFilter;
+    updatedVariants?: Prisma.VariantListRelationFilter;
+    createdVariantOptions?: Prisma.VariantOptionListRelationFilter;
+    updatedVariantOptions?: Prisma.VariantOptionListRelationFilter;
+    createdSKUs?: Prisma.SKUListRelationFilter;
+    updatedSKUs?: Prisma.SKUListRelationFilter;
+    createdBrands?: Prisma.BrandListRelationFilter;
+    updatedBrands?: Prisma.BrandListRelationFilter;
+    createdBrandTranslations?: Prisma.BrandTranslationListRelationFilter;
+    updatedBrandTranslations?: Prisma.BrandTranslationListRelationFilter;
+    createdOrders?: Prisma.OrderListRelationFilter;
+    updatedOrders?: Prisma.OrderListRelationFilter;
+    createdUserTranslations?: Prisma.UserTranslationListRelationFilter;
+    updatedUserTranslations?: Prisma.UserTranslationListRelationFilter;
   },
   'id' | 'email'
 >;
@@ -264,6 +482,14 @@ export type UserOrderByWithAggregationInput = {
   email?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   password?: Prisma.SortOrder;
+  phoneNumber?: Prisma.SortOrder;
+  avatar?: Prisma.SortOrderInput | Prisma.SortOrder;
+  totpSecret?: Prisma.SortOrderInput | Prisma.SortOrder;
+  status?: Prisma.SortOrder;
+  roleId?: Prisma.SortOrder;
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder;
+  updatedById?: Prisma.SortOrderInput | Prisma.SortOrder;
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
   _count?: Prisma.UserCountOrderByAggregateInput;
@@ -285,6 +511,23 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<'User'> | string;
   name?: Prisma.StringWithAggregatesFilter<'User'> | string;
   password?: Prisma.StringWithAggregatesFilter<'User'> | string;
+  phoneNumber?: Prisma.StringWithAggregatesFilter<'User'> | string;
+  avatar?: Prisma.StringNullableWithAggregatesFilter<'User'> | string | null;
+  totpSecret?:
+    | Prisma.StringNullableWithAggregatesFilter<'User'>
+    | string
+    | null;
+  status?:
+    | Prisma.EnumUserStatusWithAggregatesFilter<'User'>
+    | $Enums.UserStatus;
+  roleId?: Prisma.IntWithAggregatesFilter<'User'> | number;
+  createdById?: Prisma.IntNullableWithAggregatesFilter<'User'> | number | null;
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<'User'> | number | null;
+  deletedAt?:
+    | Prisma.DateTimeNullableWithAggregatesFilter<'User'>
+    | Date
+    | string
+    | null;
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'User'> | Date | string;
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<'User'> | Date | string;
 };
@@ -293,10 +536,53 @@ export type UserCreateInput = {
   email: string;
   name: string;
   password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
 };
 
 export type UserUncheckedCreateInput = {
@@ -304,20 +590,110 @@ export type UserUncheckedCreateInput = {
   email: string;
   name: string;
   password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
 };
 
 export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
 };
 
 export type UserUncheckedUpdateInput = {
@@ -325,10 +701,57 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
 };
 
 export type UserCreateManyInput = {
@@ -336,6 +759,14 @@ export type UserCreateManyInput = {
   email: string;
   name: string;
   password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
 };
@@ -344,6 +775,15 @@ export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
@@ -353,8 +793,35 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null;
+  isNot?: Prisma.UserWhereInput | null;
+};
+
+export type UserListRelationFilter = {
+  every?: Prisma.UserWhereInput;
+  some?: Prisma.UserWhereInput;
+  none?: Prisma.UserWhereInput;
+};
+
+export type UserOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder;
 };
 
 export type UserCountOrderByAggregateInput = {
@@ -362,12 +829,23 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   password?: Prisma.SortOrder;
+  phoneNumber?: Prisma.SortOrder;
+  avatar?: Prisma.SortOrder;
+  totpSecret?: Prisma.SortOrder;
+  status?: Prisma.SortOrder;
+  roleId?: Prisma.SortOrder;
+  createdById?: Prisma.SortOrder;
+  updatedById?: Prisma.SortOrder;
+  deletedAt?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
 
 export type UserAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder;
+  roleId?: Prisma.SortOrder;
+  createdById?: Prisma.SortOrder;
+  updatedById?: Prisma.SortOrder;
 };
 
 export type UserMaxOrderByAggregateInput = {
@@ -375,6 +853,14 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   password?: Prisma.SortOrder;
+  phoneNumber?: Prisma.SortOrder;
+  avatar?: Prisma.SortOrder;
+  totpSecret?: Prisma.SortOrder;
+  status?: Prisma.SortOrder;
+  roleId?: Prisma.SortOrder;
+  createdById?: Prisma.SortOrder;
+  updatedById?: Prisma.SortOrder;
+  deletedAt?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
@@ -384,12 +870,23 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
   password?: Prisma.SortOrder;
+  phoneNumber?: Prisma.SortOrder;
+  avatar?: Prisma.SortOrder;
+  totpSecret?: Prisma.SortOrder;
+  status?: Prisma.SortOrder;
+  roleId?: Prisma.SortOrder;
+  createdById?: Prisma.SortOrder;
+  updatedById?: Prisma.SortOrder;
+  deletedAt?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
 };
 
 export type UserSumOrderByAggregateInput = {
   id?: Prisma.SortOrder;
+  roleId?: Prisma.SortOrder;
+  createdById?: Prisma.SortOrder;
+  updatedById?: Prisma.SortOrder;
 };
 
 export type UserScalarRelationFilter = {
@@ -397,45 +894,377 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput;
 };
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string;
-};
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string;
-};
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number;
-  increment?: number;
-  decrement?: number;
-  multiply?: number;
-  divide?: number;
-};
-
-export type UserCreateNestedOneWithoutPostsInput = {
+export type UserCreateNestedOneWithoutCreatedLanguagesInput = {
   create?: Prisma.XOR<
-    Prisma.UserCreateWithoutPostsInput,
-    Prisma.UserUncheckedCreateWithoutPostsInput
+    Prisma.UserCreateWithoutCreatedLanguagesInput,
+    Prisma.UserUncheckedCreateWithoutCreatedLanguagesInput
   >;
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPostsInput;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedLanguagesInput;
   connect?: Prisma.UserWhereUniqueInput;
 };
 
-export type UserUpdateOneRequiredWithoutPostsNestedInput = {
+export type UserCreateNestedOneWithoutUpdatedLanguagesInput = {
   create?: Prisma.XOR<
-    Prisma.UserCreateWithoutPostsInput,
-    Prisma.UserUncheckedCreateWithoutPostsInput
+    Prisma.UserCreateWithoutUpdatedLanguagesInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedLanguagesInput
   >;
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPostsInput;
-  upsert?: Prisma.UserUpsertWithoutPostsInput;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedLanguagesInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneWithoutCreatedLanguagesNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedLanguagesInput,
+    Prisma.UserUncheckedCreateWithoutCreatedLanguagesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedLanguagesInput;
+  upsert?: Prisma.UserUpsertWithoutCreatedLanguagesInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
   connect?: Prisma.UserWhereUniqueInput;
   update?: Prisma.XOR<
     Prisma.XOR<
-      Prisma.UserUpdateToOneWithWhereWithoutPostsInput,
-      Prisma.UserUpdateWithoutPostsInput
+      Prisma.UserUpdateToOneWithWhereWithoutCreatedLanguagesInput,
+      Prisma.UserUpdateWithoutCreatedLanguagesInput
     >,
-    Prisma.UserUncheckedUpdateWithoutPostsInput
+    Prisma.UserUncheckedUpdateWithoutCreatedLanguagesInput
+  >;
+};
+
+export type UserUpdateOneWithoutUpdatedLanguagesNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedLanguagesInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedLanguagesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedLanguagesInput;
+  upsert?: Prisma.UserUpsertWithoutUpdatedLanguagesInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUpdatedLanguagesInput,
+      Prisma.UserUpdateWithoutUpdatedLanguagesInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUpdatedLanguagesInput
+  >;
+};
+
+export type UserCreateNestedOneWithoutCreatedUsersInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedUsersInput,
+    Prisma.UserUncheckedCreateWithoutCreatedUsersInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedUsersInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutUpdatedUsersInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedUsersInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedUsersInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedUsersInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedManyWithoutCreatedByInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.UserCreateWithoutCreatedByInput,
+        Prisma.UserUncheckedCreateWithoutCreatedByInput
+      >
+    | Prisma.UserCreateWithoutCreatedByInput[]
+    | Prisma.UserUncheckedCreateWithoutCreatedByInput[];
+  connectOrCreate?:
+    | Prisma.UserCreateOrConnectWithoutCreatedByInput
+    | Prisma.UserCreateOrConnectWithoutCreatedByInput[];
+  createMany?: Prisma.UserCreateManyCreatedByInputEnvelope;
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+};
+
+export type UserCreateNestedManyWithoutUpdatedByInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.UserCreateWithoutUpdatedByInput,
+        Prisma.UserUncheckedCreateWithoutUpdatedByInput
+      >
+    | Prisma.UserCreateWithoutUpdatedByInput[]
+    | Prisma.UserUncheckedCreateWithoutUpdatedByInput[];
+  connectOrCreate?:
+    | Prisma.UserCreateOrConnectWithoutUpdatedByInput
+    | Prisma.UserCreateOrConnectWithoutUpdatedByInput[];
+  createMany?: Prisma.UserCreateManyUpdatedByInputEnvelope;
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+};
+
+export type UserUncheckedCreateNestedManyWithoutCreatedByInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.UserCreateWithoutCreatedByInput,
+        Prisma.UserUncheckedCreateWithoutCreatedByInput
+      >
+    | Prisma.UserCreateWithoutCreatedByInput[]
+    | Prisma.UserUncheckedCreateWithoutCreatedByInput[];
+  connectOrCreate?:
+    | Prisma.UserCreateOrConnectWithoutCreatedByInput
+    | Prisma.UserCreateOrConnectWithoutCreatedByInput[];
+  createMany?: Prisma.UserCreateManyCreatedByInputEnvelope;
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+};
+
+export type UserUncheckedCreateNestedManyWithoutUpdatedByInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.UserCreateWithoutUpdatedByInput,
+        Prisma.UserUncheckedCreateWithoutUpdatedByInput
+      >
+    | Prisma.UserCreateWithoutUpdatedByInput[]
+    | Prisma.UserUncheckedCreateWithoutUpdatedByInput[];
+  connectOrCreate?:
+    | Prisma.UserCreateOrConnectWithoutUpdatedByInput
+    | Prisma.UserCreateOrConnectWithoutUpdatedByInput[];
+  createMany?: Prisma.UserCreateManyUpdatedByInputEnvelope;
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+};
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null;
+};
+
+export type EnumUserStatusFieldUpdateOperationsInput = {
+  set?: $Enums.UserStatus;
+};
+
+export type UserUpdateOneWithoutCreatedUsersNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedUsersInput,
+    Prisma.UserUncheckedCreateWithoutCreatedUsersInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedUsersInput;
+  upsert?: Prisma.UserUpsertWithoutCreatedUsersInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutCreatedUsersInput,
+      Prisma.UserUpdateWithoutCreatedUsersInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutCreatedUsersInput
+  >;
+};
+
+export type UserUpdateOneWithoutUpdatedUsersNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedUsersInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedUsersInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedUsersInput;
+  upsert?: Prisma.UserUpsertWithoutUpdatedUsersInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUpdatedUsersInput,
+      Prisma.UserUpdateWithoutUpdatedUsersInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUpdatedUsersInput
+  >;
+};
+
+export type UserUpdateManyWithoutCreatedByNestedInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.UserCreateWithoutCreatedByInput,
+        Prisma.UserUncheckedCreateWithoutCreatedByInput
+      >
+    | Prisma.UserCreateWithoutCreatedByInput[]
+    | Prisma.UserUncheckedCreateWithoutCreatedByInput[];
+  connectOrCreate?:
+    | Prisma.UserCreateOrConnectWithoutCreatedByInput
+    | Prisma.UserCreateOrConnectWithoutCreatedByInput[];
+  upsert?:
+    | Prisma.UserUpsertWithWhereUniqueWithoutCreatedByInput
+    | Prisma.UserUpsertWithWhereUniqueWithoutCreatedByInput[];
+  createMany?: Prisma.UserCreateManyCreatedByInputEnvelope;
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  update?:
+    | Prisma.UserUpdateWithWhereUniqueWithoutCreatedByInput
+    | Prisma.UserUpdateWithWhereUniqueWithoutCreatedByInput[];
+  updateMany?:
+    | Prisma.UserUpdateManyWithWhereWithoutCreatedByInput
+    | Prisma.UserUpdateManyWithWhereWithoutCreatedByInput[];
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[];
+};
+
+export type UserUpdateManyWithoutUpdatedByNestedInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.UserCreateWithoutUpdatedByInput,
+        Prisma.UserUncheckedCreateWithoutUpdatedByInput
+      >
+    | Prisma.UserCreateWithoutUpdatedByInput[]
+    | Prisma.UserUncheckedCreateWithoutUpdatedByInput[];
+  connectOrCreate?:
+    | Prisma.UserCreateOrConnectWithoutUpdatedByInput
+    | Prisma.UserCreateOrConnectWithoutUpdatedByInput[];
+  upsert?:
+    | Prisma.UserUpsertWithWhereUniqueWithoutUpdatedByInput
+    | Prisma.UserUpsertWithWhereUniqueWithoutUpdatedByInput[];
+  createMany?: Prisma.UserCreateManyUpdatedByInputEnvelope;
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  update?:
+    | Prisma.UserUpdateWithWhereUniqueWithoutUpdatedByInput
+    | Prisma.UserUpdateWithWhereUniqueWithoutUpdatedByInput[];
+  updateMany?:
+    | Prisma.UserUpdateManyWithWhereWithoutUpdatedByInput
+    | Prisma.UserUpdateManyWithWhereWithoutUpdatedByInput[];
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[];
+};
+
+export type UserUncheckedUpdateManyWithoutCreatedByNestedInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.UserCreateWithoutCreatedByInput,
+        Prisma.UserUncheckedCreateWithoutCreatedByInput
+      >
+    | Prisma.UserCreateWithoutCreatedByInput[]
+    | Prisma.UserUncheckedCreateWithoutCreatedByInput[];
+  connectOrCreate?:
+    | Prisma.UserCreateOrConnectWithoutCreatedByInput
+    | Prisma.UserCreateOrConnectWithoutCreatedByInput[];
+  upsert?:
+    | Prisma.UserUpsertWithWhereUniqueWithoutCreatedByInput
+    | Prisma.UserUpsertWithWhereUniqueWithoutCreatedByInput[];
+  createMany?: Prisma.UserCreateManyCreatedByInputEnvelope;
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  update?:
+    | Prisma.UserUpdateWithWhereUniqueWithoutCreatedByInput
+    | Prisma.UserUpdateWithWhereUniqueWithoutCreatedByInput[];
+  updateMany?:
+    | Prisma.UserUpdateManyWithWhereWithoutCreatedByInput
+    | Prisma.UserUpdateManyWithWhereWithoutCreatedByInput[];
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[];
+};
+
+export type UserUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.UserCreateWithoutUpdatedByInput,
+        Prisma.UserUncheckedCreateWithoutUpdatedByInput
+      >
+    | Prisma.UserCreateWithoutUpdatedByInput[]
+    | Prisma.UserUncheckedCreateWithoutUpdatedByInput[];
+  connectOrCreate?:
+    | Prisma.UserCreateOrConnectWithoutUpdatedByInput
+    | Prisma.UserCreateOrConnectWithoutUpdatedByInput[];
+  upsert?:
+    | Prisma.UserUpsertWithWhereUniqueWithoutUpdatedByInput
+    | Prisma.UserUpsertWithWhereUniqueWithoutUpdatedByInput[];
+  createMany?: Prisma.UserCreateManyUpdatedByInputEnvelope;
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  update?:
+    | Prisma.UserUpdateWithWhereUniqueWithoutUpdatedByInput
+    | Prisma.UserUpdateWithWhereUniqueWithoutUpdatedByInput[];
+  updateMany?:
+    | Prisma.UserUpdateManyWithWhereWithoutUpdatedByInput
+    | Prisma.UserUpdateManyWithWhereWithoutUpdatedByInput[];
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[];
+};
+
+export type UserCreateNestedOneWithoutUserTranslationsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUserTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUserTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserTranslationsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutCreatedUserTranslationsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedUserTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedUserTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedUserTranslationsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutUpdatedUserTranslationsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedUserTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedUserTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedUserTranslationsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneRequiredWithoutUserTranslationsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUserTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUserTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserTranslationsInput;
+  upsert?: Prisma.UserUpsertWithoutUserTranslationsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUserTranslationsInput,
+      Prisma.UserUpdateWithoutUserTranslationsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUserTranslationsInput
+  >;
+};
+
+export type UserUpdateOneWithoutCreatedUserTranslationsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedUserTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedUserTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedUserTranslationsInput;
+  upsert?: Prisma.UserUpsertWithoutCreatedUserTranslationsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutCreatedUserTranslationsInput,
+      Prisma.UserUpdateWithoutCreatedUserTranslationsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutCreatedUserTranslationsInput
+  >;
+};
+
+export type UserUpdateOneWithoutUpdatedUserTranslationsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedUserTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedUserTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedUserTranslationsInput;
+  upsert?: Prisma.UserUpsertWithoutUpdatedUserTranslationsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUpdatedUserTranslationsInput,
+      Prisma.UserUpdateWithoutUpdatedUserTranslationsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUpdatedUserTranslationsInput
   >;
 };
 
@@ -465,79 +1294,2982 @@ export type UserUpdateOneRequiredWithoutRefreshTokensNestedInput = {
   >;
 };
 
-export type UserCreateWithoutPostsInput = {
+export type UserCreateNestedOneWithoutCreatedPermissionsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedPermissionsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedPermissionsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedPermissionsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutUpdatedPermissionsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedPermissionsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedPermissionsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedPermissionsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneWithoutCreatedPermissionsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedPermissionsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedPermissionsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedPermissionsInput;
+  upsert?: Prisma.UserUpsertWithoutCreatedPermissionsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutCreatedPermissionsInput,
+      Prisma.UserUpdateWithoutCreatedPermissionsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutCreatedPermissionsInput
+  >;
+};
+
+export type UserUpdateOneWithoutUpdatedPermissionsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedPermissionsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedPermissionsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedPermissionsInput;
+  upsert?: Prisma.UserUpsertWithoutUpdatedPermissionsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUpdatedPermissionsInput,
+      Prisma.UserUpdateWithoutUpdatedPermissionsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUpdatedPermissionsInput
+  >;
+};
+
+export type UserCreateNestedOneWithoutCreatedRolesInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedRolesInput,
+    Prisma.UserUncheckedCreateWithoutCreatedRolesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedRolesInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutUpdatedRolesInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedRolesInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedRolesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedRolesInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedManyWithoutRoleInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.UserCreateWithoutRoleInput,
+        Prisma.UserUncheckedCreateWithoutRoleInput
+      >
+    | Prisma.UserCreateWithoutRoleInput[]
+    | Prisma.UserUncheckedCreateWithoutRoleInput[];
+  connectOrCreate?:
+    | Prisma.UserCreateOrConnectWithoutRoleInput
+    | Prisma.UserCreateOrConnectWithoutRoleInput[];
+  createMany?: Prisma.UserCreateManyRoleInputEnvelope;
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+};
+
+export type UserUncheckedCreateNestedManyWithoutRoleInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.UserCreateWithoutRoleInput,
+        Prisma.UserUncheckedCreateWithoutRoleInput
+      >
+    | Prisma.UserCreateWithoutRoleInput[]
+    | Prisma.UserUncheckedCreateWithoutRoleInput[];
+  connectOrCreate?:
+    | Prisma.UserCreateOrConnectWithoutRoleInput
+    | Prisma.UserCreateOrConnectWithoutRoleInput[];
+  createMany?: Prisma.UserCreateManyRoleInputEnvelope;
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+};
+
+export type UserUpdateOneWithoutCreatedRolesNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedRolesInput,
+    Prisma.UserUncheckedCreateWithoutCreatedRolesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedRolesInput;
+  upsert?: Prisma.UserUpsertWithoutCreatedRolesInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutCreatedRolesInput,
+      Prisma.UserUpdateWithoutCreatedRolesInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutCreatedRolesInput
+  >;
+};
+
+export type UserUpdateOneWithoutUpdatedRolesNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedRolesInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedRolesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedRolesInput;
+  upsert?: Prisma.UserUpsertWithoutUpdatedRolesInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUpdatedRolesInput,
+      Prisma.UserUpdateWithoutUpdatedRolesInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUpdatedRolesInput
+  >;
+};
+
+export type UserUpdateManyWithoutRoleNestedInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.UserCreateWithoutRoleInput,
+        Prisma.UserUncheckedCreateWithoutRoleInput
+      >
+    | Prisma.UserCreateWithoutRoleInput[]
+    | Prisma.UserUncheckedCreateWithoutRoleInput[];
+  connectOrCreate?:
+    | Prisma.UserCreateOrConnectWithoutRoleInput
+    | Prisma.UserCreateOrConnectWithoutRoleInput[];
+  upsert?:
+    | Prisma.UserUpsertWithWhereUniqueWithoutRoleInput
+    | Prisma.UserUpsertWithWhereUniqueWithoutRoleInput[];
+  createMany?: Prisma.UserCreateManyRoleInputEnvelope;
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  update?:
+    | Prisma.UserUpdateWithWhereUniqueWithoutRoleInput
+    | Prisma.UserUpdateWithWhereUniqueWithoutRoleInput[];
+  updateMany?:
+    | Prisma.UserUpdateManyWithWhereWithoutRoleInput
+    | Prisma.UserUpdateManyWithWhereWithoutRoleInput[];
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[];
+};
+
+export type UserUncheckedUpdateManyWithoutRoleNestedInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.UserCreateWithoutRoleInput,
+        Prisma.UserUncheckedCreateWithoutRoleInput
+      >
+    | Prisma.UserCreateWithoutRoleInput[]
+    | Prisma.UserUncheckedCreateWithoutRoleInput[];
+  connectOrCreate?:
+    | Prisma.UserCreateOrConnectWithoutRoleInput
+    | Prisma.UserCreateOrConnectWithoutRoleInput[];
+  upsert?:
+    | Prisma.UserUpsertWithWhereUniqueWithoutRoleInput
+    | Prisma.UserUpsertWithWhereUniqueWithoutRoleInput[];
+  createMany?: Prisma.UserCreateManyRoleInputEnvelope;
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[];
+  update?:
+    | Prisma.UserUpdateWithWhereUniqueWithoutRoleInput
+    | Prisma.UserUpdateWithWhereUniqueWithoutRoleInput[];
+  updateMany?:
+    | Prisma.UserUpdateManyWithWhereWithoutRoleInput
+    | Prisma.UserUpdateManyWithWhereWithoutRoleInput[];
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[];
+};
+
+export type UserCreateNestedOneWithoutCreatedBrandsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedBrandsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedBrandsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedBrandsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutUpdatedBrandsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedBrandsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedBrandsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedBrandsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneWithoutCreatedBrandsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedBrandsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedBrandsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedBrandsInput;
+  upsert?: Prisma.UserUpsertWithoutCreatedBrandsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutCreatedBrandsInput,
+      Prisma.UserUpdateWithoutCreatedBrandsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutCreatedBrandsInput
+  >;
+};
+
+export type UserUpdateOneWithoutUpdatedBrandsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedBrandsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedBrandsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedBrandsInput;
+  upsert?: Prisma.UserUpsertWithoutUpdatedBrandsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUpdatedBrandsInput,
+      Prisma.UserUpdateWithoutUpdatedBrandsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUpdatedBrandsInput
+  >;
+};
+
+export type UserCreateNestedOneWithoutCreatedBrandTranslationsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedBrandTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedBrandTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedBrandTranslationsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutUpdatedBrandTranslationsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedBrandTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedBrandTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedBrandTranslationsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneWithoutCreatedBrandTranslationsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedBrandTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedBrandTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedBrandTranslationsInput;
+  upsert?: Prisma.UserUpsertWithoutCreatedBrandTranslationsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutCreatedBrandTranslationsInput,
+      Prisma.UserUpdateWithoutCreatedBrandTranslationsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutCreatedBrandTranslationsInput
+  >;
+};
+
+export type UserUpdateOneWithoutUpdatedBrandTranslationsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedBrandTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedBrandTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedBrandTranslationsInput;
+  upsert?: Prisma.UserUpsertWithoutUpdatedBrandTranslationsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUpdatedBrandTranslationsInput,
+      Prisma.UserUpdateWithoutUpdatedBrandTranslationsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUpdatedBrandTranslationsInput
+  >;
+};
+
+export type UserCreateNestedOneWithoutCreatedProductsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedProductsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedProductsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedProductsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutUpdatedProductsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedProductsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedProductsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedProductsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneWithoutCreatedProductsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedProductsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedProductsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedProductsInput;
+  upsert?: Prisma.UserUpsertWithoutCreatedProductsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutCreatedProductsInput,
+      Prisma.UserUpdateWithoutCreatedProductsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutCreatedProductsInput
+  >;
+};
+
+export type UserUpdateOneWithoutUpdatedProductsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedProductsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedProductsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedProductsInput;
+  upsert?: Prisma.UserUpsertWithoutUpdatedProductsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUpdatedProductsInput,
+      Prisma.UserUpdateWithoutUpdatedProductsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUpdatedProductsInput
+  >;
+};
+
+export type UserCreateNestedOneWithoutCreatedProductTranslationsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedProductTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedProductTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedProductTranslationsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutUpdatedProductTranslationsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedProductTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedProductTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedProductTranslationsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneWithoutCreatedProductTranslationsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedProductTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedProductTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedProductTranslationsInput;
+  upsert?: Prisma.UserUpsertWithoutCreatedProductTranslationsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutCreatedProductTranslationsInput,
+      Prisma.UserUpdateWithoutCreatedProductTranslationsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutCreatedProductTranslationsInput
+  >;
+};
+
+export type UserUpdateOneWithoutUpdatedProductTranslationsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedProductTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedProductTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedProductTranslationsInput;
+  upsert?: Prisma.UserUpsertWithoutUpdatedProductTranslationsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUpdatedProductTranslationsInput,
+      Prisma.UserUpdateWithoutUpdatedProductTranslationsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUpdatedProductTranslationsInput
+  >;
+};
+
+export type UserCreateNestedOneWithoutCreatedCategoriesInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedCategoriesInput,
+    Prisma.UserUncheckedCreateWithoutCreatedCategoriesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedCategoriesInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutUpdatedCategoriesInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedCategoriesInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedCategoriesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedCategoriesInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneWithoutCreatedCategoriesNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedCategoriesInput,
+    Prisma.UserUncheckedCreateWithoutCreatedCategoriesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedCategoriesInput;
+  upsert?: Prisma.UserUpsertWithoutCreatedCategoriesInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutCreatedCategoriesInput,
+      Prisma.UserUpdateWithoutCreatedCategoriesInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutCreatedCategoriesInput
+  >;
+};
+
+export type UserUpdateOneWithoutUpdatedCategoriesNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedCategoriesInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedCategoriesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedCategoriesInput;
+  upsert?: Prisma.UserUpsertWithoutUpdatedCategoriesInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUpdatedCategoriesInput,
+      Prisma.UserUpdateWithoutUpdatedCategoriesInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUpdatedCategoriesInput
+  >;
+};
+
+export type UserCreateNestedOneWithoutCreatedCategoryTranslationsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedCategoryTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedCategoryTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedCategoryTranslationsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutUpdatedCategoryTranslationsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedCategoryTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedCategoryTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedCategoryTranslationsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneWithoutCreatedCategoryTranslationsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedCategoryTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedCategoryTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedCategoryTranslationsInput;
+  upsert?: Prisma.UserUpsertWithoutCreatedCategoryTranslationsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutCreatedCategoryTranslationsInput,
+      Prisma.UserUpdateWithoutCreatedCategoryTranslationsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutCreatedCategoryTranslationsInput
+  >;
+};
+
+export type UserUpdateOneWithoutUpdatedCategoryTranslationsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedCategoryTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedCategoryTranslationsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedCategoryTranslationsInput;
+  upsert?: Prisma.UserUpsertWithoutUpdatedCategoryTranslationsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUpdatedCategoryTranslationsInput,
+      Prisma.UserUpdateWithoutUpdatedCategoryTranslationsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUpdatedCategoryTranslationsInput
+  >;
+};
+
+export type UserCreateNestedOneWithoutCreatedVariantsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedVariantsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedVariantsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedVariantsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutUpdatedVariantsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedVariantsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedVariantsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedVariantsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneWithoutCreatedVariantsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedVariantsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedVariantsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedVariantsInput;
+  upsert?: Prisma.UserUpsertWithoutCreatedVariantsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutCreatedVariantsInput,
+      Prisma.UserUpdateWithoutCreatedVariantsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutCreatedVariantsInput
+  >;
+};
+
+export type UserUpdateOneWithoutUpdatedVariantsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedVariantsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedVariantsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedVariantsInput;
+  upsert?: Prisma.UserUpsertWithoutUpdatedVariantsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUpdatedVariantsInput,
+      Prisma.UserUpdateWithoutUpdatedVariantsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUpdatedVariantsInput
+  >;
+};
+
+export type UserCreateNestedOneWithoutCreatedVariantOptionsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedVariantOptionsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedVariantOptionsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedVariantOptionsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutUpdatedVariantOptionsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedVariantOptionsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedVariantOptionsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedVariantOptionsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneWithoutCreatedVariantOptionsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedVariantOptionsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedVariantOptionsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedVariantOptionsInput;
+  upsert?: Prisma.UserUpsertWithoutCreatedVariantOptionsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutCreatedVariantOptionsInput,
+      Prisma.UserUpdateWithoutCreatedVariantOptionsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutCreatedVariantOptionsInput
+  >;
+};
+
+export type UserUpdateOneWithoutUpdatedVariantOptionsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedVariantOptionsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedVariantOptionsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedVariantOptionsInput;
+  upsert?: Prisma.UserUpsertWithoutUpdatedVariantOptionsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUpdatedVariantOptionsInput,
+      Prisma.UserUpdateWithoutUpdatedVariantOptionsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUpdatedVariantOptionsInput
+  >;
+};
+
+export type UserCreateNestedOneWithoutCreatedSKUsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedSKUsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedSKUsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedSKUsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutUpdatedSKUsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedSKUsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedSKUsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedSKUsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneWithoutCreatedSKUsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedSKUsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedSKUsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedSKUsInput;
+  upsert?: Prisma.UserUpsertWithoutCreatedSKUsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutCreatedSKUsInput,
+      Prisma.UserUpdateWithoutCreatedSKUsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutCreatedSKUsInput
+  >;
+};
+
+export type UserUpdateOneWithoutUpdatedSKUsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedSKUsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedSKUsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedSKUsInput;
+  upsert?: Prisma.UserUpsertWithoutUpdatedSKUsInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUpdatedSKUsInput,
+      Prisma.UserUpdateWithoutUpdatedSKUsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUpdatedSKUsInput
+  >;
+};
+
+export type UserCreateNestedOneWithoutCartItemsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCartItemsInput,
+    Prisma.UserUncheckedCreateWithoutCartItemsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCartItemsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneRequiredWithoutCartItemsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCartItemsInput,
+    Prisma.UserUncheckedCreateWithoutCartItemsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCartItemsInput;
+  upsert?: Prisma.UserUpsertWithoutCartItemsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutCartItemsInput,
+      Prisma.UserUpdateWithoutCartItemsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutCartItemsInput
+  >;
+};
+
+export type UserCreateNestedOneWithoutOrdersInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutOrdersInput,
+    Prisma.UserUncheckedCreateWithoutOrdersInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrdersInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutCreatedOrdersInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedOrdersInput,
+    Prisma.UserUncheckedCreateWithoutCreatedOrdersInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedOrdersInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutUpdatedOrdersInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedOrdersInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedOrdersInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedOrdersInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneRequiredWithoutOrdersNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutOrdersInput,
+    Prisma.UserUncheckedCreateWithoutOrdersInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrdersInput;
+  upsert?: Prisma.UserUpsertWithoutOrdersInput;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutOrdersInput,
+      Prisma.UserUpdateWithoutOrdersInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutOrdersInput
+  >;
+};
+
+export type UserUpdateOneWithoutCreatedOrdersNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedOrdersInput,
+    Prisma.UserUncheckedCreateWithoutCreatedOrdersInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedOrdersInput;
+  upsert?: Prisma.UserUpsertWithoutCreatedOrdersInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutCreatedOrdersInput,
+      Prisma.UserUpdateWithoutCreatedOrdersInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutCreatedOrdersInput
+  >;
+};
+
+export type UserUpdateOneWithoutUpdatedOrdersNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedOrdersInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedOrdersInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedOrdersInput;
+  upsert?: Prisma.UserUpsertWithoutUpdatedOrdersInput;
+  disconnect?: Prisma.UserWhereInput | boolean;
+  delete?: Prisma.UserWhereInput | boolean;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutUpdatedOrdersInput,
+      Prisma.UserUpdateWithoutUpdatedOrdersInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutUpdatedOrdersInput
+  >;
+};
+
+export type UserCreateNestedOneWithoutReviewsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutReviewsInput,
+    Prisma.UserUncheckedCreateWithoutReviewsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutReviewsInput,
+    Prisma.UserUncheckedCreateWithoutReviewsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsInput;
+  upsert?: Prisma.UserUpsertWithoutReviewsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutReviewsInput,
+      Prisma.UserUpdateWithoutReviewsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutReviewsInput
+  >;
+};
+
+export type UserCreateNestedOneWithoutSentMessagesInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutSentMessagesInput,
+    Prisma.UserUncheckedCreateWithoutSentMessagesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSentMessagesInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserCreateNestedOneWithoutReceivedMessagesInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutReceivedMessagesInput,
+    Prisma.UserUncheckedCreateWithoutReceivedMessagesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReceivedMessagesInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneRequiredWithoutSentMessagesNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutSentMessagesInput,
+    Prisma.UserUncheckedCreateWithoutSentMessagesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSentMessagesInput;
+  upsert?: Prisma.UserUpsertWithoutSentMessagesInput;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutSentMessagesInput,
+      Prisma.UserUpdateWithoutSentMessagesInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutSentMessagesInput
+  >;
+};
+
+export type UserUpdateOneRequiredWithoutReceivedMessagesNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutReceivedMessagesInput,
+    Prisma.UserUncheckedCreateWithoutReceivedMessagesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReceivedMessagesInput;
+  upsert?: Prisma.UserUpsertWithoutReceivedMessagesInput;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutReceivedMessagesInput,
+      Prisma.UserUpdateWithoutReceivedMessagesInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutReceivedMessagesInput
+  >;
+};
+
+export type UserCreateWithoutCreatedLanguagesInput = {
   email: string;
   name: string;
   password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
 };
 
-export type UserUncheckedCreateWithoutPostsInput = {
+export type UserUncheckedCreateWithoutCreatedLanguagesInput = {
   id?: number;
   email: string;
   name: string;
   password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
 };
 
-export type UserCreateOrConnectWithoutPostsInput = {
+export type UserCreateOrConnectWithoutCreatedLanguagesInput = {
   where: Prisma.UserWhereUniqueInput;
   create: Prisma.XOR<
-    Prisma.UserCreateWithoutPostsInput,
-    Prisma.UserUncheckedCreateWithoutPostsInput
+    Prisma.UserCreateWithoutCreatedLanguagesInput,
+    Prisma.UserUncheckedCreateWithoutCreatedLanguagesInput
   >;
 };
 
-export type UserUpsertWithoutPostsInput = {
+export type UserCreateWithoutUpdatedLanguagesInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedLanguagesInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedLanguagesInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedLanguagesInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedLanguagesInput
+  >;
+};
+
+export type UserUpsertWithoutCreatedLanguagesInput = {
   update: Prisma.XOR<
-    Prisma.UserUpdateWithoutPostsInput,
-    Prisma.UserUncheckedUpdateWithoutPostsInput
+    Prisma.UserUpdateWithoutCreatedLanguagesInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedLanguagesInput
   >;
   create: Prisma.XOR<
-    Prisma.UserCreateWithoutPostsInput,
-    Prisma.UserUncheckedCreateWithoutPostsInput
+    Prisma.UserCreateWithoutCreatedLanguagesInput,
+    Prisma.UserUncheckedCreateWithoutCreatedLanguagesInput
   >;
   where?: Prisma.UserWhereInput;
 };
 
-export type UserUpdateToOneWithWhereWithoutPostsInput = {
+export type UserUpdateToOneWithWhereWithoutCreatedLanguagesInput = {
   where?: Prisma.UserWhereInput;
   data: Prisma.XOR<
-    Prisma.UserUpdateWithoutPostsInput,
-    Prisma.UserUncheckedUpdateWithoutPostsInput
+    Prisma.UserUpdateWithoutCreatedLanguagesInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedLanguagesInput
   >;
 };
 
-export type UserUpdateWithoutPostsInput = {
+export type UserUpdateWithoutCreatedLanguagesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
 };
 
-export type UserUncheckedUpdateWithoutPostsInput = {
+export type UserUncheckedUpdateWithoutCreatedLanguagesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   email?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutUpdatedLanguagesInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedLanguagesInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedLanguagesInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedLanguagesInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedLanguagesInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUpdatedLanguagesInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedLanguagesInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedLanguagesInput
+  >;
+};
+
+export type UserUpdateWithoutUpdatedLanguagesInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedLanguagesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateWithoutCreatedUsersInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCreatedUsersInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCreatedUsersInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedUsersInput,
+    Prisma.UserUncheckedCreateWithoutCreatedUsersInput
+  >;
+};
+
+export type UserCreateWithoutUpdatedUsersInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedUsersInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedUsersInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedUsersInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedUsersInput
+  >;
+};
+
+export type UserCreateWithoutCreatedByInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCreatedByInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCreatedByInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedByInput,
+    Prisma.UserUncheckedCreateWithoutCreatedByInput
+  >;
+};
+
+export type UserCreateManyCreatedByInputEnvelope = {
+  data:
+    | Prisma.UserCreateManyCreatedByInput
+    | Prisma.UserCreateManyCreatedByInput[];
+  skipDuplicates?: boolean;
+};
+
+export type UserCreateWithoutUpdatedByInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedByInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedByInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedByInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedByInput
+  >;
+};
+
+export type UserCreateManyUpdatedByInputEnvelope = {
+  data:
+    | Prisma.UserCreateManyUpdatedByInput
+    | Prisma.UserCreateManyUpdatedByInput[];
+  skipDuplicates?: boolean;
+};
+
+export type UserUpsertWithoutCreatedUsersInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedUsersInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedUsersInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedUsersInput,
+    Prisma.UserUncheckedCreateWithoutCreatedUsersInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutCreatedUsersInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedUsersInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedUsersInput
+  >;
+};
+
+export type UserUpdateWithoutCreatedUsersInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCreatedUsersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutUpdatedUsersInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedUsersInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedUsersInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedUsersInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedUsersInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUpdatedUsersInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedUsersInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedUsersInput
+  >;
+};
+
+export type UserUpdateWithoutUpdatedUsersInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedUsersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithWhereUniqueWithoutCreatedByInput = {
+  where: Prisma.UserWhereUniqueInput;
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedByInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedByInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedByInput,
+    Prisma.UserUncheckedCreateWithoutCreatedByInput
+  >;
+};
+
+export type UserUpdateWithWhereUniqueWithoutCreatedByInput = {
+  where: Prisma.UserWhereUniqueInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedByInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedByInput
+  >;
+};
+
+export type UserUpdateManyWithWhereWithoutCreatedByInput = {
+  where: Prisma.UserScalarWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateManyMutationInput,
+    Prisma.UserUncheckedUpdateManyWithoutCreatedByInput
+  >;
+};
+
+export type UserScalarWhereInput = {
+  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[];
+  OR?: Prisma.UserScalarWhereInput[];
+  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[];
+  id?: Prisma.IntFilter<'User'> | number;
+  email?: Prisma.StringFilter<'User'> | string;
+  name?: Prisma.StringFilter<'User'> | string;
+  password?: Prisma.StringFilter<'User'> | string;
+  phoneNumber?: Prisma.StringFilter<'User'> | string;
+  avatar?: Prisma.StringNullableFilter<'User'> | string | null;
+  totpSecret?: Prisma.StringNullableFilter<'User'> | string | null;
+  status?: Prisma.EnumUserStatusFilter<'User'> | $Enums.UserStatus;
+  roleId?: Prisma.IntFilter<'User'> | number;
+  createdById?: Prisma.IntNullableFilter<'User'> | number | null;
+  updatedById?: Prisma.IntNullableFilter<'User'> | number | null;
+  deletedAt?: Prisma.DateTimeNullableFilter<'User'> | Date | string | null;
+  createdAt?: Prisma.DateTimeFilter<'User'> | Date | string;
+  updatedAt?: Prisma.DateTimeFilter<'User'> | Date | string;
+};
+
+export type UserUpsertWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.UserWhereUniqueInput;
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedByInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedByInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedByInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedByInput
+  >;
+};
+
+export type UserUpdateWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.UserWhereUniqueInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedByInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedByInput
+  >;
+};
+
+export type UserUpdateManyWithWhereWithoutUpdatedByInput = {
+  where: Prisma.UserScalarWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateManyMutationInput,
+    Prisma.UserUncheckedUpdateManyWithoutUpdatedByInput
+  >;
+};
+
+export type UserCreateWithoutUserTranslationsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUserTranslationsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUserTranslationsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUserTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUserTranslationsInput
+  >;
+};
+
+export type UserCreateWithoutCreatedUserTranslationsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCreatedUserTranslationsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCreatedUserTranslationsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedUserTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedUserTranslationsInput
+  >;
+};
+
+export type UserCreateWithoutUpdatedUserTranslationsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedUserTranslationsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedUserTranslationsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedUserTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedUserTranslationsInput
+  >;
+};
+
+export type UserUpsertWithoutUserTranslationsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUserTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutUserTranslationsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUserTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUserTranslationsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUserTranslationsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUserTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutUserTranslationsInput
+  >;
+};
+
+export type UserUpdateWithoutUserTranslationsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUserTranslationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutCreatedUserTranslationsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedUserTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedUserTranslationsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedUserTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedUserTranslationsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutCreatedUserTranslationsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedUserTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedUserTranslationsInput
+  >;
+};
+
+export type UserUpdateWithoutCreatedUserTranslationsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCreatedUserTranslationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutUpdatedUserTranslationsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedUserTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedUserTranslationsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedUserTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedUserTranslationsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUpdatedUserTranslationsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedUserTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedUserTranslationsInput
+  >;
+};
+
+export type UserUpdateWithoutUpdatedUserTranslationsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedUserTranslationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
 };
 
 export type UserCreateWithoutRefreshTokensInput = {
   email: string;
   name: string;
   password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
 };
 
 export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -545,9 +4277,52 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   email: string;
   name: string;
   password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
 };
 
 export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -582,9 +4357,56 @@ export type UserUpdateWithoutRefreshTokensInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
 };
 
 export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -592,9 +4414,7783 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateWithoutCreatedPermissionsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCreatedPermissionsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCreatedPermissionsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedPermissionsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedPermissionsInput
+  >;
+};
+
+export type UserCreateWithoutUpdatedPermissionsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedPermissionsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedPermissionsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedPermissionsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedPermissionsInput
+  >;
+};
+
+export type UserUpsertWithoutCreatedPermissionsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedPermissionsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedPermissionsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedPermissionsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedPermissionsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutCreatedPermissionsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedPermissionsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedPermissionsInput
+  >;
+};
+
+export type UserUpdateWithoutCreatedPermissionsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCreatedPermissionsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutUpdatedPermissionsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedPermissionsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedPermissionsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedPermissionsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedPermissionsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUpdatedPermissionsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedPermissionsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedPermissionsInput
+  >;
+};
+
+export type UserUpdateWithoutUpdatedPermissionsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedPermissionsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateWithoutCreatedRolesInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCreatedRolesInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCreatedRolesInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedRolesInput,
+    Prisma.UserUncheckedCreateWithoutCreatedRolesInput
+  >;
+};
+
+export type UserCreateWithoutUpdatedRolesInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedRolesInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedRolesInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedRolesInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedRolesInput
+  >;
+};
+
+export type UserCreateWithoutRoleInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutRoleInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutRoleInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutRoleInput,
+    Prisma.UserUncheckedCreateWithoutRoleInput
+  >;
+};
+
+export type UserCreateManyRoleInputEnvelope = {
+  data: Prisma.UserCreateManyRoleInput | Prisma.UserCreateManyRoleInput[];
+  skipDuplicates?: boolean;
+};
+
+export type UserUpsertWithoutCreatedRolesInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedRolesInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedRolesInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedRolesInput,
+    Prisma.UserUncheckedCreateWithoutCreatedRolesInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutCreatedRolesInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedRolesInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedRolesInput
+  >;
+};
+
+export type UserUpdateWithoutCreatedRolesInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCreatedRolesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutUpdatedRolesInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedRolesInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedRolesInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedRolesInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedRolesInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUpdatedRolesInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedRolesInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedRolesInput
+  >;
+};
+
+export type UserUpdateWithoutUpdatedRolesInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedRolesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithWhereUniqueWithoutRoleInput = {
+  where: Prisma.UserWhereUniqueInput;
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutRoleInput,
+    Prisma.UserUncheckedUpdateWithoutRoleInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutRoleInput,
+    Prisma.UserUncheckedCreateWithoutRoleInput
+  >;
+};
+
+export type UserUpdateWithWhereUniqueWithoutRoleInput = {
+  where: Prisma.UserWhereUniqueInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutRoleInput,
+    Prisma.UserUncheckedUpdateWithoutRoleInput
+  >;
+};
+
+export type UserUpdateManyWithWhereWithoutRoleInput = {
+  where: Prisma.UserScalarWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateManyMutationInput,
+    Prisma.UserUncheckedUpdateManyWithoutRoleInput
+  >;
+};
+
+export type UserCreateWithoutCreatedBrandsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCreatedBrandsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCreatedBrandsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedBrandsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedBrandsInput
+  >;
+};
+
+export type UserCreateWithoutUpdatedBrandsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedBrandsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedBrandsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedBrandsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedBrandsInput
+  >;
+};
+
+export type UserUpsertWithoutCreatedBrandsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedBrandsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedBrandsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedBrandsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedBrandsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutCreatedBrandsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedBrandsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedBrandsInput
+  >;
+};
+
+export type UserUpdateWithoutCreatedBrandsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCreatedBrandsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutUpdatedBrandsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedBrandsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedBrandsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedBrandsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedBrandsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUpdatedBrandsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedBrandsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedBrandsInput
+  >;
+};
+
+export type UserUpdateWithoutUpdatedBrandsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedBrandsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateWithoutCreatedBrandTranslationsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCreatedBrandTranslationsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCreatedBrandTranslationsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedBrandTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedBrandTranslationsInput
+  >;
+};
+
+export type UserCreateWithoutUpdatedBrandTranslationsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedBrandTranslationsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedBrandTranslationsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedBrandTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedBrandTranslationsInput
+  >;
+};
+
+export type UserUpsertWithoutCreatedBrandTranslationsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedBrandTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedBrandTranslationsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedBrandTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedBrandTranslationsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutCreatedBrandTranslationsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedBrandTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedBrandTranslationsInput
+  >;
+};
+
+export type UserUpdateWithoutCreatedBrandTranslationsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCreatedBrandTranslationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutUpdatedBrandTranslationsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedBrandTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedBrandTranslationsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedBrandTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedBrandTranslationsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUpdatedBrandTranslationsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedBrandTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedBrandTranslationsInput
+  >;
+};
+
+export type UserUpdateWithoutUpdatedBrandTranslationsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedBrandTranslationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateWithoutCreatedProductsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCreatedProductsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCreatedProductsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedProductsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedProductsInput
+  >;
+};
+
+export type UserCreateWithoutUpdatedProductsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedProductsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedProductsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedProductsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedProductsInput
+  >;
+};
+
+export type UserUpsertWithoutCreatedProductsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedProductsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedProductsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedProductsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedProductsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutCreatedProductsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedProductsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedProductsInput
+  >;
+};
+
+export type UserUpdateWithoutCreatedProductsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCreatedProductsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutUpdatedProductsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedProductsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedProductsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedProductsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedProductsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUpdatedProductsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedProductsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedProductsInput
+  >;
+};
+
+export type UserUpdateWithoutUpdatedProductsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedProductsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateWithoutCreatedProductTranslationsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCreatedProductTranslationsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCreatedProductTranslationsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedProductTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedProductTranslationsInput
+  >;
+};
+
+export type UserCreateWithoutUpdatedProductTranslationsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedProductTranslationsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedProductTranslationsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedProductTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedProductTranslationsInput
+  >;
+};
+
+export type UserUpsertWithoutCreatedProductTranslationsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedProductTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedProductTranslationsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedProductTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedProductTranslationsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutCreatedProductTranslationsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedProductTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedProductTranslationsInput
+  >;
+};
+
+export type UserUpdateWithoutCreatedProductTranslationsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCreatedProductTranslationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutUpdatedProductTranslationsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedProductTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedProductTranslationsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedProductTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedProductTranslationsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUpdatedProductTranslationsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedProductTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedProductTranslationsInput
+  >;
+};
+
+export type UserUpdateWithoutUpdatedProductTranslationsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedProductTranslationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateWithoutCreatedCategoriesInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCreatedCategoriesInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCreatedCategoriesInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedCategoriesInput,
+    Prisma.UserUncheckedCreateWithoutCreatedCategoriesInput
+  >;
+};
+
+export type UserCreateWithoutUpdatedCategoriesInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedCategoriesInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedCategoriesInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedCategoriesInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedCategoriesInput
+  >;
+};
+
+export type UserUpsertWithoutCreatedCategoriesInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedCategoriesInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedCategoriesInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedCategoriesInput,
+    Prisma.UserUncheckedCreateWithoutCreatedCategoriesInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutCreatedCategoriesInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedCategoriesInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedCategoriesInput
+  >;
+};
+
+export type UserUpdateWithoutCreatedCategoriesInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCreatedCategoriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutUpdatedCategoriesInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedCategoriesInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedCategoriesInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedCategoriesInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedCategoriesInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUpdatedCategoriesInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedCategoriesInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedCategoriesInput
+  >;
+};
+
+export type UserUpdateWithoutUpdatedCategoriesInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedCategoriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateWithoutCreatedCategoryTranslationsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCreatedCategoryTranslationsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCreatedCategoryTranslationsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedCategoryTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedCategoryTranslationsInput
+  >;
+};
+
+export type UserCreateWithoutUpdatedCategoryTranslationsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedCategoryTranslationsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedCategoryTranslationsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedCategoryTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedCategoryTranslationsInput
+  >;
+};
+
+export type UserUpsertWithoutCreatedCategoryTranslationsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedCategoryTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedCategoryTranslationsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedCategoryTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedCategoryTranslationsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutCreatedCategoryTranslationsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedCategoryTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedCategoryTranslationsInput
+  >;
+};
+
+export type UserUpdateWithoutCreatedCategoryTranslationsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCreatedCategoryTranslationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutUpdatedCategoryTranslationsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedCategoryTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedCategoryTranslationsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedCategoryTranslationsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedCategoryTranslationsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUpdatedCategoryTranslationsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedCategoryTranslationsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedCategoryTranslationsInput
+  >;
+};
+
+export type UserUpdateWithoutUpdatedCategoryTranslationsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedCategoryTranslationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateWithoutCreatedVariantsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCreatedVariantsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCreatedVariantsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedVariantsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedVariantsInput
+  >;
+};
+
+export type UserCreateWithoutUpdatedVariantsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedVariantsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedVariantsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedVariantsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedVariantsInput
+  >;
+};
+
+export type UserUpsertWithoutCreatedVariantsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedVariantsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedVariantsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedVariantsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedVariantsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutCreatedVariantsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedVariantsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedVariantsInput
+  >;
+};
+
+export type UserUpdateWithoutCreatedVariantsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCreatedVariantsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutUpdatedVariantsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedVariantsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedVariantsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedVariantsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedVariantsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUpdatedVariantsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedVariantsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedVariantsInput
+  >;
+};
+
+export type UserUpdateWithoutUpdatedVariantsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedVariantsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateWithoutCreatedVariantOptionsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCreatedVariantOptionsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCreatedVariantOptionsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedVariantOptionsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedVariantOptionsInput
+  >;
+};
+
+export type UserCreateWithoutUpdatedVariantOptionsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedVariantOptionsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedVariantOptionsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedVariantOptionsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedVariantOptionsInput
+  >;
+};
+
+export type UserUpsertWithoutCreatedVariantOptionsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedVariantOptionsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedVariantOptionsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedVariantOptionsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedVariantOptionsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutCreatedVariantOptionsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedVariantOptionsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedVariantOptionsInput
+  >;
+};
+
+export type UserUpdateWithoutCreatedVariantOptionsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCreatedVariantOptionsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutUpdatedVariantOptionsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedVariantOptionsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedVariantOptionsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedVariantOptionsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedVariantOptionsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUpdatedVariantOptionsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedVariantOptionsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedVariantOptionsInput
+  >;
+};
+
+export type UserUpdateWithoutUpdatedVariantOptionsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedVariantOptionsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateWithoutCreatedSKUsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCreatedSKUsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCreatedSKUsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedSKUsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedSKUsInput
+  >;
+};
+
+export type UserCreateWithoutUpdatedSKUsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedSKUsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedSKUsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedSKUsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedSKUsInput
+  >;
+};
+
+export type UserUpsertWithoutCreatedSKUsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedSKUsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedSKUsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedSKUsInput,
+    Prisma.UserUncheckedCreateWithoutCreatedSKUsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutCreatedSKUsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedSKUsInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedSKUsInput
+  >;
+};
+
+export type UserUpdateWithoutCreatedSKUsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCreatedSKUsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutUpdatedSKUsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedSKUsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedSKUsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedSKUsInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedSKUsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUpdatedSKUsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedSKUsInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedSKUsInput
+  >;
+};
+
+export type UserUpdateWithoutUpdatedSKUsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedSKUsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateWithoutCartItemsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCartItemsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCartItemsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCartItemsInput,
+    Prisma.UserUncheckedCreateWithoutCartItemsInput
+  >;
+};
+
+export type UserUpsertWithoutCartItemsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCartItemsInput,
+    Prisma.UserUncheckedUpdateWithoutCartItemsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCartItemsInput,
+    Prisma.UserUncheckedCreateWithoutCartItemsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutCartItemsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCartItemsInput,
+    Prisma.UserUncheckedUpdateWithoutCartItemsInput
+  >;
+};
+
+export type UserUpdateWithoutCartItemsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCartItemsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateWithoutOrdersInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutOrdersInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutOrdersInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutOrdersInput,
+    Prisma.UserUncheckedCreateWithoutOrdersInput
+  >;
+};
+
+export type UserCreateWithoutCreatedOrdersInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutCreatedOrdersInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutCreatedOrdersInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedOrdersInput,
+    Prisma.UserUncheckedCreateWithoutCreatedOrdersInput
+  >;
+};
+
+export type UserCreateWithoutUpdatedOrdersInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutUpdatedOrdersInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutUpdatedOrdersInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedOrdersInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedOrdersInput
+  >;
+};
+
+export type UserUpsertWithoutOrdersInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutOrdersInput,
+    Prisma.UserUncheckedUpdateWithoutOrdersInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutOrdersInput,
+    Prisma.UserUncheckedCreateWithoutOrdersInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutOrdersInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutOrdersInput,
+    Prisma.UserUncheckedUpdateWithoutOrdersInput
+  >;
+};
+
+export type UserUpdateWithoutOrdersInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutOrdersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutCreatedOrdersInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedOrdersInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedOrdersInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutCreatedOrdersInput,
+    Prisma.UserUncheckedCreateWithoutCreatedOrdersInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutCreatedOrdersInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutCreatedOrdersInput,
+    Prisma.UserUncheckedUpdateWithoutCreatedOrdersInput
+  >;
+};
+
+export type UserUpdateWithoutCreatedOrdersInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCreatedOrdersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutUpdatedOrdersInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedOrdersInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedOrdersInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutUpdatedOrdersInput,
+    Prisma.UserUncheckedCreateWithoutUpdatedOrdersInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutUpdatedOrdersInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutUpdatedOrdersInput,
+    Prisma.UserUncheckedUpdateWithoutUpdatedOrdersInput
+  >;
+};
+
+export type UserUpdateWithoutUpdatedOrdersInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedOrdersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateWithoutReviewsInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutReviewsInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutReviewsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutReviewsInput,
+    Prisma.UserUncheckedCreateWithoutReviewsInput
+  >;
+};
+
+export type UserUpsertWithoutReviewsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutReviewsInput,
+    Prisma.UserUncheckedUpdateWithoutReviewsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutReviewsInput,
+    Prisma.UserUncheckedCreateWithoutReviewsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutReviewsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutReviewsInput,
+    Prisma.UserUncheckedUpdateWithoutReviewsInput
+  >;
+};
+
+export type UserUpdateWithoutReviewsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutReviewsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateWithoutSentMessagesInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutSentMessagesInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutSentMessagesInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutSentMessagesInput,
+    Prisma.UserUncheckedCreateWithoutSentMessagesInput
+  >;
+};
+
+export type UserCreateWithoutReceivedMessagesInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutReceivedMessagesInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutReceivedMessagesInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutReceivedMessagesInput,
+    Prisma.UserUncheckedCreateWithoutReceivedMessagesInput
+  >;
+};
+
+export type UserUpsertWithoutSentMessagesInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutSentMessagesInput,
+    Prisma.UserUncheckedUpdateWithoutSentMessagesInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutSentMessagesInput,
+    Prisma.UserUncheckedCreateWithoutSentMessagesInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutSentMessagesInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutSentMessagesInput,
+    Prisma.UserUncheckedUpdateWithoutSentMessagesInput
+  >;
+};
+
+export type UserUpdateWithoutSentMessagesInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutSentMessagesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUpsertWithoutReceivedMessagesInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutReceivedMessagesInput,
+    Prisma.UserUncheckedUpdateWithoutReceivedMessagesInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutReceivedMessagesInput,
+    Prisma.UserUncheckedCreateWithoutReceivedMessagesInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutReceivedMessagesInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutReceivedMessagesInput,
+    Prisma.UserUncheckedUpdateWithoutReceivedMessagesInput
+  >;
+};
+
+export type UserUpdateWithoutReceivedMessagesInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserCreateManyCreatedByInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+};
+
+export type UserCreateManyUpdatedByInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+};
+
+export type UserUpdateWithoutCreatedByInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutCreatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateManyWithoutCreatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+
+export type UserUpdateWithoutUpdatedByInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateManyWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+
+export type UserCreateManyRoleInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+};
+
+export type UserUpdateWithoutRoleInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutRoleInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateManyWithoutRoleInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 
 /**
@@ -602,16 +12198,106 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
  */
 
 export type UserCountOutputType = {
-  posts: number;
+  createdUsers: number;
+  updatedUsers: number;
+  userTranslations: number;
   refreshTokens: number;
+  sentMessages: number;
+  receivedMessages: number;
+  reviews: number;
+  cartItems: number;
+  orders: number;
+  createdLanguages: number;
+  updatedLanguages: number;
+  createdPermissions: number;
+  updatedPermissions: number;
+  createdRoles: number;
+  updatedRoles: number;
+  createdProducts: number;
+  updatedProducts: number;
+  createdProductTranslations: number;
+  updatedProductTranslations: number;
+  createdCategories: number;
+  updatedCategories: number;
+  createdCategoryTranslations: number;
+  updatedCategoryTranslations: number;
+  createdVariants: number;
+  updatedVariants: number;
+  createdVariantOptions: number;
+  updatedVariantOptions: number;
+  createdSKUs: number;
+  updatedSKUs: number;
+  createdBrands: number;
+  updatedBrands: number;
+  createdBrandTranslations: number;
+  updatedBrandTranslations: number;
+  createdOrders: number;
+  updatedOrders: number;
+  createdUserTranslations: number;
+  updatedUserTranslations: number;
 };
 
 export type UserCountOutputTypeSelect<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  posts?: boolean | UserCountOutputTypeCountPostsArgs;
+  createdUsers?: boolean | UserCountOutputTypeCountCreatedUsersArgs;
+  updatedUsers?: boolean | UserCountOutputTypeCountUpdatedUsersArgs;
+  userTranslations?: boolean | UserCountOutputTypeCountUserTranslationsArgs;
   refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs;
+  sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs;
+  receivedMessages?: boolean | UserCountOutputTypeCountReceivedMessagesArgs;
+  reviews?: boolean | UserCountOutputTypeCountReviewsArgs;
+  cartItems?: boolean | UserCountOutputTypeCountCartItemsArgs;
+  orders?: boolean | UserCountOutputTypeCountOrdersArgs;
+  createdLanguages?: boolean | UserCountOutputTypeCountCreatedLanguagesArgs;
+  updatedLanguages?: boolean | UserCountOutputTypeCountUpdatedLanguagesArgs;
+  createdPermissions?: boolean | UserCountOutputTypeCountCreatedPermissionsArgs;
+  updatedPermissions?: boolean | UserCountOutputTypeCountUpdatedPermissionsArgs;
+  createdRoles?: boolean | UserCountOutputTypeCountCreatedRolesArgs;
+  updatedRoles?: boolean | UserCountOutputTypeCountUpdatedRolesArgs;
+  createdProducts?: boolean | UserCountOutputTypeCountCreatedProductsArgs;
+  updatedProducts?: boolean | UserCountOutputTypeCountUpdatedProductsArgs;
+  createdProductTranslations?:
+    | boolean
+    | UserCountOutputTypeCountCreatedProductTranslationsArgs;
+  updatedProductTranslations?:
+    | boolean
+    | UserCountOutputTypeCountUpdatedProductTranslationsArgs;
+  createdCategories?: boolean | UserCountOutputTypeCountCreatedCategoriesArgs;
+  updatedCategories?: boolean | UserCountOutputTypeCountUpdatedCategoriesArgs;
+  createdCategoryTranslations?:
+    | boolean
+    | UserCountOutputTypeCountCreatedCategoryTranslationsArgs;
+  updatedCategoryTranslations?:
+    | boolean
+    | UserCountOutputTypeCountUpdatedCategoryTranslationsArgs;
+  createdVariants?: boolean | UserCountOutputTypeCountCreatedVariantsArgs;
+  updatedVariants?: boolean | UserCountOutputTypeCountUpdatedVariantsArgs;
+  createdVariantOptions?:
+    | boolean
+    | UserCountOutputTypeCountCreatedVariantOptionsArgs;
+  updatedVariantOptions?:
+    | boolean
+    | UserCountOutputTypeCountUpdatedVariantOptionsArgs;
+  createdSKUs?: boolean | UserCountOutputTypeCountCreatedSKUsArgs;
+  updatedSKUs?: boolean | UserCountOutputTypeCountUpdatedSKUsArgs;
+  createdBrands?: boolean | UserCountOutputTypeCountCreatedBrandsArgs;
+  updatedBrands?: boolean | UserCountOutputTypeCountUpdatedBrandsArgs;
+  createdBrandTranslations?:
+    | boolean
+    | UserCountOutputTypeCountCreatedBrandTranslationsArgs;
+  updatedBrandTranslations?:
+    | boolean
+    | UserCountOutputTypeCountUpdatedBrandTranslationsArgs;
+  createdOrders?: boolean | UserCountOutputTypeCountCreatedOrdersArgs;
+  updatedOrders?: boolean | UserCountOutputTypeCountUpdatedOrdersArgs;
+  createdUserTranslations?:
+    | boolean
+    | UserCountOutputTypeCountCreatedUserTranslationsArgs;
+  updatedUserTranslations?:
+    | boolean
+    | UserCountOutputTypeCountUpdatedUserTranslationsArgs;
 };
 
 /**
@@ -630,11 +12316,31 @@ export type UserCountOutputTypeDefaultArgs<
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountPostsArgs<
+export type UserCountOutputTypeCountCreatedUsersArgs<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  where?: Prisma.PostWhereInput;
+  where?: Prisma.UserWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedUsersArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.UserWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUserTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.UserTranslationWhereInput;
 };
 
 /**
@@ -647,6 +12353,336 @@ export type UserCountOutputTypeCountRefreshTokensArgs<
   where?: Prisma.RefreshTokenWhereInput;
 };
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSentMessagesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.MessageWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReceivedMessagesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.MessageWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReviewsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.ReviewWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCartItemsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.CartItemWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountOrdersArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.OrderWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedLanguagesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.LanguageWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedLanguagesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.LanguageWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedPermissionsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.PermissionWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedPermissionsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.PermissionWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedRolesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.RoleWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedRolesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.RoleWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedProductsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.ProductWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedProductsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.ProductWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedProductTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.ProductTranslationWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedProductTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.ProductTranslationWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedCategoriesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.CategoryWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedCategoriesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.CategoryWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedCategoryTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.CategoryTranslationWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedCategoryTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.CategoryTranslationWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedVariantsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.VariantWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedVariantsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.VariantWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedVariantOptionsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.VariantOptionWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedVariantOptionsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.VariantOptionWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedSKUsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.SKUWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedSKUsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.SKUWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedBrandsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.BrandWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedBrandsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.BrandWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedBrandTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.BrandTranslationWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedBrandTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.BrandTranslationWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedOrdersArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.OrderWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedOrdersArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.OrderWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedUserTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.UserTranslationWhereInput;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedUserTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.UserTranslationWhereInput;
+};
+
 export type UserSelect<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
@@ -656,10 +12692,76 @@ export type UserSelect<
     email?: boolean;
     name?: boolean;
     password?: boolean;
+    phoneNumber?: boolean;
+    avatar?: boolean;
+    totpSecret?: boolean;
+    status?: boolean;
+    roleId?: boolean;
+    createdById?: boolean;
+    updatedById?: boolean;
+    deletedAt?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
-    posts?: boolean | Prisma.User$postsArgs<ExtArgs>;
+    role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>;
+    createdBy?: boolean | Prisma.User$createdByArgs<ExtArgs>;
+    updatedBy?: boolean | Prisma.User$updatedByArgs<ExtArgs>;
+    createdUsers?: boolean | Prisma.User$createdUsersArgs<ExtArgs>;
+    updatedUsers?: boolean | Prisma.User$updatedUsersArgs<ExtArgs>;
+    userTranslations?: boolean | Prisma.User$userTranslationsArgs<ExtArgs>;
     refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>;
+    sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>;
+    receivedMessages?: boolean | Prisma.User$receivedMessagesArgs<ExtArgs>;
+    reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>;
+    cartItems?: boolean | Prisma.User$cartItemsArgs<ExtArgs>;
+    orders?: boolean | Prisma.User$ordersArgs<ExtArgs>;
+    createdLanguages?: boolean | Prisma.User$createdLanguagesArgs<ExtArgs>;
+    updatedLanguages?: boolean | Prisma.User$updatedLanguagesArgs<ExtArgs>;
+    createdPermissions?: boolean | Prisma.User$createdPermissionsArgs<ExtArgs>;
+    updatedPermissions?: boolean | Prisma.User$updatedPermissionsArgs<ExtArgs>;
+    createdRoles?: boolean | Prisma.User$createdRolesArgs<ExtArgs>;
+    updatedRoles?: boolean | Prisma.User$updatedRolesArgs<ExtArgs>;
+    createdProducts?: boolean | Prisma.User$createdProductsArgs<ExtArgs>;
+    updatedProducts?: boolean | Prisma.User$updatedProductsArgs<ExtArgs>;
+    createdProductTranslations?:
+      | boolean
+      | Prisma.User$createdProductTranslationsArgs<ExtArgs>;
+    updatedProductTranslations?:
+      | boolean
+      | Prisma.User$updatedProductTranslationsArgs<ExtArgs>;
+    createdCategories?: boolean | Prisma.User$createdCategoriesArgs<ExtArgs>;
+    updatedCategories?: boolean | Prisma.User$updatedCategoriesArgs<ExtArgs>;
+    createdCategoryTranslations?:
+      | boolean
+      | Prisma.User$createdCategoryTranslationsArgs<ExtArgs>;
+    updatedCategoryTranslations?:
+      | boolean
+      | Prisma.User$updatedCategoryTranslationsArgs<ExtArgs>;
+    createdVariants?: boolean | Prisma.User$createdVariantsArgs<ExtArgs>;
+    updatedVariants?: boolean | Prisma.User$updatedVariantsArgs<ExtArgs>;
+    createdVariantOptions?:
+      | boolean
+      | Prisma.User$createdVariantOptionsArgs<ExtArgs>;
+    updatedVariantOptions?:
+      | boolean
+      | Prisma.User$updatedVariantOptionsArgs<ExtArgs>;
+    createdSKUs?: boolean | Prisma.User$createdSKUsArgs<ExtArgs>;
+    updatedSKUs?: boolean | Prisma.User$updatedSKUsArgs<ExtArgs>;
+    createdBrands?: boolean | Prisma.User$createdBrandsArgs<ExtArgs>;
+    updatedBrands?: boolean | Prisma.User$updatedBrandsArgs<ExtArgs>;
+    createdBrandTranslations?:
+      | boolean
+      | Prisma.User$createdBrandTranslationsArgs<ExtArgs>;
+    updatedBrandTranslations?:
+      | boolean
+      | Prisma.User$updatedBrandTranslationsArgs<ExtArgs>;
+    createdOrders?: boolean | Prisma.User$createdOrdersArgs<ExtArgs>;
+    updatedOrders?: boolean | Prisma.User$updatedOrdersArgs<ExtArgs>;
+    createdUserTranslations?:
+      | boolean
+      | Prisma.User$createdUserTranslationsArgs<ExtArgs>;
+    updatedUserTranslations?:
+      | boolean
+      | Prisma.User$updatedUserTranslationsArgs<ExtArgs>;
     _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
   },
   ExtArgs['result']['user']
@@ -674,8 +12776,19 @@ export type UserSelectCreateManyAndReturn<
     email?: boolean;
     name?: boolean;
     password?: boolean;
+    phoneNumber?: boolean;
+    avatar?: boolean;
+    totpSecret?: boolean;
+    status?: boolean;
+    roleId?: boolean;
+    createdById?: boolean;
+    updatedById?: boolean;
+    deletedAt?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>;
+    createdBy?: boolean | Prisma.User$createdByArgs<ExtArgs>;
+    updatedBy?: boolean | Prisma.User$updatedByArgs<ExtArgs>;
   },
   ExtArgs['result']['user']
 >;
@@ -689,8 +12802,19 @@ export type UserSelectUpdateManyAndReturn<
     email?: boolean;
     name?: boolean;
     password?: boolean;
+    phoneNumber?: boolean;
+    avatar?: boolean;
+    totpSecret?: boolean;
+    status?: boolean;
+    roleId?: boolean;
+    createdById?: boolean;
+    updatedById?: boolean;
+    deletedAt?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>;
+    createdBy?: boolean | Prisma.User$createdByArgs<ExtArgs>;
+    updatedBy?: boolean | Prisma.User$updatedByArgs<ExtArgs>;
   },
   ExtArgs['result']['user']
 >;
@@ -700,6 +12824,14 @@ export type UserSelectScalar = {
   email?: boolean;
   name?: boolean;
   password?: boolean;
+  phoneNumber?: boolean;
+  avatar?: boolean;
+  totpSecret?: boolean;
+  status?: boolean;
+  roleId?: boolean;
+  createdById?: boolean;
+  updatedById?: boolean;
+  deletedAt?: boolean;
   createdAt?: boolean;
   updatedAt?: boolean;
 };
@@ -708,25 +12840,104 @@ export type UserOmit<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
-  'id' | 'email' | 'name' | 'password' | 'createdAt' | 'updatedAt',
+  | 'id'
+  | 'email'
+  | 'name'
+  | 'password'
+  | 'phoneNumber'
+  | 'avatar'
+  | 'totpSecret'
+  | 'status'
+  | 'roleId'
+  | 'createdById'
+  | 'updatedById'
+  | 'deletedAt'
+  | 'createdAt'
+  | 'updatedAt',
   ExtArgs['result']['user']
 >;
 export type UserInclude<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  posts?: boolean | Prisma.User$postsArgs<ExtArgs>;
+  role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>;
+  createdBy?: boolean | Prisma.User$createdByArgs<ExtArgs>;
+  updatedBy?: boolean | Prisma.User$updatedByArgs<ExtArgs>;
+  createdUsers?: boolean | Prisma.User$createdUsersArgs<ExtArgs>;
+  updatedUsers?: boolean | Prisma.User$updatedUsersArgs<ExtArgs>;
+  userTranslations?: boolean | Prisma.User$userTranslationsArgs<ExtArgs>;
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>;
+  sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>;
+  receivedMessages?: boolean | Prisma.User$receivedMessagesArgs<ExtArgs>;
+  reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>;
+  cartItems?: boolean | Prisma.User$cartItemsArgs<ExtArgs>;
+  orders?: boolean | Prisma.User$ordersArgs<ExtArgs>;
+  createdLanguages?: boolean | Prisma.User$createdLanguagesArgs<ExtArgs>;
+  updatedLanguages?: boolean | Prisma.User$updatedLanguagesArgs<ExtArgs>;
+  createdPermissions?: boolean | Prisma.User$createdPermissionsArgs<ExtArgs>;
+  updatedPermissions?: boolean | Prisma.User$updatedPermissionsArgs<ExtArgs>;
+  createdRoles?: boolean | Prisma.User$createdRolesArgs<ExtArgs>;
+  updatedRoles?: boolean | Prisma.User$updatedRolesArgs<ExtArgs>;
+  createdProducts?: boolean | Prisma.User$createdProductsArgs<ExtArgs>;
+  updatedProducts?: boolean | Prisma.User$updatedProductsArgs<ExtArgs>;
+  createdProductTranslations?:
+    | boolean
+    | Prisma.User$createdProductTranslationsArgs<ExtArgs>;
+  updatedProductTranslations?:
+    | boolean
+    | Prisma.User$updatedProductTranslationsArgs<ExtArgs>;
+  createdCategories?: boolean | Prisma.User$createdCategoriesArgs<ExtArgs>;
+  updatedCategories?: boolean | Prisma.User$updatedCategoriesArgs<ExtArgs>;
+  createdCategoryTranslations?:
+    | boolean
+    | Prisma.User$createdCategoryTranslationsArgs<ExtArgs>;
+  updatedCategoryTranslations?:
+    | boolean
+    | Prisma.User$updatedCategoryTranslationsArgs<ExtArgs>;
+  createdVariants?: boolean | Prisma.User$createdVariantsArgs<ExtArgs>;
+  updatedVariants?: boolean | Prisma.User$updatedVariantsArgs<ExtArgs>;
+  createdVariantOptions?:
+    | boolean
+    | Prisma.User$createdVariantOptionsArgs<ExtArgs>;
+  updatedVariantOptions?:
+    | boolean
+    | Prisma.User$updatedVariantOptionsArgs<ExtArgs>;
+  createdSKUs?: boolean | Prisma.User$createdSKUsArgs<ExtArgs>;
+  updatedSKUs?: boolean | Prisma.User$updatedSKUsArgs<ExtArgs>;
+  createdBrands?: boolean | Prisma.User$createdBrandsArgs<ExtArgs>;
+  updatedBrands?: boolean | Prisma.User$updatedBrandsArgs<ExtArgs>;
+  createdBrandTranslations?:
+    | boolean
+    | Prisma.User$createdBrandTranslationsArgs<ExtArgs>;
+  updatedBrandTranslations?:
+    | boolean
+    | Prisma.User$updatedBrandTranslationsArgs<ExtArgs>;
+  createdOrders?: boolean | Prisma.User$createdOrdersArgs<ExtArgs>;
+  updatedOrders?: boolean | Prisma.User$updatedOrdersArgs<ExtArgs>;
+  createdUserTranslations?:
+    | boolean
+    | Prisma.User$createdUserTranslationsArgs<ExtArgs>;
+  updatedUserTranslations?:
+    | boolean
+    | Prisma.User$updatedUserTranslationsArgs<ExtArgs>;
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type UserIncludeCreateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
-> = {};
+> = {
+  role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>;
+  createdBy?: boolean | Prisma.User$createdByArgs<ExtArgs>;
+  updatedBy?: boolean | Prisma.User$updatedByArgs<ExtArgs>;
+};
 export type UserIncludeUpdateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
-> = {};
+> = {
+  role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>;
+  createdBy?: boolean | Prisma.User$createdByArgs<ExtArgs>;
+  updatedBy?: boolean | Prisma.User$updatedByArgs<ExtArgs>;
+};
 
 export type $UserPayload<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
@@ -734,8 +12945,46 @@ export type $UserPayload<
 > = {
   name: 'User';
   objects: {
-    posts: Prisma.$PostPayload<ExtArgs>[];
+    role: Prisma.$RolePayload<ExtArgs>;
+    createdBy: Prisma.$UserPayload<ExtArgs> | null;
+    updatedBy: Prisma.$UserPayload<ExtArgs> | null;
+    createdUsers: Prisma.$UserPayload<ExtArgs>[];
+    updatedUsers: Prisma.$UserPayload<ExtArgs>[];
+    userTranslations: Prisma.$UserTranslationPayload<ExtArgs>[];
     refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[];
+    sentMessages: Prisma.$MessagePayload<ExtArgs>[];
+    receivedMessages: Prisma.$MessagePayload<ExtArgs>[];
+    reviews: Prisma.$ReviewPayload<ExtArgs>[];
+    cartItems: Prisma.$CartItemPayload<ExtArgs>[];
+    orders: Prisma.$OrderPayload<ExtArgs>[];
+    createdLanguages: Prisma.$LanguagePayload<ExtArgs>[];
+    updatedLanguages: Prisma.$LanguagePayload<ExtArgs>[];
+    createdPermissions: Prisma.$PermissionPayload<ExtArgs>[];
+    updatedPermissions: Prisma.$PermissionPayload<ExtArgs>[];
+    createdRoles: Prisma.$RolePayload<ExtArgs>[];
+    updatedRoles: Prisma.$RolePayload<ExtArgs>[];
+    createdProducts: Prisma.$ProductPayload<ExtArgs>[];
+    updatedProducts: Prisma.$ProductPayload<ExtArgs>[];
+    createdProductTranslations: Prisma.$ProductTranslationPayload<ExtArgs>[];
+    updatedProductTranslations: Prisma.$ProductTranslationPayload<ExtArgs>[];
+    createdCategories: Prisma.$CategoryPayload<ExtArgs>[];
+    updatedCategories: Prisma.$CategoryPayload<ExtArgs>[];
+    createdCategoryTranslations: Prisma.$CategoryTranslationPayload<ExtArgs>[];
+    updatedCategoryTranslations: Prisma.$CategoryTranslationPayload<ExtArgs>[];
+    createdVariants: Prisma.$VariantPayload<ExtArgs>[];
+    updatedVariants: Prisma.$VariantPayload<ExtArgs>[];
+    createdVariantOptions: Prisma.$VariantOptionPayload<ExtArgs>[];
+    updatedVariantOptions: Prisma.$VariantOptionPayload<ExtArgs>[];
+    createdSKUs: Prisma.$SKUPayload<ExtArgs>[];
+    updatedSKUs: Prisma.$SKUPayload<ExtArgs>[];
+    createdBrands: Prisma.$BrandPayload<ExtArgs>[];
+    updatedBrands: Prisma.$BrandPayload<ExtArgs>[];
+    createdBrandTranslations: Prisma.$BrandTranslationPayload<ExtArgs>[];
+    updatedBrandTranslations: Prisma.$BrandTranslationPayload<ExtArgs>[];
+    createdOrders: Prisma.$OrderPayload<ExtArgs>[];
+    updatedOrders: Prisma.$OrderPayload<ExtArgs>[];
+    createdUserTranslations: Prisma.$UserTranslationPayload<ExtArgs>[];
+    updatedUserTranslations: Prisma.$UserTranslationPayload<ExtArgs>[];
   };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
@@ -743,6 +12992,14 @@ export type $UserPayload<
       email: string;
       name: string;
       password: string;
+      phoneNumber: string;
+      avatar: string | null;
+      totpSecret: string | null;
+      status: $Enums.UserStatus;
+      roleId: number;
+      createdById: number | null;
+      updatedById: number | null;
+      deletedAt: Date | null;
       createdAt: Date;
       updatedAt: Date;
     },
@@ -1295,11 +13552,73 @@ export interface Prisma__UserClient<
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise';
-  posts<T extends Prisma.User$postsArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.User$postsArgs<ExtArgs>>,
+  role<T extends Prisma.RoleDefaultArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.RoleDefaultArgs<ExtArgs>>,
+  ): Prisma.Prisma__RoleClient<
+    | runtime.Types.Result.GetResult<
+        Prisma.$RolePayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      >
+    | Null,
+    Null,
+    ExtArgs,
+    GlobalOmitOptions
+  >;
+  createdBy<T extends Prisma.User$createdByArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$createdByArgs<ExtArgs>>,
+  ): Prisma.Prisma__UserClient<
+    runtime.Types.Result.GetResult<
+      Prisma.$UserPayload<ExtArgs>,
+      T,
+      'findUniqueOrThrow',
+      GlobalOmitOptions
+    > | null,
+    null,
+    ExtArgs,
+    GlobalOmitOptions
+  >;
+  updatedBy<T extends Prisma.User$updatedByArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$updatedByArgs<ExtArgs>>,
+  ): Prisma.Prisma__UserClient<
+    runtime.Types.Result.GetResult<
+      Prisma.$UserPayload<ExtArgs>,
+      T,
+      'findUniqueOrThrow',
+      GlobalOmitOptions
+    > | null,
+    null,
+    ExtArgs,
+    GlobalOmitOptions
+  >;
+  createdUsers<T extends Prisma.User$createdUsersArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$createdUsersArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     | runtime.Types.Result.GetResult<
-        Prisma.$PostPayload<ExtArgs>,
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  updatedUsers<T extends Prisma.User$updatedUsersArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$updatedUsersArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$UserPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  userTranslations<T extends Prisma.User$userTranslationsArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$userTranslationsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$UserTranslationPayload<ExtArgs>,
         T,
         'findMany',
         GlobalOmitOptions
@@ -1311,6 +13630,405 @@ export interface Prisma__UserClient<
   ): Prisma.PrismaPromise<
     | runtime.Types.Result.GetResult<
         Prisma.$RefreshTokenPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  sentMessages<T extends Prisma.User$sentMessagesArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$sentMessagesArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$MessagePayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  receivedMessages<T extends Prisma.User$receivedMessagesArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$receivedMessagesArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$MessagePayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  reviews<T extends Prisma.User$reviewsArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$reviewsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$ReviewPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  cartItems<T extends Prisma.User$cartItemsArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$cartItemsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$CartItemPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$OrderPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  createdLanguages<T extends Prisma.User$createdLanguagesArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$createdLanguagesArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$LanguagePayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  updatedLanguages<T extends Prisma.User$updatedLanguagesArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$updatedLanguagesArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$LanguagePayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  createdPermissions<
+    T extends Prisma.User$createdPermissionsArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<T, Prisma.User$createdPermissionsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$PermissionPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  updatedPermissions<
+    T extends Prisma.User$updatedPermissionsArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<T, Prisma.User$updatedPermissionsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$PermissionPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  createdRoles<T extends Prisma.User$createdRolesArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$createdRolesArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$RolePayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  updatedRoles<T extends Prisma.User$updatedRolesArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$updatedRolesArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$RolePayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  createdProducts<T extends Prisma.User$createdProductsArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$createdProductsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$ProductPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  updatedProducts<T extends Prisma.User$updatedProductsArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$updatedProductsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$ProductPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  createdProductTranslations<
+    T extends Prisma.User$createdProductTranslationsArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<
+      T,
+      Prisma.User$createdProductTranslationsArgs<ExtArgs>
+    >,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$ProductTranslationPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  updatedProductTranslations<
+    T extends Prisma.User$updatedProductTranslationsArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<
+      T,
+      Prisma.User$updatedProductTranslationsArgs<ExtArgs>
+    >,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$ProductTranslationPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  createdCategories<T extends Prisma.User$createdCategoriesArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$createdCategoriesArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$CategoryPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  updatedCategories<T extends Prisma.User$updatedCategoriesArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$updatedCategoriesArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$CategoryPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  createdCategoryTranslations<
+    T extends Prisma.User$createdCategoryTranslationsArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<
+      T,
+      Prisma.User$createdCategoryTranslationsArgs<ExtArgs>
+    >,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$CategoryTranslationPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  updatedCategoryTranslations<
+    T extends Prisma.User$updatedCategoryTranslationsArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<
+      T,
+      Prisma.User$updatedCategoryTranslationsArgs<ExtArgs>
+    >,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$CategoryTranslationPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  createdVariants<T extends Prisma.User$createdVariantsArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$createdVariantsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$VariantPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  updatedVariants<T extends Prisma.User$updatedVariantsArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$updatedVariantsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$VariantPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  createdVariantOptions<
+    T extends Prisma.User$createdVariantOptionsArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<T, Prisma.User$createdVariantOptionsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$VariantOptionPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  updatedVariantOptions<
+    T extends Prisma.User$updatedVariantOptionsArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<T, Prisma.User$updatedVariantOptionsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$VariantOptionPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  createdSKUs<T extends Prisma.User$createdSKUsArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$createdSKUsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$SKUPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  updatedSKUs<T extends Prisma.User$updatedSKUsArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$updatedSKUsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$SKUPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  createdBrands<T extends Prisma.User$createdBrandsArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$createdBrandsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$BrandPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  updatedBrands<T extends Prisma.User$updatedBrandsArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$updatedBrandsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$BrandPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  createdBrandTranslations<
+    T extends Prisma.User$createdBrandTranslationsArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<T, Prisma.User$createdBrandTranslationsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$BrandTranslationPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  updatedBrandTranslations<
+    T extends Prisma.User$updatedBrandTranslationsArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<T, Prisma.User$updatedBrandTranslationsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$BrandTranslationPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  createdOrders<T extends Prisma.User$createdOrdersArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$createdOrdersArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$OrderPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  updatedOrders<T extends Prisma.User$updatedOrdersArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$updatedOrdersArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$OrderPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  createdUserTranslations<
+    T extends Prisma.User$createdUserTranslationsArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<T, Prisma.User$createdUserTranslationsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$UserTranslationPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  updatedUserTranslations<
+    T extends Prisma.User$updatedUserTranslationsArgs<ExtArgs> = {},
+  >(
+    args?: Prisma.Subset<T, Prisma.User$updatedUserTranslationsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$UserTranslationPayload<ExtArgs>,
         T,
         'findMany',
         GlobalOmitOptions
@@ -1363,6 +14081,14 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<'User', 'String'>;
   readonly name: Prisma.FieldRef<'User', 'String'>;
   readonly password: Prisma.FieldRef<'User', 'String'>;
+  readonly phoneNumber: Prisma.FieldRef<'User', 'String'>;
+  readonly avatar: Prisma.FieldRef<'User', 'String'>;
+  readonly totpSecret: Prisma.FieldRef<'User', 'String'>;
+  readonly status: Prisma.FieldRef<'User', 'UserStatus'>;
+  readonly roleId: Prisma.FieldRef<'User', 'Int'>;
+  readonly createdById: Prisma.FieldRef<'User', 'Int'>;
+  readonly updatedById: Prisma.FieldRef<'User', 'Int'>;
+  readonly deletedAt: Prisma.FieldRef<'User', 'DateTime'>;
   readonly createdAt: Prisma.FieldRef<'User', 'DateTime'>;
   readonly updatedAt: Prisma.FieldRef<'User', 'DateTime'>;
 }
@@ -1620,6 +14346,7 @@ export type UserCreateManyArgs<
    * The data used to create many Users.
    */
   data: Prisma.UserCreateManyInput | Prisma.UserCreateManyInput[];
+  skipDuplicates?: boolean;
 };
 
 /**
@@ -1641,6 +14368,11 @@ export type UserCreateManyAndReturnArgs<
    * The data used to create many Users.
    */
   data: Prisma.UserCreateManyInput | Prisma.UserCreateManyInput[];
+  skipDuplicates?: boolean;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeCreateManyAndReturn<ExtArgs> | null;
 };
 
 /**
@@ -1726,6 +14458,10 @@ export type UserUpdateManyAndReturnArgs<
    * Limit how many Users to update.
    */
   limit?: number;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeUpdateManyAndReturn<ExtArgs> | null;
 };
 
 /**
@@ -1804,32 +14540,136 @@ export type UserDeleteManyArgs<
 };
 
 /**
- * User.posts
+ * User.createdBy
  */
-export type User$postsArgs<
+export type User$createdByArgs<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
-   * Select specific fields to fetch from the Post
+   * Select specific fields to fetch from the User
    */
-  select?: Prisma.PostSelect<ExtArgs> | null;
+  select?: Prisma.UserSelect<ExtArgs> | null;
   /**
-   * Omit specific fields from the Post
+   * Omit specific fields from the User
    */
-  omit?: Prisma.PostOmit<ExtArgs> | null;
+  omit?: Prisma.UserOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.PostInclude<ExtArgs> | null;
-  where?: Prisma.PostWhereInput;
+  include?: Prisma.UserInclude<ExtArgs> | null;
+  where?: Prisma.UserWhereInput;
+};
+
+/**
+ * User.updatedBy
+ */
+export type User$updatedByArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null;
+  where?: Prisma.UserWhereInput;
+};
+
+/**
+ * User.createdUsers
+ */
+export type User$createdUsersArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null;
+  where?: Prisma.UserWhereInput;
   orderBy?:
-    | Prisma.PostOrderByWithRelationInput
-    | Prisma.PostOrderByWithRelationInput[];
-  cursor?: Prisma.PostWhereUniqueInput;
+    | Prisma.UserOrderByWithRelationInput
+    | Prisma.UserOrderByWithRelationInput[];
+  cursor?: Prisma.UserWhereUniqueInput;
   take?: number;
   skip?: number;
-  distinct?: Prisma.PostScalarFieldEnum | Prisma.PostScalarFieldEnum[];
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[];
+};
+
+/**
+ * User.updatedUsers
+ */
+export type User$updatedUsersArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null;
+  where?: Prisma.UserWhereInput;
+  orderBy?:
+    | Prisma.UserOrderByWithRelationInput
+    | Prisma.UserOrderByWithRelationInput[];
+  cursor?: Prisma.UserWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[];
+};
+
+/**
+ * User.userTranslations
+ */
+export type User$userTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the UserTranslation
+   */
+  select?: Prisma.UserTranslationSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the UserTranslation
+   */
+  omit?: Prisma.UserTranslationOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserTranslationInclude<ExtArgs> | null;
+  where?: Prisma.UserTranslationWhereInput;
+  orderBy?:
+    | Prisma.UserTranslationOrderByWithRelationInput
+    | Prisma.UserTranslationOrderByWithRelationInput[];
+  cursor?: Prisma.UserTranslationWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.UserTranslationScalarFieldEnum
+    | Prisma.UserTranslationScalarFieldEnum[];
 };
 
 /**
@@ -1861,6 +14701,987 @@ export type User$refreshTokensArgs<
   distinct?:
     | Prisma.RefreshTokenScalarFieldEnum
     | Prisma.RefreshTokenScalarFieldEnum[];
+};
+
+/**
+ * User.sentMessages
+ */
+export type User$sentMessagesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Message
+   */
+  select?: Prisma.MessageSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Message
+   */
+  omit?: Prisma.MessageOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessageInclude<ExtArgs> | null;
+  where?: Prisma.MessageWhereInput;
+  orderBy?:
+    | Prisma.MessageOrderByWithRelationInput
+    | Prisma.MessageOrderByWithRelationInput[];
+  cursor?: Prisma.MessageWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[];
+};
+
+/**
+ * User.receivedMessages
+ */
+export type User$receivedMessagesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Message
+   */
+  select?: Prisma.MessageSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Message
+   */
+  omit?: Prisma.MessageOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessageInclude<ExtArgs> | null;
+  where?: Prisma.MessageWhereInput;
+  orderBy?:
+    | Prisma.MessageOrderByWithRelationInput
+    | Prisma.MessageOrderByWithRelationInput[];
+  cursor?: Prisma.MessageWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[];
+};
+
+/**
+ * User.reviews
+ */
+export type User$reviewsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Review
+   */
+  select?: Prisma.ReviewSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Review
+   */
+  omit?: Prisma.ReviewOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReviewInclude<ExtArgs> | null;
+  where?: Prisma.ReviewWhereInput;
+  orderBy?:
+    | Prisma.ReviewOrderByWithRelationInput
+    | Prisma.ReviewOrderByWithRelationInput[];
+  cursor?: Prisma.ReviewWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.ReviewScalarFieldEnum | Prisma.ReviewScalarFieldEnum[];
+};
+
+/**
+ * User.cartItems
+ */
+export type User$cartItemsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the CartItem
+   */
+  select?: Prisma.CartItemSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the CartItem
+   */
+  omit?: Prisma.CartItemOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CartItemInclude<ExtArgs> | null;
+  where?: Prisma.CartItemWhereInput;
+  orderBy?:
+    | Prisma.CartItemOrderByWithRelationInput
+    | Prisma.CartItemOrderByWithRelationInput[];
+  cursor?: Prisma.CartItemWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.CartItemScalarFieldEnum | Prisma.CartItemScalarFieldEnum[];
+};
+
+/**
+ * User.orders
+ */
+export type User$ordersArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Order
+   */
+  select?: Prisma.OrderSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Order
+   */
+  omit?: Prisma.OrderOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderInclude<ExtArgs> | null;
+  where?: Prisma.OrderWhereInput;
+  orderBy?:
+    | Prisma.OrderOrderByWithRelationInput
+    | Prisma.OrderOrderByWithRelationInput[];
+  cursor?: Prisma.OrderWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[];
+};
+
+/**
+ * User.createdLanguages
+ */
+export type User$createdLanguagesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Language
+   */
+  select?: Prisma.LanguageSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Language
+   */
+  omit?: Prisma.LanguageOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LanguageInclude<ExtArgs> | null;
+  where?: Prisma.LanguageWhereInput;
+  orderBy?:
+    | Prisma.LanguageOrderByWithRelationInput
+    | Prisma.LanguageOrderByWithRelationInput[];
+  cursor?: Prisma.LanguageWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.LanguageScalarFieldEnum | Prisma.LanguageScalarFieldEnum[];
+};
+
+/**
+ * User.updatedLanguages
+ */
+export type User$updatedLanguagesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Language
+   */
+  select?: Prisma.LanguageSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Language
+   */
+  omit?: Prisma.LanguageOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LanguageInclude<ExtArgs> | null;
+  where?: Prisma.LanguageWhereInput;
+  orderBy?:
+    | Prisma.LanguageOrderByWithRelationInput
+    | Prisma.LanguageOrderByWithRelationInput[];
+  cursor?: Prisma.LanguageWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.LanguageScalarFieldEnum | Prisma.LanguageScalarFieldEnum[];
+};
+
+/**
+ * User.createdPermissions
+ */
+export type User$createdPermissionsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Permission
+   */
+  select?: Prisma.PermissionSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Permission
+   */
+  omit?: Prisma.PermissionOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PermissionInclude<ExtArgs> | null;
+  where?: Prisma.PermissionWhereInput;
+  orderBy?:
+    | Prisma.PermissionOrderByWithRelationInput
+    | Prisma.PermissionOrderByWithRelationInput[];
+  cursor?: Prisma.PermissionWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.PermissionScalarFieldEnum
+    | Prisma.PermissionScalarFieldEnum[];
+};
+
+/**
+ * User.updatedPermissions
+ */
+export type User$updatedPermissionsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Permission
+   */
+  select?: Prisma.PermissionSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Permission
+   */
+  omit?: Prisma.PermissionOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PermissionInclude<ExtArgs> | null;
+  where?: Prisma.PermissionWhereInput;
+  orderBy?:
+    | Prisma.PermissionOrderByWithRelationInput
+    | Prisma.PermissionOrderByWithRelationInput[];
+  cursor?: Prisma.PermissionWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.PermissionScalarFieldEnum
+    | Prisma.PermissionScalarFieldEnum[];
+};
+
+/**
+ * User.createdRoles
+ */
+export type User$createdRolesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Role
+   */
+  select?: Prisma.RoleSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Role
+   */
+  omit?: Prisma.RoleOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoleInclude<ExtArgs> | null;
+  where?: Prisma.RoleWhereInput;
+  orderBy?:
+    | Prisma.RoleOrderByWithRelationInput
+    | Prisma.RoleOrderByWithRelationInput[];
+  cursor?: Prisma.RoleWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.RoleScalarFieldEnum | Prisma.RoleScalarFieldEnum[];
+};
+
+/**
+ * User.updatedRoles
+ */
+export type User$updatedRolesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Role
+   */
+  select?: Prisma.RoleSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Role
+   */
+  omit?: Prisma.RoleOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoleInclude<ExtArgs> | null;
+  where?: Prisma.RoleWhereInput;
+  orderBy?:
+    | Prisma.RoleOrderByWithRelationInput
+    | Prisma.RoleOrderByWithRelationInput[];
+  cursor?: Prisma.RoleWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.RoleScalarFieldEnum | Prisma.RoleScalarFieldEnum[];
+};
+
+/**
+ * User.createdProducts
+ */
+export type User$createdProductsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Product
+   */
+  select?: Prisma.ProductSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Product
+   */
+  omit?: Prisma.ProductOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductInclude<ExtArgs> | null;
+  where?: Prisma.ProductWhereInput;
+  orderBy?:
+    | Prisma.ProductOrderByWithRelationInput
+    | Prisma.ProductOrderByWithRelationInput[];
+  cursor?: Prisma.ProductWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.ProductScalarFieldEnum | Prisma.ProductScalarFieldEnum[];
+};
+
+/**
+ * User.updatedProducts
+ */
+export type User$updatedProductsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Product
+   */
+  select?: Prisma.ProductSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Product
+   */
+  omit?: Prisma.ProductOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductInclude<ExtArgs> | null;
+  where?: Prisma.ProductWhereInput;
+  orderBy?:
+    | Prisma.ProductOrderByWithRelationInput
+    | Prisma.ProductOrderByWithRelationInput[];
+  cursor?: Prisma.ProductWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.ProductScalarFieldEnum | Prisma.ProductScalarFieldEnum[];
+};
+
+/**
+ * User.createdProductTranslations
+ */
+export type User$createdProductTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the ProductTranslation
+   */
+  select?: Prisma.ProductTranslationSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the ProductTranslation
+   */
+  omit?: Prisma.ProductTranslationOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductTranslationInclude<ExtArgs> | null;
+  where?: Prisma.ProductTranslationWhereInput;
+  orderBy?:
+    | Prisma.ProductTranslationOrderByWithRelationInput
+    | Prisma.ProductTranslationOrderByWithRelationInput[];
+  cursor?: Prisma.ProductTranslationWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.ProductTranslationScalarFieldEnum
+    | Prisma.ProductTranslationScalarFieldEnum[];
+};
+
+/**
+ * User.updatedProductTranslations
+ */
+export type User$updatedProductTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the ProductTranslation
+   */
+  select?: Prisma.ProductTranslationSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the ProductTranslation
+   */
+  omit?: Prisma.ProductTranslationOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductTranslationInclude<ExtArgs> | null;
+  where?: Prisma.ProductTranslationWhereInput;
+  orderBy?:
+    | Prisma.ProductTranslationOrderByWithRelationInput
+    | Prisma.ProductTranslationOrderByWithRelationInput[];
+  cursor?: Prisma.ProductTranslationWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.ProductTranslationScalarFieldEnum
+    | Prisma.ProductTranslationScalarFieldEnum[];
+};
+
+/**
+ * User.createdCategories
+ */
+export type User$createdCategoriesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Category
+   */
+  select?: Prisma.CategorySelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Category
+   */
+  omit?: Prisma.CategoryOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CategoryInclude<ExtArgs> | null;
+  where?: Prisma.CategoryWhereInput;
+  orderBy?:
+    | Prisma.CategoryOrderByWithRelationInput
+    | Prisma.CategoryOrderByWithRelationInput[];
+  cursor?: Prisma.CategoryWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.CategoryScalarFieldEnum | Prisma.CategoryScalarFieldEnum[];
+};
+
+/**
+ * User.updatedCategories
+ */
+export type User$updatedCategoriesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Category
+   */
+  select?: Prisma.CategorySelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Category
+   */
+  omit?: Prisma.CategoryOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CategoryInclude<ExtArgs> | null;
+  where?: Prisma.CategoryWhereInput;
+  orderBy?:
+    | Prisma.CategoryOrderByWithRelationInput
+    | Prisma.CategoryOrderByWithRelationInput[];
+  cursor?: Prisma.CategoryWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.CategoryScalarFieldEnum | Prisma.CategoryScalarFieldEnum[];
+};
+
+/**
+ * User.createdCategoryTranslations
+ */
+export type User$createdCategoryTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the CategoryTranslation
+   */
+  select?: Prisma.CategoryTranslationSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the CategoryTranslation
+   */
+  omit?: Prisma.CategoryTranslationOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CategoryTranslationInclude<ExtArgs> | null;
+  where?: Prisma.CategoryTranslationWhereInput;
+  orderBy?:
+    | Prisma.CategoryTranslationOrderByWithRelationInput
+    | Prisma.CategoryTranslationOrderByWithRelationInput[];
+  cursor?: Prisma.CategoryTranslationWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.CategoryTranslationScalarFieldEnum
+    | Prisma.CategoryTranslationScalarFieldEnum[];
+};
+
+/**
+ * User.updatedCategoryTranslations
+ */
+export type User$updatedCategoryTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the CategoryTranslation
+   */
+  select?: Prisma.CategoryTranslationSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the CategoryTranslation
+   */
+  omit?: Prisma.CategoryTranslationOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CategoryTranslationInclude<ExtArgs> | null;
+  where?: Prisma.CategoryTranslationWhereInput;
+  orderBy?:
+    | Prisma.CategoryTranslationOrderByWithRelationInput
+    | Prisma.CategoryTranslationOrderByWithRelationInput[];
+  cursor?: Prisma.CategoryTranslationWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.CategoryTranslationScalarFieldEnum
+    | Prisma.CategoryTranslationScalarFieldEnum[];
+};
+
+/**
+ * User.createdVariants
+ */
+export type User$createdVariantsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Variant
+   */
+  select?: Prisma.VariantSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Variant
+   */
+  omit?: Prisma.VariantOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VariantInclude<ExtArgs> | null;
+  where?: Prisma.VariantWhereInput;
+  orderBy?:
+    | Prisma.VariantOrderByWithRelationInput
+    | Prisma.VariantOrderByWithRelationInput[];
+  cursor?: Prisma.VariantWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.VariantScalarFieldEnum | Prisma.VariantScalarFieldEnum[];
+};
+
+/**
+ * User.updatedVariants
+ */
+export type User$updatedVariantsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Variant
+   */
+  select?: Prisma.VariantSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Variant
+   */
+  omit?: Prisma.VariantOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VariantInclude<ExtArgs> | null;
+  where?: Prisma.VariantWhereInput;
+  orderBy?:
+    | Prisma.VariantOrderByWithRelationInput
+    | Prisma.VariantOrderByWithRelationInput[];
+  cursor?: Prisma.VariantWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.VariantScalarFieldEnum | Prisma.VariantScalarFieldEnum[];
+};
+
+/**
+ * User.createdVariantOptions
+ */
+export type User$createdVariantOptionsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the VariantOption
+   */
+  select?: Prisma.VariantOptionSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the VariantOption
+   */
+  omit?: Prisma.VariantOptionOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VariantOptionInclude<ExtArgs> | null;
+  where?: Prisma.VariantOptionWhereInput;
+  orderBy?:
+    | Prisma.VariantOptionOrderByWithRelationInput
+    | Prisma.VariantOptionOrderByWithRelationInput[];
+  cursor?: Prisma.VariantOptionWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.VariantOptionScalarFieldEnum
+    | Prisma.VariantOptionScalarFieldEnum[];
+};
+
+/**
+ * User.updatedVariantOptions
+ */
+export type User$updatedVariantOptionsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the VariantOption
+   */
+  select?: Prisma.VariantOptionSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the VariantOption
+   */
+  omit?: Prisma.VariantOptionOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VariantOptionInclude<ExtArgs> | null;
+  where?: Prisma.VariantOptionWhereInput;
+  orderBy?:
+    | Prisma.VariantOptionOrderByWithRelationInput
+    | Prisma.VariantOptionOrderByWithRelationInput[];
+  cursor?: Prisma.VariantOptionWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.VariantOptionScalarFieldEnum
+    | Prisma.VariantOptionScalarFieldEnum[];
+};
+
+/**
+ * User.createdSKUs
+ */
+export type User$createdSKUsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the SKU
+   */
+  select?: Prisma.SKUSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the SKU
+   */
+  omit?: Prisma.SKUOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SKUInclude<ExtArgs> | null;
+  where?: Prisma.SKUWhereInput;
+  orderBy?:
+    | Prisma.SKUOrderByWithRelationInput
+    | Prisma.SKUOrderByWithRelationInput[];
+  cursor?: Prisma.SKUWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.SKUScalarFieldEnum | Prisma.SKUScalarFieldEnum[];
+};
+
+/**
+ * User.updatedSKUs
+ */
+export type User$updatedSKUsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the SKU
+   */
+  select?: Prisma.SKUSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the SKU
+   */
+  omit?: Prisma.SKUOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SKUInclude<ExtArgs> | null;
+  where?: Prisma.SKUWhereInput;
+  orderBy?:
+    | Prisma.SKUOrderByWithRelationInput
+    | Prisma.SKUOrderByWithRelationInput[];
+  cursor?: Prisma.SKUWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.SKUScalarFieldEnum | Prisma.SKUScalarFieldEnum[];
+};
+
+/**
+ * User.createdBrands
+ */
+export type User$createdBrandsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Brand
+   */
+  select?: Prisma.BrandSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Brand
+   */
+  omit?: Prisma.BrandOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BrandInclude<ExtArgs> | null;
+  where?: Prisma.BrandWhereInput;
+  orderBy?:
+    | Prisma.BrandOrderByWithRelationInput
+    | Prisma.BrandOrderByWithRelationInput[];
+  cursor?: Prisma.BrandWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.BrandScalarFieldEnum | Prisma.BrandScalarFieldEnum[];
+};
+
+/**
+ * User.updatedBrands
+ */
+export type User$updatedBrandsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Brand
+   */
+  select?: Prisma.BrandSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Brand
+   */
+  omit?: Prisma.BrandOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BrandInclude<ExtArgs> | null;
+  where?: Prisma.BrandWhereInput;
+  orderBy?:
+    | Prisma.BrandOrderByWithRelationInput
+    | Prisma.BrandOrderByWithRelationInput[];
+  cursor?: Prisma.BrandWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.BrandScalarFieldEnum | Prisma.BrandScalarFieldEnum[];
+};
+
+/**
+ * User.createdBrandTranslations
+ */
+export type User$createdBrandTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the BrandTranslation
+   */
+  select?: Prisma.BrandTranslationSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the BrandTranslation
+   */
+  omit?: Prisma.BrandTranslationOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BrandTranslationInclude<ExtArgs> | null;
+  where?: Prisma.BrandTranslationWhereInput;
+  orderBy?:
+    | Prisma.BrandTranslationOrderByWithRelationInput
+    | Prisma.BrandTranslationOrderByWithRelationInput[];
+  cursor?: Prisma.BrandTranslationWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.BrandTranslationScalarFieldEnum
+    | Prisma.BrandTranslationScalarFieldEnum[];
+};
+
+/**
+ * User.updatedBrandTranslations
+ */
+export type User$updatedBrandTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the BrandTranslation
+   */
+  select?: Prisma.BrandTranslationSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the BrandTranslation
+   */
+  omit?: Prisma.BrandTranslationOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BrandTranslationInclude<ExtArgs> | null;
+  where?: Prisma.BrandTranslationWhereInput;
+  orderBy?:
+    | Prisma.BrandTranslationOrderByWithRelationInput
+    | Prisma.BrandTranslationOrderByWithRelationInput[];
+  cursor?: Prisma.BrandTranslationWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.BrandTranslationScalarFieldEnum
+    | Prisma.BrandTranslationScalarFieldEnum[];
+};
+
+/**
+ * User.createdOrders
+ */
+export type User$createdOrdersArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Order
+   */
+  select?: Prisma.OrderSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Order
+   */
+  omit?: Prisma.OrderOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderInclude<ExtArgs> | null;
+  where?: Prisma.OrderWhereInput;
+  orderBy?:
+    | Prisma.OrderOrderByWithRelationInput
+    | Prisma.OrderOrderByWithRelationInput[];
+  cursor?: Prisma.OrderWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[];
+};
+
+/**
+ * User.updatedOrders
+ */
+export type User$updatedOrdersArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Order
+   */
+  select?: Prisma.OrderSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Order
+   */
+  omit?: Prisma.OrderOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderInclude<ExtArgs> | null;
+  where?: Prisma.OrderWhereInput;
+  orderBy?:
+    | Prisma.OrderOrderByWithRelationInput
+    | Prisma.OrderOrderByWithRelationInput[];
+  cursor?: Prisma.OrderWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[];
+};
+
+/**
+ * User.createdUserTranslations
+ */
+export type User$createdUserTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the UserTranslation
+   */
+  select?: Prisma.UserTranslationSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the UserTranslation
+   */
+  omit?: Prisma.UserTranslationOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserTranslationInclude<ExtArgs> | null;
+  where?: Prisma.UserTranslationWhereInput;
+  orderBy?:
+    | Prisma.UserTranslationOrderByWithRelationInput
+    | Prisma.UserTranslationOrderByWithRelationInput[];
+  cursor?: Prisma.UserTranslationWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.UserTranslationScalarFieldEnum
+    | Prisma.UserTranslationScalarFieldEnum[];
+};
+
+/**
+ * User.updatedUserTranslations
+ */
+export type User$updatedUserTranslationsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the UserTranslation
+   */
+  select?: Prisma.UserTranslationSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the UserTranslation
+   */
+  omit?: Prisma.UserTranslationOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserTranslationInclude<ExtArgs> | null;
+  where?: Prisma.UserTranslationWhereInput;
+  orderBy?:
+    | Prisma.UserTranslationOrderByWithRelationInput
+    | Prisma.UserTranslationOrderByWithRelationInput[];
+  cursor?: Prisma.UserTranslationWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.UserTranslationScalarFieldEnum
+    | Prisma.UserTranslationScalarFieldEnum[];
 };
 
 /**
