@@ -20,6 +20,12 @@ const configSchema = z.object({
   REFRESH_TOKEN_SECRET: z.string(),
   REFRESH_TOKEN_EXPIRE_IN: z.string(),
   SECRET_API_KEY: z.string(),
+
+  // Seed data: admin user
+  ADMIN_EMAIL: z.string().email(),
+  ADMIN_PASSWORD: z.string().min(8),
+  ADMIN_NAME: z.string().min(1),
+  ADMIN_PHONE_NUMBER: z.string().min(10).max(15),
 });
 
 const configServer = configSchema.safeParse(process.env);
