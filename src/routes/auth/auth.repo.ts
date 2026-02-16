@@ -8,7 +8,8 @@ export class AuthRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   async createUser(
-    user: Omit<RegisterBodyType, 'confirmPassword'> & Pick<UserType, 'roleId'>,
+    user: Omit<RegisterBodyType, 'confirmPassword' | 'code'> &
+      Pick<UserType, 'roleId'>,
   ): Promise<Omit<UserType, 'password' | 'totpSecret'>> {
     return await this.prismaService.user.create({
       data: user,
@@ -31,6 +32,17 @@ export class AuthRepository {
       },
       create: payload,
       update: payload,
+    });
+  }
+
+  async findUniqueVerificationCode(
+    uniqueObject:
+      | { email: string }
+      | { id: number }
+      | Pick<VerificationCodeType, 'email' | 'type' | 'code'>,
+  ): Promise<VerificationCodeType | null> {
+    return await this.prismaService.verificationCode.findUnique({
+      where: uniqueObject,
     });
   }
 }

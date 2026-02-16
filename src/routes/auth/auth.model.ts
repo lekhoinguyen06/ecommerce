@@ -10,6 +10,7 @@ export const RegisterBodySchema = UserSchema.pick({
 })
   .extend({
     confirmPassword: z.string().min(8).max(20),
+    code: z.string().length(6),
   })
   .strict()
   .superRefine(({ password, confirmPassword }, ctx) => {
@@ -35,7 +36,7 @@ export type RegisterResType = z.infer<typeof RegisterResSchema>;
 export const VerificationCode = z.object({
   id: z.number(),
   email: z.email(),
-  code: z.string(),
+  code: z.string().length(6),
   type: z.enum(TypeOfVerificationCode),
   expiresAt: z.date(),
   createdAt: z.date(),

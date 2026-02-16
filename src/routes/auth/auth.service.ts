@@ -26,6 +26,30 @@ export class AuthService {
     try {
       const hashedPassword = await this.hashingService.hash(body.password);
       const clientRoleId = await this.roleService.getClientRoleId();
+
+      const verificationCode =
+        await this.authRepository.findUniqueVerificationCode({
+          email: body.email,
+          code: body.code,
+          type: TypeOfVerificationCode.REGISTER,
+        });
+
+      if (!verificationCode)
+        throw new UnprocessableEntityException([
+          {
+            message: 'OTP verification code is incorrect',
+            path: 'code',
+          },
+        ]);
+
+      if (verificationCode.expiresAt < new Date())
+        throw new UnprocessableEntityException([
+          {
+            message: 'OTP verification code has expired',
+            path: 'code',
+          },
+        ]);
+
       return await this.authRepository.createUser({
         email: body.email,
         name: body.name,
@@ -35,10 +59,12 @@ export class AuthService {
       });
     } catch (error) {
       if (isUniqueConstraintPrisma2002Error(error)) {
-        throw new UnprocessableEntityException({
-          message: 'Email already exist',
-          path: 'email',
-        });
+        throw new UnprocessableEntityException([
+          {
+            message: 'Email already exist',
+            path: 'email',
+          },
+        ]);
       }
       throw error;
     }
