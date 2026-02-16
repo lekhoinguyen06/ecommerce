@@ -11,6 +11,7 @@ import envConfig from 'src/shared/config';
 import { TypeOfVerificationCode } from 'src/shared/constants/auth.constant';
 import { addMilliseconds } from 'date-fns';
 import ms, { StringValue } from 'ms';
+import { EmailService } from 'src/shared/services/email.service';
 
 @Injectable()
 export class AuthService {
@@ -20,6 +21,7 @@ export class AuthService {
     private readonly authRepository: AuthRepository,
     private readonly sharedUserRepository: SharedUserRepository,
     private readonly roleService: RoleService,
+    private readonly emailService: EmailService,
   ) {}
 
   async register(body: RegisterBodyType) {
@@ -82,14 +84,26 @@ export class AuthService {
       });
 
     const code = generateOTP();
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    const time = ms(envConfig.OTP_EXPIRE_IN as StringValue) as number;
+    const time = ms(envConfig.OTP_EXPIRE_IN as StringValue);
     const verificationCode = await this.authRepository.createVerificationCode({
       email: body.email,
       code,
       type: TypeOfVerificationCode.REGISTER,
       expiresAt: addMilliseconds(new Date(), time),
     });
+
+    const { error } = await this.emailService.sendOTP({
+      email: body.email,
+      code: verificationCode.code,
+    });
+
+    if (error)
+      throw new UnprocessableEntityException([
+        {
+          message: 'Failed to sent OTP verification code through email',
+          path: 'code',
+        },
+      ]);
 
     return verificationCode;
   }

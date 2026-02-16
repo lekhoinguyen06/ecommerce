@@ -17,6 +17,9 @@ const configSchema = z.object({
   DATABASE_URL: z.string(),
   SECRET_API_KEY: z.string(),
 
+  // Services
+  RESEND_API_KEY: z.string(),
+
   // Application
   ACCESS_TOKEN_SECRET: z.string(),
   ACCESS_TOKEN_EXPIRE_IN: z.string(),
