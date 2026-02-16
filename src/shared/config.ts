@@ -15,11 +15,14 @@ if (!fs.existsSync(path.resolve('.env'))) {
 
 const configSchema = z.object({
   DATABASE_URL: z.string(),
+  SECRET_API_KEY: z.string(),
+
+  // Application
   ACCESS_TOKEN_SECRET: z.string(),
   ACCESS_TOKEN_EXPIRE_IN: z.string(),
   REFRESH_TOKEN_SECRET: z.string(),
   REFRESH_TOKEN_EXPIRE_IN: z.string(),
-  SECRET_API_KEY: z.string(),
+  OTP_EXPIRE_IN: z.string(),
 
   // Seed data: admin user
   ADMIN_EMAIL: z.string().email(),
@@ -31,7 +34,10 @@ const configSchema = z.object({
 const configServer = configSchema.safeParse(process.env);
 
 if (!configServer.success) {
-  console.error('Invalid environment variables:', configServer.error.format());
+  console.error(
+    'Invalid environment variables:',
+    z.prettifyError(configServer.error),
+  );
   process.exit(1);
 }
 

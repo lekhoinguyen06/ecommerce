@@ -1,8 +1,8 @@
-import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { Auth } from 'src/shared/decorators/auth.decorator';
-import { AuthType, GuardCondition } from 'src/shared/constants/auth.constant';
-import { RegisterBodyDto, RegisterResDTO } from './auth.dto';
+// import { Auth } from 'src/shared/decorators/auth.decorator';
+// import { AuthType, GuardCondition } from 'src/shared/constants/auth.constant';
+import { RegisterBodyDto, RegisterResDTO, SendOTPBodyDTO } from './auth.dto';
 import { ZodSerializerDto } from 'nestjs-zod';
 @Controller('auth')
 export class AuthController {
@@ -14,20 +14,25 @@ export class AuthController {
     return await this.authService.register(body);
   }
 
-  @Post('login')
-  async login(@Body() body: any) {
-    return await this.authService.login(body);
+  @Post('otp')
+  sendOTP(@Body() body: SendOTPBodyDTO) {
+    return this.authService.sendOTP(body);
   }
 
-  @Post('refresh-token')
-  @Auth([AuthType.Bearer, AuthType.APIKey], { condition: GuardCondition.And })
-  @HttpCode(HttpStatus.OK)
-  async refreshToken(@Body() body: any) {
-    return await this.authService.refreshToken(body.refreshToken);
-  }
+  // @Post('login')
+  // async login(@Body() body: any) {
+  //   return await this.authService.login(body);
+  // }
 
-  @Post('logout')
-  async logout(@Body() body: any) {
-    return await this.authService.logout(body.refreshToken);
-  }
+  // @Post('refresh-token')
+  // @Auth([AuthType.Bearer, AuthType.APIKey], { condition: GuardCondition.And })
+  // @HttpCode(HttpStatus.OK)
+  // async refreshToken(@Body() body: any) {
+  //   return await this.authService.refreshToken(body.refreshToken);
+  // }
+
+  // @Post('logout')
+  // async logout(@Body() body: any) {
+  //   return await this.authService.logout(body.refreshToken);
+  // }
 }

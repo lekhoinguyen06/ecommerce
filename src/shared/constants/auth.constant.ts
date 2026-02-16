@@ -15,3 +15,14 @@ export const GuardCondition = {
 
 export type GuardConditionType =
   (typeof GuardCondition)[keyof typeof GuardCondition];
+
+export const TypeOfUserStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  BLOCKED: 'BLOCKED',
+} as const;
+
+export const TypeOfVerificationCode = {
+  REGISTER: 'REGISTER',
+  FORGOT_PASSWORD: 'FORGOT_PASSWORD',
+} as const;
