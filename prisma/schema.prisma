@@ -80,9 +80,10 @@ model User {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
-  role      Role  @relation("UserRole", fields: [roleId], references: [id])
-  createdBy User? @relation("UserCreatedBy", fields: [createdById], references: [id])
-  updatedBy User? @relation("UserUpdatedBy", fields: [updatedById], references: [id])
+  role      Role     @relation("UserRole", fields: [roleId], references: [id])
+  createdBy User?    @relation("UserCreatedBy", fields: [createdById], references: [id])
+  updatedBy User?    @relation("UserUpdatedBy", fields: [updatedById], references: [id])
+  devices   Device[]
 
   // Self-relations for audit trail
   createdUsers User[] @relation("UserCreatedBy")
@@ -178,7 +179,9 @@ model RefreshToken {
   expiresAt DateTime
   createdAt DateTime @default(now())
 
-  user User @relation(fields: [userId], references: [id])
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  deviceId Int
+  device   Device @relation(fields: [deviceId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@index([expiresAt])
   @@index([userId])
@@ -228,6 +231,18 @@ model Role {
 
   @@index([createdById])
   @@index([updatedById])
+}
+
+model Device {
+  id            Int            @id @default(autoincrement())
+  userId        Int
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userAgent     String
+  ip            String
+  lastActive    DateTime       @default(now())
+  createdAt     DateTime       @default(now())
+  isActive      Boolean        @default(true)
+  refreshTokens RefreshToken[]
 }
 
 model Brand {
