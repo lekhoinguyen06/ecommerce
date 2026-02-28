@@ -1,5 +1,6 @@
 import { SetMetadata } from '@nestjs/common';
 import {
+  AuthType,
   AuthTypeType,
   GuardCondition,
   GuardConditionType,
@@ -19,3 +20,5 @@ export const Auth = (
     options: options ?? { condition: GuardCondition.And },
   });
 };
+
+export const IsPublic = () => Auth([AuthType.None]);
