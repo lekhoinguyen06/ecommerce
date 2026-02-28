@@ -42,8 +42,8 @@ export class TokenService {
     });
   }
 
-  async verifyRefreshToken(token: string): Promise<RefreshTokenPayload> {
-    return await this.jwtService.verifyAsync(token, {
+  verifyRefreshToken(token: string): Promise<RefreshTokenPayload> {
+    return this.jwtService.verifyAsync(token, {
       secret: envConfig.REFRESH_TOKEN_SECRET as StringValue,
     });
   }

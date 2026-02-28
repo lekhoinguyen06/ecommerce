@@ -71,7 +71,7 @@ export const RefreshTokenBodySchema = z
   })
   .strict();
 
-export const RefreshTokenResSchema = LoginBodySchema;
+export const RefreshTokenResSchema = LoginResSchema;
 
 // Logout
 export const LogoutBodySchema = RefreshTokenBodySchema;

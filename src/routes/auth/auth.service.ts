@@ -1,8 +1,18 @@
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
+import {
+  HttpException,
+  Injectable,
+  UnauthorizedException,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { HashingService } from 'src/shared/services/hashing.service';
 import { TokenService } from 'src/shared/services/token.service';
 import { isUniqueConstraintPrisma2002Error } from 'src/types/helper';
-import { LoginBodyType, RegisterBodyType, SendOTPBodyType } from './auth.model';
+import {
+  LoginBodyType,
+  RefreshTokenBodyType,
+  RegisterBodyType,
+  SendOTPBodyType,
+} from './auth.model';
 import { AuthRepository } from './auth.repo';
 import { RoleService } from './role.service';
 import { SharedUserRepository } from 'src/shared/repositories/shared-user.repo';
@@ -191,34 +201,72 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
-  // async refreshToken(refreshToken: string) {
-  //   try {
-  //     // Validate token
-  //     const { userId } =
-  //       await this.tokenService.verifyRefreshToken(refreshToken);
+  async refreshToken({
+    refreshToken,
+    userAgent,
+    ip,
+  }: RefreshTokenBodyType & { userAgent: string; ip: string }) {
+    try {
+      // Validate token
+      const { userId } =
+        await this.tokenService.verifyRefreshToken(refreshToken);
 
-  //     await this.prismaService.refreshToken.findUniqueOrThrow({
-  //       where: {
-  //         token: refreshToken,
-  //       },
-  //     });
+      // Validate refreshToken exist in database
+      const refreshTokenInDB =
+        await this.authRepository.findUniqueRefreshTokenWithUserRole({
+          token: refreshToken,
+        });
 
-  //     // Remove existing refreshToken
-  //     await this.prismaService.refreshToken.delete({
-  //       where: {
-  //         token: refreshToken,
-  //       },
-  //     });
+      if (!refreshTokenInDB)
+        throw new UnauthorizedException([
+          {
+            field: 'refreshToken',
+            error: 'Refresh token has been used',
+          },
+        ]);
 
-  //     // Create new accessToken and refreshToken
-  //     return await this.generateTokens({ userId });
-  //   } catch (error) {
-  //     if (isRequiredRecordNotFoundPrisma2025Error(error)) {
-  //       throw new UnauthorizedException('Refresh token has been revoked');
-  //     }
-  //     throw error;
-  //   }
-  // }
+      const {
+        deviceId,
+        user: {
+          roleId,
+          role: { name: roleName },
+        },
+      } = refreshTokenInDB;
+
+      // Update device
+      const $updateDevice = this.authRepository.updateDevice(deviceId, {
+        userId,
+        userAgent,
+        ip,
+      });
+
+      // Remove existing refreshToken
+      const $deleteRefreshToken = this.authRepository.deleteRefreshToken({
+        token: refreshToken,
+      });
+
+      // Create new accessToken and refreshToken
+      const $tokens = this.generateTokens({
+        userId,
+        roleId,
+        roleName,
+        deviceId,
+      });
+
+      const [, , tokens] = await Promise.all([
+        $updateDevice,
+        $deleteRefreshToken,
+        $tokens,
+      ]);
+
+      return tokens;
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new UnauthorizedException();
+    }
+  }
 
   // async logout(refreshToken: string) {
   //   try {
