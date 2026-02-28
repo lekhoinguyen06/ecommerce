@@ -9,8 +9,8 @@ export class EmailService {
     this.resend = new Resend(envConfig.RESEND_API_KEY);
   }
 
-  async sendOTP(payload: { email: string; code: string }) {
-    return await this.resend.emails.send({
+  sendOTP(payload: { email: string; code: string }) {
+    return this.resend.emails.send({
       from: 'onboarding@resend.dev',
       to: 'khoinguyenbenz@gmail.com',
       subject: 'Your verification code',

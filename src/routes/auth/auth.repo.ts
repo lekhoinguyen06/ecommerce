@@ -12,11 +12,11 @@ import { UserType } from 'src/shared/models/shared-user.model';
 export class AuthRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async createUser(
+  createUser(
     user: Omit<RegisterBodyType, 'confirmPassword' | 'code'> &
       Pick<UserType, 'roleId'>,
   ): Promise<Omit<UserType, 'password' | 'totpSecret'>> {
-    return await this.prismaService.user.create({
+    return this.prismaService.user.create({
       data: user,
       omit: {
         password: true,
@@ -25,13 +25,13 @@ export class AuthRepository {
     });
   }
 
-  async createVerificationCode(
+  createVerificationCode(
     payload: Pick<
       VerificationCodeType,
       'email' | 'type' | 'code' | 'expiresAt'
     >,
   ): Promise<VerificationCodeType> {
-    return await this.prismaService.verificationCode.upsert({
+    return this.prismaService.verificationCode.upsert({
       where: {
         email: payload.email,
       },
@@ -40,13 +40,13 @@ export class AuthRepository {
     });
   }
 
-  async findUniqueVerificationCode(
+  findUniqueVerificationCode(
     uniqueObject:
       | { email: string }
       | { id: number }
       | Pick<VerificationCodeType, 'email' | 'type' | 'code'>,
   ): Promise<VerificationCodeType | null> {
-    return await this.prismaService.verificationCode.findUnique({
+    return this.prismaService.verificationCode.findUnique({
       where: uniqueObject,
     });
   }
@@ -67,10 +67,10 @@ export class AuthRepository {
     return this.prismaService.device.create({ data });
   }
 
-  async findUniqueUserWithRole(
+  findUniqueUserWithRole(
     uniqueObject: { email: string } | { id: number },
   ): Promise<(UserType & { role: RoleType }) | null> {
-    return await this.prismaService.user.findUnique({
+    return this.prismaService.user.findUnique({
       where: uniqueObject,
       include: {
         role: true,

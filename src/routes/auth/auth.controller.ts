@@ -16,8 +16,8 @@ export class AuthController {
 
   @Post('register')
   @ZodSerializerDto(RegisterResDTO)
-  async register(@Body() body: RegisterBodyDTO) {
-    return await this.authService.register(body);
+  register(@Body() body: RegisterBodyDTO) {
+    return this.authService.register(body);
   }
 
   @Post('otp')
@@ -26,12 +26,8 @@ export class AuthController {
   }
 
   @Post('login')
-  async login(
-    @Body() body: LoginBodyDTO,
-    @Ip() ip,
-    @UserAgent() userAgent: string,
-  ) {
-    return await this.authService.login({
+  login(@Body() body: LoginBodyDTO, @Ip() ip, @UserAgent() userAgent: string) {
+    return this.authService.login({
       ...body,
       ip,
       userAgent,

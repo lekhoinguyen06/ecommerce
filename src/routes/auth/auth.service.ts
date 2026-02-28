@@ -52,7 +52,7 @@ export class AuthService {
           },
         ]);
 
-      return await this.authRepository.createUser({
+      return this.authRepository.createUser({
         email: body.email,
         name: body.name,
         phoneNumber: body.phoneNumber,
