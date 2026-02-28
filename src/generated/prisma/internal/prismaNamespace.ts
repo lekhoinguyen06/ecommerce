@@ -419,6 +419,7 @@ export const ModelName = {
   RefreshToken: 'RefreshToken',
   Permission: 'Permission',
   Role: 'Role',
+  Device: 'Device',
   Brand: 'Brand',
   BrandTranslation: 'BrandTranslation',
   Product: 'Product',
@@ -466,6 +467,7 @@ export type TypeMap<
       | 'refreshToken'
       | 'permission'
       | 'role'
+      | 'device'
       | 'brand'
       | 'brandTranslation'
       | 'product'
@@ -1015,6 +1017,82 @@ export type TypeMap<
           args: Prisma.RoleCountArgs<ExtArgs>;
           result:
             | runtime.Types.Utils.Optional<Prisma.RoleCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
+    Device: {
+      payload: Prisma.$DevicePayload<ExtArgs>;
+      fields: Prisma.DeviceFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.DeviceFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.DeviceFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePayload>;
+        };
+        findFirst: {
+          args: Prisma.DeviceFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.DeviceFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePayload>;
+        };
+        findMany: {
+          args: Prisma.DeviceFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePayload>[];
+        };
+        create: {
+          args: Prisma.DeviceCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePayload>;
+        };
+        createMany: {
+          args: Prisma.DeviceCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.DeviceCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePayload>[];
+        };
+        delete: {
+          args: Prisma.DeviceDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePayload>;
+        };
+        update: {
+          args: Prisma.DeviceUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePayload>;
+        };
+        deleteMany: {
+          args: Prisma.DeviceDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.DeviceUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.DeviceUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePayload>[];
+        };
+        upsert: {
+          args: Prisma.DeviceUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePayload>;
+        };
+        aggregate: {
+          args: Prisma.DeviceAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDevice>;
+        };
+        groupBy: {
+          args: Prisma.DeviceGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.DeviceGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.DeviceCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.DeviceCountAggregateOutputType>
             | number;
         };
       };
@@ -2493,6 +2571,7 @@ export const RefreshTokenScalarFieldEnum = {
   userId: 'userId',
   expiresAt: 'expiresAt',
   createdAt: 'createdAt',
+  deviceId: 'deviceId',
 } as const;
 
 export type RefreshTokenScalarFieldEnum =
@@ -2528,6 +2607,19 @@ export const RoleScalarFieldEnum = {
 
 export type RoleScalarFieldEnum =
   (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum];
+
+export const DeviceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  userAgent: 'userAgent',
+  ip: 'ip',
+  lastActive: 'lastActive',
+  createdAt: 'createdAt',
+  isActive: 'isActive',
+} as const;
+
+export type DeviceScalarFieldEnum =
+  (typeof DeviceScalarFieldEnum)[keyof typeof DeviceScalarFieldEnum];
 
 export const BrandScalarFieldEnum = {
   id: 'id',
@@ -3040,6 +3132,7 @@ export type GlobalOmitConfig = {
   refreshToken?: Prisma.RefreshTokenOmit;
   permission?: Prisma.PermissionOmit;
   role?: Prisma.RoleOmit;
+  device?: Prisma.DeviceOmit;
   brand?: Prisma.BrandOmit;
   brandTranslation?: Prisma.BrandTranslationOmit;
   product?: Prisma.ProductOmit;

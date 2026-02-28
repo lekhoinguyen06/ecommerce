@@ -61,6 +61,7 @@ export const ModelName = {
   RefreshToken: 'RefreshToken',
   Permission: 'Permission',
   Role: 'Role',
+  Device: 'Device',
   Brand: 'Brand',
   BrandTranslation: 'BrandTranslation',
   Product: 'Product',
@@ -164,6 +165,7 @@ export const RefreshTokenScalarFieldEnum = {
   userId: 'userId',
   expiresAt: 'expiresAt',
   createdAt: 'createdAt',
+  deviceId: 'deviceId',
 } as const;
 
 export type RefreshTokenScalarFieldEnum =
@@ -199,6 +201,19 @@ export const RoleScalarFieldEnum = {
 
 export type RoleScalarFieldEnum =
   (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum];
+
+export const DeviceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  userAgent: 'userAgent',
+  ip: 'ip',
+  lastActive: 'lastActive',
+  createdAt: 'createdAt',
+  isActive: 'isActive',
+} as const;
+
+export type DeviceScalarFieldEnum =
+  (typeof DeviceScalarFieldEnum)[keyof typeof DeviceScalarFieldEnum];
 
 export const BrandScalarFieldEnum = {
   id: 'id',

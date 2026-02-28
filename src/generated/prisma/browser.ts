@@ -52,6 +52,11 @@ export type Permission = Prisma.PermissionModel;
  */
 export type Role = Prisma.RoleModel;
 /**
+ * Model Device
+ *
+ */
+export type Device = Prisma.DeviceModel;
+/**
  * Model Brand
  *
  */

@@ -2,7 +2,7 @@ import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { HashingService } from 'src/shared/services/hashing.service';
 import { TokenService } from 'src/shared/services/token.service';
 import { isUniqueConstraintPrisma2002Error } from 'src/types/helper';
-import { RegisterBodyType, SendOTPBodyType } from './auth.model';
+import { LoginBodyType, RegisterBodyType, SendOTPBodyType } from './auth.model';
 import { AuthRepository } from './auth.repo';
 import { RoleService } from './role.service';
 import { SharedUserRepository } from 'src/shared/repositories/shared-user.repo';
@@ -108,55 +108,88 @@ export class AuthService {
     return verificationCode;
   }
 
-  // async login(body: any) {
-  //   try {
-  //     const user = await this.prismaService.user.findUnique({
-  //       where: {
-  //         email: body.email,
-  //       },
-  //     });
+  async login(body: LoginBodyType & { userAgent: string; ip: string }) {
+    try {
+      const user = await this.authRepository.findUniqueUserWithRole({
+        email: body.email,
+      });
 
-  //     if (!user) throw new UnauthorizedException('Account does not exist');
+      if (!user)
+        throw new UnprocessableEntityException([
+          {
+            field: 'email',
+            error: 'Email does not exist',
+          },
+        ]);
 
-  //     const isPasswordMatch = await this.hashingService.compare(
-  //       body.password,
-  //       user.password,
-  //     );
+      const isPasswordMatch = await this.hashingService.compare(
+        body.password,
+        user.password,
+      );
 
-  //     if (!isPasswordMatch)
-  //       throw new UnprocessableEntityException([
-  //         {
-  //           field: 'password',
-  //           error: 'Password is incorrect',
-  //         },
-  //       ]);
+      if (!isPasswordMatch)
+        throw new UnprocessableEntityException([
+          {
+            field: 'password',
+            error: 'Password is incorrect',
+          },
+        ]);
 
-  //     const tokens = await this.generateTokens({ userId: user.id });
-  //     return tokens;
-  //   } catch (error) {
-  //     console.log('Error when generating token');
-  //     throw error;
-  //   }
-  // }
+      const device = await this.authRepository.createDevice({
+        userId: user.id,
+        ip: body.ip,
+        userAgent: body.userAgent,
+        isActive: true,
+        lastActive: new Date(),
+      });
 
-  // async generateTokens(payload: { userId: number }) {
-  //   const [accessToken, refreshToken] = await Promise.all([
-  //     this.tokenService.signAccessToken(payload),
-  //     this.tokenService.signRefreshToken(payload),
-  //   ]);
+      const tokens = await this.generateTokens({
+        userId: user.id,
+        deviceId: device.id,
+        roleId: user.roleId,
+        roleName: user.role.name,
+      });
+      return tokens;
+    } catch (error) {
+      console.log('Error when generating token');
+      throw error;
+    }
+  }
 
-  //   const decodedRefreshToken =
-  //     await this.tokenService.verifyRefreshToken(refreshToken);
+  async generateTokens({
+    userId,
+    deviceId,
+    roleId,
+    roleName,
+  }: {
+    userId: number;
+    deviceId: number;
+    roleId: number;
+    roleName: string;
+  }) {
+    const [accessToken, refreshToken] = await Promise.all([
+      this.tokenService.signAccessToken({
+        userId,
+        deviceId,
+        roleId,
+        roleName,
+      }),
+      this.tokenService.signRefreshToken({
+        userId,
+      }),
+    ]);
 
-  //   await this.prismaService.refreshToken.create({
-  //     data: {
-  //       token: refreshToken,
-  //       expiresAt: new Date(decodedRefreshToken.exp * 1000),
-  //       userId: payload.userId,
-  //     },
-  //   });
-  //   return { accessToken, refreshToken };
-  // }
+    const decodedRefreshToken =
+      await this.tokenService.verifyRefreshToken(refreshToken);
+
+    await this.authRepository.createRefreshToken({
+      token: refreshToken,
+      expiresAt: new Date(decodedRefreshToken.exp * 1000),
+      userId,
+      deviceId: 1,
+    });
+    return { accessToken, refreshToken };
+  }
 
   // async refreshToken(refreshToken: string) {
   //   try {

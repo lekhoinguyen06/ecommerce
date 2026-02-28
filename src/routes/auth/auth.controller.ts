@@ -1,9 +1,15 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Ip } from '@nestjs/common';
 import { AuthService } from './auth.service';
 // import { Auth } from 'src/shared/decorators/auth.decorator';
 // import { AuthType, GuardCondition } from 'src/shared/constants/auth.constant';
-import { RegisterBodyDTO, RegisterResDTO, SendOTPBodyDTO } from './auth.dto';
+import {
+  LoginBodyDTO,
+  RegisterBodyDTO,
+  RegisterResDTO,
+  SendOTPBodyDTO,
+} from './auth.dto';
 import { ZodSerializerDto } from 'nestjs-zod';
+import { UserAgent } from 'src/shared/decorators/user-agent.decorator';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -19,10 +25,18 @@ export class AuthController {
     return this.authService.sendOTP(body);
   }
 
-  // @Post('login')
-  // async login(@Body() body: any) {
-  //   return await this.authService.login(body);
-  // }
+  @Post('login')
+  async login(
+    @Body() body: LoginBodyDTO,
+    @Ip() ip,
+    @UserAgent() userAgent: string,
+  ) {
+    return await this.authService.login({
+      ...body,
+      ip,
+      userAgent,
+    });
+  }
 
   // @Post('refresh-token')
   // @Auth([AuthType.Bearer, AuthType.APIKey], { condition: GuardCondition.And })

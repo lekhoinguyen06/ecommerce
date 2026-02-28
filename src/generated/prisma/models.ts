@@ -14,6 +14,7 @@ export type * from './models/VerificationCode.js';
 export type * from './models/RefreshToken.js';
 export type * from './models/Permission.js';
 export type * from './models/Role.js';
+export type * from './models/Device.js';
 export type * from './models/Brand.js';
 export type * from './models/BrandTranslation.js';
 export type * from './models/Product.js';

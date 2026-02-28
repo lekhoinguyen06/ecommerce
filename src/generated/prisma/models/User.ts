@@ -312,6 +312,7 @@ export type UserWhereInput = {
     Prisma.UserNullableScalarRelationFilter,
     Prisma.UserWhereInput
   > | null;
+  devices?: Prisma.DeviceListRelationFilter;
   createdUsers?: Prisma.UserListRelationFilter;
   updatedUsers?: Prisma.UserListRelationFilter;
   userTranslations?: Prisma.UserTranslationListRelationFilter;
@@ -369,6 +370,7 @@ export type UserOrderByWithRelationInput = {
   role?: Prisma.RoleOrderByWithRelationInput;
   createdBy?: Prisma.UserOrderByWithRelationInput;
   updatedBy?: Prisma.UserOrderByWithRelationInput;
+  devices?: Prisma.DeviceOrderByRelationAggregateInput;
   createdUsers?: Prisma.UserOrderByRelationAggregateInput;
   updatedUsers?: Prisma.UserOrderByRelationAggregateInput;
   userTranslations?: Prisma.UserTranslationOrderByRelationAggregateInput;
@@ -436,6 +438,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<
       Prisma.UserNullableScalarRelationFilter,
       Prisma.UserWhereInput
     > | null;
+    devices?: Prisma.DeviceListRelationFilter;
     createdUsers?: Prisma.UserListRelationFilter;
     updatedUsers?: Prisma.UserListRelationFilter;
     userTranslations?: Prisma.UserTranslationListRelationFilter;
@@ -546,6 +549,7 @@ export type UserCreateInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -600,6 +604,7 @@ export type UserUncheckedCreateInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -657,6 +662,7 @@ export type UserUpdateInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -715,6 +721,7 @@ export type UserUncheckedUpdateInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -1492,6 +1499,32 @@ export type UserUncheckedUpdateManyWithoutRoleNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[];
 };
 
+export type UserCreateNestedOneWithoutDevicesInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutDevicesInput,
+    Prisma.UserUncheckedCreateWithoutDevicesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDevicesInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneRequiredWithoutDevicesNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutDevicesInput,
+    Prisma.UserUncheckedCreateWithoutDevicesInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDevicesInput;
+  upsert?: Prisma.UserUpsertWithoutDevicesInput;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutDevicesInput,
+      Prisma.UserUpdateWithoutDevicesInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutDevicesInput
+  >;
+};
+
 export type UserCreateNestedOneWithoutCreatedBrandsInput = {
   create?: Prisma.XOR<
     Prisma.UserCreateWithoutCreatedBrandsInput,
@@ -2196,6 +2229,7 @@ export type UserCreateWithoutCreatedLanguagesInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -2249,6 +2283,7 @@ export type UserUncheckedCreateWithoutCreatedLanguagesInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -2309,6 +2344,7 @@ export type UserCreateWithoutUpdatedLanguagesInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -2362,6 +2398,7 @@ export type UserUncheckedCreateWithoutUpdatedLanguagesInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -2446,6 +2483,7 @@ export type UserUpdateWithoutCreatedLanguagesInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -2503,6 +2541,7 @@ export type UserUncheckedUpdateWithoutCreatedLanguagesInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -2579,6 +2618,7 @@ export type UserUpdateWithoutUpdatedLanguagesInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -2636,6 +2676,7 @@ export type UserUncheckedUpdateWithoutUpdatedLanguagesInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -2688,6 +2729,7 @@ export type UserCreateWithoutCreatedUsersInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
@@ -2741,6 +2783,7 @@ export type UserUncheckedCreateWithoutCreatedUsersInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
@@ -2801,6 +2844,7 @@ export type UserCreateWithoutUpdatedUsersInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
@@ -2854,6 +2898,7 @@ export type UserUncheckedCreateWithoutUpdatedUsersInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
@@ -2913,6 +2958,7 @@ export type UserCreateWithoutCreatedByInput = {
   updatedAt?: Date | string;
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -2966,6 +3012,7 @@ export type UserUncheckedCreateWithoutCreatedByInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -3033,6 +3080,7 @@ export type UserCreateWithoutUpdatedByInput = {
   updatedAt?: Date | string;
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -3086,6 +3134,7 @@ export type UserUncheckedCreateWithoutUpdatedByInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -3178,6 +3227,7 @@ export type UserUpdateWithoutCreatedUsersInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
@@ -3235,6 +3285,7 @@ export type UserUncheckedUpdateWithoutCreatedUsersInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
@@ -3311,6 +3362,7 @@ export type UserUpdateWithoutUpdatedUsersInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
@@ -3368,6 +3420,7 @@ export type UserUncheckedUpdateWithoutUpdatedUsersInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
@@ -3496,6 +3549,7 @@ export type UserCreateWithoutUserTranslationsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
@@ -3549,6 +3603,7 @@ export type UserUncheckedCreateWithoutUserTranslationsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
@@ -3609,6 +3664,7 @@ export type UserCreateWithoutCreatedUserTranslationsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -3662,6 +3718,7 @@ export type UserUncheckedCreateWithoutCreatedUserTranslationsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -3722,6 +3779,7 @@ export type UserCreateWithoutUpdatedUserTranslationsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -3775,6 +3833,7 @@ export type UserUncheckedCreateWithoutUpdatedUserTranslationsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -3859,6 +3918,7 @@ export type UserUpdateWithoutUserTranslationsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
@@ -3916,6 +3976,7 @@ export type UserUncheckedUpdateWithoutUserTranslationsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
@@ -3992,6 +4053,7 @@ export type UserUpdateWithoutCreatedUserTranslationsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -4049,6 +4111,7 @@ export type UserUncheckedUpdateWithoutCreatedUserTranslationsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -4125,6 +4188,7 @@ export type UserUpdateWithoutUpdatedUserTranslationsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -4182,6 +4246,7 @@ export type UserUncheckedUpdateWithoutUpdatedUserTranslationsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -4234,6 +4299,7 @@ export type UserCreateWithoutRefreshTokensInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -4287,6 +4353,7 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -4371,6 +4438,7 @@ export type UserUpdateWithoutRefreshTokensInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -4428,6 +4496,7 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -4480,6 +4549,7 @@ export type UserCreateWithoutCreatedPermissionsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -4533,6 +4603,7 @@ export type UserUncheckedCreateWithoutCreatedPermissionsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -4593,6 +4664,7 @@ export type UserCreateWithoutUpdatedPermissionsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -4646,6 +4718,7 @@ export type UserUncheckedCreateWithoutUpdatedPermissionsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -4730,6 +4803,7 @@ export type UserUpdateWithoutCreatedPermissionsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -4787,6 +4861,7 @@ export type UserUncheckedUpdateWithoutCreatedPermissionsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -4863,6 +4938,7 @@ export type UserUpdateWithoutUpdatedPermissionsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -4920,6 +4996,7 @@ export type UserUncheckedUpdateWithoutUpdatedPermissionsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -4972,6 +5049,7 @@ export type UserCreateWithoutCreatedRolesInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -5025,6 +5103,7 @@ export type UserUncheckedCreateWithoutCreatedRolesInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -5085,6 +5164,7 @@ export type UserCreateWithoutUpdatedRolesInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -5138,6 +5218,7 @@ export type UserUncheckedCreateWithoutUpdatedRolesInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -5197,6 +5278,7 @@ export type UserCreateWithoutRoleInput = {
   updatedAt?: Date | string;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -5250,6 +5332,7 @@ export type UserUncheckedCreateWithoutRoleInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -5340,6 +5423,7 @@ export type UserUpdateWithoutCreatedRolesInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -5397,6 +5481,7 @@ export type UserUncheckedUpdateWithoutCreatedRolesInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -5473,6 +5558,7 @@ export type UserUpdateWithoutUpdatedRolesInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -5530,6 +5616,7 @@ export type UserUncheckedUpdateWithoutUpdatedRolesInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -5596,6 +5683,256 @@ export type UserUpdateManyWithWhereWithoutRoleInput = {
   >;
 };
 
+export type UserCreateWithoutDevicesInput = {
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  role: Prisma.RoleCreateNestedOneWithoutUsersInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserUncheckedCreateWithoutDevicesInput = {
+  id?: number;
+  email: string;
+  name: string;
+  password: string;
+  phoneNumber: string;
+  avatar?: string | null;
+  totpSecret?: string | null;
+  status?: $Enums.UserStatus;
+  roleId: number;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
+  userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutFromUserInput;
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutToUserInput;
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput;
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutUserInput;
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+  createdLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedLanguages?: Prisma.LanguageUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProducts?: Prisma.ProductUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategories?: Prisma.CategoryUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariants?: Prisma.VariantUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedSKUs?: Prisma.SKUUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedOrders?: Prisma.OrderUncheckedCreateNestedManyWithoutUpdatedByInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutCreatedByInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUpdatedByInput;
+};
+
+export type UserCreateOrConnectWithoutDevicesInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutDevicesInput,
+    Prisma.UserUncheckedCreateWithoutDevicesInput
+  >;
+};
+
+export type UserUpsertWithoutDevicesInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutDevicesInput,
+    Prisma.UserUncheckedUpdateWithoutDevicesInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutDevicesInput,
+    Prisma.UserUncheckedCreateWithoutDevicesInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutDevicesInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutDevicesInput,
+    Prisma.UserUncheckedUpdateWithoutDevicesInput
+  >;
+};
+
+export type UserUpdateWithoutDevicesInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUpdateManyWithoutUpdatedByNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutDevicesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  password?: Prisma.StringFieldUpdateOperationsInput | string;
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string;
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus;
+  roleId?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutFromUserNestedInput;
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutToUserNestedInput;
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput;
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutUserNestedInput;
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+  createdLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedLanguages?: Prisma.LanguageUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProducts?: Prisma.ProductUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProducts?: Prisma.ProductUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedProductTranslations?: Prisma.ProductTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategories?: Prisma.CategoryUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategories?: Prisma.CategoryUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedCategoryTranslations?: Prisma.CategoryTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariants?: Prisma.VariantUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariants?: Prisma.VariantUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedVariantOptions?: Prisma.VariantOptionUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdSKUs?: Prisma.SKUUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedSKUs?: Prisma.SKUUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrands?: Prisma.BrandUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedBrandTranslations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdOrders?: Prisma.OrderUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedOrders?: Prisma.OrderUncheckedUpdateManyWithoutUpdatedByNestedInput;
+  createdUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutCreatedByNestedInput;
+  updatedUserTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUpdatedByNestedInput;
+};
+
 export type UserCreateWithoutCreatedBrandsInput = {
   email: string;
   name: string;
@@ -5610,6 +5947,7 @@ export type UserCreateWithoutCreatedBrandsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -5663,6 +6001,7 @@ export type UserUncheckedCreateWithoutCreatedBrandsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -5723,6 +6062,7 @@ export type UserCreateWithoutUpdatedBrandsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -5776,6 +6116,7 @@ export type UserUncheckedCreateWithoutUpdatedBrandsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -5860,6 +6201,7 @@ export type UserUpdateWithoutCreatedBrandsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -5917,6 +6259,7 @@ export type UserUncheckedUpdateWithoutCreatedBrandsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -5993,6 +6336,7 @@ export type UserUpdateWithoutUpdatedBrandsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -6050,6 +6394,7 @@ export type UserUncheckedUpdateWithoutUpdatedBrandsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -6102,6 +6447,7 @@ export type UserCreateWithoutCreatedBrandTranslationsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -6155,6 +6501,7 @@ export type UserUncheckedCreateWithoutCreatedBrandTranslationsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -6215,6 +6562,7 @@ export type UserCreateWithoutUpdatedBrandTranslationsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -6268,6 +6616,7 @@ export type UserUncheckedCreateWithoutUpdatedBrandTranslationsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -6352,6 +6701,7 @@ export type UserUpdateWithoutCreatedBrandTranslationsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -6409,6 +6759,7 @@ export type UserUncheckedUpdateWithoutCreatedBrandTranslationsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -6485,6 +6836,7 @@ export type UserUpdateWithoutUpdatedBrandTranslationsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -6542,6 +6894,7 @@ export type UserUncheckedUpdateWithoutUpdatedBrandTranslationsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -6594,6 +6947,7 @@ export type UserCreateWithoutCreatedProductsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -6647,6 +7001,7 @@ export type UserUncheckedCreateWithoutCreatedProductsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -6707,6 +7062,7 @@ export type UserCreateWithoutUpdatedProductsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -6760,6 +7116,7 @@ export type UserUncheckedCreateWithoutUpdatedProductsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -6844,6 +7201,7 @@ export type UserUpdateWithoutCreatedProductsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -6901,6 +7259,7 @@ export type UserUncheckedUpdateWithoutCreatedProductsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -6977,6 +7336,7 @@ export type UserUpdateWithoutUpdatedProductsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -7034,6 +7394,7 @@ export type UserUncheckedUpdateWithoutUpdatedProductsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -7086,6 +7447,7 @@ export type UserCreateWithoutCreatedProductTranslationsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -7139,6 +7501,7 @@ export type UserUncheckedCreateWithoutCreatedProductTranslationsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -7199,6 +7562,7 @@ export type UserCreateWithoutUpdatedProductTranslationsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -7252,6 +7616,7 @@ export type UserUncheckedCreateWithoutUpdatedProductTranslationsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -7336,6 +7701,7 @@ export type UserUpdateWithoutCreatedProductTranslationsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -7393,6 +7759,7 @@ export type UserUncheckedUpdateWithoutCreatedProductTranslationsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -7469,6 +7836,7 @@ export type UserUpdateWithoutUpdatedProductTranslationsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -7526,6 +7894,7 @@ export type UserUncheckedUpdateWithoutUpdatedProductTranslationsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -7578,6 +7947,7 @@ export type UserCreateWithoutCreatedCategoriesInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -7631,6 +8001,7 @@ export type UserUncheckedCreateWithoutCreatedCategoriesInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -7691,6 +8062,7 @@ export type UserCreateWithoutUpdatedCategoriesInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -7744,6 +8116,7 @@ export type UserUncheckedCreateWithoutUpdatedCategoriesInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -7828,6 +8201,7 @@ export type UserUpdateWithoutCreatedCategoriesInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -7885,6 +8259,7 @@ export type UserUncheckedUpdateWithoutCreatedCategoriesInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -7961,6 +8336,7 @@ export type UserUpdateWithoutUpdatedCategoriesInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -8018,6 +8394,7 @@ export type UserUncheckedUpdateWithoutUpdatedCategoriesInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -8070,6 +8447,7 @@ export type UserCreateWithoutCreatedCategoryTranslationsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -8123,6 +8501,7 @@ export type UserUncheckedCreateWithoutCreatedCategoryTranslationsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -8183,6 +8562,7 @@ export type UserCreateWithoutUpdatedCategoryTranslationsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -8236,6 +8616,7 @@ export type UserUncheckedCreateWithoutUpdatedCategoryTranslationsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -8320,6 +8701,7 @@ export type UserUpdateWithoutCreatedCategoryTranslationsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -8377,6 +8759,7 @@ export type UserUncheckedUpdateWithoutCreatedCategoryTranslationsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -8453,6 +8836,7 @@ export type UserUpdateWithoutUpdatedCategoryTranslationsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -8510,6 +8894,7 @@ export type UserUncheckedUpdateWithoutUpdatedCategoryTranslationsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -8562,6 +8947,7 @@ export type UserCreateWithoutCreatedVariantsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -8615,6 +9001,7 @@ export type UserUncheckedCreateWithoutCreatedVariantsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -8675,6 +9062,7 @@ export type UserCreateWithoutUpdatedVariantsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -8728,6 +9116,7 @@ export type UserUncheckedCreateWithoutUpdatedVariantsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -8812,6 +9201,7 @@ export type UserUpdateWithoutCreatedVariantsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -8869,6 +9259,7 @@ export type UserUncheckedUpdateWithoutCreatedVariantsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -8945,6 +9336,7 @@ export type UserUpdateWithoutUpdatedVariantsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -9002,6 +9394,7 @@ export type UserUncheckedUpdateWithoutUpdatedVariantsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -9054,6 +9447,7 @@ export type UserCreateWithoutCreatedVariantOptionsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -9107,6 +9501,7 @@ export type UserUncheckedCreateWithoutCreatedVariantOptionsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -9167,6 +9562,7 @@ export type UserCreateWithoutUpdatedVariantOptionsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -9220,6 +9616,7 @@ export type UserUncheckedCreateWithoutUpdatedVariantOptionsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -9304,6 +9701,7 @@ export type UserUpdateWithoutCreatedVariantOptionsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -9361,6 +9759,7 @@ export type UserUncheckedUpdateWithoutCreatedVariantOptionsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -9437,6 +9836,7 @@ export type UserUpdateWithoutUpdatedVariantOptionsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -9494,6 +9894,7 @@ export type UserUncheckedUpdateWithoutUpdatedVariantOptionsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -9546,6 +9947,7 @@ export type UserCreateWithoutCreatedSKUsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -9599,6 +10001,7 @@ export type UserUncheckedCreateWithoutCreatedSKUsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -9659,6 +10062,7 @@ export type UserCreateWithoutUpdatedSKUsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -9712,6 +10116,7 @@ export type UserUncheckedCreateWithoutUpdatedSKUsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -9796,6 +10201,7 @@ export type UserUpdateWithoutCreatedSKUsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -9853,6 +10259,7 @@ export type UserUncheckedUpdateWithoutCreatedSKUsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -9929,6 +10336,7 @@ export type UserUpdateWithoutUpdatedSKUsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -9986,6 +10394,7 @@ export type UserUncheckedUpdateWithoutUpdatedSKUsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -10038,6 +10447,7 @@ export type UserCreateWithoutCartItemsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -10091,6 +10501,7 @@ export type UserUncheckedCreateWithoutCartItemsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -10175,6 +10586,7 @@ export type UserUpdateWithoutCartItemsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -10232,6 +10644,7 @@ export type UserUncheckedUpdateWithoutCartItemsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -10284,6 +10697,7 @@ export type UserCreateWithoutOrdersInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -10337,6 +10751,7 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -10397,6 +10812,7 @@ export type UserCreateWithoutCreatedOrdersInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -10450,6 +10866,7 @@ export type UserUncheckedCreateWithoutCreatedOrdersInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -10510,6 +10927,7 @@ export type UserCreateWithoutUpdatedOrdersInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -10563,6 +10981,7 @@ export type UserUncheckedCreateWithoutUpdatedOrdersInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -10647,6 +11066,7 @@ export type UserUpdateWithoutOrdersInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -10704,6 +11124,7 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -10780,6 +11201,7 @@ export type UserUpdateWithoutCreatedOrdersInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -10837,6 +11259,7 @@ export type UserUncheckedUpdateWithoutCreatedOrdersInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -10913,6 +11336,7 @@ export type UserUpdateWithoutUpdatedOrdersInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -10970,6 +11394,7 @@ export type UserUncheckedUpdateWithoutUpdatedOrdersInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -11022,6 +11447,7 @@ export type UserCreateWithoutReviewsInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -11075,6 +11501,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -11159,6 +11586,7 @@ export type UserUpdateWithoutReviewsInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -11216,6 +11644,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -11268,6 +11697,7 @@ export type UserCreateWithoutSentMessagesInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -11321,6 +11751,7 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -11381,6 +11812,7 @@ export type UserCreateWithoutReceivedMessagesInput = {
   role: Prisma.RoleCreateNestedOneWithoutUsersInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput;
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationCreateNestedManyWithoutUserInput;
@@ -11434,6 +11866,7 @@ export type UserUncheckedCreateWithoutReceivedMessagesInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput;
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatedByInput;
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput;
   userTranslations?: Prisma.UserTranslationUncheckedCreateNestedManyWithoutUserInput;
@@ -11518,6 +11951,7 @@ export type UserUpdateWithoutSentMessagesInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -11575,6 +12009,7 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -11651,6 +12086,7 @@ export type UserUpdateWithoutReceivedMessagesInput = {
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -11708,6 +12144,7 @@ export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -11795,6 +12232,7 @@ export type UserUpdateWithoutCreatedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -11852,6 +12290,7 @@ export type UserUncheckedUpdateWithoutCreatedByInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -11928,6 +12367,7 @@ export type UserUpdateWithoutUpdatedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   role?: Prisma.RoleUpdateOneRequiredWithoutUsersNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -11985,6 +12425,7 @@ export type UserUncheckedUpdateWithoutUpdatedByInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -12077,6 +12518,7 @@ export type UserUpdateWithoutRoleInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput;
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUpdateManyWithoutUserNestedInput;
@@ -12134,6 +12576,7 @@ export type UserUncheckedUpdateWithoutRoleInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput;
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatedByNestedInput;
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput;
   userTranslations?: Prisma.UserTranslationUncheckedUpdateManyWithoutUserNestedInput;
@@ -12198,6 +12641,7 @@ export type UserUncheckedUpdateManyWithoutRoleInput = {
  */
 
 export type UserCountOutputType = {
+  devices: number;
   createdUsers: number;
   updatedUsers: number;
   userTranslations: number;
@@ -12241,6 +12685,7 @@ export type UserCountOutputTypeSelect<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
+  devices?: boolean | UserCountOutputTypeCountDevicesArgs;
   createdUsers?: boolean | UserCountOutputTypeCountCreatedUsersArgs;
   updatedUsers?: boolean | UserCountOutputTypeCountUpdatedUsersArgs;
   userTranslations?: boolean | UserCountOutputTypeCountUserTranslationsArgs;
@@ -12311,6 +12756,16 @@ export type UserCountOutputTypeDefaultArgs<
    * Select specific fields to fetch from the UserCountOutputType
    */
   select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null;
+};
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDevicesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.DeviceWhereInput;
 };
 
 /**
@@ -12705,6 +13160,7 @@ export type UserSelect<
     role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>;
     createdBy?: boolean | Prisma.User$createdByArgs<ExtArgs>;
     updatedBy?: boolean | Prisma.User$updatedByArgs<ExtArgs>;
+    devices?: boolean | Prisma.User$devicesArgs<ExtArgs>;
     createdUsers?: boolean | Prisma.User$createdUsersArgs<ExtArgs>;
     updatedUsers?: boolean | Prisma.User$updatedUsersArgs<ExtArgs>;
     userTranslations?: boolean | Prisma.User$userTranslationsArgs<ExtArgs>;
@@ -12863,6 +13319,7 @@ export type UserInclude<
   role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>;
   createdBy?: boolean | Prisma.User$createdByArgs<ExtArgs>;
   updatedBy?: boolean | Prisma.User$updatedByArgs<ExtArgs>;
+  devices?: boolean | Prisma.User$devicesArgs<ExtArgs>;
   createdUsers?: boolean | Prisma.User$createdUsersArgs<ExtArgs>;
   updatedUsers?: boolean | Prisma.User$updatedUsersArgs<ExtArgs>;
   userTranslations?: boolean | Prisma.User$userTranslationsArgs<ExtArgs>;
@@ -12948,6 +13405,7 @@ export type $UserPayload<
     role: Prisma.$RolePayload<ExtArgs>;
     createdBy: Prisma.$UserPayload<ExtArgs> | null;
     updatedBy: Prisma.$UserPayload<ExtArgs> | null;
+    devices: Prisma.$DevicePayload<ExtArgs>[];
     createdUsers: Prisma.$UserPayload<ExtArgs>[];
     updatedUsers: Prisma.$UserPayload<ExtArgs>[];
     userTranslations: Prisma.$UserTranslationPayload<ExtArgs>[];
@@ -13591,6 +14049,17 @@ export interface Prisma__UserClient<
     null,
     ExtArgs,
     GlobalOmitOptions
+  >;
+  devices<T extends Prisma.User$devicesArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$devicesArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$DevicePayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
   >;
   createdUsers<T extends Prisma.User$createdUsersArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.User$createdUsersArgs<ExtArgs>>,
@@ -14581,6 +15050,35 @@ export type User$updatedByArgs<
    */
   include?: Prisma.UserInclude<ExtArgs> | null;
   where?: Prisma.UserWhereInput;
+};
+
+/**
+ * User.devices
+ */
+export type User$devicesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Device
+   */
+  select?: Prisma.DeviceSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Device
+   */
+  omit?: Prisma.DeviceOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DeviceInclude<ExtArgs> | null;
+  where?: Prisma.DeviceWhereInput;
+  orderBy?:
+    | Prisma.DeviceOrderByWithRelationInput
+    | Prisma.DeviceOrderByWithRelationInput[];
+  cursor?: Prisma.DeviceWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.DeviceScalarFieldEnum | Prisma.DeviceScalarFieldEnum[];
 };
 
 /**
