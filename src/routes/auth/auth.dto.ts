@@ -14,3 +14,8 @@ export class SendOTPBodyDTO extends createZodDto(SendOTPBodySchema) {}
 
 export class LoginBodyDTO extends createZodDto(LoginBodySchema) {}
 export class LoginResDTO extends createZodDto(LoginResSchema) {}
+
+export class RefreshTokenBodyDTO extends createZodDto(RegisterBodySchema) {}
+export class RefreshTokenResDTO extends createZodDto(RegisterResSchema) {}
+
+export class LogoutBodyDTO extends createZodDto(LoginBodySchema) {}
