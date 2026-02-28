@@ -6,9 +6,13 @@ import {
 } from '@nestjs/common';
 import { HashingService } from 'src/shared/services/hashing.service';
 import { TokenService } from 'src/shared/services/token.service';
-import { isUniqueConstraintPrisma2002Error } from 'src/types/helper';
+import {
+  isRequiredRecordNotFoundPrisma2025Error,
+  isUniqueConstraintPrisma2002Error,
+} from 'src/types/helper';
 import {
   LoginBodyType,
+  LogoutBodyType,
   RefreshTokenBodyType,
   RegisterBodyType,
   SendOTPBodyType,
@@ -115,7 +119,7 @@ export class AuthService {
         },
       ]);
 
-    return verificationCode;
+    return { message: 'Successfully sent OTP verification code' };
   }
 
   async login(body: LoginBodyType & { userAgent: string; ip: string }) {
@@ -221,7 +225,7 @@ export class AuthService {
         throw new UnauthorizedException([
           {
             field: 'refreshToken',
-            error: 'Refresh token has been used',
+            error: 'Refresh token has been revoked',
           },
         ]);
 
@@ -268,25 +272,28 @@ export class AuthService {
     }
   }
 
-  // async logout(refreshToken: string) {
-  //   try {
-  //     // Validate token
-  //     await this.tokenService.verifyRefreshToken(refreshToken);
+  async logout({ refreshToken }: LogoutBodyType) {
+    try {
+      // Validate token
+      await this.tokenService.verifyRefreshToken(refreshToken);
 
-  //     // Remove refreshToken
-  //     await this.prismaService.refreshToken.delete({
-  //       where: {
-  //         token: refreshToken,
-  //       },
-  //     });
+      // Remove refreshToken
+      const deletedRefreshToken = await this.authRepository.deleteRefreshToken({
+        token: refreshToken,
+      });
 
-  //     // Create new accessToken and refreshToken
-  //     return { message: 'Logout successful' };
-  //   } catch (error) {
-  //     if (isRequiredRecordNotFoundPrisma2025Error(error)) {
-  //       throw new UnauthorizedException('Refresh token has been revoked');
-  //     }
-  //     throw new UnauthorizedException();
-  //   }
-  // }
+      // Inactivate device
+      await this.authRepository.updateDevice(deletedRefreshToken.deviceId, {
+        isActive: false,
+      });
+
+      // Create new accessToken and refreshToken
+      return { message: 'Logout successful' };
+    } catch (error) {
+      if (isRequiredRecordNotFoundPrisma2025Error(error)) {
+        throw new UnauthorizedException('Refresh token has been revoked');
+      }
+      throw new UnauthorizedException();
+    }
+  }
 }

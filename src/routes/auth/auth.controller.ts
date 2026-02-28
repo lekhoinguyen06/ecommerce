@@ -12,6 +12,7 @@ import { AuthService } from './auth.service';
 import {
   LoginBodyDTO,
   LoginResDTO,
+  LogoutBodyDTO,
   RefreshTokenBodyDTO,
   RefreshTokenResDTO,
   RegisterBodyDTO,
@@ -20,8 +21,7 @@ import {
 } from './auth.dto';
 import { ZodSerializerDto } from 'nestjs-zod';
 import { UserAgent } from 'src/shared/decorators/user-agent.decorator';
-import { Auth } from 'src/shared/decorators/auth.decorator';
-import { AuthType, GuardCondition } from 'src/shared/constants/auth.constant';
+import { MessageResDTO } from 'src/shared/dto/response.dto';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -33,6 +33,7 @@ export class AuthController {
   }
 
   @Post('otp')
+  @ZodSerializerDto(MessageResDTO)
   sendOTP(@Body() body: SendOTPBodyDTO) {
     return this.authService.sendOTP(body);
   }
@@ -48,7 +49,6 @@ export class AuthController {
   }
 
   @Post('refresh-token')
-  @Auth([AuthType.Bearer, AuthType.APIKey], { condition: GuardCondition.And })
   @HttpCode(HttpStatus.OK)
   @ZodSerializerDto(RefreshTokenResDTO)
   refreshToken(
@@ -63,8 +63,9 @@ export class AuthController {
     });
   }
 
-  // @Post('logout')
-  // async logout(@Body() body: any) {
-  //   return await this.authService.logout(body.refreshToken);
-  // }
+  @Post('logout')
+  @ZodSerializerDto(MessageResDTO)
+  logout(@Body() body: LogoutBodyDTO) {
+    return this.authService.logout(body);
+  }
 }
