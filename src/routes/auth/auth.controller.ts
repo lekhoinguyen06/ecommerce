@@ -6,6 +6,8 @@ import {
   HttpCode,
   HttpStatus,
   Get,
+  Query,
+  Res,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 // import { Auth } from 'src/shared/decorators/auth.decorator';
@@ -26,6 +28,8 @@ import { UserAgent } from 'src/shared/decorators/user-agent.decorator';
 import { MessageResDTO } from 'src/shared/dto/response.dto';
 import { IsPublic } from 'src/shared/decorators/auth.decorator';
 import { GoogleService } from './google.service';
+import { type Response } from 'express';
+import envConfig from 'src/shared/config';
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -85,5 +89,28 @@ export class AuthController {
   @ZodSerializerDto(GetAuthURLResDTO)
   getGoogleAuthUrl(@Ip() ip, @UserAgent() userAgent: string) {
     return this.googleService.getGoogleAuthUrl({ ip, userAgent });
+  }
+
+  @Get('google/callback')
+  @IsPublic()
+  async googleAuthCallback(
+    @Query('code') code: string,
+    @Query('state') state: string,
+    @Res() res: Response,
+  ) {
+    try {
+      const data = await this.googleService.googleAuthCallback({ code, state });
+      console.log('Google auth callback data:', data);
+      return res.redirect(
+        `${envConfig.GOOGLE_CLIENT_REDIRECT_URI}?accessToken=${data.accessToken}&refreshToken=${data.refreshToken}`,
+      );
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      return res.redirect(
+        `${envConfig.GOOGLE_CLIENT_REDIRECT_URI}?error=${encodeURIComponent(
+          message,
+        )}`,
+      );
+    }
   }
 }
