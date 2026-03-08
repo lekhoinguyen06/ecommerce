@@ -5,11 +5,13 @@ import {
   Ip,
   HttpCode,
   HttpStatus,
+  Get,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 // import { Auth } from 'src/shared/decorators/auth.decorator';
 // import { AuthType, GuardCondition } from 'src/shared/constants/auth.constant';
 import {
+  GetAuthURLResDTO,
   LoginBodyDTO,
   LoginResDTO,
   LogoutBodyDTO,
@@ -23,9 +25,13 @@ import { ZodSerializerDto } from 'nestjs-zod';
 import { UserAgent } from 'src/shared/decorators/user-agent.decorator';
 import { MessageResDTO } from 'src/shared/dto/response.dto';
 import { IsPublic } from 'src/shared/decorators/auth.decorator';
+import { GoogleService } from './google.service';
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly googleService: GoogleService,
+  ) {}
 
   @Post('register')
   @IsPublic()
@@ -72,5 +78,12 @@ export class AuthController {
   @ZodSerializerDto(MessageResDTO)
   logout(@Body() body: LogoutBodyDTO) {
     return this.authService.logout(body);
+  }
+
+  @Get('google')
+  @IsPublic()
+  @ZodSerializerDto(GetAuthURLResDTO)
+  getGoogleAuthUrl(@Ip() ip, @UserAgent() userAgent: string) {
+    return this.googleService.getGoogleAuthUrl({ ip, userAgent });
   }
 }

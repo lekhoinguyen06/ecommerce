@@ -100,6 +100,16 @@ export const RoleSchema = z.object({
   updatedAt: z.date(),
 });
 
+// Google OAuth
+export const GoogleOAuthStateSchema = DeviceSchema.pick({
+  userAgent: true,
+  ip: true,
+});
+
+export const GetAuthURLResSchema = z.object({
+  url: z.string(),
+});
+
 // Types
 export type RegisterBodyType = z.infer<typeof RegisterBodySchema>;
 export type RegisterResType = z.infer<typeof RegisterResSchema>;
@@ -113,3 +123,5 @@ export type LoginResType = z.infer<typeof LoginResSchema>;
 export type LogoutBodyType = RefreshTokenBodyType;
 export type RoleType = z.infer<typeof RoleSchema>;
 export type DeviceType = z.infer<typeof DeviceSchema>;
+export type GoogleOAuthStateType = z.infer<typeof GoogleOAuthStateSchema>;
+export type GetAuthURLResType = z.infer<typeof GetAuthURLResSchema>;
