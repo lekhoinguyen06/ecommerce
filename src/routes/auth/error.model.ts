@@ -41,9 +41,9 @@ export const EmailAlreadyExistException = new UnprocessableEntityException([
   },
 ]);
 
-export const EmailDoesNotExistException = new UnprocessableEntityException([
+export const EmailNotFoundException = new UnprocessableEntityException([
   {
-    message: 'Error.EmailDoesNotExist',
+    message: 'Error.EmailNotFound',
     path: 'email',
   },
 ]);

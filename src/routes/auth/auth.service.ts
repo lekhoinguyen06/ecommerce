@@ -10,6 +10,7 @@ import {
   isUniqueConstraintPrisma2002Error,
 } from 'src/types/helper';
 import {
+  ForgotPasswordBodyType,
   LoginBodyType,
   LogoutBodyType,
   RefreshTokenBodyType,
@@ -27,7 +28,7 @@ import ms, { StringValue } from 'ms';
 import { EmailService } from 'src/shared/services/email.service';
 import {
   EmailAlreadyExistException,
-  EmailDoesNotExistException,
+  EmailNotFoundException,
   ExpiredOTPException,
   FailedToSentOTPException,
   IncorrectPasswordException,
@@ -46,29 +47,49 @@ export class AuthService {
     private readonly emailService: EmailService,
   ) {}
 
+  async verifyOTP(
+    email: string,
+    code: string,
+    type: keyof typeof TypeOfVerificationCode,
+  ) {
+    const verificationCode =
+      await this.authRepository.findUniqueVerificationCode({
+        email: email,
+        code: code,
+        type,
+      });
+
+    if (!verificationCode) throw InvalidOTPException;
+
+    if (verificationCode.expiresAt < new Date()) throw ExpiredOTPException;
+
+    return verificationCode;
+  }
+
   async register(body: RegisterBodyType) {
     try {
       const hashedPassword = await this.hashingService.hash(body.password);
       const clientRoleId = await this.roleService.getClientRoleId();
 
-      const verificationCode =
-        await this.authRepository.findUniqueVerificationCode({
+      await this.verifyOTP(
+        body.email,
+        body.code,
+        TypeOfVerificationCode.REGISTER,
+      );
+
+      const [user] = await Promise.all([
+        this.authRepository.createUser({
           email: body.email,
-          code: body.code,
-          type: TypeOfVerificationCode.REGISTER,
-        });
-
-      if (!verificationCode) throw InvalidOTPException;
-
-      if (verificationCode.expiresAt < new Date()) throw ExpiredOTPException;
-
-      return this.authRepository.createUser({
-        email: body.email,
-        name: body.name,
-        phoneNumber: body.phoneNumber,
-        password: hashedPassword,
-        roleId: clientRoleId,
-      });
+          name: body.name,
+          phoneNumber: body.phoneNumber,
+          password: hashedPassword,
+          roleId: clientRoleId,
+        }),
+        this.authRepository.deleteVerificationCode({
+          email: body.email,
+        }),
+      ]);
+      return user;
     } catch (error) {
       if (isUniqueConstraintPrisma2002Error(error)) {
         throw EmailAlreadyExistException;
@@ -82,14 +103,17 @@ export class AuthService {
       email: body.email,
     });
 
-    if (user) throw EmailAlreadyExistException;
+    if (body.type === TypeOfVerificationCode.REGISTER && user)
+      throw EmailAlreadyExistException;
+    if (body.type === TypeOfVerificationCode.FORGOT_PASSWORD && !user)
+      throw EmailNotFoundException;
 
     const code = generateOTP();
     const time = ms(envConfig.OTP_EXPIRE_IN as StringValue);
     const verificationCode = await this.authRepository.createVerificationCode({
       email: body.email,
       code,
-      type: TypeOfVerificationCode.REGISTER,
+      type: body.type,
       expiresAt: addMilliseconds(new Date(), time),
     });
 
@@ -109,7 +133,7 @@ export class AuthService {
         email: body.email,
       });
 
-      if (!user) throw EmailDoesNotExistException;
+      if (!user) throw EmailNotFoundException;
 
       const isPasswordMatch = await this.hashingService.compare(
         body.password,
@@ -259,5 +283,35 @@ export class AuthService {
       }
       throw new UnauthorizedException();
     }
+  }
+
+  async forgotPassword(body: ForgotPasswordBodyType) {
+    const { email, code, newPassword } = body;
+
+    // Find user by email
+    const user = await this.sharedUserRepository.findUnique({ email });
+
+    if (!user) throw EmailNotFoundException;
+
+    // Verify verification code
+    await this.verifyOTP(email, code, TypeOfVerificationCode.FORGOT_PASSWORD);
+
+    // Hash new password
+    const hashedPassword = await this.hashingService.hash(newPassword);
+
+    // Update
+    const $updateUser = this.authRepository.updateUser(
+      { id: user.id },
+      {
+        password: hashedPassword,
+      },
+    );
+    const $deleteVerificationCode = this.authRepository.deleteVerificationCode({
+      email,
+    });
+
+    await Promise.all([$updateUser, $deleteVerificationCode]);
+
+    return { message: 'Password reset successful' };
   }
 }

@@ -7,6 +7,7 @@ import {
   VerificationCodeType,
 } from './auth.model';
 import { UserType } from 'src/shared/models/shared-user.model';
+import { TypeOfVerificationCode } from 'src/shared/constants/auth.constant';
 @Injectable()
 export class AuthRepository {
   constructor(private readonly prismaService: PrismaService) {}
@@ -110,6 +111,16 @@ export class AuthRepository {
     });
   }
 
+  updateUser(
+    where: { id: number } | { email: string },
+    data: Partial<Omit<UserType, 'id'>>,
+  ) {
+    return this.prismaService.user.update({
+      where,
+      data,
+    });
+  }
+
   updateDevice(deviceId: number, data: Partial<DeviceType>) {
     return this.prismaService.device.update({
       where: {
@@ -123,6 +134,21 @@ export class AuthRepository {
     token: string;
   }): Promise<RefreshTokenType> {
     return this.prismaService.refreshToken.delete({
+      where: uniqueObject,
+    });
+  }
+
+  deleteVerificationCode(
+    uniqueObject:
+      | { email: string }
+      | { id: number }
+      | {
+          email: string;
+          type: keyof typeof TypeOfVerificationCode;
+          code: string;
+        },
+  ): Promise<VerificationCodeType> {
+    return this.prismaService.verificationCode.delete({
       where: uniqueObject,
     });
   }

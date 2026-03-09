@@ -13,6 +13,7 @@ import { AuthService } from './auth.service';
 // import { Auth } from 'src/shared/decorators/auth.decorator';
 // import { AuthType, GuardCondition } from 'src/shared/constants/auth.constant';
 import {
+  ForgotPasswordBodyDTO,
   GetAuthURLResDTO,
   LoginBodyDTO,
   LoginResDTO,
@@ -112,5 +113,12 @@ export class AuthController {
         )}`,
       );
     }
+  }
+
+  @Post('forgot-password')
+  @IsPublic()
+  @ZodSerializerDto(MessageResDTO)
+  forgotPassword(@Body() body: ForgotPasswordBodyDTO) {
+    return this.authService.forgotPassword(body);
   }
 }

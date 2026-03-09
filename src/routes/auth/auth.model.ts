@@ -76,6 +76,26 @@ export const RefreshTokenResSchema = LoginResSchema;
 // Logout
 export const LogoutBodySchema = RefreshTokenBodySchema;
 
+// Forgot Password
+export const ForgotPasswordBodySchema = z
+  .object({
+    email: z.email(),
+    code: z.string().length(6),
+    newPassword: z.string().min(8).max(20),
+    confirmNewPassword: z.string().min(8).max(20),
+  })
+  .strict()
+  .superRefine(({ newPassword, confirmNewPassword }, ctx) => {
+    if (newPassword !== confirmNewPassword) {
+      ctx.addIssue({
+        code: 'invalid_value',
+        message: 'Password and confirm password do not match',
+        values: [confirmNewPassword],
+        path: ['confirmNewPassword'],
+      });
+    }
+  });
+
 // Device
 export const DeviceSchema = z.object({
   id: z.number(),
@@ -125,3 +145,4 @@ export type RoleType = z.infer<typeof RoleSchema>;
 export type DeviceType = z.infer<typeof DeviceSchema>;
 export type GoogleOAuthStateType = z.infer<typeof GoogleOAuthStateSchema>;
 export type GetAuthURLResType = z.infer<typeof GetAuthURLResSchema>;
+export type ForgotPasswordBodyType = z.infer<typeof ForgotPasswordBodySchema>;
