@@ -2,7 +2,6 @@ import {
   HttpException,
   Injectable,
   UnauthorizedException,
-  UnprocessableEntityException,
 } from '@nestjs/common';
 import { HashingService } from 'src/shared/services/hashing.service';
 import { TokenService } from 'src/shared/services/token.service';
@@ -26,6 +25,15 @@ import { TypeOfVerificationCode } from 'src/shared/constants/auth.constant';
 import { addMilliseconds } from 'date-fns';
 import ms, { StringValue } from 'ms';
 import { EmailService } from 'src/shared/services/email.service';
+import {
+  EmailAlreadyExistException,
+  EmailDoesNotExistException,
+  ExpiredOTPException,
+  FailedToSentOTPException,
+  IncorrectPasswordException,
+  InvalidOTPException,
+  RefreshTokenRevokedException,
+} from './error.model';
 
 @Injectable()
 export class AuthService {
@@ -50,21 +58,9 @@ export class AuthService {
           type: TypeOfVerificationCode.REGISTER,
         });
 
-      if (!verificationCode)
-        throw new UnprocessableEntityException([
-          {
-            message: 'OTP verification code is incorrect',
-            path: 'code',
-          },
-        ]);
+      if (!verificationCode) throw InvalidOTPException;
 
-      if (verificationCode.expiresAt < new Date())
-        throw new UnprocessableEntityException([
-          {
-            message: 'OTP verification code has expired',
-            path: 'code',
-          },
-        ]);
+      if (verificationCode.expiresAt < new Date()) throw ExpiredOTPException;
 
       return this.authRepository.createUser({
         email: body.email,
@@ -75,12 +71,7 @@ export class AuthService {
       });
     } catch (error) {
       if (isUniqueConstraintPrisma2002Error(error)) {
-        throw new UnprocessableEntityException([
-          {
-            message: 'Email already exist',
-            path: 'email',
-          },
-        ]);
+        throw EmailAlreadyExistException;
       }
       throw error;
     }
@@ -91,11 +82,7 @@ export class AuthService {
       email: body.email,
     });
 
-    if (user)
-      throw new UnprocessableEntityException({
-        message: 'Email already exist',
-        path: 'email',
-      });
+    if (user) throw EmailAlreadyExistException;
 
     const code = generateOTP();
     const time = ms(envConfig.OTP_EXPIRE_IN as StringValue);
@@ -111,13 +98,7 @@ export class AuthService {
       code: verificationCode.code,
     });
 
-    if (error)
-      throw new UnprocessableEntityException([
-        {
-          message: 'Failed to sent OTP verification code through email',
-          path: 'code',
-        },
-      ]);
+    if (error) throw FailedToSentOTPException;
 
     return { message: 'Successfully sent OTP verification code' };
   }
@@ -128,26 +109,14 @@ export class AuthService {
         email: body.email,
       });
 
-      if (!user)
-        throw new UnprocessableEntityException([
-          {
-            field: 'email',
-            error: 'Email does not exist',
-          },
-        ]);
+      if (!user) throw EmailDoesNotExistException;
 
       const isPasswordMatch = await this.hashingService.compare(
         body.password,
         user.password,
       );
 
-      if (!isPasswordMatch)
-        throw new UnprocessableEntityException([
-          {
-            field: 'password',
-            error: 'Password is incorrect',
-          },
-        ]);
+      if (!isPasswordMatch) throw IncorrectPasswordException;
 
       const device = await this.authRepository.createDevice({
         userId: user.id,
@@ -165,8 +134,9 @@ export class AuthService {
       });
       return tokens;
     } catch (error) {
-      console.log('Error when generating token');
-      throw error;
+      throw error instanceof HttpException
+        ? error
+        : new UnauthorizedException();
     }
   }
 
@@ -221,13 +191,7 @@ export class AuthService {
           token: refreshToken,
         });
 
-      if (!refreshTokenInDB)
-        throw new UnauthorizedException([
-          {
-            field: 'refreshToken',
-            error: 'Refresh token has been revoked',
-          },
-        ]);
+      if (!refreshTokenInDB) throw RefreshTokenRevokedException;
 
       const {
         deviceId,
@@ -291,7 +255,7 @@ export class AuthService {
       return { message: 'Logout successful' };
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
-        throw new UnauthorizedException('Refresh token has been revoked');
+        throw RefreshTokenRevokedException;
       }
       throw new UnauthorizedException();
     }

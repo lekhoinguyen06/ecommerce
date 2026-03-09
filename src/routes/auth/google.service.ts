@@ -8,6 +8,10 @@ import { HashingService } from 'src/shared/services/hashing.service';
 import { RoleService } from './role.service';
 import { v4 as uuidv4 } from 'uuid';
 import { AuthService } from './auth.service';
+import {
+  GoogleAuthenticationFailedException,
+  GoogleUserInfoError,
+} from './error.model';
 
 @Injectable()
 export class GoogleService {
@@ -81,8 +85,7 @@ export class GoogleService {
       });
       const { data } = await oauth2.userinfo.get();
 
-      if (!data || !data.email)
-        throw new Error('Failed to get user email from Google');
+      if (!data || !data.email) throw GoogleUserInfoError;
 
       let user = await this.authRepository.findUniqueUserWithRole({
         email: data.email,
@@ -121,7 +124,7 @@ export class GoogleService {
       return authTokens;
     } catch (error) {
       console.error('Google authentication failed: ', error);
-      throw new UnauthorizedException('Google authentication failed');
+      throw GoogleAuthenticationFailedException;
     }
   }
 }
