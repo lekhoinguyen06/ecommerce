@@ -54,9 +54,11 @@ export class AuthService {
   ) {
     const verificationCode =
       await this.authRepository.findUniqueVerificationCode({
-        email: email,
-        code: code,
-        type,
+        email_code_type: {
+          email: email,
+          code: code,
+          type,
+        },
       });
 
     if (!verificationCode) throw InvalidOTPException;
@@ -86,7 +88,11 @@ export class AuthService {
           roleId: clientRoleId,
         }),
         this.authRepository.deleteVerificationCode({
-          email: body.email,
+          email_code_type: {
+            email: body.email,
+            code: body.code,
+            type: TypeOfVerificationCode.REGISTER,
+          },
         }),
       ]);
       return user;
@@ -307,7 +313,11 @@ export class AuthService {
       },
     );
     const $deleteVerificationCode = this.authRepository.deleteVerificationCode({
-      email,
+      email_code_type: {
+        email,
+        code,
+        type: TypeOfVerificationCode.FORGOT_PASSWORD,
+      },
     });
 
     await Promise.all([$updateUser, $deleteVerificationCode]);

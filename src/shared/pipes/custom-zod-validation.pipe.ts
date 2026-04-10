@@ -1,10 +1,9 @@
 import { UnprocessableEntityException } from '@nestjs/common';
-import { createZodValidationPipe } from 'nestjs-zod';
+import { createZodValidationPipe, ZodValidationPipe } from 'nestjs-zod';
 import { ZodError } from 'zod';
 
-export const CustomZodValidationPipe = createZodValidationPipe({
-  // provide custom validation exception factory
-  createValidationException: (error: ZodError) => {
-    throw new UnprocessableEntityException(JSON.parse(error.message));
-  },
-});
+export const CustomZodValidationPipe: typeof ZodValidationPipe =
+  createZodValidationPipe({
+    createValidationException: (error: unknown) =>
+      new UnprocessableEntityException(JSON.parse((error as ZodError).message)),
+  });

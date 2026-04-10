@@ -7,7 +7,6 @@ import {
   VerificationCodeType,
 } from './auth.model';
 import { UserType } from 'src/shared/models/shared-user.model';
-import { TypeOfVerificationCode } from 'src/shared/constants/auth.constant';
 @Injectable()
 export class AuthRepository {
   constructor(private readonly prismaService: PrismaService) {}
@@ -49,7 +48,11 @@ export class AuthRepository {
   ): Promise<VerificationCodeType> {
     return this.prismaService.verificationCode.upsert({
       where: {
-        email: payload.email,
+        email_code_type: {
+          email: payload.email,
+          type: payload.type,
+          code: payload.code,
+        },
       },
       create: payload,
       update: payload,
@@ -58,9 +61,13 @@ export class AuthRepository {
 
   findUniqueVerificationCode(
     uniqueObject:
-      | { email: string }
       | { id: number }
-      | Pick<VerificationCodeType, 'email' | 'type' | 'code'>,
+      | {
+          email_code_type: Pick<
+            VerificationCodeType,
+            'email' | 'type' | 'code'
+          >;
+        },
   ): Promise<VerificationCodeType | null> {
     return this.prismaService.verificationCode.findUnique({
       where: uniqueObject,
@@ -140,12 +147,12 @@ export class AuthRepository {
 
   deleteVerificationCode(
     uniqueObject:
-      | { email: string }
       | { id: number }
       | {
-          email: string;
-          type: keyof typeof TypeOfVerificationCode;
-          code: string;
+          email_code_type: Pick<
+            VerificationCodeType,
+            'email' | 'type' | 'code'
+          >;
         },
   ): Promise<VerificationCodeType> {
     return this.prismaService.verificationCode.delete({

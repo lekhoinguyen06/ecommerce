@@ -23,6 +23,7 @@
     "jsx": "react-jsx",
     //"strict": true
     "paths": {
+      "root/*": ["./*"],
       "src/*": ["./src/*"]
     }
   }
