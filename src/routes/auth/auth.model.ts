@@ -49,7 +49,12 @@ export const SendOTPBodySchema = VerificationCodeSchema.pick({
 export const LoginBodySchema = UserSchema.pick({
   email: true,
   password: true,
-}).strict();
+})
+  .extend({
+    totpCode: z.string().length(6).optional(), // 2FA code
+    code: z.string().length(6).optional(), // Email OTP code
+  })
+  .strict();
 
 export const LoginResSchema = z.object({
   accessToken: z.string(),
@@ -130,6 +135,35 @@ export const GetAuthURLResSchema = z.object({
   url: z.string(),
 });
 
+// 2FA
+export const Disable2FABodySchema = z
+  .object({
+    totpCode: z.string().length(6).optional(), // 2FA code
+    code: z.string().length(6).optional(), // Email OTP code
+  })
+  .superRefine(({ totpCode, code }, ctx) => {
+    const message = 'Either totpCode or code must be provided, but not both';
+    if ((totpCode !== undefined) === (code !== undefined)) {
+      ctx.addIssue({
+        path: ['totpCode'],
+        code: 'invalid_value',
+        message,
+        values: [totpCode],
+      });
+      ctx.addIssue({
+        path: ['code'],
+        code: 'invalid_value',
+        message,
+        values: [code],
+      });
+    }
+  });
+
+export const TwoFASetupResSchema = z.object({
+  secret: z.string(),
+  url: z.string(),
+});
+
 // Types
 export type RegisterBodyType = z.infer<typeof RegisterBodySchema>;
 export type RegisterResType = z.infer<typeof RegisterResSchema>;
@@ -146,3 +180,5 @@ export type DeviceType = z.infer<typeof DeviceSchema>;
 export type GoogleOAuthStateType = z.infer<typeof GoogleOAuthStateSchema>;
 export type GetAuthURLResType = z.infer<typeof GetAuthURLResSchema>;
 export type ForgotPasswordBodyType = z.infer<typeof ForgotPasswordBodySchema>;
+export type Disable2FABodyType = z.infer<typeof Disable2FABodySchema>;
+export type TwoFASetupResType = z.infer<typeof TwoFASetupResSchema>;
