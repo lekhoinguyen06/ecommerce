@@ -141,6 +141,7 @@ export const Disable2FABodySchema = z
     totpCode: z.string().length(6).optional(), // 2FA code
     code: z.string().length(6).optional(), // Email OTP code
   })
+  .strict()
   .superRefine(({ totpCode, code }, ctx) => {
     const message = 'Either totpCode or code must be provided, but not both';
     if ((totpCode !== undefined) === (code !== undefined)) {
