@@ -14,6 +14,10 @@ if (!fs.existsSync(path.resolve('.env'))) {
 }
 
 const configSchema = z.object({
+  // Information
+  APP_NAME: z.string(),
+
+  // Secrets
   DATABASE_URL: z.string(),
   SECRET_API_KEY: z.string(),
 
