@@ -121,4 +121,14 @@ export class AuthController {
   forgotPassword(@Body() body: ForgotPasswordBodyDTO) {
     return this.authService.forgotPassword(body);
   }
+
+  // Why POST:
+  // 1. Security: POST require body which means a form or JS is needed to submit the request, reducing the risk of CSRF attacks.
+  // 2. Semantic: POST is used for actions that create or modify resources, which aligns with the action of setting up 2FA.
+  @Post('2fa/setup')
+  @IsPublic()
+  @ZodSerializerDto(MessageResDTO)
+  setup2FA(@Body() body: ForgotPasswordBodyDTO) {
+    return this.authService.forgotPassword(body);
+  }
 }

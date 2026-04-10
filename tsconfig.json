@@ -20,7 +20,10 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
     //"strict": true
+    "paths": {
+      "src/*": ["./src/*"]
+    }
   }
 }
