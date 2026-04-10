@@ -1,0 +1,9 @@
+services:
+  pgsql:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: lekhoinguyen
+      POSTGRES_PASSWORD: 123456789
+      POSTGRES_DB: ecommerce
+    ports:
+      - "5432:5432"
