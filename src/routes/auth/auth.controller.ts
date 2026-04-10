@@ -10,8 +10,6 @@ import {
   Res,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-// import { Auth } from 'src/shared/decorators/auth.decorator';
-// import { AuthType, GuardCondition } from 'src/shared/constants/auth.constant';
 import {
   ForgotPasswordBodyDTO,
   GetAuthURLResDTO,
@@ -31,6 +29,9 @@ import { IsPublic } from 'src/shared/decorators/auth.decorator';
 import { GoogleService } from './google.service';
 import { type Response } from 'express';
 import envConfig from 'src/shared/config';
+import { EmptyBodyDTO } from 'src/shared/dto/request.dto';
+import { ActiveUser } from 'src/shared/decorators/active-user.decorator';
+
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -128,7 +129,7 @@ export class AuthController {
   @Post('2fa/setup')
   @IsPublic()
   @ZodSerializerDto(MessageResDTO)
-  setup2FA(@Body() body: ForgotPasswordBodyDTO) {
-    return this.authService.forgotPassword(body);
+  setup2FA(@Body() _: EmptyBodyDTO, @ActiveUser() userId: number) {
+    return this.authService.setup2FA(userId);
   }
 }

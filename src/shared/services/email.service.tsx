@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Resend } from 'resend';
 import envConfig from '../config';
-import { LinearLoginCodeEmail } from 'root/emails/verification-code.email';
+import { LinearLoginCodeEmail } from 'emails/verification-code.email';
 
 @Injectable()
 export class EmailService {

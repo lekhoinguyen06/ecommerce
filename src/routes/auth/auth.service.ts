@@ -34,7 +34,9 @@ import {
   IncorrectPasswordException,
   InvalidOTPException,
   RefreshTokenRevokedException,
+  TOTPAlreadyEnabledException,
 } from './error.model';
+import { TwoFactorService } from 'src/shared/services/2fa.service';
 
 @Injectable()
 export class AuthService {
@@ -45,6 +47,7 @@ export class AuthService {
     private readonly sharedUserRepository: SharedUserRepository,
     private readonly roleService: RoleService,
     private readonly emailService: EmailService,
+    private readonly twoFactorService: TwoFactorService,
   ) {}
 
   async verifyOTP(
@@ -323,5 +326,27 @@ export class AuthService {
     await Promise.all([$updateUser, $deleteVerificationCode]);
 
     return { message: 'Password reset successful' };
+  }
+
+  async setup2FA(userId: number) {
+    // 1. Get user
+    const user = await this.sharedUserRepository.findUnique({ id: userId });
+
+    if (!user) throw EmailNotFoundException;
+
+    if (user.totpSecret) throw TOTPAlreadyEnabledException;
+
+    // 2. Generate TOTP secret
+    const { secret, uri } = this.twoFactorService.generateTOTPSecret(
+      user.email,
+    );
+
+    // 3. Save TOTP secret to database
+    await this.authRepository.updateUser(
+      { id: userId },
+      { totpSecret: secret },
+    );
+
+    return { secret, uri };
   }
 }

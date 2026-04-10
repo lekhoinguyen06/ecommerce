@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as OTPAuth from 'otpauth';
 
 @Injectable()
-export class TwoFactorAuthService {
+export class TwoFactorService {
   private createTOTP(email: string) {
     return new OTPAuth.TOTP({
       issuer: 'ACME',

@@ -162,7 +162,7 @@ export const Disable2FABodySchema = z
 
 export const TwoFASetupResSchema = z.object({
   secret: z.string(),
-  url: z.string(),
+  uri: z.string(),
 });
 
 // Types
