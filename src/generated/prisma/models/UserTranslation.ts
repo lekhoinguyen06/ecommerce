@@ -29,7 +29,6 @@ export type AggregateUserTranslation = {
 export type UserTranslationAvgAggregateOutputType = {
   id: number | null;
   userId: number | null;
-  languageId: number | null;
   createdById: number | null;
   updatedById: number | null;
 };
@@ -37,7 +36,6 @@ export type UserTranslationAvgAggregateOutputType = {
 export type UserTranslationSumAggregateOutputType = {
   id: number | null;
   userId: number | null;
-  languageId: number | null;
   createdById: number | null;
   updatedById: number | null;
 };
@@ -45,7 +43,7 @@ export type UserTranslationSumAggregateOutputType = {
 export type UserTranslationMinAggregateOutputType = {
   id: number | null;
   userId: number | null;
-  languageId: number | null;
+  languageId: string | null;
   address: string | null;
   description: string | null;
   createdById: number | null;
@@ -58,7 +56,7 @@ export type UserTranslationMinAggregateOutputType = {
 export type UserTranslationMaxAggregateOutputType = {
   id: number | null;
   userId: number | null;
-  languageId: number | null;
+  languageId: string | null;
   address: string | null;
   description: string | null;
   createdById: number | null;
@@ -85,7 +83,6 @@ export type UserTranslationCountAggregateOutputType = {
 export type UserTranslationAvgAggregateInputType = {
   id?: true;
   userId?: true;
-  languageId?: true;
   createdById?: true;
   updatedById?: true;
 };
@@ -93,7 +90,6 @@ export type UserTranslationAvgAggregateInputType = {
 export type UserTranslationSumAggregateInputType = {
   id?: true;
   userId?: true;
-  languageId?: true;
   createdById?: true;
   updatedById?: true;
 };
@@ -238,7 +234,7 @@ export type UserTranslationGroupByArgs<
 export type UserTranslationGroupByOutputType = {
   id: number;
   userId: number;
-  languageId: number;
+  languageId: string;
   address: string | null;
   description: string | null;
   createdById: number | null;
@@ -273,7 +269,7 @@ export type UserTranslationWhereInput = {
   NOT?: Prisma.UserTranslationWhereInput | Prisma.UserTranslationWhereInput[];
   id?: Prisma.IntFilter<'UserTranslation'> | number;
   userId?: Prisma.IntFilter<'UserTranslation'> | number;
-  languageId?: Prisma.IntFilter<'UserTranslation'> | number;
+  languageId?: Prisma.StringFilter<'UserTranslation'> | string;
   address?: Prisma.StringNullableFilter<'UserTranslation'> | string | null;
   description?: Prisma.StringNullableFilter<'UserTranslation'> | string | null;
   createdById?: Prisma.IntNullableFilter<'UserTranslation'> | number | null;
@@ -324,7 +320,7 @@ export type UserTranslationWhereUniqueInput = Prisma.AtLeast<
     OR?: Prisma.UserTranslationWhereInput[];
     NOT?: Prisma.UserTranslationWhereInput | Prisma.UserTranslationWhereInput[];
     userId?: Prisma.IntFilter<'UserTranslation'> | number;
-    languageId?: Prisma.IntFilter<'UserTranslation'> | number;
+    languageId?: Prisma.StringFilter<'UserTranslation'> | string;
     address?: Prisma.StringNullableFilter<'UserTranslation'> | string | null;
     description?:
       | Prisma.StringNullableFilter<'UserTranslation'>
@@ -384,7 +380,7 @@ export type UserTranslationScalarWhereWithAggregatesInput = {
     | Prisma.UserTranslationScalarWhereWithAggregatesInput[];
   id?: Prisma.IntWithAggregatesFilter<'UserTranslation'> | number;
   userId?: Prisma.IntWithAggregatesFilter<'UserTranslation'> | number;
-  languageId?: Prisma.IntWithAggregatesFilter<'UserTranslation'> | number;
+  languageId?: Prisma.StringWithAggregatesFilter<'UserTranslation'> | string;
   address?:
     | Prisma.StringNullableWithAggregatesFilter<'UserTranslation'>
     | string
@@ -431,7 +427,7 @@ export type UserTranslationCreateInput = {
 export type UserTranslationUncheckedCreateInput = {
   id?: number;
   userId: number;
-  languageId: number;
+  languageId: string;
   address?: string | null;
   description?: string | null;
   createdById?: number | null;
@@ -460,7 +456,7 @@ export type UserTranslationUpdateInput = {
 export type UserTranslationUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   userId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -477,7 +473,7 @@ export type UserTranslationUncheckedUpdateInput = {
 export type UserTranslationCreateManyInput = {
   id?: number;
   userId: number;
-  languageId: number;
+  languageId: string;
   address?: string | null;
   description?: string | null;
   createdById?: number | null;
@@ -502,7 +498,7 @@ export type UserTranslationUpdateManyMutationInput = {
 export type UserTranslationUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   userId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -542,7 +538,6 @@ export type UserTranslationCountOrderByAggregateInput = {
 export type UserTranslationAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   userId?: Prisma.SortOrder;
-  languageId?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
 };
@@ -576,7 +571,6 @@ export type UserTranslationMinOrderByAggregateInput = {
 export type UserTranslationSumOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   userId?: Prisma.SortOrder;
-  languageId?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
 };
@@ -1097,7 +1091,7 @@ export type UserTranslationScalarWhereInput = {
     | Prisma.UserTranslationScalarWhereInput[];
   id?: Prisma.IntFilter<'UserTranslation'> | number;
   userId?: Prisma.IntFilter<'UserTranslation'> | number;
-  languageId?: Prisma.IntFilter<'UserTranslation'> | number;
+  languageId?: Prisma.StringFilter<'UserTranslation'> | string;
   address?: Prisma.StringNullableFilter<'UserTranslation'> | string | null;
   description?: Prisma.StringNullableFilter<'UserTranslation'> | string | null;
   createdById?: Prisma.IntNullableFilter<'UserTranslation'> | number | null;
@@ -1124,7 +1118,7 @@ export type UserTranslationCreateWithoutUserInput = {
 
 export type UserTranslationUncheckedCreateWithoutUserInput = {
   id?: number;
-  languageId: number;
+  languageId: string;
   address?: string | null;
   description?: string | null;
   createdById?: number | null;
@@ -1163,7 +1157,7 @@ export type UserTranslationCreateWithoutCreatedByInput = {
 export type UserTranslationUncheckedCreateWithoutCreatedByInput = {
   id?: number;
   userId: number;
-  languageId: number;
+  languageId: string;
   address?: string | null;
   description?: string | null;
   updatedById?: number | null;
@@ -1201,7 +1195,7 @@ export type UserTranslationCreateWithoutUpdatedByInput = {
 export type UserTranslationUncheckedCreateWithoutUpdatedByInput = {
   id?: number;
   userId: number;
-  languageId: number;
+  languageId: string;
   address?: string | null;
   description?: string | null;
   createdById?: number | null;
@@ -1370,7 +1364,7 @@ export type UserTranslationUncheckedUpdateManyWithoutLanguageInput = {
 
 export type UserTranslationCreateManyUserInput = {
   id?: number;
-  languageId: number;
+  languageId: string;
   address?: string | null;
   description?: string | null;
   createdById?: number | null;
@@ -1383,7 +1377,7 @@ export type UserTranslationCreateManyUserInput = {
 export type UserTranslationCreateManyCreatedByInput = {
   id?: number;
   userId: number;
-  languageId: number;
+  languageId: string;
   address?: string | null;
   description?: string | null;
   updatedById?: number | null;
@@ -1395,7 +1389,7 @@ export type UserTranslationCreateManyCreatedByInput = {
 export type UserTranslationCreateManyUpdatedByInput = {
   id?: number;
   userId: number;
-  languageId: number;
+  languageId: string;
   address?: string | null;
   description?: string | null;
   createdById?: number | null;
@@ -1421,7 +1415,7 @@ export type UserTranslationUpdateWithoutUserInput = {
 
 export type UserTranslationUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1437,7 +1431,7 @@ export type UserTranslationUncheckedUpdateWithoutUserInput = {
 
 export type UserTranslationUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1469,7 +1463,7 @@ export type UserTranslationUpdateWithoutCreatedByInput = {
 export type UserTranslationUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   userId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1485,7 +1479,7 @@ export type UserTranslationUncheckedUpdateWithoutCreatedByInput = {
 export type UserTranslationUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   userId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1516,7 +1510,7 @@ export type UserTranslationUpdateWithoutUpdatedByInput = {
 export type UserTranslationUncheckedUpdateWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   userId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1532,7 +1526,7 @@ export type UserTranslationUncheckedUpdateWithoutUpdatedByInput = {
 export type UserTranslationUncheckedUpdateManyWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   userId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1686,7 +1680,7 @@ export type $UserTranslationPayload<
     {
       id: number;
       userId: number;
-      languageId: number;
+      languageId: string;
       address: string | null;
       description: string | null;
       createdById: number | null;
@@ -2354,7 +2348,7 @@ export interface Prisma__UserTranslationClient<
 export interface UserTranslationFieldRefs {
   readonly id: Prisma.FieldRef<'UserTranslation', 'Int'>;
   readonly userId: Prisma.FieldRef<'UserTranslation', 'Int'>;
-  readonly languageId: Prisma.FieldRef<'UserTranslation', 'Int'>;
+  readonly languageId: Prisma.FieldRef<'UserTranslation', 'String'>;
   readonly address: Prisma.FieldRef<'UserTranslation', 'String'>;
   readonly description: Prisma.FieldRef<'UserTranslation', 'String'>;
   readonly createdById: Prisma.FieldRef<'UserTranslation', 'Int'>;

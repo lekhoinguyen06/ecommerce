@@ -29,7 +29,6 @@ export type AggregateCategoryTranslation = {
 export type CategoryTranslationAvgAggregateOutputType = {
   id: number | null;
   categoryId: number | null;
-  languageId: number | null;
   createdById: number | null;
   updatedById: number | null;
 };
@@ -37,7 +36,6 @@ export type CategoryTranslationAvgAggregateOutputType = {
 export type CategoryTranslationSumAggregateOutputType = {
   id: number | null;
   categoryId: number | null;
-  languageId: number | null;
   createdById: number | null;
   updatedById: number | null;
 };
@@ -45,7 +43,7 @@ export type CategoryTranslationSumAggregateOutputType = {
 export type CategoryTranslationMinAggregateOutputType = {
   id: number | null;
   categoryId: number | null;
-  languageId: number | null;
+  languageId: string | null;
   name: string | null;
   description: string | null;
   createdById: number | null;
@@ -58,7 +56,7 @@ export type CategoryTranslationMinAggregateOutputType = {
 export type CategoryTranslationMaxAggregateOutputType = {
   id: number | null;
   categoryId: number | null;
-  languageId: number | null;
+  languageId: string | null;
   name: string | null;
   description: string | null;
   createdById: number | null;
@@ -85,7 +83,6 @@ export type CategoryTranslationCountAggregateOutputType = {
 export type CategoryTranslationAvgAggregateInputType = {
   id?: true;
   categoryId?: true;
-  languageId?: true;
   createdById?: true;
   updatedById?: true;
 };
@@ -93,7 +90,6 @@ export type CategoryTranslationAvgAggregateInputType = {
 export type CategoryTranslationSumAggregateInputType = {
   id?: true;
   categoryId?: true;
-  languageId?: true;
   createdById?: true;
   updatedById?: true;
 };
@@ -240,7 +236,7 @@ export type CategoryTranslationGroupByArgs<
 export type CategoryTranslationGroupByOutputType = {
   id: number;
   categoryId: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   createdById: number | null;
@@ -280,7 +276,7 @@ export type CategoryTranslationWhereInput = {
     | Prisma.CategoryTranslationWhereInput[];
   id?: Prisma.IntFilter<'CategoryTranslation'> | number;
   categoryId?: Prisma.IntFilter<'CategoryTranslation'> | number;
-  languageId?: Prisma.IntFilter<'CategoryTranslation'> | number;
+  languageId?: Prisma.StringFilter<'CategoryTranslation'> | string;
   name?: Prisma.StringFilter<'CategoryTranslation'> | string;
   description?: Prisma.StringFilter<'CategoryTranslation'> | string;
   createdById?: Prisma.IntNullableFilter<'CategoryTranslation'> | number | null;
@@ -338,7 +334,7 @@ export type CategoryTranslationWhereUniqueInput = Prisma.AtLeast<
       | Prisma.CategoryTranslationWhereInput
       | Prisma.CategoryTranslationWhereInput[];
     categoryId?: Prisma.IntFilter<'CategoryTranslation'> | number;
-    languageId?: Prisma.IntFilter<'CategoryTranslation'> | number;
+    languageId?: Prisma.StringFilter<'CategoryTranslation'> | string;
     name?: Prisma.StringFilter<'CategoryTranslation'> | string;
     description?: Prisma.StringFilter<'CategoryTranslation'> | string;
     createdById?:
@@ -404,7 +400,9 @@ export type CategoryTranslationScalarWhereWithAggregatesInput = {
     | Prisma.CategoryTranslationScalarWhereWithAggregatesInput[];
   id?: Prisma.IntWithAggregatesFilter<'CategoryTranslation'> | number;
   categoryId?: Prisma.IntWithAggregatesFilter<'CategoryTranslation'> | number;
-  languageId?: Prisma.IntWithAggregatesFilter<'CategoryTranslation'> | number;
+  languageId?:
+    | Prisma.StringWithAggregatesFilter<'CategoryTranslation'>
+    | string;
   name?: Prisma.StringWithAggregatesFilter<'CategoryTranslation'> | string;
   description?:
     | Prisma.StringWithAggregatesFilter<'CategoryTranslation'>
@@ -447,7 +445,7 @@ export type CategoryTranslationCreateInput = {
 export type CategoryTranslationUncheckedCreateInput = {
   id?: number;
   categoryId: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   createdById?: number | null;
@@ -476,7 +474,7 @@ export type CategoryTranslationUpdateInput = {
 export type CategoryTranslationUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -493,7 +491,7 @@ export type CategoryTranslationUncheckedUpdateInput = {
 export type CategoryTranslationCreateManyInput = {
   id?: number;
   categoryId: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   createdById?: number | null;
@@ -518,7 +516,7 @@ export type CategoryTranslationUpdateManyMutationInput = {
 export type CategoryTranslationUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -558,7 +556,6 @@ export type CategoryTranslationCountOrderByAggregateInput = {
 export type CategoryTranslationAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   categoryId?: Prisma.SortOrder;
-  languageId?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
 };
@@ -592,7 +589,6 @@ export type CategoryTranslationMinOrderByAggregateInput = {
 export type CategoryTranslationSumOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   categoryId?: Prisma.SortOrder;
-  languageId?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
 };
@@ -1117,7 +1113,7 @@ export type CategoryTranslationScalarWhereInput = {
     | Prisma.CategoryTranslationScalarWhereInput[];
   id?: Prisma.IntFilter<'CategoryTranslation'> | number;
   categoryId?: Prisma.IntFilter<'CategoryTranslation'> | number;
-  languageId?: Prisma.IntFilter<'CategoryTranslation'> | number;
+  languageId?: Prisma.StringFilter<'CategoryTranslation'> | string;
   name?: Prisma.StringFilter<'CategoryTranslation'> | string;
   description?: Prisma.StringFilter<'CategoryTranslation'> | string;
   createdById?: Prisma.IntNullableFilter<'CategoryTranslation'> | number | null;
@@ -1145,7 +1141,7 @@ export type CategoryTranslationCreateWithoutCreatedByInput = {
 export type CategoryTranslationUncheckedCreateWithoutCreatedByInput = {
   id?: number;
   categoryId: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   updatedById?: number | null;
@@ -1183,7 +1179,7 @@ export type CategoryTranslationCreateWithoutUpdatedByInput = {
 export type CategoryTranslationUncheckedCreateWithoutUpdatedByInput = {
   id?: number;
   categoryId: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   createdById?: number | null;
@@ -1276,7 +1272,7 @@ export type CategoryTranslationCreateWithoutCategoryInput = {
 
 export type CategoryTranslationUncheckedCreateWithoutCategoryInput = {
   id?: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   createdById?: number | null;
@@ -1391,7 +1387,7 @@ export type CategoryTranslationUncheckedUpdateManyWithoutLanguageInput = {
 export type CategoryTranslationCreateManyCreatedByInput = {
   id?: number;
   categoryId: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   updatedById?: number | null;
@@ -1403,7 +1399,7 @@ export type CategoryTranslationCreateManyCreatedByInput = {
 export type CategoryTranslationCreateManyUpdatedByInput = {
   id?: number;
   categoryId: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   createdById?: number | null;
@@ -1430,7 +1426,7 @@ export type CategoryTranslationUpdateWithoutCreatedByInput = {
 export type CategoryTranslationUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1446,7 +1442,7 @@ export type CategoryTranslationUncheckedUpdateWithoutCreatedByInput = {
 export type CategoryTranslationUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1477,7 +1473,7 @@ export type CategoryTranslationUpdateWithoutUpdatedByInput = {
 export type CategoryTranslationUncheckedUpdateWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1493,7 +1489,7 @@ export type CategoryTranslationUncheckedUpdateWithoutUpdatedByInput = {
 export type CategoryTranslationUncheckedUpdateManyWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1508,7 +1504,7 @@ export type CategoryTranslationUncheckedUpdateManyWithoutUpdatedByInput = {
 
 export type CategoryTranslationCreateManyCategoryInput = {
   id?: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   createdById?: number | null;
@@ -1535,7 +1531,7 @@ export type CategoryTranslationUpdateWithoutCategoryInput = {
 
 export type CategoryTranslationUncheckedUpdateWithoutCategoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1551,7 +1547,7 @@ export type CategoryTranslationUncheckedUpdateWithoutCategoryInput = {
 
 export type CategoryTranslationUncheckedUpdateManyWithoutCategoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1706,7 +1702,7 @@ export type $CategoryTranslationPayload<
     {
       id: number;
       categoryId: number;
-      languageId: number;
+      languageId: string;
       name: string;
       description: string;
       createdById: number | null;
@@ -2384,7 +2380,7 @@ export interface Prisma__CategoryTranslationClient<
 export interface CategoryTranslationFieldRefs {
   readonly id: Prisma.FieldRef<'CategoryTranslation', 'Int'>;
   readonly categoryId: Prisma.FieldRef<'CategoryTranslation', 'Int'>;
-  readonly languageId: Prisma.FieldRef<'CategoryTranslation', 'Int'>;
+  readonly languageId: Prisma.FieldRef<'CategoryTranslation', 'String'>;
   readonly name: Prisma.FieldRef<'CategoryTranslation', 'String'>;
   readonly description: Prisma.FieldRef<'CategoryTranslation', 'String'>;
   readonly createdById: Prisma.FieldRef<'CategoryTranslation', 'Int'>;

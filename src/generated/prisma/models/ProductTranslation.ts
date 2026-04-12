@@ -29,7 +29,6 @@ export type AggregateProductTranslation = {
 export type ProductTranslationAvgAggregateOutputType = {
   id: number | null;
   productId: number | null;
-  languageId: number | null;
   createdById: number | null;
   updatedById: number | null;
 };
@@ -37,7 +36,6 @@ export type ProductTranslationAvgAggregateOutputType = {
 export type ProductTranslationSumAggregateOutputType = {
   id: number | null;
   productId: number | null;
-  languageId: number | null;
   createdById: number | null;
   updatedById: number | null;
 };
@@ -45,7 +43,7 @@ export type ProductTranslationSumAggregateOutputType = {
 export type ProductTranslationMinAggregateOutputType = {
   id: number | null;
   productId: number | null;
-  languageId: number | null;
+  languageId: string | null;
   name: string | null;
   description: string | null;
   createdById: number | null;
@@ -58,7 +56,7 @@ export type ProductTranslationMinAggregateOutputType = {
 export type ProductTranslationMaxAggregateOutputType = {
   id: number | null;
   productId: number | null;
-  languageId: number | null;
+  languageId: string | null;
   name: string | null;
   description: string | null;
   createdById: number | null;
@@ -85,7 +83,6 @@ export type ProductTranslationCountAggregateOutputType = {
 export type ProductTranslationAvgAggregateInputType = {
   id?: true;
   productId?: true;
-  languageId?: true;
   createdById?: true;
   updatedById?: true;
 };
@@ -93,7 +90,6 @@ export type ProductTranslationAvgAggregateInputType = {
 export type ProductTranslationSumAggregateInputType = {
   id?: true;
   productId?: true;
-  languageId?: true;
   createdById?: true;
   updatedById?: true;
 };
@@ -240,7 +236,7 @@ export type ProductTranslationGroupByArgs<
 export type ProductTranslationGroupByOutputType = {
   id: number;
   productId: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   createdById: number | null;
@@ -280,7 +276,7 @@ export type ProductTranslationWhereInput = {
     | Prisma.ProductTranslationWhereInput[];
   id?: Prisma.IntFilter<'ProductTranslation'> | number;
   productId?: Prisma.IntFilter<'ProductTranslation'> | number;
-  languageId?: Prisma.IntFilter<'ProductTranslation'> | number;
+  languageId?: Prisma.StringFilter<'ProductTranslation'> | string;
   name?: Prisma.StringFilter<'ProductTranslation'> | string;
   description?: Prisma.StringFilter<'ProductTranslation'> | string;
   createdById?: Prisma.IntNullableFilter<'ProductTranslation'> | number | null;
@@ -338,7 +334,7 @@ export type ProductTranslationWhereUniqueInput = Prisma.AtLeast<
       | Prisma.ProductTranslationWhereInput
       | Prisma.ProductTranslationWhereInput[];
     productId?: Prisma.IntFilter<'ProductTranslation'> | number;
-    languageId?: Prisma.IntFilter<'ProductTranslation'> | number;
+    languageId?: Prisma.StringFilter<'ProductTranslation'> | string;
     name?: Prisma.StringFilter<'ProductTranslation'> | string;
     description?: Prisma.StringFilter<'ProductTranslation'> | string;
     createdById?:
@@ -404,7 +400,7 @@ export type ProductTranslationScalarWhereWithAggregatesInput = {
     | Prisma.ProductTranslationScalarWhereWithAggregatesInput[];
   id?: Prisma.IntWithAggregatesFilter<'ProductTranslation'> | number;
   productId?: Prisma.IntWithAggregatesFilter<'ProductTranslation'> | number;
-  languageId?: Prisma.IntWithAggregatesFilter<'ProductTranslation'> | number;
+  languageId?: Prisma.StringWithAggregatesFilter<'ProductTranslation'> | string;
   name?: Prisma.StringWithAggregatesFilter<'ProductTranslation'> | string;
   description?:
     | Prisma.StringWithAggregatesFilter<'ProductTranslation'>
@@ -447,7 +443,7 @@ export type ProductTranslationCreateInput = {
 export type ProductTranslationUncheckedCreateInput = {
   id?: number;
   productId: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   createdById?: number | null;
@@ -476,7 +472,7 @@ export type ProductTranslationUpdateInput = {
 export type ProductTranslationUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   productId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -493,7 +489,7 @@ export type ProductTranslationUncheckedUpdateInput = {
 export type ProductTranslationCreateManyInput = {
   id?: number;
   productId: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   createdById?: number | null;
@@ -518,7 +514,7 @@ export type ProductTranslationUpdateManyMutationInput = {
 export type ProductTranslationUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   productId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -558,7 +554,6 @@ export type ProductTranslationCountOrderByAggregateInput = {
 export type ProductTranslationAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   productId?: Prisma.SortOrder;
-  languageId?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
 };
@@ -592,7 +587,6 @@ export type ProductTranslationMinOrderByAggregateInput = {
 export type ProductTranslationSumOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   productId?: Prisma.SortOrder;
-  languageId?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
 };
@@ -1113,7 +1107,7 @@ export type ProductTranslationScalarWhereInput = {
     | Prisma.ProductTranslationScalarWhereInput[];
   id?: Prisma.IntFilter<'ProductTranslation'> | number;
   productId?: Prisma.IntFilter<'ProductTranslation'> | number;
-  languageId?: Prisma.IntFilter<'ProductTranslation'> | number;
+  languageId?: Prisma.StringFilter<'ProductTranslation'> | string;
   name?: Prisma.StringFilter<'ProductTranslation'> | string;
   description?: Prisma.StringFilter<'ProductTranslation'> | string;
   createdById?: Prisma.IntNullableFilter<'ProductTranslation'> | number | null;
@@ -1141,7 +1135,7 @@ export type ProductTranslationCreateWithoutCreatedByInput = {
 export type ProductTranslationUncheckedCreateWithoutCreatedByInput = {
   id?: number;
   productId: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   updatedById?: number | null;
@@ -1179,7 +1173,7 @@ export type ProductTranslationCreateWithoutUpdatedByInput = {
 export type ProductTranslationUncheckedCreateWithoutUpdatedByInput = {
   id?: number;
   productId: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   createdById?: number | null;
@@ -1272,7 +1266,7 @@ export type ProductTranslationCreateWithoutProductInput = {
 
 export type ProductTranslationUncheckedCreateWithoutProductInput = {
   id?: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   createdById?: number | null;
@@ -1387,7 +1381,7 @@ export type ProductTranslationUncheckedUpdateManyWithoutLanguageInput = {
 export type ProductTranslationCreateManyCreatedByInput = {
   id?: number;
   productId: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   updatedById?: number | null;
@@ -1399,7 +1393,7 @@ export type ProductTranslationCreateManyCreatedByInput = {
 export type ProductTranslationCreateManyUpdatedByInput = {
   id?: number;
   productId: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   createdById?: number | null;
@@ -1426,7 +1420,7 @@ export type ProductTranslationUpdateWithoutCreatedByInput = {
 export type ProductTranslationUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   productId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1442,7 +1436,7 @@ export type ProductTranslationUncheckedUpdateWithoutCreatedByInput = {
 export type ProductTranslationUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   productId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1473,7 +1467,7 @@ export type ProductTranslationUpdateWithoutUpdatedByInput = {
 export type ProductTranslationUncheckedUpdateWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   productId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1489,7 +1483,7 @@ export type ProductTranslationUncheckedUpdateWithoutUpdatedByInput = {
 export type ProductTranslationUncheckedUpdateManyWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   productId?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1504,7 +1498,7 @@ export type ProductTranslationUncheckedUpdateManyWithoutUpdatedByInput = {
 
 export type ProductTranslationCreateManyProductInput = {
   id?: number;
-  languageId: number;
+  languageId: string;
   name: string;
   description: string;
   createdById?: number | null;
@@ -1531,7 +1525,7 @@ export type ProductTranslationUpdateWithoutProductInput = {
 
 export type ProductTranslationUncheckedUpdateWithoutProductInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1547,7 +1541,7 @@ export type ProductTranslationUncheckedUpdateWithoutProductInput = {
 
 export type ProductTranslationUncheckedUpdateManyWithoutProductInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
-  languageId?: Prisma.IntFieldUpdateOperationsInput | number;
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
@@ -1702,7 +1696,7 @@ export type $ProductTranslationPayload<
     {
       id: number;
       productId: number;
-      languageId: number;
+      languageId: string;
       name: string;
       description: string;
       createdById: number | null;
@@ -2380,7 +2374,7 @@ export interface Prisma__ProductTranslationClient<
 export interface ProductTranslationFieldRefs {
   readonly id: Prisma.FieldRef<'ProductTranslation', 'Int'>;
   readonly productId: Prisma.FieldRef<'ProductTranslation', 'Int'>;
-  readonly languageId: Prisma.FieldRef<'ProductTranslation', 'Int'>;
+  readonly languageId: Prisma.FieldRef<'ProductTranslation', 'String'>;
   readonly name: Prisma.FieldRef<'ProductTranslation', 'String'>;
   readonly description: Prisma.FieldRef<'ProductTranslation', 'String'>;
   readonly createdById: Prisma.FieldRef<'ProductTranslation', 'Int'>;

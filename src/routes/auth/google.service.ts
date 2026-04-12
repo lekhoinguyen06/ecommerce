@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 import {
   GoogleAuthenticationFailedException,
   GoogleUserInfoError,
-} from './error.model';
+} from './auth.error';
 
 @Injectable()
 export class GoogleService {

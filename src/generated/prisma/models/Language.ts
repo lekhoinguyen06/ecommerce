@@ -27,21 +27,18 @@ export type AggregateLanguage = {
 };
 
 export type LanguageAvgAggregateOutputType = {
-  id: number | null;
   createdById: number | null;
   updatedById: number | null;
 };
 
 export type LanguageSumAggregateOutputType = {
-  id: number | null;
   createdById: number | null;
   updatedById: number | null;
 };
 
 export type LanguageMinAggregateOutputType = {
-  id: number | null;
+  id: string | null;
   name: string | null;
-  code: string | null;
   createdById: number | null;
   updatedById: number | null;
   deletedAt: Date | null;
@@ -50,9 +47,8 @@ export type LanguageMinAggregateOutputType = {
 };
 
 export type LanguageMaxAggregateOutputType = {
-  id: number | null;
+  id: string | null;
   name: string | null;
-  code: string | null;
   createdById: number | null;
   updatedById: number | null;
   deletedAt: Date | null;
@@ -63,7 +59,6 @@ export type LanguageMaxAggregateOutputType = {
 export type LanguageCountAggregateOutputType = {
   id: number;
   name: number;
-  code: number;
   createdById: number;
   updatedById: number;
   deletedAt: number;
@@ -73,13 +68,11 @@ export type LanguageCountAggregateOutputType = {
 };
 
 export type LanguageAvgAggregateInputType = {
-  id?: true;
   createdById?: true;
   updatedById?: true;
 };
 
 export type LanguageSumAggregateInputType = {
-  id?: true;
   createdById?: true;
   updatedById?: true;
 };
@@ -87,7 +80,6 @@ export type LanguageSumAggregateInputType = {
 export type LanguageMinAggregateInputType = {
   id?: true;
   name?: true;
-  code?: true;
   createdById?: true;
   updatedById?: true;
   deletedAt?: true;
@@ -98,7 +90,6 @@ export type LanguageMinAggregateInputType = {
 export type LanguageMaxAggregateInputType = {
   id?: true;
   name?: true;
-  code?: true;
   createdById?: true;
   updatedById?: true;
   deletedAt?: true;
@@ -109,7 +100,6 @@ export type LanguageMaxAggregateInputType = {
 export type LanguageCountAggregateInputType = {
   id?: true;
   name?: true;
-  code?: true;
   createdById?: true;
   updatedById?: true;
   deletedAt?: true;
@@ -212,9 +202,8 @@ export type LanguageGroupByArgs<
 };
 
 export type LanguageGroupByOutputType = {
-  id: number;
+  id: string;
   name: string;
-  code: string;
   createdById: number | null;
   updatedById: number | null;
   deletedAt: Date | null;
@@ -244,9 +233,8 @@ export type LanguageWhereInput = {
   AND?: Prisma.LanguageWhereInput | Prisma.LanguageWhereInput[];
   OR?: Prisma.LanguageWhereInput[];
   NOT?: Prisma.LanguageWhereInput | Prisma.LanguageWhereInput[];
-  id?: Prisma.IntFilter<'Language'> | number;
+  id?: Prisma.StringFilter<'Language'> | string;
   name?: Prisma.StringFilter<'Language'> | string;
-  code?: Prisma.StringFilter<'Language'> | string;
   createdById?: Prisma.IntNullableFilter<'Language'> | number | null;
   updatedById?: Prisma.IntNullableFilter<'Language'> | number | null;
   deletedAt?: Prisma.DateTimeNullableFilter<'Language'> | Date | string | null;
@@ -269,7 +257,6 @@ export type LanguageWhereInput = {
 export type LanguageOrderByWithRelationInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
-  code?: Prisma.SortOrder;
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder;
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder;
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
@@ -285,8 +272,7 @@ export type LanguageOrderByWithRelationInput = {
 
 export type LanguageWhereUniqueInput = Prisma.AtLeast<
   {
-    id?: number;
-    code?: string;
+    id?: string;
     AND?: Prisma.LanguageWhereInput | Prisma.LanguageWhereInput[];
     OR?: Prisma.LanguageWhereInput[];
     NOT?: Prisma.LanguageWhereInput | Prisma.LanguageWhereInput[];
@@ -313,13 +299,12 @@ export type LanguageWhereUniqueInput = Prisma.AtLeast<
     categoryTranslations?: Prisma.CategoryTranslationListRelationFilter;
     brandTranslations?: Prisma.BrandTranslationListRelationFilter;
   },
-  'id' | 'code'
+  'id'
 >;
 
 export type LanguageOrderByWithAggregationInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
-  code?: Prisma.SortOrder;
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder;
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder;
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
@@ -340,9 +325,8 @@ export type LanguageScalarWhereWithAggregatesInput = {
   NOT?:
     | Prisma.LanguageScalarWhereWithAggregatesInput
     | Prisma.LanguageScalarWhereWithAggregatesInput[];
-  id?: Prisma.IntWithAggregatesFilter<'Language'> | number;
+  id?: Prisma.StringWithAggregatesFilter<'Language'> | string;
   name?: Prisma.StringWithAggregatesFilter<'Language'> | string;
-  code?: Prisma.StringWithAggregatesFilter<'Language'> | string;
   createdById?:
     | Prisma.IntNullableWithAggregatesFilter<'Language'>
     | number
@@ -361,8 +345,8 @@ export type LanguageScalarWhereWithAggregatesInput = {
 };
 
 export type LanguageCreateInput = {
+  id: string;
   name: string;
-  code: string;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -375,9 +359,8 @@ export type LanguageCreateInput = {
 };
 
 export type LanguageUncheckedCreateInput = {
-  id?: number;
+  id: string;
   name: string;
-  code: string;
   createdById?: number | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
@@ -390,8 +373,8 @@ export type LanguageUncheckedCreateInput = {
 };
 
 export type LanguageUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -408,9 +391,8 @@ export type LanguageUpdateInput = {
 };
 
 export type LanguageUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
@@ -427,9 +409,8 @@ export type LanguageUncheckedUpdateInput = {
 };
 
 export type LanguageCreateManyInput = {
-  id?: number;
+  id: string;
   name: string;
-  code: string;
   createdById?: number | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
@@ -438,8 +419,8 @@ export type LanguageCreateManyInput = {
 };
 
 export type LanguageUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -450,9 +431,8 @@ export type LanguageUpdateManyMutationInput = {
 };
 
 export type LanguageUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
@@ -467,7 +447,6 @@ export type LanguageUncheckedUpdateManyInput = {
 export type LanguageCountOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
-  code?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
   deletedAt?: Prisma.SortOrder;
@@ -476,7 +455,6 @@ export type LanguageCountOrderByAggregateInput = {
 };
 
 export type LanguageAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
 };
@@ -484,7 +462,6 @@ export type LanguageAvgOrderByAggregateInput = {
 export type LanguageMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
-  code?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
   deletedAt?: Prisma.SortOrder;
@@ -495,7 +472,6 @@ export type LanguageMaxOrderByAggregateInput = {
 export type LanguageMinOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
-  code?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
   deletedAt?: Prisma.SortOrder;
@@ -504,7 +480,6 @@ export type LanguageMinOrderByAggregateInput = {
 };
 
 export type LanguageSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
 };
@@ -534,14 +509,6 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string;
-};
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number;
-  increment?: number;
-  decrement?: number;
-  multiply?: number;
-  divide?: number;
 };
 
 export type NullableIntFieldUpdateOperationsInput = {
@@ -845,8 +812,8 @@ export type LanguageUpdateOneRequiredWithoutCategoryTranslationsNestedInput = {
 };
 
 export type LanguageCreateWithoutCreatedByInput = {
+  id: string;
   name: string;
-  code: string;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -858,9 +825,8 @@ export type LanguageCreateWithoutCreatedByInput = {
 };
 
 export type LanguageUncheckedCreateWithoutCreatedByInput = {
-  id?: number;
+  id: string;
   name: string;
-  code: string;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
@@ -887,8 +853,8 @@ export type LanguageCreateManyCreatedByInputEnvelope = {
 };
 
 export type LanguageCreateWithoutUpdatedByInput = {
+  id: string;
   name: string;
-  code: string;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -900,9 +866,8 @@ export type LanguageCreateWithoutUpdatedByInput = {
 };
 
 export type LanguageUncheckedCreateWithoutUpdatedByInput = {
-  id?: number;
+  id: string;
   name: string;
-  code: string;
   createdById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
@@ -960,9 +925,8 @@ export type LanguageScalarWhereInput = {
   AND?: Prisma.LanguageScalarWhereInput | Prisma.LanguageScalarWhereInput[];
   OR?: Prisma.LanguageScalarWhereInput[];
   NOT?: Prisma.LanguageScalarWhereInput | Prisma.LanguageScalarWhereInput[];
-  id?: Prisma.IntFilter<'Language'> | number;
+  id?: Prisma.StringFilter<'Language'> | string;
   name?: Prisma.StringFilter<'Language'> | string;
-  code?: Prisma.StringFilter<'Language'> | string;
   createdById?: Prisma.IntNullableFilter<'Language'> | number | null;
   updatedById?: Prisma.IntNullableFilter<'Language'> | number | null;
   deletedAt?: Prisma.DateTimeNullableFilter<'Language'> | Date | string | null;
@@ -999,8 +963,8 @@ export type LanguageUpdateManyWithWhereWithoutUpdatedByInput = {
 };
 
 export type LanguageCreateWithoutUserTranslationsInput = {
+  id: string;
   name: string;
-  code: string;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -1012,9 +976,8 @@ export type LanguageCreateWithoutUserTranslationsInput = {
 };
 
 export type LanguageUncheckedCreateWithoutUserTranslationsInput = {
-  id?: number;
+  id: string;
   name: string;
-  code: string;
   createdById?: number | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
@@ -1054,8 +1017,8 @@ export type LanguageUpdateToOneWithWhereWithoutUserTranslationsInput = {
 };
 
 export type LanguageUpdateWithoutUserTranslationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1071,9 +1034,8 @@ export type LanguageUpdateWithoutUserTranslationsInput = {
 };
 
 export type LanguageUncheckedUpdateWithoutUserTranslationsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
@@ -1089,8 +1051,8 @@ export type LanguageUncheckedUpdateWithoutUserTranslationsInput = {
 };
 
 export type LanguageCreateWithoutBrandTranslationsInput = {
+  id: string;
   name: string;
-  code: string;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -1102,9 +1064,8 @@ export type LanguageCreateWithoutBrandTranslationsInput = {
 };
 
 export type LanguageUncheckedCreateWithoutBrandTranslationsInput = {
-  id?: number;
+  id: string;
   name: string;
-  code: string;
   createdById?: number | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
@@ -1144,8 +1105,8 @@ export type LanguageUpdateToOneWithWhereWithoutBrandTranslationsInput = {
 };
 
 export type LanguageUpdateWithoutBrandTranslationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1161,9 +1122,8 @@ export type LanguageUpdateWithoutBrandTranslationsInput = {
 };
 
 export type LanguageUncheckedUpdateWithoutBrandTranslationsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
@@ -1179,8 +1139,8 @@ export type LanguageUncheckedUpdateWithoutBrandTranslationsInput = {
 };
 
 export type LanguageCreateWithoutProductTranslationsInput = {
+  id: string;
   name: string;
-  code: string;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -1192,9 +1152,8 @@ export type LanguageCreateWithoutProductTranslationsInput = {
 };
 
 export type LanguageUncheckedCreateWithoutProductTranslationsInput = {
-  id?: number;
+  id: string;
   name: string;
-  code: string;
   createdById?: number | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
@@ -1234,8 +1193,8 @@ export type LanguageUpdateToOneWithWhereWithoutProductTranslationsInput = {
 };
 
 export type LanguageUpdateWithoutProductTranslationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1251,9 +1210,8 @@ export type LanguageUpdateWithoutProductTranslationsInput = {
 };
 
 export type LanguageUncheckedUpdateWithoutProductTranslationsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
@@ -1269,8 +1227,8 @@ export type LanguageUncheckedUpdateWithoutProductTranslationsInput = {
 };
 
 export type LanguageCreateWithoutCategoryTranslationsInput = {
+  id: string;
   name: string;
-  code: string;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -1282,9 +1240,8 @@ export type LanguageCreateWithoutCategoryTranslationsInput = {
 };
 
 export type LanguageUncheckedCreateWithoutCategoryTranslationsInput = {
-  id?: number;
+  id: string;
   name: string;
-  code: string;
   createdById?: number | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
@@ -1324,8 +1281,8 @@ export type LanguageUpdateToOneWithWhereWithoutCategoryTranslationsInput = {
 };
 
 export type LanguageUpdateWithoutCategoryTranslationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1341,9 +1298,8 @@ export type LanguageUpdateWithoutCategoryTranslationsInput = {
 };
 
 export type LanguageUncheckedUpdateWithoutCategoryTranslationsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
@@ -1359,9 +1315,8 @@ export type LanguageUncheckedUpdateWithoutCategoryTranslationsInput = {
 };
 
 export type LanguageCreateManyCreatedByInput = {
-  id?: number;
+  id: string;
   name: string;
-  code: string;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
@@ -1369,9 +1324,8 @@ export type LanguageCreateManyCreatedByInput = {
 };
 
 export type LanguageCreateManyUpdatedByInput = {
-  id?: number;
+  id: string;
   name: string;
-  code: string;
   createdById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
@@ -1379,8 +1333,8 @@ export type LanguageCreateManyUpdatedByInput = {
 };
 
 export type LanguageUpdateWithoutCreatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1396,9 +1350,8 @@ export type LanguageUpdateWithoutCreatedByInput = {
 };
 
 export type LanguageUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
@@ -1414,9 +1367,8 @@ export type LanguageUncheckedUpdateWithoutCreatedByInput = {
 };
 
 export type LanguageUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
@@ -1428,8 +1380,8 @@ export type LanguageUncheckedUpdateManyWithoutCreatedByInput = {
 };
 
 export type LanguageUpdateWithoutUpdatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1445,9 +1397,8 @@ export type LanguageUpdateWithoutUpdatedByInput = {
 };
 
 export type LanguageUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
@@ -1463,9 +1414,8 @@ export type LanguageUncheckedUpdateWithoutUpdatedByInput = {
 };
 
 export type LanguageUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  code?: Prisma.StringFieldUpdateOperationsInput | string;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
@@ -1563,7 +1513,6 @@ export type LanguageSelect<
   {
     id?: boolean;
     name?: boolean;
-    code?: boolean;
     createdById?: boolean;
     updatedById?: boolean;
     deletedAt?: boolean;
@@ -1593,7 +1542,6 @@ export type LanguageSelectCreateManyAndReturn<
   {
     id?: boolean;
     name?: boolean;
-    code?: boolean;
     createdById?: boolean;
     updatedById?: boolean;
     deletedAt?: boolean;
@@ -1612,7 +1560,6 @@ export type LanguageSelectUpdateManyAndReturn<
   {
     id?: boolean;
     name?: boolean;
-    code?: boolean;
     createdById?: boolean;
     updatedById?: boolean;
     deletedAt?: boolean;
@@ -1627,7 +1574,6 @@ export type LanguageSelectUpdateManyAndReturn<
 export type LanguageSelectScalar = {
   id?: boolean;
   name?: boolean;
-  code?: boolean;
   createdById?: boolean;
   updatedById?: boolean;
   deletedAt?: boolean;
@@ -1641,7 +1587,6 @@ export type LanguageOmit<
 > = runtime.Types.Extensions.GetOmit<
   | 'id'
   | 'name'
-  | 'code'
   | 'createdById'
   | 'updatedById'
   | 'deletedAt'
@@ -1695,9 +1640,8 @@ export type $LanguagePayload<
   };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
-      id: number;
+      id: string;
       name: string;
-      code: string;
       createdById: number | null;
       updatedById: number | null;
       deletedAt: Date | null;
@@ -2373,9 +2317,8 @@ export interface Prisma__LanguageClient<
  * Fields of the Language model
  */
 export interface LanguageFieldRefs {
-  readonly id: Prisma.FieldRef<'Language', 'Int'>;
+  readonly id: Prisma.FieldRef<'Language', 'String'>;
   readonly name: Prisma.FieldRef<'Language', 'String'>;
-  readonly code: Prisma.FieldRef<'Language', 'String'>;
   readonly createdById: Prisma.FieldRef<'Language', 'Int'>;
   readonly updatedById: Prisma.FieldRef<'Language', 'Int'>;
   readonly deletedAt: Prisma.FieldRef<'Language', 'DateTime'>;

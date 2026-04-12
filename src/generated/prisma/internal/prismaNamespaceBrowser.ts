@@ -101,7 +101,6 @@ export type TransactionIsolationLevel =
 export const LanguageScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  code: 'code',
   createdById: 'createdById',
   updatedById: 'updatedById',
   deletedAt: 'deletedAt',
