@@ -33,6 +33,8 @@ import {
   FailedToSentOTPException,
   IncorrectPasswordException,
   InvalidOTPException,
+  InvalidTOTPAndCodeException,
+  InvalidTOTPException,
   RefreshTokenRevokedException,
   TOTPAlreadyEnabledException,
 } from './error.model';
@@ -50,11 +52,15 @@ export class AuthService {
     private readonly twoFactorService: TwoFactorService,
   ) {}
 
-  async verifyOTP(
-    email: string,
-    code: string,
-    type: keyof typeof TypeOfVerificationCode,
-  ) {
+  async verifyOTP({
+    email,
+    code,
+    type,
+  }: {
+    email: string;
+    code: string;
+    type: keyof typeof TypeOfVerificationCode;
+  }) {
     const verificationCode =
       await this.authRepository.findUniqueVerificationCode({
         email_code_type: {
@@ -76,11 +82,11 @@ export class AuthService {
       const hashedPassword = await this.hashingService.hash(body.password);
       const clientRoleId = await this.roleService.getClientRoleId();
 
-      await this.verifyOTP(
-        body.email,
-        body.code,
-        TypeOfVerificationCode.REGISTER,
-      );
+      await this.verifyOTP({
+        email: body.email,
+        code: body.code,
+        type: TypeOfVerificationCode.REGISTER,
+      });
 
       const [user] = await Promise.all([
         this.authRepository.createUser({
@@ -138,6 +144,7 @@ export class AuthService {
 
   async login(body: LoginBodyType & { userAgent: string; ip: string }) {
     try {
+      // 1. Find user
       const user = await this.authRepository.findUniqueUserWithRole({
         email: body.email,
       });
@@ -151,6 +158,33 @@ export class AuthService {
 
       if (!isPasswordMatch) throw IncorrectPasswordException;
 
+      // 2. Check TOTP code
+      if (user.totpSecret) {
+        // No code provided
+        if (!body.totpCode && !body.code) {
+          throw InvalidTOTPAndCodeException;
+        }
+
+        // Verify
+        if (body.totpCode) {
+          const isValid = this.twoFactorService.verifyTOTP({
+            email: user.email,
+            secret: user.totpSecret,
+            token: body.totpCode,
+          });
+          if (!isValid) {
+            throw InvalidTOTPException;
+          }
+        } else if (body.code) {
+          await this.verifyOTP({
+            email: user.email,
+            code: body.code,
+            type: TypeOfVerificationCode.LOGIN,
+          });
+        }
+      }
+
+      // 3. Create device
       const device = await this.authRepository.createDevice({
         userId: user.id,
         ip: body.ip,
@@ -159,6 +193,7 @@ export class AuthService {
         lastActive: new Date(),
       });
 
+      // 4. Generate tokens
       const tokens = await this.generateTokens({
         userId: user.id,
         deviceId: device.id,
@@ -303,7 +338,11 @@ export class AuthService {
     if (!user) throw EmailNotFoundException;
 
     // Verify verification code
-    await this.verifyOTP(email, code, TypeOfVerificationCode.FORGOT_PASSWORD);
+    await this.verifyOTP({
+      email,
+      code,
+      type: TypeOfVerificationCode.FORGOT_PASSWORD,
+    });
 
     // Hash new password
     const hashedPassword = await this.hashingService.hash(newPassword);

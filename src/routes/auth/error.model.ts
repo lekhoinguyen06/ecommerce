@@ -71,6 +71,7 @@ export const GoogleUserInfoError = new UnauthorizedException([
   },
 ]);
 
+// 2FA
 export const TOTPAlreadyEnabledException = new UnprocessableEntityException([
   {
     message: 'Error.TOTPAlreadyEnabled',
@@ -81,6 +82,13 @@ export const TOTPAlreadyEnabledException = new UnprocessableEntityException([
 export const TOTPNotEnabledException = new UnprocessableEntityException([
   {
     message: 'Error.TOTPNotEnabled',
+    path: 'totpCode',
+  },
+]);
+
+export const InvalidTOTPException = new UnprocessableEntityException([
+  {
+    message: 'Error.InvalidTOTP',
     path: 'totpCode',
   },
 ]);
