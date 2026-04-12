@@ -21,6 +21,7 @@ import {
   RegisterBodyDTO,
   RegisterResDTO,
   SendOTPBodyDTO,
+  TwoFASetupResDTO,
 } from './auth.dto';
 import { ZodSerializerDto } from 'nestjs-zod';
 import { UserAgent } from 'src/shared/decorators/user-agent.decorator';
@@ -127,9 +128,8 @@ export class AuthController {
   // 1. Security: POST require body which means a form or JS is needed to submit the request, reducing the risk of CSRF attacks.
   // 2. Semantic: POST is used for actions that create or modify resources, which aligns with the action of setting up 2FA.
   @Post('2fa/setup')
-  @IsPublic()
-  @ZodSerializerDto(MessageResDTO)
-  setup2FA(@Body() _: EmptyBodyDTO, @ActiveUser() userId: number) {
+  @ZodSerializerDto(TwoFASetupResDTO)
+  setup2FA(@Body() _: EmptyBodyDTO, @ActiveUser('userId') userId: number) {
     return this.authService.setup2FA(userId);
   }
 }

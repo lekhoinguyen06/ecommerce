@@ -3,13 +3,14 @@ import * as OTPAuth from 'otpauth';
 
 @Injectable()
 export class TwoFactorService {
-  private createTOTP(email: string) {
+  private createTOTP(email: string, secret?: string) {
     return new OTPAuth.TOTP({
       issuer: 'ACME',
       label: email,
       algorithm: 'SHA1',
       digits: 6,
       period: 30,
+      secret: secret || new OTPAuth.Secret(),
     });
   }
 
@@ -21,8 +22,16 @@ export class TwoFactorService {
     };
   }
 
-  verifyTOTP({ email, token }: { email: string; token: string }): boolean {
-    const totp = this.createTOTP(email);
+  verifyTOTP({
+    email,
+    secret,
+    token,
+  }: {
+    email: string;
+    secret: string;
+    token: string;
+  }): boolean {
+    const totp = this.createTOTP(email, secret);
     const delta = totp.validate({ token, window: 1 });
     return delta !== null;
   }
