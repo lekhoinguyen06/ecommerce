@@ -35,4 +35,4 @@ export class GetAuthURLResDTO extends createZodDto(GetAuthURLResSchema) {}
 
 export class TwoFASetupResDTO extends createZodDto(TwoFASetupResSchema) {}
 
-export class Disable2FADTO extends createZodDto(Disable2FABodySchema) {}
+export class Disable2FABodyDTO extends createZodDto(Disable2FABodySchema) {}

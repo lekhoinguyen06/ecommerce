@@ -10,6 +10,7 @@ import {
   isUniqueConstraintPrisma2002Error,
 } from 'src/types/helper';
 import {
+  Disable2FABodyType,
   ForgotPasswordBodyType,
   LoginBodyType,
   LogoutBodyType,
@@ -37,6 +38,7 @@ import {
   InvalidTOTPException,
   RefreshTokenRevokedException,
   TOTPAlreadyEnabledException,
+  TOTPNotEnabledException,
 } from './error.model';
 import { TwoFactorService } from 'src/shared/services/2fa.service';
 
@@ -387,5 +389,40 @@ export class AuthService {
     );
 
     return { secret, uri };
+  }
+
+  async disable2FA(data: Disable2FABodyType & { userId: number }) {
+    const { totpCode, code, userId } = data;
+    // 1. Get user
+    const user = await this.sharedUserRepository.findUnique({ id: userId });
+
+    if (!user) throw EmailNotFoundException;
+
+    if (!user.totpSecret) throw TOTPNotEnabledException;
+
+    // 2. Check TOTP code
+    if (totpCode) {
+      const isValid = this.twoFactorService.verifyTOTP({
+        email: user.email,
+        secret: user.totpSecret,
+        token: totpCode,
+      });
+      if (!isValid) {
+        throw InvalidTOTPException;
+      }
+    } else if (code) {
+      await this.verifyOTP({
+        email: user.email,
+        code,
+        type: TypeOfVerificationCode.DISABLE_2FA,
+      });
+    } else {
+      throw new UnauthorizedException();
+    }
+
+    // 3. Disable 2FA
+    await this.authRepository.updateUser({ id: userId }, { totpSecret: null });
+
+    return { message: '2FA disabled successfully' };
   }
 }
