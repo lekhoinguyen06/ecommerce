@@ -50,7 +50,7 @@ export const CreatePermissionBodySchema = PermissionSchema.pick({
 export const UpdatePermissionBodySchema = CreatePermissionBodySchema;
 
 // Types
-export type Permission = z.infer<typeof PermissionSchema>;
+export type PermissionType = z.infer<typeof PermissionSchema>;
 export type GetPermissionsBodyType = z.infer<typeof GetPermissionsBodySchema>;
 export type GetPermissionsParamType = z.infer<typeof GetPermissionsParamSchema>;
 export type GetPermissionResType = z.infer<typeof GetPermissionResSchema>;
