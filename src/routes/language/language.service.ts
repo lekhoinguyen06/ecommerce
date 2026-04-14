@@ -10,11 +10,9 @@ import {
   isRequiredRecordNotFoundPrisma2025Error,
   isUniqueConstraintPrisma2002Error,
 } from 'src/types/helper';
-import {
-  LanguageAlreadyExistsError,
-  LanguageNotFoundError,
-} from './language.error';
+import { LanguageAlreadyExistsError } from './language.error';
 import { MessageResType } from 'src/shared/models/response.model';
+import { NotFoundRecord } from 'src/shared/error';
 
 @Injectable()
 export class LanguageService {
@@ -39,7 +37,7 @@ export class LanguageService {
   async findAll(): Promise<GetLanguagesResType | null> {
     const languages = await this.languageRepository.findAll();
     if (!languages) {
-      throw LanguageNotFoundError;
+      throw NotFoundRecord;
     }
     return {
       data: languages,
@@ -50,7 +48,7 @@ export class LanguageService {
   async findOne(id: string): Promise<GetLanguageDetailResType | null> {
     const language = await this.languageRepository.findOne(id);
     if (!language) {
-      throw LanguageNotFoundError;
+      throw NotFoundRecord;
     }
     return language;
   }
@@ -66,7 +64,7 @@ export class LanguageService {
       });
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
-        throw LanguageNotFoundError;
+        throw NotFoundRecord;
       }
       throw error;
     }
@@ -80,7 +78,7 @@ export class LanguageService {
       });
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
-        throw LanguageNotFoundError;
+        throw NotFoundRecord;
       }
       throw error;
     }
@@ -98,7 +96,7 @@ export class LanguageService {
       };
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
-        throw LanguageNotFoundError;
+        throw NotFoundRecord;
       }
       throw error;
     }
@@ -112,7 +110,7 @@ export class LanguageService {
       };
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
-        throw LanguageNotFoundError;
+        throw NotFoundRecord;
       }
       throw error;
     }
