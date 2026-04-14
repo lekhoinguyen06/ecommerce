@@ -31,6 +31,12 @@ export class LanguageController {
     return this.languageService.create(createLanguageDto, userId);
   }
 
+  @Post(':id/restore')
+  @ZodSerializerDto(GetLanguageDetailResDTO)
+  restore(@Param('id') id: string, @ActiveUser('userId') userId: number) {
+    return this.languageService.restore(id, userId);
+  }
+
   @Get()
   @ZodSerializerDto(GetLanguagesResDTO)
   findAll() {
@@ -54,7 +60,7 @@ export class LanguageController {
 
   @Delete(':id')
   @ZodSerializerDto(MessageResDTO)
-  remove(@Param('id') id: string) {
-    return this.languageService.remove(id);
+  delete(@Param('id') id: string, @ActiveUser('userId') userId: number) {
+    return this.languageService.delete(id, userId);
   }
 }

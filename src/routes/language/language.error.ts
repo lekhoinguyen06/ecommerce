@@ -6,3 +6,10 @@ export const LanguageAlreadyExistsError = new UnprocessableEntityException([
     path: 'id',
   },
 ]);
+
+export const LanguageNotFoundError = new UnprocessableEntityException([
+  {
+    message: 'Error.LanguageNotFound',
+    path: 'id',
+  },
+]);

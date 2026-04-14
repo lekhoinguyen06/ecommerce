@@ -60,6 +60,24 @@ export class LanguageRepository {
     });
   }
 
+  restore({
+    id,
+    userId,
+  }: {
+    id: string;
+    userId: number;
+  }): Promise<LanguageType> {
+    return this.prismaService.language.update({
+      where: {
+        id,
+      },
+      data: {
+        deletedAt: null,
+        updatedById: userId,
+      },
+    });
+  }
+
   delete({
     id,
     userId,
