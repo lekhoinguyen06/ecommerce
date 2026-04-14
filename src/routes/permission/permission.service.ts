@@ -5,7 +5,6 @@ import { NotFoundRecord } from 'src/shared/error';
 import {
   CreatePermissionBodyType,
   GetPermissionsBodyType,
-  GetPermissionsParamType,
   PermissionType,
   UpdatePermissionBodyType,
 } from './permission.model';
@@ -26,9 +25,7 @@ export class PermissionService {
     return data;
   }
 
-  async paginate(
-    query: GetPermissionsBodyType & GetPermissionsParamType,
-  ): Promise<GetPermissionResDTO> {
+  async paginate(query: GetPermissionsBodyType): Promise<GetPermissionResDTO> {
     const data = await this.permissionRepository.paginate(
       query.page,
       query.limit,
