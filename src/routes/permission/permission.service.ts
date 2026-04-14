@@ -1,4 +1,108 @@
 import { Injectable } from '@nestjs/common';
+import { GetPermissionResDTO } from './permission.dto';
+import { PermissionRepository } from './permission.repo';
+import { NotFoundRecord } from 'src/shared/error';
+import {
+  CreatePermissionBodyType,
+  GetPermissionsBodyType,
+  GetPermissionsParamType,
+  PermissionType,
+  UpdatePermissionBodyType,
+} from './permission.model';
+import {
+  isRequiredRecordNotFoundPrisma2025Error,
+  isUniqueConstraintPrisma2002Error,
+} from 'src/types/helper';
 
 @Injectable()
-export class PermissionService {}
+export class PermissionService {
+  constructor(private readonly permissionRepository: PermissionRepository) {}
+
+  async findOne(id: number): Promise<PermissionType> {
+    const data = await this.permissionRepository.findOne(id);
+
+    if (!data) throw NotFoundRecord;
+
+    return data;
+  }
+
+  async paginate(
+    query: GetPermissionsBodyType & GetPermissionsParamType,
+  ): Promise<GetPermissionResDTO> {
+    const data = await this.permissionRepository.paginate(
+      query.page,
+      query.limit,
+    );
+
+    if (!data.length) throw NotFoundRecord;
+
+    return {
+      data,
+      limit: query.limit,
+      totalItems: data.length,
+      totalPages: Math.ceil(data.length / query.limit),
+      currentPage: query.page,
+    };
+  }
+
+  async create({
+    data,
+    createdById,
+  }: {
+    data: CreatePermissionBodyType;
+    createdById: number;
+  }) {
+    try {
+      return await this.permissionRepository.create(data, createdById);
+    } catch (error) {
+      if (isUniqueConstraintPrisma2002Error(error)) {
+        throw new Error('Permission with the same name already exists');
+      }
+      throw error;
+    }
+  }
+
+  async update({
+    id,
+    data,
+    updatedById,
+  }: {
+    id: number;
+    data: UpdatePermissionBodyType;
+    updatedById: number;
+  }) {
+    try {
+      return await this.permissionRepository.update(id, data, updatedById);
+    } catch (error) {
+      if (isUniqueConstraintPrisma2002Error(error)) {
+        throw new Error('Permission with the same name already exists');
+      }
+      if (isRequiredRecordNotFoundPrisma2025Error(error)) {
+        throw NotFoundRecord;
+      }
+      throw error;
+    }
+  }
+
+  async delete({ id, deletedById }: { id: number; deletedById: number }) {
+    try {
+      return await this.permissionRepository.delete({ id, deletedById });
+    } catch (error) {
+      if (isRequiredRecordNotFoundPrisma2025Error(error)) {
+        throw NotFoundRecord;
+      }
+      throw error;
+    }
+  }
+
+  async restore({ id, restoredById }: { id: number; restoredById: number }) {
+    try {
+      return await this.permissionRepository.restore({ id, restoredById });
+    } catch (error) {
+      if (isRequiredRecordNotFoundPrisma2025Error(error)) {
+        throw NotFoundRecord;
+      }
+      throw error;
+    }
+  }
+}

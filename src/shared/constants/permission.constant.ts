@@ -4,6 +4,8 @@ export const HTTPMethod = {
   PUT: 'PUT',
   PATCH: 'PATCH',
   DELETE: 'DELETE',
+  OPTIONS: 'OPTIONS',
+  HEAD: 'HEAD',
 } as const;
 
 export type HTTPMethodType = (typeof HTTPMethod)[keyof typeof HTTPMethod];

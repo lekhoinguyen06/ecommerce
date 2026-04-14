@@ -30,12 +30,14 @@ export type PermissionAvgAggregateOutputType = {
   id: number | null;
   createdById: number | null;
   updatedById: number | null;
+  deletedById: number | null;
 };
 
 export type PermissionSumAggregateOutputType = {
   id: number | null;
   createdById: number | null;
   updatedById: number | null;
+  deletedById: number | null;
 };
 
 export type PermissionMinAggregateOutputType = {
@@ -46,6 +48,7 @@ export type PermissionMinAggregateOutputType = {
   method: $Enums.HTTPMethod | null;
   createdById: number | null;
   updatedById: number | null;
+  deletedById: number | null;
   deletedAt: Date | null;
   createdAt: Date | null;
   updatedAt: Date | null;
@@ -59,6 +62,7 @@ export type PermissionMaxAggregateOutputType = {
   method: $Enums.HTTPMethod | null;
   createdById: number | null;
   updatedById: number | null;
+  deletedById: number | null;
   deletedAt: Date | null;
   createdAt: Date | null;
   updatedAt: Date | null;
@@ -72,6 +76,7 @@ export type PermissionCountAggregateOutputType = {
   method: number;
   createdById: number;
   updatedById: number;
+  deletedById: number;
   deletedAt: number;
   createdAt: number;
   updatedAt: number;
@@ -82,12 +87,14 @@ export type PermissionAvgAggregateInputType = {
   id?: true;
   createdById?: true;
   updatedById?: true;
+  deletedById?: true;
 };
 
 export type PermissionSumAggregateInputType = {
   id?: true;
   createdById?: true;
   updatedById?: true;
+  deletedById?: true;
 };
 
 export type PermissionMinAggregateInputType = {
@@ -98,6 +105,7 @@ export type PermissionMinAggregateInputType = {
   method?: true;
   createdById?: true;
   updatedById?: true;
+  deletedById?: true;
   deletedAt?: true;
   createdAt?: true;
   updatedAt?: true;
@@ -111,6 +119,7 @@ export type PermissionMaxAggregateInputType = {
   method?: true;
   createdById?: true;
   updatedById?: true;
+  deletedById?: true;
   deletedAt?: true;
   createdAt?: true;
   updatedAt?: true;
@@ -124,6 +133,7 @@ export type PermissionCountAggregateInputType = {
   method?: true;
   createdById?: true;
   updatedById?: true;
+  deletedById?: true;
   deletedAt?: true;
   createdAt?: true;
   updatedAt?: true;
@@ -231,6 +241,7 @@ export type PermissionGroupByOutputType = {
   method: $Enums.HTTPMethod;
   createdById: number | null;
   updatedById: number | null;
+  deletedById: number | null;
   deletedAt: Date | null;
   createdAt: Date;
   updatedAt: Date;
@@ -265,6 +276,7 @@ export type PermissionWhereInput = {
   method?: Prisma.EnumHTTPMethodFilter<'Permission'> | $Enums.HTTPMethod;
   createdById?: Prisma.IntNullableFilter<'Permission'> | number | null;
   updatedById?: Prisma.IntNullableFilter<'Permission'> | number | null;
+  deletedById?: Prisma.IntNullableFilter<'Permission'> | number | null;
   deletedAt?:
     | Prisma.DateTimeNullableFilter<'Permission'>
     | Date
@@ -280,6 +292,10 @@ export type PermissionWhereInput = {
     Prisma.UserNullableScalarRelationFilter,
     Prisma.UserWhereInput
   > | null;
+  deletedBy?: Prisma.XOR<
+    Prisma.UserNullableScalarRelationFilter,
+    Prisma.UserWhereInput
+  > | null;
   roles?: Prisma.PermissionsRolesListRelationFilter;
 };
 
@@ -291,11 +307,13 @@ export type PermissionOrderByWithRelationInput = {
   method?: Prisma.SortOrder;
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder;
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder;
+  deletedById?: Prisma.SortOrderInput | Prisma.SortOrder;
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
   createdBy?: Prisma.UserOrderByWithRelationInput;
   updatedBy?: Prisma.UserOrderByWithRelationInput;
+  deletedBy?: Prisma.UserOrderByWithRelationInput;
   roles?: Prisma.PermissionsRolesOrderByRelationAggregateInput;
 };
 
@@ -311,6 +329,7 @@ export type PermissionWhereUniqueInput = Prisma.AtLeast<
     method?: Prisma.EnumHTTPMethodFilter<'Permission'> | $Enums.HTTPMethod;
     createdById?: Prisma.IntNullableFilter<'Permission'> | number | null;
     updatedById?: Prisma.IntNullableFilter<'Permission'> | number | null;
+    deletedById?: Prisma.IntNullableFilter<'Permission'> | number | null;
     deletedAt?:
       | Prisma.DateTimeNullableFilter<'Permission'>
       | Date
@@ -323,6 +342,10 @@ export type PermissionWhereUniqueInput = Prisma.AtLeast<
       Prisma.UserWhereInput
     > | null;
     updatedBy?: Prisma.XOR<
+      Prisma.UserNullableScalarRelationFilter,
+      Prisma.UserWhereInput
+    > | null;
+    deletedBy?: Prisma.XOR<
       Prisma.UserNullableScalarRelationFilter,
       Prisma.UserWhereInput
     > | null;
@@ -339,6 +362,7 @@ export type PermissionOrderByWithAggregationInput = {
   method?: Prisma.SortOrder;
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder;
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder;
+  deletedById?: Prisma.SortOrderInput | Prisma.SortOrder;
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
@@ -372,6 +396,10 @@ export type PermissionScalarWhereWithAggregatesInput = {
     | Prisma.IntNullableWithAggregatesFilter<'Permission'>
     | number
     | null;
+  deletedById?:
+    | Prisma.IntNullableWithAggregatesFilter<'Permission'>
+    | number
+    | null;
   deletedAt?:
     | Prisma.DateTimeNullableWithAggregatesFilter<'Permission'>
     | Date
@@ -391,6 +419,7 @@ export type PermissionCreateInput = {
   updatedAt?: Date | string;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPermissionsInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedPermissionsInput;
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedPermissionsInput;
   roles?: Prisma.PermissionsRolesCreateNestedManyWithoutPermissionInput;
 };
 
@@ -402,6 +431,7 @@ export type PermissionUncheckedCreateInput = {
   method: $Enums.HTTPMethod;
   createdById?: number | null;
   updatedById?: number | null;
+  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -422,6 +452,7 @@ export type PermissionUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedPermissionsNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedPermissionsNestedInput;
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedPermissionsNestedInput;
   roles?: Prisma.PermissionsRolesUpdateManyWithoutPermissionNestedInput;
 };
 
@@ -433,6 +464,7 @@ export type PermissionUncheckedUpdateInput = {
   method?: Prisma.EnumHTTPMethodFieldUpdateOperationsInput | $Enums.HTTPMethod;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -451,6 +483,7 @@ export type PermissionCreateManyInput = {
   method: $Enums.HTTPMethod;
   createdById?: number | null;
   updatedById?: number | null;
+  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -478,6 +511,7 @@ export type PermissionUncheckedUpdateManyInput = {
   method?: Prisma.EnumHTTPMethodFieldUpdateOperationsInput | $Enums.HTTPMethod;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -505,6 +539,7 @@ export type PermissionCountOrderByAggregateInput = {
   method?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
+  deletedById?: Prisma.SortOrder;
   deletedAt?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
@@ -514,6 +549,7 @@ export type PermissionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
+  deletedById?: Prisma.SortOrder;
 };
 
 export type PermissionMaxOrderByAggregateInput = {
@@ -524,6 +560,7 @@ export type PermissionMaxOrderByAggregateInput = {
   method?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
+  deletedById?: Prisma.SortOrder;
   deletedAt?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
@@ -537,6 +574,7 @@ export type PermissionMinOrderByAggregateInput = {
   method?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
+  deletedById?: Prisma.SortOrder;
   deletedAt?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
@@ -546,6 +584,7 @@ export type PermissionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
+  deletedById?: Prisma.SortOrder;
 };
 
 export type PermissionScalarRelationFilter = {
@@ -587,6 +626,23 @@ export type PermissionCreateNestedManyWithoutUpdatedByInput = {
     | Prisma.PermissionWhereUniqueInput[];
 };
 
+export type PermissionCreateNestedManyWithoutDeletedByInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.PermissionCreateWithoutDeletedByInput,
+        Prisma.PermissionUncheckedCreateWithoutDeletedByInput
+      >
+    | Prisma.PermissionCreateWithoutDeletedByInput[]
+    | Prisma.PermissionUncheckedCreateWithoutDeletedByInput[];
+  connectOrCreate?:
+    | Prisma.PermissionCreateOrConnectWithoutDeletedByInput
+    | Prisma.PermissionCreateOrConnectWithoutDeletedByInput[];
+  createMany?: Prisma.PermissionCreateManyDeletedByInputEnvelope;
+  connect?:
+    | Prisma.PermissionWhereUniqueInput
+    | Prisma.PermissionWhereUniqueInput[];
+};
+
 export type PermissionUncheckedCreateNestedManyWithoutCreatedByInput = {
   create?:
     | Prisma.XOR<
@@ -616,6 +672,23 @@ export type PermissionUncheckedCreateNestedManyWithoutUpdatedByInput = {
     | Prisma.PermissionCreateOrConnectWithoutUpdatedByInput
     | Prisma.PermissionCreateOrConnectWithoutUpdatedByInput[];
   createMany?: Prisma.PermissionCreateManyUpdatedByInputEnvelope;
+  connect?:
+    | Prisma.PermissionWhereUniqueInput
+    | Prisma.PermissionWhereUniqueInput[];
+};
+
+export type PermissionUncheckedCreateNestedManyWithoutDeletedByInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.PermissionCreateWithoutDeletedByInput,
+        Prisma.PermissionUncheckedCreateWithoutDeletedByInput
+      >
+    | Prisma.PermissionCreateWithoutDeletedByInput[]
+    | Prisma.PermissionUncheckedCreateWithoutDeletedByInput[];
+  connectOrCreate?:
+    | Prisma.PermissionCreateOrConnectWithoutDeletedByInput
+    | Prisma.PermissionCreateOrConnectWithoutDeletedByInput[];
+  createMany?: Prisma.PermissionCreateManyDeletedByInputEnvelope;
   connect?:
     | Prisma.PermissionWhereUniqueInput
     | Prisma.PermissionWhereUniqueInput[];
@@ -693,6 +766,42 @@ export type PermissionUpdateManyWithoutUpdatedByNestedInput = {
     | Prisma.PermissionScalarWhereInput[];
 };
 
+export type PermissionUpdateManyWithoutDeletedByNestedInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.PermissionCreateWithoutDeletedByInput,
+        Prisma.PermissionUncheckedCreateWithoutDeletedByInput
+      >
+    | Prisma.PermissionCreateWithoutDeletedByInput[]
+    | Prisma.PermissionUncheckedCreateWithoutDeletedByInput[];
+  connectOrCreate?:
+    | Prisma.PermissionCreateOrConnectWithoutDeletedByInput
+    | Prisma.PermissionCreateOrConnectWithoutDeletedByInput[];
+  upsert?:
+    | Prisma.PermissionUpsertWithWhereUniqueWithoutDeletedByInput
+    | Prisma.PermissionUpsertWithWhereUniqueWithoutDeletedByInput[];
+  createMany?: Prisma.PermissionCreateManyDeletedByInputEnvelope;
+  set?: Prisma.PermissionWhereUniqueInput | Prisma.PermissionWhereUniqueInput[];
+  disconnect?:
+    | Prisma.PermissionWhereUniqueInput
+    | Prisma.PermissionWhereUniqueInput[];
+  delete?:
+    | Prisma.PermissionWhereUniqueInput
+    | Prisma.PermissionWhereUniqueInput[];
+  connect?:
+    | Prisma.PermissionWhereUniqueInput
+    | Prisma.PermissionWhereUniqueInput[];
+  update?:
+    | Prisma.PermissionUpdateWithWhereUniqueWithoutDeletedByInput
+    | Prisma.PermissionUpdateWithWhereUniqueWithoutDeletedByInput[];
+  updateMany?:
+    | Prisma.PermissionUpdateManyWithWhereWithoutDeletedByInput
+    | Prisma.PermissionUpdateManyWithWhereWithoutDeletedByInput[];
+  deleteMany?:
+    | Prisma.PermissionScalarWhereInput
+    | Prisma.PermissionScalarWhereInput[];
+};
+
 export type PermissionUncheckedUpdateManyWithoutCreatedByNestedInput = {
   create?:
     | Prisma.XOR<
@@ -765,6 +874,42 @@ export type PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput = {
     | Prisma.PermissionScalarWhereInput[];
 };
 
+export type PermissionUncheckedUpdateManyWithoutDeletedByNestedInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.PermissionCreateWithoutDeletedByInput,
+        Prisma.PermissionUncheckedCreateWithoutDeletedByInput
+      >
+    | Prisma.PermissionCreateWithoutDeletedByInput[]
+    | Prisma.PermissionUncheckedCreateWithoutDeletedByInput[];
+  connectOrCreate?:
+    | Prisma.PermissionCreateOrConnectWithoutDeletedByInput
+    | Prisma.PermissionCreateOrConnectWithoutDeletedByInput[];
+  upsert?:
+    | Prisma.PermissionUpsertWithWhereUniqueWithoutDeletedByInput
+    | Prisma.PermissionUpsertWithWhereUniqueWithoutDeletedByInput[];
+  createMany?: Prisma.PermissionCreateManyDeletedByInputEnvelope;
+  set?: Prisma.PermissionWhereUniqueInput | Prisma.PermissionWhereUniqueInput[];
+  disconnect?:
+    | Prisma.PermissionWhereUniqueInput
+    | Prisma.PermissionWhereUniqueInput[];
+  delete?:
+    | Prisma.PermissionWhereUniqueInput
+    | Prisma.PermissionWhereUniqueInput[];
+  connect?:
+    | Prisma.PermissionWhereUniqueInput
+    | Prisma.PermissionWhereUniqueInput[];
+  update?:
+    | Prisma.PermissionUpdateWithWhereUniqueWithoutDeletedByInput
+    | Prisma.PermissionUpdateWithWhereUniqueWithoutDeletedByInput[];
+  updateMany?:
+    | Prisma.PermissionUpdateManyWithWhereWithoutDeletedByInput
+    | Prisma.PermissionUpdateManyWithWhereWithoutDeletedByInput[];
+  deleteMany?:
+    | Prisma.PermissionScalarWhereInput
+    | Prisma.PermissionScalarWhereInput[];
+};
+
 export type EnumHTTPMethodFieldUpdateOperationsInput = {
   set?: $Enums.HTTPMethod;
 };
@@ -804,6 +949,7 @@ export type PermissionCreateWithoutCreatedByInput = {
   createdAt?: Date | string;
   updatedAt?: Date | string;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedPermissionsInput;
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedPermissionsInput;
   roles?: Prisma.PermissionsRolesCreateNestedManyWithoutPermissionInput;
 };
 
@@ -814,6 +960,7 @@ export type PermissionUncheckedCreateWithoutCreatedByInput = {
   path: string;
   method: $Enums.HTTPMethod;
   updatedById?: number | null;
+  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -844,6 +991,7 @@ export type PermissionCreateWithoutUpdatedByInput = {
   createdAt?: Date | string;
   updatedAt?: Date | string;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPermissionsInput;
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedPermissionsInput;
   roles?: Prisma.PermissionsRolesCreateNestedManyWithoutPermissionInput;
 };
 
@@ -854,6 +1002,7 @@ export type PermissionUncheckedCreateWithoutUpdatedByInput = {
   path: string;
   method: $Enums.HTTPMethod;
   createdById?: number | null;
+  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -872,6 +1021,48 @@ export type PermissionCreateManyUpdatedByInputEnvelope = {
   data:
     | Prisma.PermissionCreateManyUpdatedByInput
     | Prisma.PermissionCreateManyUpdatedByInput[];
+  skipDuplicates?: boolean;
+};
+
+export type PermissionCreateWithoutDeletedByInput = {
+  name: string;
+  description: string;
+  path: string;
+  method: $Enums.HTTPMethod;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPermissionsInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedPermissionsInput;
+  roles?: Prisma.PermissionsRolesCreateNestedManyWithoutPermissionInput;
+};
+
+export type PermissionUncheckedCreateWithoutDeletedByInput = {
+  id?: number;
+  name: string;
+  description: string;
+  path: string;
+  method: $Enums.HTTPMethod;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  roles?: Prisma.PermissionsRolesUncheckedCreateNestedManyWithoutPermissionInput;
+};
+
+export type PermissionCreateOrConnectWithoutDeletedByInput = {
+  where: Prisma.PermissionWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.PermissionCreateWithoutDeletedByInput,
+    Prisma.PermissionUncheckedCreateWithoutDeletedByInput
+  >;
+};
+
+export type PermissionCreateManyDeletedByInputEnvelope = {
+  data:
+    | Prisma.PermissionCreateManyDeletedByInput
+    | Prisma.PermissionCreateManyDeletedByInput[];
   skipDuplicates?: boolean;
 };
 
@@ -914,6 +1105,7 @@ export type PermissionScalarWhereInput = {
   method?: Prisma.EnumHTTPMethodFilter<'Permission'> | $Enums.HTTPMethod;
   createdById?: Prisma.IntNullableFilter<'Permission'> | number | null;
   updatedById?: Prisma.IntNullableFilter<'Permission'> | number | null;
+  deletedById?: Prisma.IntNullableFilter<'Permission'> | number | null;
   deletedAt?:
     | Prisma.DateTimeNullableFilter<'Permission'>
     | Date
@@ -951,6 +1143,34 @@ export type PermissionUpdateManyWithWhereWithoutUpdatedByInput = {
   >;
 };
 
+export type PermissionUpsertWithWhereUniqueWithoutDeletedByInput = {
+  where: Prisma.PermissionWhereUniqueInput;
+  update: Prisma.XOR<
+    Prisma.PermissionUpdateWithoutDeletedByInput,
+    Prisma.PermissionUncheckedUpdateWithoutDeletedByInput
+  >;
+  create: Prisma.XOR<
+    Prisma.PermissionCreateWithoutDeletedByInput,
+    Prisma.PermissionUncheckedCreateWithoutDeletedByInput
+  >;
+};
+
+export type PermissionUpdateWithWhereUniqueWithoutDeletedByInput = {
+  where: Prisma.PermissionWhereUniqueInput;
+  data: Prisma.XOR<
+    Prisma.PermissionUpdateWithoutDeletedByInput,
+    Prisma.PermissionUncheckedUpdateWithoutDeletedByInput
+  >;
+};
+
+export type PermissionUpdateManyWithWhereWithoutDeletedByInput = {
+  where: Prisma.PermissionScalarWhereInput;
+  data: Prisma.XOR<
+    Prisma.PermissionUpdateManyMutationInput,
+    Prisma.PermissionUncheckedUpdateManyWithoutDeletedByInput
+  >;
+};
+
 export type PermissionCreateWithoutRolesInput = {
   name: string;
   description: string;
@@ -961,6 +1181,7 @@ export type PermissionCreateWithoutRolesInput = {
   updatedAt?: Date | string;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPermissionsInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedPermissionsInput;
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedPermissionsInput;
 };
 
 export type PermissionUncheckedCreateWithoutRolesInput = {
@@ -971,6 +1192,7 @@ export type PermissionUncheckedCreateWithoutRolesInput = {
   method: $Enums.HTTPMethod;
   createdById?: number | null;
   updatedById?: number | null;
+  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -1018,6 +1240,7 @@ export type PermissionUpdateWithoutRolesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedPermissionsNestedInput;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedPermissionsNestedInput;
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedPermissionsNestedInput;
 };
 
 export type PermissionUncheckedUpdateWithoutRolesInput = {
@@ -1028,6 +1251,7 @@ export type PermissionUncheckedUpdateWithoutRolesInput = {
   method?: Prisma.EnumHTTPMethodFieldUpdateOperationsInput | $Enums.HTTPMethod;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1044,6 +1268,7 @@ export type PermissionCreateManyCreatedByInput = {
   path: string;
   method: $Enums.HTTPMethod;
   updatedById?: number | null;
+  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -1056,6 +1281,20 @@ export type PermissionCreateManyUpdatedByInput = {
   path: string;
   method: $Enums.HTTPMethod;
   createdById?: number | null;
+  deletedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+};
+
+export type PermissionCreateManyDeletedByInput = {
+  id?: number;
+  name: string;
+  description: string;
+  path: string;
+  method: $Enums.HTTPMethod;
+  createdById?: number | null;
+  updatedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -1074,6 +1313,7 @@ export type PermissionUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedPermissionsNestedInput;
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedPermissionsNestedInput;
   roles?: Prisma.PermissionsRolesUpdateManyWithoutPermissionNestedInput;
 };
 
@@ -1084,6 +1324,7 @@ export type PermissionUncheckedUpdateWithoutCreatedByInput = {
   path?: Prisma.StringFieldUpdateOperationsInput | string;
   method?: Prisma.EnumHTTPMethodFieldUpdateOperationsInput | $Enums.HTTPMethod;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1101,6 +1342,7 @@ export type PermissionUncheckedUpdateManyWithoutCreatedByInput = {
   path?: Prisma.StringFieldUpdateOperationsInput | string;
   method?: Prisma.EnumHTTPMethodFieldUpdateOperationsInput | $Enums.HTTPMethod;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1123,6 +1365,7 @@ export type PermissionUpdateWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedPermissionsNestedInput;
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedPermissionsNestedInput;
   roles?: Prisma.PermissionsRolesUpdateManyWithoutPermissionNestedInput;
 };
 
@@ -1133,6 +1376,7 @@ export type PermissionUncheckedUpdateWithoutUpdatedByInput = {
   path?: Prisma.StringFieldUpdateOperationsInput | string;
   method?: Prisma.EnumHTTPMethodFieldUpdateOperationsInput | $Enums.HTTPMethod;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1150,6 +1394,59 @@ export type PermissionUncheckedUpdateManyWithoutUpdatedByInput = {
   path?: Prisma.StringFieldUpdateOperationsInput | string;
   method?: Prisma.EnumHTTPMethodFieldUpdateOperationsInput | $Enums.HTTPMethod;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+
+export type PermissionUpdateWithoutDeletedByInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  path?: Prisma.StringFieldUpdateOperationsInput | string;
+  method?: Prisma.EnumHTTPMethodFieldUpdateOperationsInput | $Enums.HTTPMethod;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedPermissionsNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedPermissionsNestedInput;
+  roles?: Prisma.PermissionsRolesUpdateManyWithoutPermissionNestedInput;
+};
+
+export type PermissionUncheckedUpdateWithoutDeletedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  path?: Prisma.StringFieldUpdateOperationsInput | string;
+  method?: Prisma.EnumHTTPMethodFieldUpdateOperationsInput | $Enums.HTTPMethod;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  roles?: Prisma.PermissionsRolesUncheckedUpdateManyWithoutPermissionNestedInput;
+};
+
+export type PermissionUncheckedUpdateManyWithoutDeletedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  path?: Prisma.StringFieldUpdateOperationsInput | string;
+  method?: Prisma.EnumHTTPMethodFieldUpdateOperationsInput | $Enums.HTTPMethod;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1209,11 +1506,13 @@ export type PermissionSelect<
     method?: boolean;
     createdById?: boolean;
     updatedById?: boolean;
+    deletedById?: boolean;
     deletedAt?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
     createdBy?: boolean | Prisma.Permission$createdByArgs<ExtArgs>;
     updatedBy?: boolean | Prisma.Permission$updatedByArgs<ExtArgs>;
+    deletedBy?: boolean | Prisma.Permission$deletedByArgs<ExtArgs>;
     roles?: boolean | Prisma.Permission$rolesArgs<ExtArgs>;
     _count?: boolean | Prisma.PermissionCountOutputTypeDefaultArgs<ExtArgs>;
   },
@@ -1232,11 +1531,13 @@ export type PermissionSelectCreateManyAndReturn<
     method?: boolean;
     createdById?: boolean;
     updatedById?: boolean;
+    deletedById?: boolean;
     deletedAt?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
     createdBy?: boolean | Prisma.Permission$createdByArgs<ExtArgs>;
     updatedBy?: boolean | Prisma.Permission$updatedByArgs<ExtArgs>;
+    deletedBy?: boolean | Prisma.Permission$deletedByArgs<ExtArgs>;
   },
   ExtArgs['result']['permission']
 >;
@@ -1253,11 +1554,13 @@ export type PermissionSelectUpdateManyAndReturn<
     method?: boolean;
     createdById?: boolean;
     updatedById?: boolean;
+    deletedById?: boolean;
     deletedAt?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
     createdBy?: boolean | Prisma.Permission$createdByArgs<ExtArgs>;
     updatedBy?: boolean | Prisma.Permission$updatedByArgs<ExtArgs>;
+    deletedBy?: boolean | Prisma.Permission$deletedByArgs<ExtArgs>;
   },
   ExtArgs['result']['permission']
 >;
@@ -1270,6 +1573,7 @@ export type PermissionSelectScalar = {
   method?: boolean;
   createdById?: boolean;
   updatedById?: boolean;
+  deletedById?: boolean;
   deletedAt?: boolean;
   createdAt?: boolean;
   updatedAt?: boolean;
@@ -1286,6 +1590,7 @@ export type PermissionOmit<
   | 'method'
   | 'createdById'
   | 'updatedById'
+  | 'deletedById'
   | 'deletedAt'
   | 'createdAt'
   | 'updatedAt',
@@ -1297,6 +1602,7 @@ export type PermissionInclude<
 > = {
   createdBy?: boolean | Prisma.Permission$createdByArgs<ExtArgs>;
   updatedBy?: boolean | Prisma.Permission$updatedByArgs<ExtArgs>;
+  deletedBy?: boolean | Prisma.Permission$deletedByArgs<ExtArgs>;
   roles?: boolean | Prisma.Permission$rolesArgs<ExtArgs>;
   _count?: boolean | Prisma.PermissionCountOutputTypeDefaultArgs<ExtArgs>;
 };
@@ -1306,6 +1612,7 @@ export type PermissionIncludeCreateManyAndReturn<
 > = {
   createdBy?: boolean | Prisma.Permission$createdByArgs<ExtArgs>;
   updatedBy?: boolean | Prisma.Permission$updatedByArgs<ExtArgs>;
+  deletedBy?: boolean | Prisma.Permission$deletedByArgs<ExtArgs>;
 };
 export type PermissionIncludeUpdateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
@@ -1313,6 +1620,7 @@ export type PermissionIncludeUpdateManyAndReturn<
 > = {
   createdBy?: boolean | Prisma.Permission$createdByArgs<ExtArgs>;
   updatedBy?: boolean | Prisma.Permission$updatedByArgs<ExtArgs>;
+  deletedBy?: boolean | Prisma.Permission$deletedByArgs<ExtArgs>;
 };
 
 export type $PermissionPayload<
@@ -1323,6 +1631,7 @@ export type $PermissionPayload<
   objects: {
     createdBy: Prisma.$UserPayload<ExtArgs> | null;
     updatedBy: Prisma.$UserPayload<ExtArgs> | null;
+    deletedBy: Prisma.$UserPayload<ExtArgs> | null;
     roles: Prisma.$PermissionsRolesPayload<ExtArgs>[];
   };
   scalars: runtime.Types.Extensions.GetPayloadResult<
@@ -1334,6 +1643,7 @@ export type $PermissionPayload<
       method: $Enums.HTTPMethod;
       createdById: number | null;
       updatedById: number | null;
+      deletedById: number | null;
       deletedAt: Date | null;
       createdAt: Date;
       updatedAt: Date;
@@ -1913,6 +2223,19 @@ export interface Prisma__PermissionClient<
     ExtArgs,
     GlobalOmitOptions
   >;
+  deletedBy<T extends Prisma.Permission$deletedByArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.Permission$deletedByArgs<ExtArgs>>,
+  ): Prisma.Prisma__UserClient<
+    runtime.Types.Result.GetResult<
+      Prisma.$UserPayload<ExtArgs>,
+      T,
+      'findUniqueOrThrow',
+      GlobalOmitOptions
+    > | null,
+    null,
+    ExtArgs,
+    GlobalOmitOptions
+  >;
   roles<T extends Prisma.Permission$rolesArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.Permission$rolesArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
@@ -1973,6 +2296,7 @@ export interface PermissionFieldRefs {
   readonly method: Prisma.FieldRef<'Permission', 'HTTPMethod'>;
   readonly createdById: Prisma.FieldRef<'Permission', 'Int'>;
   readonly updatedById: Prisma.FieldRef<'Permission', 'Int'>;
+  readonly deletedById: Prisma.FieldRef<'Permission', 'Int'>;
   readonly deletedAt: Prisma.FieldRef<'Permission', 'DateTime'>;
   readonly createdAt: Prisma.FieldRef<'Permission', 'DateTime'>;
   readonly updatedAt: Prisma.FieldRef<'Permission', 'DateTime'>;
@@ -2468,6 +2792,28 @@ export type Permission$createdByArgs<
  * Permission.updatedBy
  */
 export type Permission$updatedByArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null;
+  where?: Prisma.UserWhereInput;
+};
+
+/**
+ * Permission.deletedBy
+ */
+export type Permission$deletedByArgs<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
