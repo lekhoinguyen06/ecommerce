@@ -47,10 +47,10 @@ export type RoleMinAggregateOutputType = {
   isActive: boolean | null;
   createdById: number | null;
   updatedById: number | null;
-  deletedById: number | null;
   deletedAt: Date | null;
   createdAt: Date | null;
   updatedAt: Date | null;
+  deletedById: number | null;
 };
 
 export type RoleMaxAggregateOutputType = {
@@ -60,10 +60,10 @@ export type RoleMaxAggregateOutputType = {
   isActive: boolean | null;
   createdById: number | null;
   updatedById: number | null;
-  deletedById: number | null;
   deletedAt: Date | null;
   createdAt: Date | null;
   updatedAt: Date | null;
+  deletedById: number | null;
 };
 
 export type RoleCountAggregateOutputType = {
@@ -73,10 +73,10 @@ export type RoleCountAggregateOutputType = {
   isActive: number;
   createdById: number;
   updatedById: number;
-  deletedById: number;
   deletedAt: number;
   createdAt: number;
   updatedAt: number;
+  deletedById: number;
   _all: number;
 };
 
@@ -101,10 +101,10 @@ export type RoleMinAggregateInputType = {
   isActive?: true;
   createdById?: true;
   updatedById?: true;
-  deletedById?: true;
   deletedAt?: true;
   createdAt?: true;
   updatedAt?: true;
+  deletedById?: true;
 };
 
 export type RoleMaxAggregateInputType = {
@@ -114,10 +114,10 @@ export type RoleMaxAggregateInputType = {
   isActive?: true;
   createdById?: true;
   updatedById?: true;
-  deletedById?: true;
   deletedAt?: true;
   createdAt?: true;
   updatedAt?: true;
+  deletedById?: true;
 };
 
 export type RoleCountAggregateInputType = {
@@ -127,10 +127,10 @@ export type RoleCountAggregateInputType = {
   isActive?: true;
   createdById?: true;
   updatedById?: true;
-  deletedById?: true;
   deletedAt?: true;
   createdAt?: true;
   updatedAt?: true;
+  deletedById?: true;
   _all?: true;
 };
 
@@ -234,10 +234,10 @@ export type RoleGroupByOutputType = {
   isActive: boolean;
   createdById: number | null;
   updatedById: number | null;
-  deletedById: number | null;
   deletedAt: Date | null;
   createdAt: Date;
   updatedAt: Date;
+  deletedById: number | null;
   _count: RoleCountAggregateOutputType | null;
   _avg: RoleAvgAggregateOutputType | null;
   _sum: RoleSumAggregateOutputType | null;
@@ -267,15 +267,12 @@ export type RoleWhereInput = {
   isActive?: Prisma.BoolFilter<'Role'> | boolean;
   createdById?: Prisma.IntNullableFilter<'Role'> | number | null;
   updatedById?: Prisma.IntNullableFilter<'Role'> | number | null;
-  deletedById?: Prisma.IntNullableFilter<'Role'> | number | null;
   deletedAt?: Prisma.DateTimeNullableFilter<'Role'> | Date | string | null;
   createdAt?: Prisma.DateTimeFilter<'Role'> | Date | string;
   updatedAt?: Prisma.DateTimeFilter<'Role'> | Date | string;
+  deletedById?: Prisma.IntNullableFilter<'Role'> | number | null;
+  permissions?: Prisma.PermissionsRolesListRelationFilter;
   createdBy?: Prisma.XOR<
-    Prisma.UserNullableScalarRelationFilter,
-    Prisma.UserWhereInput
-  > | null;
-  updatedBy?: Prisma.XOR<
     Prisma.UserNullableScalarRelationFilter,
     Prisma.UserWhereInput
   > | null;
@@ -283,8 +280,11 @@ export type RoleWhereInput = {
     Prisma.UserNullableScalarRelationFilter,
     Prisma.UserWhereInput
   > | null;
+  updatedBy?: Prisma.XOR<
+    Prisma.UserNullableScalarRelationFilter,
+    Prisma.UserWhereInput
+  > | null;
   users?: Prisma.UserListRelationFilter;
-  permissions?: Prisma.PermissionsRolesListRelationFilter;
 };
 
 export type RoleOrderByWithRelationInput = {
@@ -294,37 +294,34 @@ export type RoleOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder;
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder;
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder;
-  deletedById?: Prisma.SortOrderInput | Prisma.SortOrder;
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
-  createdBy?: Prisma.UserOrderByWithRelationInput;
-  updatedBy?: Prisma.UserOrderByWithRelationInput;
-  deletedBy?: Prisma.UserOrderByWithRelationInput;
-  users?: Prisma.UserOrderByRelationAggregateInput;
+  deletedById?: Prisma.SortOrderInput | Prisma.SortOrder;
   permissions?: Prisma.PermissionsRolesOrderByRelationAggregateInput;
+  createdBy?: Prisma.UserOrderByWithRelationInput;
+  deletedBy?: Prisma.UserOrderByWithRelationInput;
+  updatedBy?: Prisma.UserOrderByWithRelationInput;
+  users?: Prisma.UserOrderByRelationAggregateInput;
 };
 
 export type RoleWhereUniqueInput = Prisma.AtLeast<
   {
     id?: number;
-    name?: string;
     AND?: Prisma.RoleWhereInput | Prisma.RoleWhereInput[];
     OR?: Prisma.RoleWhereInput[];
     NOT?: Prisma.RoleWhereInput | Prisma.RoleWhereInput[];
+    name?: Prisma.StringFilter<'Role'> | string;
     description?: Prisma.StringFilter<'Role'> | string;
     isActive?: Prisma.BoolFilter<'Role'> | boolean;
     createdById?: Prisma.IntNullableFilter<'Role'> | number | null;
     updatedById?: Prisma.IntNullableFilter<'Role'> | number | null;
-    deletedById?: Prisma.IntNullableFilter<'Role'> | number | null;
     deletedAt?: Prisma.DateTimeNullableFilter<'Role'> | Date | string | null;
     createdAt?: Prisma.DateTimeFilter<'Role'> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<'Role'> | Date | string;
+    deletedById?: Prisma.IntNullableFilter<'Role'> | number | null;
+    permissions?: Prisma.PermissionsRolesListRelationFilter;
     createdBy?: Prisma.XOR<
-      Prisma.UserNullableScalarRelationFilter,
-      Prisma.UserWhereInput
-    > | null;
-    updatedBy?: Prisma.XOR<
       Prisma.UserNullableScalarRelationFilter,
       Prisma.UserWhereInput
     > | null;
@@ -332,10 +329,13 @@ export type RoleWhereUniqueInput = Prisma.AtLeast<
       Prisma.UserNullableScalarRelationFilter,
       Prisma.UserWhereInput
     > | null;
+    updatedBy?: Prisma.XOR<
+      Prisma.UserNullableScalarRelationFilter,
+      Prisma.UserWhereInput
+    > | null;
     users?: Prisma.UserListRelationFilter;
-    permissions?: Prisma.PermissionsRolesListRelationFilter;
   },
-  'id' | 'name'
+  'id'
 >;
 
 export type RoleOrderByWithAggregationInput = {
@@ -345,10 +345,10 @@ export type RoleOrderByWithAggregationInput = {
   isActive?: Prisma.SortOrder;
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder;
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder;
-  deletedById?: Prisma.SortOrderInput | Prisma.SortOrder;
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
+  deletedById?: Prisma.SortOrderInput | Prisma.SortOrder;
   _count?: Prisma.RoleCountOrderByAggregateInput;
   _avg?: Prisma.RoleAvgOrderByAggregateInput;
   _max?: Prisma.RoleMaxOrderByAggregateInput;
@@ -370,7 +370,6 @@ export type RoleScalarWhereWithAggregatesInput = {
   isActive?: Prisma.BoolWithAggregatesFilter<'Role'> | boolean;
   createdById?: Prisma.IntNullableWithAggregatesFilter<'Role'> | number | null;
   updatedById?: Prisma.IntNullableWithAggregatesFilter<'Role'> | number | null;
-  deletedById?: Prisma.IntNullableWithAggregatesFilter<'Role'> | number | null;
   deletedAt?:
     | Prisma.DateTimeNullableWithAggregatesFilter<'Role'>
     | Date
@@ -378,35 +377,36 @@ export type RoleScalarWhereWithAggregatesInput = {
     | null;
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'Role'> | Date | string;
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<'Role'> | Date | string;
+  deletedById?: Prisma.IntNullableWithAggregatesFilter<'Role'> | number | null;
 };
 
 export type RoleCreateInput = {
   name: string;
-  description: string;
+  description?: string;
   isActive?: boolean;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRolesInput;
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRolesInput;
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRolesInput;
-  users?: Prisma.UserCreateNestedManyWithoutRoleInput;
   permissions?: Prisma.PermissionsRolesCreateNestedManyWithoutRoleInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRolesInput;
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRolesInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRolesInput;
+  users?: Prisma.UserCreateNestedManyWithoutRoleInput;
 };
 
 export type RoleUncheckedCreateInput = {
   id?: number;
   name: string;
-  description: string;
+  description?: string;
   isActive?: boolean;
   createdById?: number | null;
   updatedById?: number | null;
-  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutRoleInput;
+  deletedById?: number | null;
   permissions?: Prisma.PermissionsRolesUncheckedCreateNestedManyWithoutRoleInput;
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutRoleInput;
 };
 
 export type RoleUpdateInput = {
@@ -420,11 +420,11 @@ export type RoleUpdateInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedRolesNestedInput;
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRolesNestedInput;
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedRolesNestedInput;
-  users?: Prisma.UserUpdateManyWithoutRoleNestedInput;
   permissions?: Prisma.PermissionsRolesUpdateManyWithoutRoleNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedRolesNestedInput;
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedRolesNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRolesNestedInput;
+  users?: Prisma.UserUpdateManyWithoutRoleNestedInput;
 };
 
 export type RoleUncheckedUpdateInput = {
@@ -434,7 +434,6 @@ export type RoleUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -442,21 +441,22 @@ export type RoleUncheckedUpdateInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  users?: Prisma.UserUncheckedUpdateManyWithoutRoleNestedInput;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   permissions?: Prisma.PermissionsRolesUncheckedUpdateManyWithoutRoleNestedInput;
+  users?: Prisma.UserUncheckedUpdateManyWithoutRoleNestedInput;
 };
 
 export type RoleCreateManyInput = {
   id?: number;
   name: string;
-  description: string;
+  description?: string;
   isActive?: boolean;
   createdById?: number | null;
   updatedById?: number | null;
-  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  deletedById?: number | null;
 };
 
 export type RoleUpdateManyMutationInput = {
@@ -479,7 +479,6 @@ export type RoleUncheckedUpdateManyInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -487,17 +486,18 @@ export type RoleUncheckedUpdateManyInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-};
-
-export type RoleScalarRelationFilter = {
-  is?: Prisma.RoleWhereInput;
-  isNot?: Prisma.RoleWhereInput;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
 };
 
 export type RoleListRelationFilter = {
   every?: Prisma.RoleWhereInput;
   some?: Prisma.RoleWhereInput;
   none?: Prisma.RoleWhereInput;
+};
+
+export type RoleScalarRelationFilter = {
+  is?: Prisma.RoleWhereInput;
+  isNot?: Prisma.RoleWhereInput;
 };
 
 export type RoleOrderByRelationAggregateInput = {
@@ -511,10 +511,10 @@ export type RoleCountOrderByAggregateInput = {
   isActive?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
-  deletedById?: Prisma.SortOrder;
   deletedAt?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
+  deletedById?: Prisma.SortOrder;
 };
 
 export type RoleAvgOrderByAggregateInput = {
@@ -531,10 +531,10 @@ export type RoleMaxOrderByAggregateInput = {
   isActive?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
-  deletedById?: Prisma.SortOrder;
   deletedAt?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
+  deletedById?: Prisma.SortOrder;
 };
 
 export type RoleMinOrderByAggregateInput = {
@@ -544,10 +544,10 @@ export type RoleMinOrderByAggregateInput = {
   isActive?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
-  deletedById?: Prisma.SortOrder;
   deletedAt?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
+  deletedById?: Prisma.SortOrder;
 };
 
 export type RoleSumOrderByAggregateInput = {
@@ -555,15 +555,6 @@ export type RoleSumOrderByAggregateInput = {
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
   deletedById?: Prisma.SortOrder;
-};
-
-export type RoleCreateNestedOneWithoutUsersInput = {
-  create?: Prisma.XOR<
-    Prisma.RoleCreateWithoutUsersInput,
-    Prisma.RoleUncheckedCreateWithoutUsersInput
-  >;
-  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutUsersInput;
-  connect?: Prisma.RoleWhereUniqueInput;
 };
 
 export type RoleCreateNestedManyWithoutCreatedByInput = {
@@ -578,21 +569,6 @@ export type RoleCreateNestedManyWithoutCreatedByInput = {
     | Prisma.RoleCreateOrConnectWithoutCreatedByInput
     | Prisma.RoleCreateOrConnectWithoutCreatedByInput[];
   createMany?: Prisma.RoleCreateManyCreatedByInputEnvelope;
-  connect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
-};
-
-export type RoleCreateNestedManyWithoutUpdatedByInput = {
-  create?:
-    | Prisma.XOR<
-        Prisma.RoleCreateWithoutUpdatedByInput,
-        Prisma.RoleUncheckedCreateWithoutUpdatedByInput
-      >
-    | Prisma.RoleCreateWithoutUpdatedByInput[]
-    | Prisma.RoleUncheckedCreateWithoutUpdatedByInput[];
-  connectOrCreate?:
-    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput
-    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput[];
-  createMany?: Prisma.RoleCreateManyUpdatedByInputEnvelope;
   connect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
 };
 
@@ -611,6 +587,30 @@ export type RoleCreateNestedManyWithoutDeletedByInput = {
   connect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
 };
 
+export type RoleCreateNestedManyWithoutUpdatedByInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.RoleCreateWithoutUpdatedByInput,
+        Prisma.RoleUncheckedCreateWithoutUpdatedByInput
+      >
+    | Prisma.RoleCreateWithoutUpdatedByInput[]
+    | Prisma.RoleUncheckedCreateWithoutUpdatedByInput[];
+  connectOrCreate?:
+    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput
+    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput[];
+  createMany?: Prisma.RoleCreateManyUpdatedByInputEnvelope;
+  connect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
+};
+
+export type RoleCreateNestedOneWithoutUsersInput = {
+  create?: Prisma.XOR<
+    Prisma.RoleCreateWithoutUsersInput,
+    Prisma.RoleUncheckedCreateWithoutUsersInput
+  >;
+  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutUsersInput;
+  connect?: Prisma.RoleWhereUniqueInput;
+};
+
 export type RoleUncheckedCreateNestedManyWithoutCreatedByInput = {
   create?:
     | Prisma.XOR<
@@ -623,21 +623,6 @@ export type RoleUncheckedCreateNestedManyWithoutCreatedByInput = {
     | Prisma.RoleCreateOrConnectWithoutCreatedByInput
     | Prisma.RoleCreateOrConnectWithoutCreatedByInput[];
   createMany?: Prisma.RoleCreateManyCreatedByInputEnvelope;
-  connect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
-};
-
-export type RoleUncheckedCreateNestedManyWithoutUpdatedByInput = {
-  create?:
-    | Prisma.XOR<
-        Prisma.RoleCreateWithoutUpdatedByInput,
-        Prisma.RoleUncheckedCreateWithoutUpdatedByInput
-      >
-    | Prisma.RoleCreateWithoutUpdatedByInput[]
-    | Prisma.RoleUncheckedCreateWithoutUpdatedByInput[];
-  connectOrCreate?:
-    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput
-    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput[];
-  createMany?: Prisma.RoleCreateManyUpdatedByInputEnvelope;
   connect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
 };
 
@@ -656,21 +641,19 @@ export type RoleUncheckedCreateNestedManyWithoutDeletedByInput = {
   connect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
 };
 
-export type RoleUpdateOneRequiredWithoutUsersNestedInput = {
-  create?: Prisma.XOR<
-    Prisma.RoleCreateWithoutUsersInput,
-    Prisma.RoleUncheckedCreateWithoutUsersInput
-  >;
-  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutUsersInput;
-  upsert?: Prisma.RoleUpsertWithoutUsersInput;
-  connect?: Prisma.RoleWhereUniqueInput;
-  update?: Prisma.XOR<
-    Prisma.XOR<
-      Prisma.RoleUpdateToOneWithWhereWithoutUsersInput,
-      Prisma.RoleUpdateWithoutUsersInput
-    >,
-    Prisma.RoleUncheckedUpdateWithoutUsersInput
-  >;
+export type RoleUncheckedCreateNestedManyWithoutUpdatedByInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.RoleCreateWithoutUpdatedByInput,
+        Prisma.RoleUncheckedCreateWithoutUpdatedByInput
+      >
+    | Prisma.RoleCreateWithoutUpdatedByInput[]
+    | Prisma.RoleUncheckedCreateWithoutUpdatedByInput[];
+  connectOrCreate?:
+    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput
+    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput[];
+  createMany?: Prisma.RoleCreateManyUpdatedByInputEnvelope;
+  connect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
 };
 
 export type RoleUpdateManyWithoutCreatedByNestedInput = {
@@ -698,34 +681,6 @@ export type RoleUpdateManyWithoutCreatedByNestedInput = {
   updateMany?:
     | Prisma.RoleUpdateManyWithWhereWithoutCreatedByInput
     | Prisma.RoleUpdateManyWithWhereWithoutCreatedByInput[];
-  deleteMany?: Prisma.RoleScalarWhereInput | Prisma.RoleScalarWhereInput[];
-};
-
-export type RoleUpdateManyWithoutUpdatedByNestedInput = {
-  create?:
-    | Prisma.XOR<
-        Prisma.RoleCreateWithoutUpdatedByInput,
-        Prisma.RoleUncheckedCreateWithoutUpdatedByInput
-      >
-    | Prisma.RoleCreateWithoutUpdatedByInput[]
-    | Prisma.RoleUncheckedCreateWithoutUpdatedByInput[];
-  connectOrCreate?:
-    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput
-    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput[];
-  upsert?:
-    | Prisma.RoleUpsertWithWhereUniqueWithoutUpdatedByInput
-    | Prisma.RoleUpsertWithWhereUniqueWithoutUpdatedByInput[];
-  createMany?: Prisma.RoleCreateManyUpdatedByInputEnvelope;
-  set?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
-  disconnect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
-  delete?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
-  connect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
-  update?:
-    | Prisma.RoleUpdateWithWhereUniqueWithoutUpdatedByInput
-    | Prisma.RoleUpdateWithWhereUniqueWithoutUpdatedByInput[];
-  updateMany?:
-    | Prisma.RoleUpdateManyWithWhereWithoutUpdatedByInput
-    | Prisma.RoleUpdateManyWithWhereWithoutUpdatedByInput[];
   deleteMany?: Prisma.RoleScalarWhereInput | Prisma.RoleScalarWhereInput[];
 };
 
@@ -757,6 +712,51 @@ export type RoleUpdateManyWithoutDeletedByNestedInput = {
   deleteMany?: Prisma.RoleScalarWhereInput | Prisma.RoleScalarWhereInput[];
 };
 
+export type RoleUpdateManyWithoutUpdatedByNestedInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.RoleCreateWithoutUpdatedByInput,
+        Prisma.RoleUncheckedCreateWithoutUpdatedByInput
+      >
+    | Prisma.RoleCreateWithoutUpdatedByInput[]
+    | Prisma.RoleUncheckedCreateWithoutUpdatedByInput[];
+  connectOrCreate?:
+    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput
+    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput[];
+  upsert?:
+    | Prisma.RoleUpsertWithWhereUniqueWithoutUpdatedByInput
+    | Prisma.RoleUpsertWithWhereUniqueWithoutUpdatedByInput[];
+  createMany?: Prisma.RoleCreateManyUpdatedByInputEnvelope;
+  set?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
+  disconnect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
+  delete?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
+  connect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
+  update?:
+    | Prisma.RoleUpdateWithWhereUniqueWithoutUpdatedByInput
+    | Prisma.RoleUpdateWithWhereUniqueWithoutUpdatedByInput[];
+  updateMany?:
+    | Prisma.RoleUpdateManyWithWhereWithoutUpdatedByInput
+    | Prisma.RoleUpdateManyWithWhereWithoutUpdatedByInput[];
+  deleteMany?: Prisma.RoleScalarWhereInput | Prisma.RoleScalarWhereInput[];
+};
+
+export type RoleUpdateOneRequiredWithoutUsersNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.RoleCreateWithoutUsersInput,
+    Prisma.RoleUncheckedCreateWithoutUsersInput
+  >;
+  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutUsersInput;
+  upsert?: Prisma.RoleUpsertWithoutUsersInput;
+  connect?: Prisma.RoleWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.RoleUpdateToOneWithWhereWithoutUsersInput,
+      Prisma.RoleUpdateWithoutUsersInput
+    >,
+    Prisma.RoleUncheckedUpdateWithoutUsersInput
+  >;
+};
+
 export type RoleUncheckedUpdateManyWithoutCreatedByNestedInput = {
   create?:
     | Prisma.XOR<
@@ -785,34 +785,6 @@ export type RoleUncheckedUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.RoleScalarWhereInput | Prisma.RoleScalarWhereInput[];
 };
 
-export type RoleUncheckedUpdateManyWithoutUpdatedByNestedInput = {
-  create?:
-    | Prisma.XOR<
-        Prisma.RoleCreateWithoutUpdatedByInput,
-        Prisma.RoleUncheckedCreateWithoutUpdatedByInput
-      >
-    | Prisma.RoleCreateWithoutUpdatedByInput[]
-    | Prisma.RoleUncheckedCreateWithoutUpdatedByInput[];
-  connectOrCreate?:
-    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput
-    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput[];
-  upsert?:
-    | Prisma.RoleUpsertWithWhereUniqueWithoutUpdatedByInput
-    | Prisma.RoleUpsertWithWhereUniqueWithoutUpdatedByInput[];
-  createMany?: Prisma.RoleCreateManyUpdatedByInputEnvelope;
-  set?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
-  disconnect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
-  delete?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
-  connect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
-  update?:
-    | Prisma.RoleUpdateWithWhereUniqueWithoutUpdatedByInput
-    | Prisma.RoleUpdateWithWhereUniqueWithoutUpdatedByInput[];
-  updateMany?:
-    | Prisma.RoleUpdateManyWithWhereWithoutUpdatedByInput
-    | Prisma.RoleUpdateManyWithWhereWithoutUpdatedByInput[];
-  deleteMany?: Prisma.RoleScalarWhereInput | Prisma.RoleScalarWhereInput[];
-};
-
 export type RoleUncheckedUpdateManyWithoutDeletedByNestedInput = {
   create?:
     | Prisma.XOR<
@@ -838,6 +810,34 @@ export type RoleUncheckedUpdateManyWithoutDeletedByNestedInput = {
   updateMany?:
     | Prisma.RoleUpdateManyWithWhereWithoutDeletedByInput
     | Prisma.RoleUpdateManyWithWhereWithoutDeletedByInput[];
+  deleteMany?: Prisma.RoleScalarWhereInput | Prisma.RoleScalarWhereInput[];
+};
+
+export type RoleUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.RoleCreateWithoutUpdatedByInput,
+        Prisma.RoleUncheckedCreateWithoutUpdatedByInput
+      >
+    | Prisma.RoleCreateWithoutUpdatedByInput[]
+    | Prisma.RoleUncheckedCreateWithoutUpdatedByInput[];
+  connectOrCreate?:
+    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput
+    | Prisma.RoleCreateOrConnectWithoutUpdatedByInput[];
+  upsert?:
+    | Prisma.RoleUpsertWithWhereUniqueWithoutUpdatedByInput
+    | Prisma.RoleUpsertWithWhereUniqueWithoutUpdatedByInput[];
+  createMany?: Prisma.RoleCreateManyUpdatedByInputEnvelope;
+  set?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
+  disconnect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
+  delete?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
+  connect?: Prisma.RoleWhereUniqueInput | Prisma.RoleWhereUniqueInput[];
+  update?:
+    | Prisma.RoleUpdateWithWhereUniqueWithoutUpdatedByInput
+    | Prisma.RoleUpdateWithWhereUniqueWithoutUpdatedByInput[];
+  updateMany?:
+    | Prisma.RoleUpdateManyWithWhereWithoutUpdatedByInput
+    | Prisma.RoleUpdateManyWithWhereWithoutUpdatedByInput[];
   deleteMany?: Prisma.RoleScalarWhereInput | Prisma.RoleScalarWhereInput[];
 };
 
@@ -871,66 +871,31 @@ export type RoleUpdateOneRequiredWithoutPermissionsNestedInput = {
   >;
 };
 
-export type RoleCreateWithoutUsersInput = {
-  name: string;
-  description: string;
-  isActive?: boolean;
-  deletedAt?: Date | string | null;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRolesInput;
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRolesInput;
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRolesInput;
-  permissions?: Prisma.PermissionsRolesCreateNestedManyWithoutRoleInput;
-};
-
-export type RoleUncheckedCreateWithoutUsersInput = {
-  id?: number;
-  name: string;
-  description: string;
-  isActive?: boolean;
-  createdById?: number | null;
-  updatedById?: number | null;
-  deletedById?: number | null;
-  deletedAt?: Date | string | null;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
-  permissions?: Prisma.PermissionsRolesUncheckedCreateNestedManyWithoutRoleInput;
-};
-
-export type RoleCreateOrConnectWithoutUsersInput = {
-  where: Prisma.RoleWhereUniqueInput;
-  create: Prisma.XOR<
-    Prisma.RoleCreateWithoutUsersInput,
-    Prisma.RoleUncheckedCreateWithoutUsersInput
-  >;
-};
-
 export type RoleCreateWithoutCreatedByInput = {
   name: string;
-  description: string;
+  description?: string;
   isActive?: boolean;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRolesInput;
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRolesInput;
-  users?: Prisma.UserCreateNestedManyWithoutRoleInput;
   permissions?: Prisma.PermissionsRolesCreateNestedManyWithoutRoleInput;
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRolesInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRolesInput;
+  users?: Prisma.UserCreateNestedManyWithoutRoleInput;
 };
 
 export type RoleUncheckedCreateWithoutCreatedByInput = {
   id?: number;
   name: string;
-  description: string;
+  description?: string;
   isActive?: boolean;
   updatedById?: number | null;
-  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutRoleInput;
+  deletedById?: number | null;
   permissions?: Prisma.PermissionsRolesUncheckedCreateNestedManyWithoutRoleInput;
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutRoleInput;
 };
 
 export type RoleCreateOrConnectWithoutCreatedByInput = {
@@ -948,73 +913,31 @@ export type RoleCreateManyCreatedByInputEnvelope = {
   skipDuplicates?: boolean;
 };
 
-export type RoleCreateWithoutUpdatedByInput = {
-  name: string;
-  description: string;
-  isActive?: boolean;
-  deletedAt?: Date | string | null;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRolesInput;
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRolesInput;
-  users?: Prisma.UserCreateNestedManyWithoutRoleInput;
-  permissions?: Prisma.PermissionsRolesCreateNestedManyWithoutRoleInput;
-};
-
-export type RoleUncheckedCreateWithoutUpdatedByInput = {
-  id?: number;
-  name: string;
-  description: string;
-  isActive?: boolean;
-  createdById?: number | null;
-  deletedById?: number | null;
-  deletedAt?: Date | string | null;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutRoleInput;
-  permissions?: Prisma.PermissionsRolesUncheckedCreateNestedManyWithoutRoleInput;
-};
-
-export type RoleCreateOrConnectWithoutUpdatedByInput = {
-  where: Prisma.RoleWhereUniqueInput;
-  create: Prisma.XOR<
-    Prisma.RoleCreateWithoutUpdatedByInput,
-    Prisma.RoleUncheckedCreateWithoutUpdatedByInput
-  >;
-};
-
-export type RoleCreateManyUpdatedByInputEnvelope = {
-  data:
-    | Prisma.RoleCreateManyUpdatedByInput
-    | Prisma.RoleCreateManyUpdatedByInput[];
-  skipDuplicates?: boolean;
-};
-
 export type RoleCreateWithoutDeletedByInput = {
   name: string;
-  description: string;
+  description?: string;
   isActive?: boolean;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  permissions?: Prisma.PermissionsRolesCreateNestedManyWithoutRoleInput;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRolesInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRolesInput;
   users?: Prisma.UserCreateNestedManyWithoutRoleInput;
-  permissions?: Prisma.PermissionsRolesCreateNestedManyWithoutRoleInput;
 };
 
 export type RoleUncheckedCreateWithoutDeletedByInput = {
   id?: number;
   name: string;
-  description: string;
+  description?: string;
   isActive?: boolean;
   createdById?: number | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutRoleInput;
   permissions?: Prisma.PermissionsRolesUncheckedCreateNestedManyWithoutRoleInput;
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutRoleInput;
 };
 
 export type RoleCreateOrConnectWithoutDeletedByInput = {
@@ -1032,59 +955,81 @@ export type RoleCreateManyDeletedByInputEnvelope = {
   skipDuplicates?: boolean;
 };
 
-export type RoleUpsertWithoutUsersInput = {
-  update: Prisma.XOR<
-    Prisma.RoleUpdateWithoutUsersInput,
-    Prisma.RoleUncheckedUpdateWithoutUsersInput
+export type RoleCreateWithoutUpdatedByInput = {
+  name: string;
+  description?: string;
+  isActive?: boolean;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  permissions?: Prisma.PermissionsRolesCreateNestedManyWithoutRoleInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRolesInput;
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRolesInput;
+  users?: Prisma.UserCreateNestedManyWithoutRoleInput;
+};
+
+export type RoleUncheckedCreateWithoutUpdatedByInput = {
+  id?: number;
+  name: string;
+  description?: string;
+  isActive?: boolean;
+  createdById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  deletedById?: number | null;
+  permissions?: Prisma.PermissionsRolesUncheckedCreateNestedManyWithoutRoleInput;
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutRoleInput;
+};
+
+export type RoleCreateOrConnectWithoutUpdatedByInput = {
+  where: Prisma.RoleWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.RoleCreateWithoutUpdatedByInput,
+    Prisma.RoleUncheckedCreateWithoutUpdatedByInput
   >;
+};
+
+export type RoleCreateManyUpdatedByInputEnvelope = {
+  data:
+    | Prisma.RoleCreateManyUpdatedByInput
+    | Prisma.RoleCreateManyUpdatedByInput[];
+  skipDuplicates?: boolean;
+};
+
+export type RoleCreateWithoutUsersInput = {
+  name: string;
+  description?: string;
+  isActive?: boolean;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  permissions?: Prisma.PermissionsRolesCreateNestedManyWithoutRoleInput;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRolesInput;
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRolesInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRolesInput;
+};
+
+export type RoleUncheckedCreateWithoutUsersInput = {
+  id?: number;
+  name: string;
+  description?: string;
+  isActive?: boolean;
+  createdById?: number | null;
+  updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  deletedById?: number | null;
+  permissions?: Prisma.PermissionsRolesUncheckedCreateNestedManyWithoutRoleInput;
+};
+
+export type RoleCreateOrConnectWithoutUsersInput = {
+  where: Prisma.RoleWhereUniqueInput;
   create: Prisma.XOR<
     Prisma.RoleCreateWithoutUsersInput,
     Prisma.RoleUncheckedCreateWithoutUsersInput
   >;
-  where?: Prisma.RoleWhereInput;
-};
-
-export type RoleUpdateToOneWithWhereWithoutUsersInput = {
-  where?: Prisma.RoleWhereInput;
-  data: Prisma.XOR<
-    Prisma.RoleUpdateWithoutUsersInput,
-    Prisma.RoleUncheckedUpdateWithoutUsersInput
-  >;
-};
-
-export type RoleUpdateWithoutUsersInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
-  deletedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null;
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedRolesNestedInput;
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRolesNestedInput;
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedRolesNestedInput;
-  permissions?: Prisma.PermissionsRolesUpdateManyWithoutRoleNestedInput;
-};
-
-export type RoleUncheckedUpdateWithoutUsersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number;
-  name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
-  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null;
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  permissions?: Prisma.PermissionsRolesUncheckedUpdateManyWithoutRoleNestedInput;
 };
 
 export type RoleUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -1125,38 +1070,10 @@ export type RoleScalarWhereInput = {
   isActive?: Prisma.BoolFilter<'Role'> | boolean;
   createdById?: Prisma.IntNullableFilter<'Role'> | number | null;
   updatedById?: Prisma.IntNullableFilter<'Role'> | number | null;
-  deletedById?: Prisma.IntNullableFilter<'Role'> | number | null;
   deletedAt?: Prisma.DateTimeNullableFilter<'Role'> | Date | string | null;
   createdAt?: Prisma.DateTimeFilter<'Role'> | Date | string;
   updatedAt?: Prisma.DateTimeFilter<'Role'> | Date | string;
-};
-
-export type RoleUpsertWithWhereUniqueWithoutUpdatedByInput = {
-  where: Prisma.RoleWhereUniqueInput;
-  update: Prisma.XOR<
-    Prisma.RoleUpdateWithoutUpdatedByInput,
-    Prisma.RoleUncheckedUpdateWithoutUpdatedByInput
-  >;
-  create: Prisma.XOR<
-    Prisma.RoleCreateWithoutUpdatedByInput,
-    Prisma.RoleUncheckedCreateWithoutUpdatedByInput
-  >;
-};
-
-export type RoleUpdateWithWhereUniqueWithoutUpdatedByInput = {
-  where: Prisma.RoleWhereUniqueInput;
-  data: Prisma.XOR<
-    Prisma.RoleUpdateWithoutUpdatedByInput,
-    Prisma.RoleUncheckedUpdateWithoutUpdatedByInput
-  >;
-};
-
-export type RoleUpdateManyWithWhereWithoutUpdatedByInput = {
-  where: Prisma.RoleScalarWhereInput;
-  data: Prisma.XOR<
-    Prisma.RoleUpdateManyMutationInput,
-    Prisma.RoleUncheckedUpdateManyWithoutUpdatedByInput
-  >;
+  deletedById?: Prisma.IntNullableFilter<'Role'> | number | null;
 };
 
 export type RoleUpsertWithWhereUniqueWithoutDeletedByInput = {
@@ -1187,30 +1104,113 @@ export type RoleUpdateManyWithWhereWithoutDeletedByInput = {
   >;
 };
 
+export type RoleUpsertWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.RoleWhereUniqueInput;
+  update: Prisma.XOR<
+    Prisma.RoleUpdateWithoutUpdatedByInput,
+    Prisma.RoleUncheckedUpdateWithoutUpdatedByInput
+  >;
+  create: Prisma.XOR<
+    Prisma.RoleCreateWithoutUpdatedByInput,
+    Prisma.RoleUncheckedCreateWithoutUpdatedByInput
+  >;
+};
+
+export type RoleUpdateWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.RoleWhereUniqueInput;
+  data: Prisma.XOR<
+    Prisma.RoleUpdateWithoutUpdatedByInput,
+    Prisma.RoleUncheckedUpdateWithoutUpdatedByInput
+  >;
+};
+
+export type RoleUpdateManyWithWhereWithoutUpdatedByInput = {
+  where: Prisma.RoleScalarWhereInput;
+  data: Prisma.XOR<
+    Prisma.RoleUpdateManyMutationInput,
+    Prisma.RoleUncheckedUpdateManyWithoutUpdatedByInput
+  >;
+};
+
+export type RoleUpsertWithoutUsersInput = {
+  update: Prisma.XOR<
+    Prisma.RoleUpdateWithoutUsersInput,
+    Prisma.RoleUncheckedUpdateWithoutUsersInput
+  >;
+  create: Prisma.XOR<
+    Prisma.RoleCreateWithoutUsersInput,
+    Prisma.RoleUncheckedCreateWithoutUsersInput
+  >;
+  where?: Prisma.RoleWhereInput;
+};
+
+export type RoleUpdateToOneWithWhereWithoutUsersInput = {
+  where?: Prisma.RoleWhereInput;
+  data: Prisma.XOR<
+    Prisma.RoleUpdateWithoutUsersInput,
+    Prisma.RoleUncheckedUpdateWithoutUsersInput
+  >;
+};
+
+export type RoleUpdateWithoutUsersInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  permissions?: Prisma.PermissionsRolesUpdateManyWithoutRoleNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedRolesNestedInput;
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedRolesNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRolesNestedInput;
+};
+
+export type RoleUncheckedUpdateWithoutUsersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  permissions?: Prisma.PermissionsRolesUncheckedUpdateManyWithoutRoleNestedInput;
+};
+
 export type RoleCreateWithoutPermissionsInput = {
   name: string;
-  description: string;
+  description?: string;
   isActive?: boolean;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRolesInput;
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRolesInput;
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRolesInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRolesInput;
   users?: Prisma.UserCreateNestedManyWithoutRoleInput;
 };
 
 export type RoleUncheckedCreateWithoutPermissionsInput = {
   id?: number;
   name: string;
-  description: string;
+  description?: string;
   isActive?: boolean;
   createdById?: number | null;
   updatedById?: number | null;
-  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  deletedById?: number | null;
   users?: Prisma.UserUncheckedCreateNestedManyWithoutRoleInput;
 };
 
@@ -1254,8 +1254,8 @@ export type RoleUpdateWithoutPermissionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRolesNestedInput;
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRolesNestedInput;
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRolesNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRolesNestedInput;
   users?: Prisma.UserUpdateManyWithoutRoleNestedInput;
 };
 
@@ -1266,7 +1266,6 @@ export type RoleUncheckedUpdateWithoutPermissionsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1274,16 +1273,29 @@ export type RoleUncheckedUpdateWithoutPermissionsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   users?: Prisma.UserUncheckedUpdateManyWithoutRoleNestedInput;
 };
 
 export type RoleCreateManyCreatedByInput = {
   id?: number;
   name: string;
-  description: string;
+  description?: string;
   isActive?: boolean;
   updatedById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
   deletedById?: number | null;
+};
+
+export type RoleCreateManyDeletedByInput = {
+  id?: number;
+  name: string;
+  description?: string;
+  isActive?: boolean;
+  createdById?: number | null;
+  updatedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -1292,25 +1304,13 @@ export type RoleCreateManyCreatedByInput = {
 export type RoleCreateManyUpdatedByInput = {
   id?: number;
   name: string;
-  description: string;
+  description?: string;
   isActive?: boolean;
   createdById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
   deletedById?: number | null;
-  deletedAt?: Date | string | null;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
-};
-
-export type RoleCreateManyDeletedByInput = {
-  id?: number;
-  name: string;
-  description: string;
-  isActive?: boolean;
-  createdById?: number | null;
-  updatedById?: number | null;
-  deletedAt?: Date | string | null;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
 };
 
 export type RoleUpdateWithoutCreatedByInput = {
@@ -1324,10 +1324,10 @@ export type RoleUpdateWithoutCreatedByInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRolesNestedInput;
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedRolesNestedInput;
-  users?: Prisma.UserUpdateManyWithoutRoleNestedInput;
   permissions?: Prisma.PermissionsRolesUpdateManyWithoutRoleNestedInput;
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedRolesNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRolesNestedInput;
+  users?: Prisma.UserUpdateManyWithoutRoleNestedInput;
 };
 
 export type RoleUncheckedUpdateWithoutCreatedByInput = {
@@ -1336,7 +1336,6 @@ export type RoleUncheckedUpdateWithoutCreatedByInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1344,8 +1343,9 @@ export type RoleUncheckedUpdateWithoutCreatedByInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  users?: Prisma.UserUncheckedUpdateManyWithoutRoleNestedInput;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   permissions?: Prisma.PermissionsRolesUncheckedUpdateManyWithoutRoleNestedInput;
+  users?: Prisma.UserUncheckedUpdateManyWithoutRoleNestedInput;
 };
 
 export type RoleUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1354,7 +1354,58 @@ export type RoleUncheckedUpdateManyWithoutCreatedByInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+};
+
+export type RoleUpdateWithoutDeletedByInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  permissions?: Prisma.PermissionsRolesUpdateManyWithoutRoleNestedInput;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedRolesNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRolesNestedInput;
+  users?: Prisma.UserUpdateManyWithoutRoleNestedInput;
+};
+
+export type RoleUncheckedUpdateWithoutDeletedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  permissions?: Prisma.PermissionsRolesUncheckedUpdateManyWithoutRoleNestedInput;
+  users?: Prisma.UserUncheckedUpdateManyWithoutRoleNestedInput;
+};
+
+export type RoleUncheckedUpdateManyWithoutDeletedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1375,10 +1426,10 @@ export type RoleUpdateWithoutUpdatedByInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  permissions?: Prisma.PermissionsRolesUpdateManyWithoutRoleNestedInput;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRolesNestedInput;
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRolesNestedInput;
   users?: Prisma.UserUpdateManyWithoutRoleNestedInput;
-  permissions?: Prisma.PermissionsRolesUpdateManyWithoutRoleNestedInput;
 };
 
 export type RoleUncheckedUpdateWithoutUpdatedByInput = {
@@ -1387,7 +1438,6 @@ export type RoleUncheckedUpdateWithoutUpdatedByInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1395,8 +1445,9 @@ export type RoleUncheckedUpdateWithoutUpdatedByInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  users?: Prisma.UserUncheckedUpdateManyWithoutRoleNestedInput;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   permissions?: Prisma.PermissionsRolesUncheckedUpdateManyWithoutRoleNestedInput;
+  users?: Prisma.UserUncheckedUpdateManyWithoutRoleNestedInput;
 };
 
 export type RoleUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -1405,65 +1456,14 @@ export type RoleUncheckedUpdateManyWithoutUpdatedByInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string;
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null;
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-};
-
-export type RoleUpdateWithoutDeletedByInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
-  deletedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null;
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedRolesNestedInput;
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRolesNestedInput;
-  users?: Prisma.UserUpdateManyWithoutRoleNestedInput;
-  permissions?: Prisma.PermissionsRolesUpdateManyWithoutRoleNestedInput;
-};
-
-export type RoleUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number;
-  name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
-  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null;
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  users?: Prisma.UserUncheckedUpdateManyWithoutRoleNestedInput;
-  permissions?: Prisma.PermissionsRolesUncheckedUpdateManyWithoutRoleNestedInput;
-};
-
-export type RoleUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number;
-  name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean;
-  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null;
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 
 /**
@@ -1471,16 +1471,16 @@ export type RoleUncheckedUpdateManyWithoutDeletedByInput = {
  */
 
 export type RoleCountOutputType = {
-  users: number;
   permissions: number;
+  users: number;
 };
 
 export type RoleCountOutputTypeSelect<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  users?: boolean | RoleCountOutputTypeCountUsersArgs;
   permissions?: boolean | RoleCountOutputTypeCountPermissionsArgs;
+  users?: boolean | RoleCountOutputTypeCountUsersArgs;
 };
 
 /**
@@ -1499,21 +1499,21 @@ export type RoleCountOutputTypeDefaultArgs<
 /**
  * RoleCountOutputType without action
  */
-export type RoleCountOutputTypeCountUsersArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {
-  where?: Prisma.UserWhereInput;
-};
-
-/**
- * RoleCountOutputType without action
- */
 export type RoleCountOutputTypeCountPermissionsArgs<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.PermissionsRolesWhereInput;
+};
+
+/**
+ * RoleCountOutputType without action
+ */
+export type RoleCountOutputTypeCountUsersArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.UserWhereInput;
 };
 
 export type RoleSelect<
@@ -1527,15 +1527,15 @@ export type RoleSelect<
     isActive?: boolean;
     createdById?: boolean;
     updatedById?: boolean;
-    deletedById?: boolean;
     deletedAt?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
-    createdBy?: boolean | Prisma.Role$createdByArgs<ExtArgs>;
-    updatedBy?: boolean | Prisma.Role$updatedByArgs<ExtArgs>;
-    deletedBy?: boolean | Prisma.Role$deletedByArgs<ExtArgs>;
-    users?: boolean | Prisma.Role$usersArgs<ExtArgs>;
+    deletedById?: boolean;
     permissions?: boolean | Prisma.Role$permissionsArgs<ExtArgs>;
+    createdBy?: boolean | Prisma.Role$createdByArgs<ExtArgs>;
+    deletedBy?: boolean | Prisma.Role$deletedByArgs<ExtArgs>;
+    updatedBy?: boolean | Prisma.Role$updatedByArgs<ExtArgs>;
+    users?: boolean | Prisma.Role$usersArgs<ExtArgs>;
     _count?: boolean | Prisma.RoleCountOutputTypeDefaultArgs<ExtArgs>;
   },
   ExtArgs['result']['role']
@@ -1552,13 +1552,13 @@ export type RoleSelectCreateManyAndReturn<
     isActive?: boolean;
     createdById?: boolean;
     updatedById?: boolean;
-    deletedById?: boolean;
     deletedAt?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    deletedById?: boolean;
     createdBy?: boolean | Prisma.Role$createdByArgs<ExtArgs>;
-    updatedBy?: boolean | Prisma.Role$updatedByArgs<ExtArgs>;
     deletedBy?: boolean | Prisma.Role$deletedByArgs<ExtArgs>;
+    updatedBy?: boolean | Prisma.Role$updatedByArgs<ExtArgs>;
   },
   ExtArgs['result']['role']
 >;
@@ -1574,13 +1574,13 @@ export type RoleSelectUpdateManyAndReturn<
     isActive?: boolean;
     createdById?: boolean;
     updatedById?: boolean;
-    deletedById?: boolean;
     deletedAt?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    deletedById?: boolean;
     createdBy?: boolean | Prisma.Role$createdByArgs<ExtArgs>;
-    updatedBy?: boolean | Prisma.Role$updatedByArgs<ExtArgs>;
     deletedBy?: boolean | Prisma.Role$deletedByArgs<ExtArgs>;
+    updatedBy?: boolean | Prisma.Role$updatedByArgs<ExtArgs>;
   },
   ExtArgs['result']['role']
 >;
@@ -1592,10 +1592,10 @@ export type RoleSelectScalar = {
   isActive?: boolean;
   createdById?: boolean;
   updatedById?: boolean;
-  deletedById?: boolean;
   deletedAt?: boolean;
   createdAt?: boolean;
   updatedAt?: boolean;
+  deletedById?: boolean;
 };
 
 export type RoleOmit<
@@ -1608,21 +1608,21 @@ export type RoleOmit<
   | 'isActive'
   | 'createdById'
   | 'updatedById'
-  | 'deletedById'
   | 'deletedAt'
   | 'createdAt'
-  | 'updatedAt',
+  | 'updatedAt'
+  | 'deletedById',
   ExtArgs['result']['role']
 >;
 export type RoleInclude<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  createdBy?: boolean | Prisma.Role$createdByArgs<ExtArgs>;
-  updatedBy?: boolean | Prisma.Role$updatedByArgs<ExtArgs>;
-  deletedBy?: boolean | Prisma.Role$deletedByArgs<ExtArgs>;
-  users?: boolean | Prisma.Role$usersArgs<ExtArgs>;
   permissions?: boolean | Prisma.Role$permissionsArgs<ExtArgs>;
+  createdBy?: boolean | Prisma.Role$createdByArgs<ExtArgs>;
+  deletedBy?: boolean | Prisma.Role$deletedByArgs<ExtArgs>;
+  updatedBy?: boolean | Prisma.Role$updatedByArgs<ExtArgs>;
+  users?: boolean | Prisma.Role$usersArgs<ExtArgs>;
   _count?: boolean | Prisma.RoleCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type RoleIncludeCreateManyAndReturn<
@@ -1630,16 +1630,16 @@ export type RoleIncludeCreateManyAndReturn<
     runtime.Types.Extensions.DefaultArgs,
 > = {
   createdBy?: boolean | Prisma.Role$createdByArgs<ExtArgs>;
-  updatedBy?: boolean | Prisma.Role$updatedByArgs<ExtArgs>;
   deletedBy?: boolean | Prisma.Role$deletedByArgs<ExtArgs>;
+  updatedBy?: boolean | Prisma.Role$updatedByArgs<ExtArgs>;
 };
 export type RoleIncludeUpdateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
   createdBy?: boolean | Prisma.Role$createdByArgs<ExtArgs>;
-  updatedBy?: boolean | Prisma.Role$updatedByArgs<ExtArgs>;
   deletedBy?: boolean | Prisma.Role$deletedByArgs<ExtArgs>;
+  updatedBy?: boolean | Prisma.Role$updatedByArgs<ExtArgs>;
 };
 
 export type $RolePayload<
@@ -1648,11 +1648,11 @@ export type $RolePayload<
 > = {
   name: 'Role';
   objects: {
-    createdBy: Prisma.$UserPayload<ExtArgs> | null;
-    updatedBy: Prisma.$UserPayload<ExtArgs> | null;
-    deletedBy: Prisma.$UserPayload<ExtArgs> | null;
-    users: Prisma.$UserPayload<ExtArgs>[];
     permissions: Prisma.$PermissionsRolesPayload<ExtArgs>[];
+    createdBy: Prisma.$UserPayload<ExtArgs> | null;
+    deletedBy: Prisma.$UserPayload<ExtArgs> | null;
+    updatedBy: Prisma.$UserPayload<ExtArgs> | null;
+    users: Prisma.$UserPayload<ExtArgs>[];
   };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
@@ -1662,10 +1662,10 @@ export type $RolePayload<
       isActive: boolean;
       createdById: number | null;
       updatedById: number | null;
-      deletedById: number | null;
       deletedAt: Date | null;
       createdAt: Date;
       updatedAt: Date;
+      deletedById: number | null;
     },
     ExtArgs['result']['role']
   >;
@@ -2216,21 +2216,19 @@ export interface Prisma__RoleClient<
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise';
+  permissions<T extends Prisma.Role$permissionsArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.Role$permissionsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$PermissionsRolesPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
   createdBy<T extends Prisma.Role$createdByArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.Role$createdByArgs<ExtArgs>>,
-  ): Prisma.Prisma__UserClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$UserPayload<ExtArgs>,
-      T,
-      'findUniqueOrThrow',
-      GlobalOmitOptions
-    > | null,
-    null,
-    ExtArgs,
-    GlobalOmitOptions
-  >;
-  updatedBy<T extends Prisma.Role$updatedByArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.Role$updatedByArgs<ExtArgs>>,
   ): Prisma.Prisma__UserClient<
     runtime.Types.Result.GetResult<
       Prisma.$UserPayload<ExtArgs>,
@@ -2255,22 +2253,24 @@ export interface Prisma__RoleClient<
     ExtArgs,
     GlobalOmitOptions
   >;
+  updatedBy<T extends Prisma.Role$updatedByArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.Role$updatedByArgs<ExtArgs>>,
+  ): Prisma.Prisma__UserClient<
+    runtime.Types.Result.GetResult<
+      Prisma.$UserPayload<ExtArgs>,
+      T,
+      'findUniqueOrThrow',
+      GlobalOmitOptions
+    > | null,
+    null,
+    ExtArgs,
+    GlobalOmitOptions
+  >;
   users<T extends Prisma.Role$usersArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.Role$usersArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     | runtime.Types.Result.GetResult<
         Prisma.$UserPayload<ExtArgs>,
-        T,
-        'findMany',
-        GlobalOmitOptions
-      >
-    | Null
-  >;
-  permissions<T extends Prisma.Role$permissionsArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.Role$permissionsArgs<ExtArgs>>,
-  ): Prisma.PrismaPromise<
-    | runtime.Types.Result.GetResult<
-        Prisma.$PermissionsRolesPayload<ExtArgs>,
         T,
         'findMany',
         GlobalOmitOptions
@@ -2325,10 +2325,10 @@ export interface RoleFieldRefs {
   readonly isActive: Prisma.FieldRef<'Role', 'Boolean'>;
   readonly createdById: Prisma.FieldRef<'Role', 'Int'>;
   readonly updatedById: Prisma.FieldRef<'Role', 'Int'>;
-  readonly deletedById: Prisma.FieldRef<'Role', 'Int'>;
   readonly deletedAt: Prisma.FieldRef<'Role', 'DateTime'>;
   readonly createdAt: Prisma.FieldRef<'Role', 'DateTime'>;
   readonly updatedAt: Prisma.FieldRef<'Role', 'DateTime'>;
+  readonly deletedById: Prisma.FieldRef<'Role', 'Int'>;
 }
 
 // Custom InputTypes
@@ -2778,6 +2778,37 @@ export type RoleDeleteManyArgs<
 };
 
 /**
+ * Role.permissions
+ */
+export type Role$permissionsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the PermissionsRoles
+   */
+  select?: Prisma.PermissionsRolesSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the PermissionsRoles
+   */
+  omit?: Prisma.PermissionsRolesOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PermissionsRolesInclude<ExtArgs> | null;
+  where?: Prisma.PermissionsRolesWhereInput;
+  orderBy?:
+    | Prisma.PermissionsRolesOrderByWithRelationInput
+    | Prisma.PermissionsRolesOrderByWithRelationInput[];
+  cursor?: Prisma.PermissionsRolesWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?:
+    | Prisma.PermissionsRolesScalarFieldEnum
+    | Prisma.PermissionsRolesScalarFieldEnum[];
+};
+
+/**
  * Role.createdBy
  */
 export type Role$createdByArgs<
@@ -2800,9 +2831,9 @@ export type Role$createdByArgs<
 };
 
 /**
- * Role.updatedBy
+ * Role.deletedBy
  */
-export type Role$updatedByArgs<
+export type Role$deletedByArgs<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
@@ -2822,9 +2853,9 @@ export type Role$updatedByArgs<
 };
 
 /**
- * Role.deletedBy
+ * Role.updatedBy
  */
-export type Role$deletedByArgs<
+export type Role$updatedByArgs<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
@@ -2870,37 +2901,6 @@ export type Role$usersArgs<
   take?: number;
   skip?: number;
   distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[];
-};
-
-/**
- * Role.permissions
- */
-export type Role$permissionsArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {
-  /**
-   * Select specific fields to fetch from the PermissionsRoles
-   */
-  select?: Prisma.PermissionsRolesSelect<ExtArgs> | null;
-  /**
-   * Omit specific fields from the PermissionsRoles
-   */
-  omit?: Prisma.PermissionsRolesOmit<ExtArgs> | null;
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PermissionsRolesInclude<ExtArgs> | null;
-  where?: Prisma.PermissionsRolesWhereInput;
-  orderBy?:
-    | Prisma.PermissionsRolesOrderByWithRelationInput
-    | Prisma.PermissionsRolesOrderByWithRelationInput[];
-  cursor?: Prisma.PermissionsRolesWhereUniqueInput;
-  take?: number;
-  skip?: number;
-  distinct?:
-    | Prisma.PermissionsRolesScalarFieldEnum
-    | Prisma.PermissionsRolesScalarFieldEnum[];
 };
 
 /**

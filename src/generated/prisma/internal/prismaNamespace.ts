@@ -2509,10 +2509,10 @@ export const LanguageScalarFieldEnum = {
   name: 'name',
   createdById: 'createdById',
   updatedById: 'updatedById',
-  deletedById: 'deletedById',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedById: 'deletedById',
 } as const;
 
 export type LanguageScalarFieldEnum =
@@ -2530,10 +2530,10 @@ export const UserScalarFieldEnum = {
   roleId: 'roleId',
   createdById: 'createdById',
   updatedById: 'updatedById',
-  deletedById: 'deletedById',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedById: 'deletedById',
 } as const;
 
 export type UserScalarFieldEnum =
@@ -2547,10 +2547,10 @@ export const UserTranslationScalarFieldEnum = {
   description: 'description',
   createdById: 'createdById',
   updatedById: 'updatedById',
-  deletedById: 'deletedById',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedById: 'deletedById',
 } as const;
 
 export type UserTranslationScalarFieldEnum =
@@ -2587,10 +2587,10 @@ export const PermissionScalarFieldEnum = {
   method: 'method',
   createdById: 'createdById',
   updatedById: 'updatedById',
-  deletedById: 'deletedById',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedById: 'deletedById',
 } as const;
 
 export type PermissionScalarFieldEnum =
@@ -2603,10 +2603,10 @@ export const RoleScalarFieldEnum = {
   isActive: 'isActive',
   createdById: 'createdById',
   updatedById: 'updatedById',
-  deletedById: 'deletedById',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedById: 'deletedById',
 } as const;
 
 export type RoleScalarFieldEnum =
@@ -2630,10 +2630,10 @@ export const BrandScalarFieldEnum = {
   logo: 'logo',
   createdById: 'createdById',
   updatedById: 'updatedById',
-  deletedById: 'deletedById',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedById: 'deletedById',
 } as const;
 
 export type BrandScalarFieldEnum =
@@ -2647,10 +2647,10 @@ export const BrandTranslationScalarFieldEnum = {
   description: 'description',
   createdById: 'createdById',
   updatedById: 'updatedById',
-  deletedById: 'deletedById',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedById: 'deletedById',
 } as const;
 
 export type BrandTranslationScalarFieldEnum =
@@ -2664,10 +2664,10 @@ export const ProductScalarFieldEnum = {
   images: 'images',
   createdById: 'createdById',
   updatedById: 'updatedById',
-  deletedById: 'deletedById',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedById: 'deletedById',
 } as const;
 
 export type ProductScalarFieldEnum =
@@ -2681,10 +2681,10 @@ export const ProductTranslationScalarFieldEnum = {
   description: 'description',
   createdById: 'createdById',
   updatedById: 'updatedById',
-  deletedById: 'deletedById',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedById: 'deletedById',
 } as const;
 
 export type ProductTranslationScalarFieldEnum =
@@ -2695,10 +2695,10 @@ export const CategoryScalarFieldEnum = {
   parentCategoryId: 'parentCategoryId',
   createdById: 'createdById',
   updatedById: 'updatedById',
-  deletedById: 'deletedById',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedById: 'deletedById',
 } as const;
 
 export type CategoryScalarFieldEnum =
@@ -2712,10 +2712,10 @@ export const CategoryTranslationScalarFieldEnum = {
   description: 'description',
   createdById: 'createdById',
   updatedById: 'updatedById',
-  deletedById: 'deletedById',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedById: 'deletedById',
 } as const;
 
 export type CategoryTranslationScalarFieldEnum =
@@ -2727,10 +2727,10 @@ export const VariantScalarFieldEnum = {
   productId: 'productId',
   createdById: 'createdById',
   updatedById: 'updatedById',
-  deletedById: 'deletedById',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedById: 'deletedById',
 } as const;
 
 export type VariantScalarFieldEnum =
@@ -2742,10 +2742,10 @@ export const VariantOptionScalarFieldEnum = {
   variantId: 'variantId',
   createdById: 'createdById',
   updatedById: 'updatedById',
-  deletedById: 'deletedById',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedById: 'deletedById',
 } as const;
 
 export type VariantOptionScalarFieldEnum =
@@ -2760,10 +2760,10 @@ export const SKUScalarFieldEnum = {
   productId: 'productId',
   createdById: 'createdById',
   updatedById: 'updatedById',
-  deletedById: 'deletedById',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedById: 'deletedById',
 } as const;
 
 export type SKUScalarFieldEnum =
@@ -2801,10 +2801,10 @@ export const OrderScalarFieldEnum = {
   status: 'status',
   createdById: 'createdById',
   updatedById: 'updatedById',
-  deletedById: 'deletedById',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedById: 'deletedById',
 } as const;
 
 export type OrderScalarFieldEnum =

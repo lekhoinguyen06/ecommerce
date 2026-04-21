@@ -212,21 +212,21 @@ export type ProductsCategoriesWhereInput = {
     | Prisma.ProductsCategoriesWhereInput[];
   product_id?: Prisma.IntFilter<'ProductsCategories'> | number;
   category_id?: Prisma.IntFilter<'ProductsCategories'> | number;
-  product?: Prisma.XOR<
-    Prisma.ProductScalarRelationFilter,
-    Prisma.ProductWhereInput
-  >;
   category?: Prisma.XOR<
     Prisma.CategoryScalarRelationFilter,
     Prisma.CategoryWhereInput
+  >;
+  product?: Prisma.XOR<
+    Prisma.ProductScalarRelationFilter,
+    Prisma.ProductWhereInput
   >;
 };
 
 export type ProductsCategoriesOrderByWithRelationInput = {
   product_id?: Prisma.SortOrder;
   category_id?: Prisma.SortOrder;
-  product?: Prisma.ProductOrderByWithRelationInput;
   category?: Prisma.CategoryOrderByWithRelationInput;
+  product?: Prisma.ProductOrderByWithRelationInput;
 };
 
 export type ProductsCategoriesWhereUniqueInput = Prisma.AtLeast<
@@ -241,13 +241,13 @@ export type ProductsCategoriesWhereUniqueInput = Prisma.AtLeast<
       | Prisma.ProductsCategoriesWhereInput[];
     product_id?: Prisma.IntFilter<'ProductsCategories'> | number;
     category_id?: Prisma.IntFilter<'ProductsCategories'> | number;
-    product?: Prisma.XOR<
-      Prisma.ProductScalarRelationFilter,
-      Prisma.ProductWhereInput
-    >;
     category?: Prisma.XOR<
       Prisma.CategoryScalarRelationFilter,
       Prisma.CategoryWhereInput
+    >;
+    product?: Prisma.XOR<
+      Prisma.ProductScalarRelationFilter,
+      Prisma.ProductWhereInput
     >;
   },
   'product_id_category_id'
@@ -276,8 +276,8 @@ export type ProductsCategoriesScalarWhereWithAggregatesInput = {
 };
 
 export type ProductsCategoriesCreateInput = {
-  product: Prisma.ProductCreateNestedOneWithoutCategoriesInput;
   category: Prisma.CategoryCreateNestedOneWithoutProductsInput;
+  product: Prisma.ProductCreateNestedOneWithoutCategoriesInput;
 };
 
 export type ProductsCategoriesUncheckedCreateInput = {
@@ -286,8 +286,8 @@ export type ProductsCategoriesUncheckedCreateInput = {
 };
 
 export type ProductsCategoriesUpdateInput = {
-  product?: Prisma.ProductUpdateOneRequiredWithoutCategoriesNestedInput;
   category?: Prisma.CategoryUpdateOneRequiredWithoutProductsNestedInput;
+  product?: Prisma.ProductUpdateOneRequiredWithoutCategoriesNestedInput;
 };
 
 export type ProductsCategoriesUncheckedUpdateInput = {
@@ -720,8 +720,8 @@ export type ProductsCategoriesSelect<
   {
     product_id?: boolean;
     category_id?: boolean;
-    product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>;
     category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>;
+    product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>;
   },
   ExtArgs['result']['productsCategories']
 >;
@@ -733,8 +733,8 @@ export type ProductsCategoriesSelectCreateManyAndReturn<
   {
     product_id?: boolean;
     category_id?: boolean;
-    product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>;
     category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>;
+    product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>;
   },
   ExtArgs['result']['productsCategories']
 >;
@@ -746,8 +746,8 @@ export type ProductsCategoriesSelectUpdateManyAndReturn<
   {
     product_id?: boolean;
     category_id?: boolean;
-    product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>;
     category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>;
+    product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>;
   },
   ExtArgs['result']['productsCategories']
 >;
@@ -768,22 +768,22 @@ export type ProductsCategoriesInclude<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>;
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>;
+  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>;
 };
 export type ProductsCategoriesIncludeCreateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>;
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>;
+  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>;
 };
 export type ProductsCategoriesIncludeUpdateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>;
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>;
+  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>;
 };
 
 export type $ProductsCategoriesPayload<
@@ -792,8 +792,8 @@ export type $ProductsCategoriesPayload<
 > = {
   name: 'ProductsCategories';
   objects: {
-    product: Prisma.$ProductPayload<ExtArgs>;
     category: Prisma.$CategoryPayload<ExtArgs>;
+    product: Prisma.$ProductPayload<ExtArgs>;
   };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
@@ -1371,11 +1371,11 @@ export interface Prisma__ProductsCategoriesClient<
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise';
-  product<T extends Prisma.ProductDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.ProductDefaultArgs<ExtArgs>>,
-  ): Prisma.Prisma__ProductClient<
+  category<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>,
+  ): Prisma.Prisma__CategoryClient<
     | runtime.Types.Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
+        Prisma.$CategoryPayload<ExtArgs>,
         T,
         'findUniqueOrThrow',
         GlobalOmitOptions
@@ -1385,11 +1385,11 @@ export interface Prisma__ProductsCategoriesClient<
     ExtArgs,
     GlobalOmitOptions
   >;
-  category<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>,
-  ): Prisma.Prisma__CategoryClient<
+  product<T extends Prisma.ProductDefaultArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.ProductDefaultArgs<ExtArgs>>,
+  ): Prisma.Prisma__ProductClient<
     | runtime.Types.Result.GetResult<
-        Prisma.$CategoryPayload<ExtArgs>,
+        Prisma.$ProductPayload<ExtArgs>,
         T,
         'findUniqueOrThrow',
         GlobalOmitOptions

@@ -225,11 +225,11 @@ export type RefreshTokenWhereInput = {
   expiresAt?: Prisma.DateTimeFilter<'RefreshToken'> | Date | string;
   createdAt?: Prisma.DateTimeFilter<'RefreshToken'> | Date | string;
   deviceId?: Prisma.IntFilter<'RefreshToken'> | number;
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
   device?: Prisma.XOR<
     Prisma.DeviceScalarRelationFilter,
     Prisma.DeviceWhereInput
   >;
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
 };
 
 export type RefreshTokenOrderByWithRelationInput = {
@@ -238,8 +238,8 @@ export type RefreshTokenOrderByWithRelationInput = {
   expiresAt?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   deviceId?: Prisma.SortOrder;
-  user?: Prisma.UserOrderByWithRelationInput;
   device?: Prisma.DeviceOrderByWithRelationInput;
+  user?: Prisma.UserOrderByWithRelationInput;
 };
 
 export type RefreshTokenWhereUniqueInput = Prisma.AtLeast<
@@ -252,11 +252,11 @@ export type RefreshTokenWhereUniqueInput = Prisma.AtLeast<
     expiresAt?: Prisma.DateTimeFilter<'RefreshToken'> | Date | string;
     createdAt?: Prisma.DateTimeFilter<'RefreshToken'> | Date | string;
     deviceId?: Prisma.IntFilter<'RefreshToken'> | number;
-    user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
     device?: Prisma.XOR<
       Prisma.DeviceScalarRelationFilter,
       Prisma.DeviceWhereInput
     >;
+    user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
   },
   'token'
 >;
@@ -299,8 +299,8 @@ export type RefreshTokenCreateInput = {
   token: string;
   expiresAt: Date | string;
   createdAt?: Date | string;
-  user: Prisma.UserCreateNestedOneWithoutRefreshTokensInput;
   device: Prisma.DeviceCreateNestedOneWithoutRefreshTokensInput;
+  user: Prisma.UserCreateNestedOneWithoutRefreshTokensInput;
 };
 
 export type RefreshTokenUncheckedCreateInput = {
@@ -315,8 +315,8 @@ export type RefreshTokenUpdateInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string;
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  user?: Prisma.UserUpdateOneRequiredWithoutRefreshTokensNestedInput;
   device?: Prisma.DeviceUpdateOneRequiredWithoutRefreshTokensNestedInput;
+  user?: Prisma.UserUpdateOneRequiredWithoutRefreshTokensNestedInput;
 };
 
 export type RefreshTokenUncheckedUpdateInput = {
@@ -808,8 +808,8 @@ export type RefreshTokenSelect<
     expiresAt?: boolean;
     createdAt?: boolean;
     deviceId?: boolean;
-    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
     device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>;
+    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
   },
   ExtArgs['result']['refreshToken']
 >;
@@ -824,8 +824,8 @@ export type RefreshTokenSelectCreateManyAndReturn<
     expiresAt?: boolean;
     createdAt?: boolean;
     deviceId?: boolean;
-    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
     device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>;
+    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
   },
   ExtArgs['result']['refreshToken']
 >;
@@ -840,8 +840,8 @@ export type RefreshTokenSelectUpdateManyAndReturn<
     expiresAt?: boolean;
     createdAt?: boolean;
     deviceId?: boolean;
-    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
     device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>;
+    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
   },
   ExtArgs['result']['refreshToken']
 >;
@@ -865,22 +865,22 @@ export type RefreshTokenInclude<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
   device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>;
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
 };
 export type RefreshTokenIncludeCreateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
   device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>;
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
 };
 export type RefreshTokenIncludeUpdateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
   device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>;
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
 };
 
 export type $RefreshTokenPayload<
@@ -889,8 +889,8 @@ export type $RefreshTokenPayload<
 > = {
   name: 'RefreshToken';
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>;
     device: Prisma.$DevicePayload<ExtArgs>;
+    user: Prisma.$UserPayload<ExtArgs>;
   };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
@@ -1455,11 +1455,11 @@ export interface Prisma__RefreshTokenClient<
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise';
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>,
-  ): Prisma.Prisma__UserClient<
+  device<T extends Prisma.DeviceDefaultArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.DeviceDefaultArgs<ExtArgs>>,
+  ): Prisma.Prisma__DeviceClient<
     | runtime.Types.Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
+        Prisma.$DevicePayload<ExtArgs>,
         T,
         'findUniqueOrThrow',
         GlobalOmitOptions
@@ -1469,11 +1469,11 @@ export interface Prisma__RefreshTokenClient<
     ExtArgs,
     GlobalOmitOptions
   >;
-  device<T extends Prisma.DeviceDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.DeviceDefaultArgs<ExtArgs>>,
-  ): Prisma.Prisma__DeviceClient<
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>,
+  ): Prisma.Prisma__UserClient<
     | runtime.Types.Result.GetResult<
-        Prisma.$DevicePayload<ExtArgs>,
+        Prisma.$UserPayload<ExtArgs>,
         T,
         'findUniqueOrThrow',
         GlobalOmitOptions

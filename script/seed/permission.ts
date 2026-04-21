@@ -8,7 +8,7 @@ const prisma = new PrismaService();
 async function bootstrap() {
   await prisma.$connect();
   const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  await app.listen(3001);
   const server = app.getHttpAdapter().getInstance();
   const router = server.router;
 

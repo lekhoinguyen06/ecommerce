@@ -45,10 +45,10 @@ export type BrandMinAggregateOutputType = {
   logo: string | null;
   createdById: number | null;
   updatedById: number | null;
-  deletedById: number | null;
   deletedAt: Date | null;
   createdAt: Date | null;
   updatedAt: Date | null;
+  deletedById: number | null;
 };
 
 export type BrandMaxAggregateOutputType = {
@@ -56,10 +56,10 @@ export type BrandMaxAggregateOutputType = {
   logo: string | null;
   createdById: number | null;
   updatedById: number | null;
-  deletedById: number | null;
   deletedAt: Date | null;
   createdAt: Date | null;
   updatedAt: Date | null;
+  deletedById: number | null;
 };
 
 export type BrandCountAggregateOutputType = {
@@ -67,10 +67,10 @@ export type BrandCountAggregateOutputType = {
   logo: number;
   createdById: number;
   updatedById: number;
-  deletedById: number;
   deletedAt: number;
   createdAt: number;
   updatedAt: number;
+  deletedById: number;
   _all: number;
 };
 
@@ -93,10 +93,10 @@ export type BrandMinAggregateInputType = {
   logo?: true;
   createdById?: true;
   updatedById?: true;
-  deletedById?: true;
   deletedAt?: true;
   createdAt?: true;
   updatedAt?: true;
+  deletedById?: true;
 };
 
 export type BrandMaxAggregateInputType = {
@@ -104,10 +104,10 @@ export type BrandMaxAggregateInputType = {
   logo?: true;
   createdById?: true;
   updatedById?: true;
-  deletedById?: true;
   deletedAt?: true;
   createdAt?: true;
   updatedAt?: true;
+  deletedById?: true;
 };
 
 export type BrandCountAggregateInputType = {
@@ -115,10 +115,10 @@ export type BrandCountAggregateInputType = {
   logo?: true;
   createdById?: true;
   updatedById?: true;
-  deletedById?: true;
   deletedAt?: true;
   createdAt?: true;
   updatedAt?: true;
+  deletedById?: true;
   _all?: true;
 };
 
@@ -220,10 +220,10 @@ export type BrandGroupByOutputType = {
   logo: string | null;
   createdById: number | null;
   updatedById: number | null;
-  deletedById: number | null;
   deletedAt: Date | null;
   createdAt: Date;
   updatedAt: Date;
+  deletedById: number | null;
   _count: BrandCountAggregateOutputType | null;
   _avg: BrandAvgAggregateOutputType | null;
   _sum: BrandSumAggregateOutputType | null;
@@ -251,15 +251,11 @@ export type BrandWhereInput = {
   logo?: Prisma.StringNullableFilter<'Brand'> | string | null;
   createdById?: Prisma.IntNullableFilter<'Brand'> | number | null;
   updatedById?: Prisma.IntNullableFilter<'Brand'> | number | null;
-  deletedById?: Prisma.IntNullableFilter<'Brand'> | number | null;
   deletedAt?: Prisma.DateTimeNullableFilter<'Brand'> | Date | string | null;
   createdAt?: Prisma.DateTimeFilter<'Brand'> | Date | string;
   updatedAt?: Prisma.DateTimeFilter<'Brand'> | Date | string;
+  deletedById?: Prisma.IntNullableFilter<'Brand'> | number | null;
   createdBy?: Prisma.XOR<
-    Prisma.UserNullableScalarRelationFilter,
-    Prisma.UserWhereInput
-  > | null;
-  updatedBy?: Prisma.XOR<
     Prisma.UserNullableScalarRelationFilter,
     Prisma.UserWhereInput
   > | null;
@@ -267,8 +263,12 @@ export type BrandWhereInput = {
     Prisma.UserNullableScalarRelationFilter,
     Prisma.UserWhereInput
   > | null;
-  products?: Prisma.ProductListRelationFilter;
+  updatedBy?: Prisma.XOR<
+    Prisma.UserNullableScalarRelationFilter,
+    Prisma.UserWhereInput
+  > | null;
   translations?: Prisma.BrandTranslationListRelationFilter;
+  products?: Prisma.ProductListRelationFilter;
 };
 
 export type BrandOrderByWithRelationInput = {
@@ -276,15 +276,15 @@ export type BrandOrderByWithRelationInput = {
   logo?: Prisma.SortOrderInput | Prisma.SortOrder;
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder;
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder;
-  deletedById?: Prisma.SortOrderInput | Prisma.SortOrder;
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
+  deletedById?: Prisma.SortOrderInput | Prisma.SortOrder;
   createdBy?: Prisma.UserOrderByWithRelationInput;
-  updatedBy?: Prisma.UserOrderByWithRelationInput;
   deletedBy?: Prisma.UserOrderByWithRelationInput;
-  products?: Prisma.ProductOrderByRelationAggregateInput;
+  updatedBy?: Prisma.UserOrderByWithRelationInput;
   translations?: Prisma.BrandTranslationOrderByRelationAggregateInput;
+  products?: Prisma.ProductOrderByRelationAggregateInput;
 };
 
 export type BrandWhereUniqueInput = Prisma.AtLeast<
@@ -296,15 +296,11 @@ export type BrandWhereUniqueInput = Prisma.AtLeast<
     logo?: Prisma.StringNullableFilter<'Brand'> | string | null;
     createdById?: Prisma.IntNullableFilter<'Brand'> | number | null;
     updatedById?: Prisma.IntNullableFilter<'Brand'> | number | null;
-    deletedById?: Prisma.IntNullableFilter<'Brand'> | number | null;
     deletedAt?: Prisma.DateTimeNullableFilter<'Brand'> | Date | string | null;
     createdAt?: Prisma.DateTimeFilter<'Brand'> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<'Brand'> | Date | string;
+    deletedById?: Prisma.IntNullableFilter<'Brand'> | number | null;
     createdBy?: Prisma.XOR<
-      Prisma.UserNullableScalarRelationFilter,
-      Prisma.UserWhereInput
-    > | null;
-    updatedBy?: Prisma.XOR<
       Prisma.UserNullableScalarRelationFilter,
       Prisma.UserWhereInput
     > | null;
@@ -312,8 +308,12 @@ export type BrandWhereUniqueInput = Prisma.AtLeast<
       Prisma.UserNullableScalarRelationFilter,
       Prisma.UserWhereInput
     > | null;
-    products?: Prisma.ProductListRelationFilter;
+    updatedBy?: Prisma.XOR<
+      Prisma.UserNullableScalarRelationFilter,
+      Prisma.UserWhereInput
+    > | null;
     translations?: Prisma.BrandTranslationListRelationFilter;
+    products?: Prisma.ProductListRelationFilter;
   },
   'id'
 >;
@@ -323,10 +323,10 @@ export type BrandOrderByWithAggregationInput = {
   logo?: Prisma.SortOrderInput | Prisma.SortOrder;
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder;
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder;
-  deletedById?: Prisma.SortOrderInput | Prisma.SortOrder;
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
+  deletedById?: Prisma.SortOrderInput | Prisma.SortOrder;
   _count?: Prisma.BrandCountOrderByAggregateInput;
   _avg?: Prisma.BrandAvgOrderByAggregateInput;
   _max?: Prisma.BrandMaxOrderByAggregateInput;
@@ -346,7 +346,6 @@ export type BrandScalarWhereWithAggregatesInput = {
   logo?: Prisma.StringNullableWithAggregatesFilter<'Brand'> | string | null;
   createdById?: Prisma.IntNullableWithAggregatesFilter<'Brand'> | number | null;
   updatedById?: Prisma.IntNullableWithAggregatesFilter<'Brand'> | number | null;
-  deletedById?: Prisma.IntNullableWithAggregatesFilter<'Brand'> | number | null;
   deletedAt?:
     | Prisma.DateTimeNullableWithAggregatesFilter<'Brand'>
     | Date
@@ -354,6 +353,7 @@ export type BrandScalarWhereWithAggregatesInput = {
     | null;
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'Brand'> | Date | string;
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<'Brand'> | Date | string;
+  deletedById?: Prisma.IntNullableWithAggregatesFilter<'Brand'> | number | null;
 };
 
 export type BrandCreateInput = {
@@ -362,10 +362,10 @@ export type BrandCreateInput = {
   createdAt?: Date | string;
   updatedAt?: Date | string;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedBrandsInput;
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedBrandsInput;
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedBrandsInput;
-  products?: Prisma.ProductCreateNestedManyWithoutBrandInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedBrandsInput;
   translations?: Prisma.BrandTranslationCreateNestedManyWithoutBrandInput;
+  products?: Prisma.ProductCreateNestedManyWithoutBrandInput;
 };
 
 export type BrandUncheckedCreateInput = {
@@ -373,12 +373,12 @@ export type BrandUncheckedCreateInput = {
   logo?: string | null;
   createdById?: number | null;
   updatedById?: number | null;
-  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutBrandInput;
+  deletedById?: number | null;
   translations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutBrandInput;
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutBrandInput;
 };
 
 export type BrandUpdateInput = {
@@ -391,10 +391,10 @@ export type BrandUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedBrandsNestedInput;
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedBrandsNestedInput;
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedBrandsNestedInput;
-  products?: Prisma.ProductUpdateManyWithoutBrandNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedBrandsNestedInput;
   translations?: Prisma.BrandTranslationUpdateManyWithoutBrandNestedInput;
+  products?: Prisma.ProductUpdateManyWithoutBrandNestedInput;
 };
 
 export type BrandUncheckedUpdateInput = {
@@ -402,7 +402,6 @@ export type BrandUncheckedUpdateInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -410,8 +409,9 @@ export type BrandUncheckedUpdateInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  products?: Prisma.ProductUncheckedUpdateManyWithoutBrandNestedInput;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   translations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutBrandNestedInput;
+  products?: Prisma.ProductUncheckedUpdateManyWithoutBrandNestedInput;
 };
 
 export type BrandCreateManyInput = {
@@ -419,10 +419,10 @@ export type BrandCreateManyInput = {
   logo?: string | null;
   createdById?: number | null;
   updatedById?: number | null;
-  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  deletedById?: number | null;
 };
 
 export type BrandUpdateManyMutationInput = {
@@ -441,7 +441,6 @@ export type BrandUncheckedUpdateManyInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -449,6 +448,7 @@ export type BrandUncheckedUpdateManyInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
 };
 
 export type BrandListRelationFilter = {
@@ -466,10 +466,10 @@ export type BrandCountOrderByAggregateInput = {
   logo?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
-  deletedById?: Prisma.SortOrder;
   deletedAt?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
+  deletedById?: Prisma.SortOrder;
 };
 
 export type BrandAvgOrderByAggregateInput = {
@@ -484,10 +484,10 @@ export type BrandMaxOrderByAggregateInput = {
   logo?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
-  deletedById?: Prisma.SortOrder;
   deletedAt?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
+  deletedById?: Prisma.SortOrder;
 };
 
 export type BrandMinOrderByAggregateInput = {
@@ -495,10 +495,10 @@ export type BrandMinOrderByAggregateInput = {
   logo?: Prisma.SortOrder;
   createdById?: Prisma.SortOrder;
   updatedById?: Prisma.SortOrder;
-  deletedById?: Prisma.SortOrder;
   deletedAt?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
   updatedAt?: Prisma.SortOrder;
+  deletedById?: Prisma.SortOrder;
 };
 
 export type BrandSumOrderByAggregateInput = {
@@ -528,21 +528,6 @@ export type BrandCreateNestedManyWithoutCreatedByInput = {
   connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
 };
 
-export type BrandCreateNestedManyWithoutUpdatedByInput = {
-  create?:
-    | Prisma.XOR<
-        Prisma.BrandCreateWithoutUpdatedByInput,
-        Prisma.BrandUncheckedCreateWithoutUpdatedByInput
-      >
-    | Prisma.BrandCreateWithoutUpdatedByInput[]
-    | Prisma.BrandUncheckedCreateWithoutUpdatedByInput[];
-  connectOrCreate?:
-    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput
-    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput[];
-  createMany?: Prisma.BrandCreateManyUpdatedByInputEnvelope;
-  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
-};
-
 export type BrandCreateNestedManyWithoutDeletedByInput = {
   create?:
     | Prisma.XOR<
@@ -555,6 +540,21 @@ export type BrandCreateNestedManyWithoutDeletedByInput = {
     | Prisma.BrandCreateOrConnectWithoutDeletedByInput
     | Prisma.BrandCreateOrConnectWithoutDeletedByInput[];
   createMany?: Prisma.BrandCreateManyDeletedByInputEnvelope;
+  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
+};
+
+export type BrandCreateNestedManyWithoutUpdatedByInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.BrandCreateWithoutUpdatedByInput,
+        Prisma.BrandUncheckedCreateWithoutUpdatedByInput
+      >
+    | Prisma.BrandCreateWithoutUpdatedByInput[]
+    | Prisma.BrandUncheckedCreateWithoutUpdatedByInput[];
+  connectOrCreate?:
+    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput
+    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput[];
+  createMany?: Prisma.BrandCreateManyUpdatedByInputEnvelope;
   connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
 };
 
@@ -573,21 +573,6 @@ export type BrandUncheckedCreateNestedManyWithoutCreatedByInput = {
   connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
 };
 
-export type BrandUncheckedCreateNestedManyWithoutUpdatedByInput = {
-  create?:
-    | Prisma.XOR<
-        Prisma.BrandCreateWithoutUpdatedByInput,
-        Prisma.BrandUncheckedCreateWithoutUpdatedByInput
-      >
-    | Prisma.BrandCreateWithoutUpdatedByInput[]
-    | Prisma.BrandUncheckedCreateWithoutUpdatedByInput[];
-  connectOrCreate?:
-    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput
-    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput[];
-  createMany?: Prisma.BrandCreateManyUpdatedByInputEnvelope;
-  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
-};
-
 export type BrandUncheckedCreateNestedManyWithoutDeletedByInput = {
   create?:
     | Prisma.XOR<
@@ -600,6 +585,21 @@ export type BrandUncheckedCreateNestedManyWithoutDeletedByInput = {
     | Prisma.BrandCreateOrConnectWithoutDeletedByInput
     | Prisma.BrandCreateOrConnectWithoutDeletedByInput[];
   createMany?: Prisma.BrandCreateManyDeletedByInputEnvelope;
+  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
+};
+
+export type BrandUncheckedCreateNestedManyWithoutUpdatedByInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.BrandCreateWithoutUpdatedByInput,
+        Prisma.BrandUncheckedCreateWithoutUpdatedByInput
+      >
+    | Prisma.BrandCreateWithoutUpdatedByInput[]
+    | Prisma.BrandUncheckedCreateWithoutUpdatedByInput[];
+  connectOrCreate?:
+    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput
+    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput[];
+  createMany?: Prisma.BrandCreateManyUpdatedByInputEnvelope;
   connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
 };
 
@@ -631,34 +631,6 @@ export type BrandUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.BrandScalarWhereInput | Prisma.BrandScalarWhereInput[];
 };
 
-export type BrandUpdateManyWithoutUpdatedByNestedInput = {
-  create?:
-    | Prisma.XOR<
-        Prisma.BrandCreateWithoutUpdatedByInput,
-        Prisma.BrandUncheckedCreateWithoutUpdatedByInput
-      >
-    | Prisma.BrandCreateWithoutUpdatedByInput[]
-    | Prisma.BrandUncheckedCreateWithoutUpdatedByInput[];
-  connectOrCreate?:
-    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput
-    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput[];
-  upsert?:
-    | Prisma.BrandUpsertWithWhereUniqueWithoutUpdatedByInput
-    | Prisma.BrandUpsertWithWhereUniqueWithoutUpdatedByInput[];
-  createMany?: Prisma.BrandCreateManyUpdatedByInputEnvelope;
-  set?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
-  disconnect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
-  delete?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
-  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
-  update?:
-    | Prisma.BrandUpdateWithWhereUniqueWithoutUpdatedByInput
-    | Prisma.BrandUpdateWithWhereUniqueWithoutUpdatedByInput[];
-  updateMany?:
-    | Prisma.BrandUpdateManyWithWhereWithoutUpdatedByInput
-    | Prisma.BrandUpdateManyWithWhereWithoutUpdatedByInput[];
-  deleteMany?: Prisma.BrandScalarWhereInput | Prisma.BrandScalarWhereInput[];
-};
-
 export type BrandUpdateManyWithoutDeletedByNestedInput = {
   create?:
     | Prisma.XOR<
@@ -684,6 +656,34 @@ export type BrandUpdateManyWithoutDeletedByNestedInput = {
   updateMany?:
     | Prisma.BrandUpdateManyWithWhereWithoutDeletedByInput
     | Prisma.BrandUpdateManyWithWhereWithoutDeletedByInput[];
+  deleteMany?: Prisma.BrandScalarWhereInput | Prisma.BrandScalarWhereInput[];
+};
+
+export type BrandUpdateManyWithoutUpdatedByNestedInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.BrandCreateWithoutUpdatedByInput,
+        Prisma.BrandUncheckedCreateWithoutUpdatedByInput
+      >
+    | Prisma.BrandCreateWithoutUpdatedByInput[]
+    | Prisma.BrandUncheckedCreateWithoutUpdatedByInput[];
+  connectOrCreate?:
+    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput
+    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput[];
+  upsert?:
+    | Prisma.BrandUpsertWithWhereUniqueWithoutUpdatedByInput
+    | Prisma.BrandUpsertWithWhereUniqueWithoutUpdatedByInput[];
+  createMany?: Prisma.BrandCreateManyUpdatedByInputEnvelope;
+  set?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
+  disconnect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
+  delete?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
+  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
+  update?:
+    | Prisma.BrandUpdateWithWhereUniqueWithoutUpdatedByInput
+    | Prisma.BrandUpdateWithWhereUniqueWithoutUpdatedByInput[];
+  updateMany?:
+    | Prisma.BrandUpdateManyWithWhereWithoutUpdatedByInput
+    | Prisma.BrandUpdateManyWithWhereWithoutUpdatedByInput[];
   deleteMany?: Prisma.BrandScalarWhereInput | Prisma.BrandScalarWhereInput[];
 };
 
@@ -715,34 +715,6 @@ export type BrandUncheckedUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.BrandScalarWhereInput | Prisma.BrandScalarWhereInput[];
 };
 
-export type BrandUncheckedUpdateManyWithoutUpdatedByNestedInput = {
-  create?:
-    | Prisma.XOR<
-        Prisma.BrandCreateWithoutUpdatedByInput,
-        Prisma.BrandUncheckedCreateWithoutUpdatedByInput
-      >
-    | Prisma.BrandCreateWithoutUpdatedByInput[]
-    | Prisma.BrandUncheckedCreateWithoutUpdatedByInput[];
-  connectOrCreate?:
-    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput
-    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput[];
-  upsert?:
-    | Prisma.BrandUpsertWithWhereUniqueWithoutUpdatedByInput
-    | Prisma.BrandUpsertWithWhereUniqueWithoutUpdatedByInput[];
-  createMany?: Prisma.BrandCreateManyUpdatedByInputEnvelope;
-  set?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
-  disconnect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
-  delete?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
-  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
-  update?:
-    | Prisma.BrandUpdateWithWhereUniqueWithoutUpdatedByInput
-    | Prisma.BrandUpdateWithWhereUniqueWithoutUpdatedByInput[];
-  updateMany?:
-    | Prisma.BrandUpdateManyWithWhereWithoutUpdatedByInput
-    | Prisma.BrandUpdateManyWithWhereWithoutUpdatedByInput[];
-  deleteMany?: Prisma.BrandScalarWhereInput | Prisma.BrandScalarWhereInput[];
-};
-
 export type BrandUncheckedUpdateManyWithoutDeletedByNestedInput = {
   create?:
     | Prisma.XOR<
@@ -768,6 +740,34 @@ export type BrandUncheckedUpdateManyWithoutDeletedByNestedInput = {
   updateMany?:
     | Prisma.BrandUpdateManyWithWhereWithoutDeletedByInput
     | Prisma.BrandUpdateManyWithWhereWithoutDeletedByInput[];
+  deleteMany?: Prisma.BrandScalarWhereInput | Prisma.BrandScalarWhereInput[];
+};
+
+export type BrandUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+  create?:
+    | Prisma.XOR<
+        Prisma.BrandCreateWithoutUpdatedByInput,
+        Prisma.BrandUncheckedCreateWithoutUpdatedByInput
+      >
+    | Prisma.BrandCreateWithoutUpdatedByInput[]
+    | Prisma.BrandUncheckedCreateWithoutUpdatedByInput[];
+  connectOrCreate?:
+    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput
+    | Prisma.BrandCreateOrConnectWithoutUpdatedByInput[];
+  upsert?:
+    | Prisma.BrandUpsertWithWhereUniqueWithoutUpdatedByInput
+    | Prisma.BrandUpsertWithWhereUniqueWithoutUpdatedByInput[];
+  createMany?: Prisma.BrandCreateManyUpdatedByInputEnvelope;
+  set?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
+  disconnect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
+  delete?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
+  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[];
+  update?:
+    | Prisma.BrandUpdateWithWhereUniqueWithoutUpdatedByInput
+    | Prisma.BrandUpdateWithWhereUniqueWithoutUpdatedByInput[];
+  updateMany?:
+    | Prisma.BrandUpdateManyWithWhereWithoutUpdatedByInput
+    | Prisma.BrandUpdateManyWithWhereWithoutUpdatedByInput[];
   deleteMany?: Prisma.BrandScalarWhereInput | Prisma.BrandScalarWhereInput[];
 };
 
@@ -828,22 +828,22 @@ export type BrandCreateWithoutCreatedByInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedBrandsInput;
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedBrandsInput;
-  products?: Prisma.ProductCreateNestedManyWithoutBrandInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedBrandsInput;
   translations?: Prisma.BrandTranslationCreateNestedManyWithoutBrandInput;
+  products?: Prisma.ProductCreateNestedManyWithoutBrandInput;
 };
 
 export type BrandUncheckedCreateWithoutCreatedByInput = {
   id?: number;
   logo?: string | null;
   updatedById?: number | null;
-  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutBrandInput;
+  deletedById?: number | null;
   translations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutBrandInput;
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutBrandInput;
 };
 
 export type BrandCreateOrConnectWithoutCreatedByInput = {
@@ -861,44 +861,6 @@ export type BrandCreateManyCreatedByInputEnvelope = {
   skipDuplicates?: boolean;
 };
 
-export type BrandCreateWithoutUpdatedByInput = {
-  logo?: string | null;
-  deletedAt?: Date | string | null;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedBrandsInput;
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedBrandsInput;
-  products?: Prisma.ProductCreateNestedManyWithoutBrandInput;
-  translations?: Prisma.BrandTranslationCreateNestedManyWithoutBrandInput;
-};
-
-export type BrandUncheckedCreateWithoutUpdatedByInput = {
-  id?: number;
-  logo?: string | null;
-  createdById?: number | null;
-  deletedById?: number | null;
-  deletedAt?: Date | string | null;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutBrandInput;
-  translations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutBrandInput;
-};
-
-export type BrandCreateOrConnectWithoutUpdatedByInput = {
-  where: Prisma.BrandWhereUniqueInput;
-  create: Prisma.XOR<
-    Prisma.BrandCreateWithoutUpdatedByInput,
-    Prisma.BrandUncheckedCreateWithoutUpdatedByInput
-  >;
-};
-
-export type BrandCreateManyUpdatedByInputEnvelope = {
-  data:
-    | Prisma.BrandCreateManyUpdatedByInput
-    | Prisma.BrandCreateManyUpdatedByInput[];
-  skipDuplicates?: boolean;
-};
-
 export type BrandCreateWithoutDeletedByInput = {
   logo?: string | null;
   deletedAt?: Date | string | null;
@@ -906,8 +868,8 @@ export type BrandCreateWithoutDeletedByInput = {
   updatedAt?: Date | string;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedBrandsInput;
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedBrandsInput;
-  products?: Prisma.ProductCreateNestedManyWithoutBrandInput;
   translations?: Prisma.BrandTranslationCreateNestedManyWithoutBrandInput;
+  products?: Prisma.ProductCreateNestedManyWithoutBrandInput;
 };
 
 export type BrandUncheckedCreateWithoutDeletedByInput = {
@@ -918,8 +880,8 @@ export type BrandUncheckedCreateWithoutDeletedByInput = {
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutBrandInput;
   translations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutBrandInput;
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutBrandInput;
 };
 
 export type BrandCreateOrConnectWithoutDeletedByInput = {
@@ -934,6 +896,44 @@ export type BrandCreateManyDeletedByInputEnvelope = {
   data:
     | Prisma.BrandCreateManyDeletedByInput
     | Prisma.BrandCreateManyDeletedByInput[];
+  skipDuplicates?: boolean;
+};
+
+export type BrandCreateWithoutUpdatedByInput = {
+  logo?: string | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedBrandsInput;
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedBrandsInput;
+  translations?: Prisma.BrandTranslationCreateNestedManyWithoutBrandInput;
+  products?: Prisma.ProductCreateNestedManyWithoutBrandInput;
+};
+
+export type BrandUncheckedCreateWithoutUpdatedByInput = {
+  id?: number;
+  logo?: string | null;
+  createdById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  deletedById?: number | null;
+  translations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutBrandInput;
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutBrandInput;
+};
+
+export type BrandCreateOrConnectWithoutUpdatedByInput = {
+  where: Prisma.BrandWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.BrandCreateWithoutUpdatedByInput,
+    Prisma.BrandUncheckedCreateWithoutUpdatedByInput
+  >;
+};
+
+export type BrandCreateManyUpdatedByInputEnvelope = {
+  data:
+    | Prisma.BrandCreateManyUpdatedByInput
+    | Prisma.BrandCreateManyUpdatedByInput[];
   skipDuplicates?: boolean;
 };
 
@@ -973,38 +973,10 @@ export type BrandScalarWhereInput = {
   logo?: Prisma.StringNullableFilter<'Brand'> | string | null;
   createdById?: Prisma.IntNullableFilter<'Brand'> | number | null;
   updatedById?: Prisma.IntNullableFilter<'Brand'> | number | null;
-  deletedById?: Prisma.IntNullableFilter<'Brand'> | number | null;
   deletedAt?: Prisma.DateTimeNullableFilter<'Brand'> | Date | string | null;
   createdAt?: Prisma.DateTimeFilter<'Brand'> | Date | string;
   updatedAt?: Prisma.DateTimeFilter<'Brand'> | Date | string;
-};
-
-export type BrandUpsertWithWhereUniqueWithoutUpdatedByInput = {
-  where: Prisma.BrandWhereUniqueInput;
-  update: Prisma.XOR<
-    Prisma.BrandUpdateWithoutUpdatedByInput,
-    Prisma.BrandUncheckedUpdateWithoutUpdatedByInput
-  >;
-  create: Prisma.XOR<
-    Prisma.BrandCreateWithoutUpdatedByInput,
-    Prisma.BrandUncheckedCreateWithoutUpdatedByInput
-  >;
-};
-
-export type BrandUpdateWithWhereUniqueWithoutUpdatedByInput = {
-  where: Prisma.BrandWhereUniqueInput;
-  data: Prisma.XOR<
-    Prisma.BrandUpdateWithoutUpdatedByInput,
-    Prisma.BrandUncheckedUpdateWithoutUpdatedByInput
-  >;
-};
-
-export type BrandUpdateManyWithWhereWithoutUpdatedByInput = {
-  where: Prisma.BrandScalarWhereInput;
-  data: Prisma.XOR<
-    Prisma.BrandUpdateManyMutationInput,
-    Prisma.BrandUncheckedUpdateManyWithoutUpdatedByInput
-  >;
+  deletedById?: Prisma.IntNullableFilter<'Brand'> | number | null;
 };
 
 export type BrandUpsertWithWhereUniqueWithoutDeletedByInput = {
@@ -1035,14 +1007,42 @@ export type BrandUpdateManyWithWhereWithoutDeletedByInput = {
   >;
 };
 
+export type BrandUpsertWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.BrandWhereUniqueInput;
+  update: Prisma.XOR<
+    Prisma.BrandUpdateWithoutUpdatedByInput,
+    Prisma.BrandUncheckedUpdateWithoutUpdatedByInput
+  >;
+  create: Prisma.XOR<
+    Prisma.BrandCreateWithoutUpdatedByInput,
+    Prisma.BrandUncheckedCreateWithoutUpdatedByInput
+  >;
+};
+
+export type BrandUpdateWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.BrandWhereUniqueInput;
+  data: Prisma.XOR<
+    Prisma.BrandUpdateWithoutUpdatedByInput,
+    Prisma.BrandUncheckedUpdateWithoutUpdatedByInput
+  >;
+};
+
+export type BrandUpdateManyWithWhereWithoutUpdatedByInput = {
+  where: Prisma.BrandScalarWhereInput;
+  data: Prisma.XOR<
+    Prisma.BrandUpdateManyMutationInput,
+    Prisma.BrandUncheckedUpdateManyWithoutUpdatedByInput
+  >;
+};
+
 export type BrandCreateWithoutTranslationsInput = {
   logo?: string | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedBrandsInput;
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedBrandsInput;
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedBrandsInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedBrandsInput;
   products?: Prisma.ProductCreateNestedManyWithoutBrandInput;
 };
 
@@ -1051,10 +1051,10 @@ export type BrandUncheckedCreateWithoutTranslationsInput = {
   logo?: string | null;
   createdById?: number | null;
   updatedById?: number | null;
-  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  deletedById?: number | null;
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBrandInput;
 };
 
@@ -1096,8 +1096,8 @@ export type BrandUpdateWithoutTranslationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedBrandsNestedInput;
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedBrandsNestedInput;
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedBrandsNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedBrandsNestedInput;
   products?: Prisma.ProductUpdateManyWithoutBrandNestedInput;
 };
 
@@ -1106,7 +1106,6 @@ export type BrandUncheckedUpdateWithoutTranslationsInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1114,6 +1113,7 @@ export type BrandUncheckedUpdateWithoutTranslationsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   products?: Prisma.ProductUncheckedUpdateManyWithoutBrandNestedInput;
 };
 
@@ -1123,8 +1123,8 @@ export type BrandCreateWithoutProductsInput = {
   createdAt?: Date | string;
   updatedAt?: Date | string;
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedBrandsInput;
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedBrandsInput;
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedBrandsInput;
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedBrandsInput;
   translations?: Prisma.BrandTranslationCreateNestedManyWithoutBrandInput;
 };
 
@@ -1133,10 +1133,10 @@ export type BrandUncheckedCreateWithoutProductsInput = {
   logo?: string | null;
   createdById?: number | null;
   updatedById?: number | null;
-  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  deletedById?: number | null;
   translations?: Prisma.BrandTranslationUncheckedCreateNestedManyWithoutBrandInput;
 };
 
@@ -1178,8 +1178,8 @@ export type BrandUpdateWithoutProductsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedBrandsNestedInput;
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedBrandsNestedInput;
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedBrandsNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedBrandsNestedInput;
   translations?: Prisma.BrandTranslationUpdateManyWithoutBrandNestedInput;
 };
 
@@ -1188,7 +1188,6 @@ export type BrandUncheckedUpdateWithoutProductsInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1196,6 +1195,7 @@ export type BrandUncheckedUpdateWithoutProductsInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   translations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutBrandNestedInput;
 };
 
@@ -1203,20 +1203,10 @@ export type BrandCreateManyCreatedByInput = {
   id?: number;
   logo?: string | null;
   updatedById?: number | null;
-  deletedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-};
-
-export type BrandCreateManyUpdatedByInput = {
-  id?: number;
-  logo?: string | null;
-  createdById?: number | null;
   deletedById?: number | null;
-  deletedAt?: Date | string | null;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
 };
 
 export type BrandCreateManyDeletedByInput = {
@@ -1229,6 +1219,16 @@ export type BrandCreateManyDeletedByInput = {
   updatedAt?: Date | string;
 };
 
+export type BrandCreateManyUpdatedByInput = {
+  id?: number;
+  logo?: string | null;
+  createdById?: number | null;
+  deletedAt?: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  deletedById?: number | null;
+};
+
 export type BrandUpdateWithoutCreatedByInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   deletedAt?:
@@ -1238,17 +1238,16 @@ export type BrandUpdateWithoutCreatedByInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedBrandsNestedInput;
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedBrandsNestedInput;
-  products?: Prisma.ProductUpdateManyWithoutBrandNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedBrandsNestedInput;
   translations?: Prisma.BrandTranslationUpdateManyWithoutBrandNestedInput;
+  products?: Prisma.ProductUpdateManyWithoutBrandNestedInput;
 };
 
 export type BrandUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1256,15 +1255,61 @@ export type BrandUncheckedUpdateWithoutCreatedByInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  products?: Prisma.ProductUncheckedUpdateManyWithoutBrandNestedInput;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   translations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutBrandNestedInput;
+  products?: Prisma.ProductUncheckedUpdateManyWithoutBrandNestedInput;
 };
 
 export type BrandUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+};
+
+export type BrandUpdateWithoutDeletedByInput = {
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedBrandsNestedInput;
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedBrandsNestedInput;
+  translations?: Prisma.BrandTranslationUpdateManyWithoutBrandNestedInput;
+  products?: Prisma.ProductUpdateManyWithoutBrandNestedInput;
+};
+
+export type BrandUncheckedUpdateWithoutDeletedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  translations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutBrandNestedInput;
+  products?: Prisma.ProductUncheckedUpdateManyWithoutBrandNestedInput;
+};
+
+export type BrandUncheckedUpdateManyWithoutDeletedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number;
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1285,15 +1330,14 @@ export type BrandUpdateWithoutUpdatedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   createdBy?: Prisma.UserUpdateOneWithoutCreatedBrandsNestedInput;
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedBrandsNestedInput;
-  products?: Prisma.ProductUpdateManyWithoutBrandNestedInput;
   translations?: Prisma.BrandTranslationUpdateManyWithoutBrandNestedInput;
+  products?: Prisma.ProductUpdateManyWithoutBrandNestedInput;
 };
 
 export type BrandUncheckedUpdateWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1301,67 +1345,23 @@ export type BrandUncheckedUpdateWithoutUpdatedByInput = {
     | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  products?: Prisma.ProductUncheckedUpdateManyWithoutBrandNestedInput;
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   translations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutBrandNestedInput;
+  products?: Prisma.ProductUncheckedUpdateManyWithoutBrandNestedInput;
 };
 
 export type BrandUncheckedUpdateManyWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+  deletedAt?:
+    | Prisma.NullableDateTimeFieldUpdateOperationsInput
+    | Date
+    | string
+    | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null;
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-};
-
-export type BrandUpdateWithoutDeletedByInput = {
-  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  deletedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null;
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedBrandsNestedInput;
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedBrandsNestedInput;
-  products?: Prisma.ProductUpdateManyWithoutBrandNestedInput;
-  translations?: Prisma.BrandTranslationUpdateManyWithoutBrandNestedInput;
-};
-
-export type BrandUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number;
-  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null;
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  products?: Prisma.ProductUncheckedUpdateManyWithoutBrandNestedInput;
-  translations?: Prisma.BrandTranslationUncheckedUpdateManyWithoutBrandNestedInput;
-};
-
-export type BrandUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number;
-  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
-  deletedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null;
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 
 /**
@@ -1369,16 +1369,16 @@ export type BrandUncheckedUpdateManyWithoutDeletedByInput = {
  */
 
 export type BrandCountOutputType = {
-  products: number;
   translations: number;
+  products: number;
 };
 
 export type BrandCountOutputTypeSelect<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  products?: boolean | BrandCountOutputTypeCountProductsArgs;
   translations?: boolean | BrandCountOutputTypeCountTranslationsArgs;
+  products?: boolean | BrandCountOutputTypeCountProductsArgs;
 };
 
 /**
@@ -1397,21 +1397,21 @@ export type BrandCountOutputTypeDefaultArgs<
 /**
  * BrandCountOutputType without action
  */
-export type BrandCountOutputTypeCountProductsArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {
-  where?: Prisma.ProductWhereInput;
-};
-
-/**
- * BrandCountOutputType without action
- */
 export type BrandCountOutputTypeCountTranslationsArgs<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.BrandTranslationWhereInput;
+};
+
+/**
+ * BrandCountOutputType without action
+ */
+export type BrandCountOutputTypeCountProductsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.ProductWhereInput;
 };
 
 export type BrandSelect<
@@ -1423,15 +1423,15 @@ export type BrandSelect<
     logo?: boolean;
     createdById?: boolean;
     updatedById?: boolean;
-    deletedById?: boolean;
     deletedAt?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    deletedById?: boolean;
     createdBy?: boolean | Prisma.Brand$createdByArgs<ExtArgs>;
-    updatedBy?: boolean | Prisma.Brand$updatedByArgs<ExtArgs>;
     deletedBy?: boolean | Prisma.Brand$deletedByArgs<ExtArgs>;
-    products?: boolean | Prisma.Brand$productsArgs<ExtArgs>;
+    updatedBy?: boolean | Prisma.Brand$updatedByArgs<ExtArgs>;
     translations?: boolean | Prisma.Brand$translationsArgs<ExtArgs>;
+    products?: boolean | Prisma.Brand$productsArgs<ExtArgs>;
     _count?: boolean | Prisma.BrandCountOutputTypeDefaultArgs<ExtArgs>;
   },
   ExtArgs['result']['brand']
@@ -1446,13 +1446,13 @@ export type BrandSelectCreateManyAndReturn<
     logo?: boolean;
     createdById?: boolean;
     updatedById?: boolean;
-    deletedById?: boolean;
     deletedAt?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    deletedById?: boolean;
     createdBy?: boolean | Prisma.Brand$createdByArgs<ExtArgs>;
-    updatedBy?: boolean | Prisma.Brand$updatedByArgs<ExtArgs>;
     deletedBy?: boolean | Prisma.Brand$deletedByArgs<ExtArgs>;
+    updatedBy?: boolean | Prisma.Brand$updatedByArgs<ExtArgs>;
   },
   ExtArgs['result']['brand']
 >;
@@ -1466,13 +1466,13 @@ export type BrandSelectUpdateManyAndReturn<
     logo?: boolean;
     createdById?: boolean;
     updatedById?: boolean;
-    deletedById?: boolean;
     deletedAt?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    deletedById?: boolean;
     createdBy?: boolean | Prisma.Brand$createdByArgs<ExtArgs>;
-    updatedBy?: boolean | Prisma.Brand$updatedByArgs<ExtArgs>;
     deletedBy?: boolean | Prisma.Brand$deletedByArgs<ExtArgs>;
+    updatedBy?: boolean | Prisma.Brand$updatedByArgs<ExtArgs>;
   },
   ExtArgs['result']['brand']
 >;
@@ -1482,10 +1482,10 @@ export type BrandSelectScalar = {
   logo?: boolean;
   createdById?: boolean;
   updatedById?: boolean;
-  deletedById?: boolean;
   deletedAt?: boolean;
   createdAt?: boolean;
   updatedAt?: boolean;
+  deletedById?: boolean;
 };
 
 export type BrandOmit<
@@ -1496,10 +1496,10 @@ export type BrandOmit<
   | 'logo'
   | 'createdById'
   | 'updatedById'
-  | 'deletedById'
   | 'deletedAt'
   | 'createdAt'
-  | 'updatedAt',
+  | 'updatedAt'
+  | 'deletedById',
   ExtArgs['result']['brand']
 >;
 export type BrandInclude<
@@ -1507,10 +1507,10 @@ export type BrandInclude<
     runtime.Types.Extensions.DefaultArgs,
 > = {
   createdBy?: boolean | Prisma.Brand$createdByArgs<ExtArgs>;
-  updatedBy?: boolean | Prisma.Brand$updatedByArgs<ExtArgs>;
   deletedBy?: boolean | Prisma.Brand$deletedByArgs<ExtArgs>;
-  products?: boolean | Prisma.Brand$productsArgs<ExtArgs>;
+  updatedBy?: boolean | Prisma.Brand$updatedByArgs<ExtArgs>;
   translations?: boolean | Prisma.Brand$translationsArgs<ExtArgs>;
+  products?: boolean | Prisma.Brand$productsArgs<ExtArgs>;
   _count?: boolean | Prisma.BrandCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type BrandIncludeCreateManyAndReturn<
@@ -1518,16 +1518,16 @@ export type BrandIncludeCreateManyAndReturn<
     runtime.Types.Extensions.DefaultArgs,
 > = {
   createdBy?: boolean | Prisma.Brand$createdByArgs<ExtArgs>;
-  updatedBy?: boolean | Prisma.Brand$updatedByArgs<ExtArgs>;
   deletedBy?: boolean | Prisma.Brand$deletedByArgs<ExtArgs>;
+  updatedBy?: boolean | Prisma.Brand$updatedByArgs<ExtArgs>;
 };
 export type BrandIncludeUpdateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
   createdBy?: boolean | Prisma.Brand$createdByArgs<ExtArgs>;
-  updatedBy?: boolean | Prisma.Brand$updatedByArgs<ExtArgs>;
   deletedBy?: boolean | Prisma.Brand$deletedByArgs<ExtArgs>;
+  updatedBy?: boolean | Prisma.Brand$updatedByArgs<ExtArgs>;
 };
 
 export type $BrandPayload<
@@ -1537,10 +1537,10 @@ export type $BrandPayload<
   name: 'Brand';
   objects: {
     createdBy: Prisma.$UserPayload<ExtArgs> | null;
-    updatedBy: Prisma.$UserPayload<ExtArgs> | null;
     deletedBy: Prisma.$UserPayload<ExtArgs> | null;
-    products: Prisma.$ProductPayload<ExtArgs>[];
+    updatedBy: Prisma.$UserPayload<ExtArgs> | null;
     translations: Prisma.$BrandTranslationPayload<ExtArgs>[];
+    products: Prisma.$ProductPayload<ExtArgs>[];
   };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
@@ -1548,10 +1548,10 @@ export type $BrandPayload<
       logo: string | null;
       createdById: number | null;
       updatedById: number | null;
-      deletedById: number | null;
       deletedAt: Date | null;
       createdAt: Date;
       updatedAt: Date;
+      deletedById: number | null;
     },
     ExtArgs['result']['brand']
   >;
@@ -2115,19 +2115,6 @@ export interface Prisma__BrandClient<
     ExtArgs,
     GlobalOmitOptions
   >;
-  updatedBy<T extends Prisma.Brand$updatedByArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.Brand$updatedByArgs<ExtArgs>>,
-  ): Prisma.Prisma__UserClient<
-    runtime.Types.Result.GetResult<
-      Prisma.$UserPayload<ExtArgs>,
-      T,
-      'findUniqueOrThrow',
-      GlobalOmitOptions
-    > | null,
-    null,
-    ExtArgs,
-    GlobalOmitOptions
-  >;
   deletedBy<T extends Prisma.Brand$deletedByArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.Brand$deletedByArgs<ExtArgs>>,
   ): Prisma.Prisma__UserClient<
@@ -2141,22 +2128,35 @@ export interface Prisma__BrandClient<
     ExtArgs,
     GlobalOmitOptions
   >;
-  products<T extends Prisma.Brand$productsArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.Brand$productsArgs<ExtArgs>>,
-  ): Prisma.PrismaPromise<
-    | runtime.Types.Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        'findMany',
-        GlobalOmitOptions
-      >
-    | Null
+  updatedBy<T extends Prisma.Brand$updatedByArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.Brand$updatedByArgs<ExtArgs>>,
+  ): Prisma.Prisma__UserClient<
+    runtime.Types.Result.GetResult<
+      Prisma.$UserPayload<ExtArgs>,
+      T,
+      'findUniqueOrThrow',
+      GlobalOmitOptions
+    > | null,
+    null,
+    ExtArgs,
+    GlobalOmitOptions
   >;
   translations<T extends Prisma.Brand$translationsArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.Brand$translationsArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     | runtime.Types.Result.GetResult<
         Prisma.$BrandTranslationPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >;
+  products<T extends Prisma.Brand$productsArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.Brand$productsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$ProductPayload<ExtArgs>,
         T,
         'findMany',
         GlobalOmitOptions
@@ -2209,10 +2209,10 @@ export interface BrandFieldRefs {
   readonly logo: Prisma.FieldRef<'Brand', 'String'>;
   readonly createdById: Prisma.FieldRef<'Brand', 'Int'>;
   readonly updatedById: Prisma.FieldRef<'Brand', 'Int'>;
-  readonly deletedById: Prisma.FieldRef<'Brand', 'Int'>;
   readonly deletedAt: Prisma.FieldRef<'Brand', 'DateTime'>;
   readonly createdAt: Prisma.FieldRef<'Brand', 'DateTime'>;
   readonly updatedAt: Prisma.FieldRef<'Brand', 'DateTime'>;
+  readonly deletedById: Prisma.FieldRef<'Brand', 'Int'>;
 }
 
 // Custom InputTypes
@@ -2684,28 +2684,6 @@ export type Brand$createdByArgs<
 };
 
 /**
- * Brand.updatedBy
- */
-export type Brand$updatedByArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null;
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null;
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null;
-  where?: Prisma.UserWhereInput;
-};
-
-/**
  * Brand.deletedBy
  */
 export type Brand$deletedByArgs<
@@ -2728,32 +2706,25 @@ export type Brand$deletedByArgs<
 };
 
 /**
- * Brand.products
+ * Brand.updatedBy
  */
-export type Brand$productsArgs<
+export type Brand$updatedByArgs<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
-   * Select specific fields to fetch from the Product
+   * Select specific fields to fetch from the User
    */
-  select?: Prisma.ProductSelect<ExtArgs> | null;
+  select?: Prisma.UserSelect<ExtArgs> | null;
   /**
-   * Omit specific fields from the Product
+   * Omit specific fields from the User
    */
-  omit?: Prisma.ProductOmit<ExtArgs> | null;
+  omit?: Prisma.UserOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ProductInclude<ExtArgs> | null;
-  where?: Prisma.ProductWhereInput;
-  orderBy?:
-    | Prisma.ProductOrderByWithRelationInput
-    | Prisma.ProductOrderByWithRelationInput[];
-  cursor?: Prisma.ProductWhereUniqueInput;
-  take?: number;
-  skip?: number;
-  distinct?: Prisma.ProductScalarFieldEnum | Prisma.ProductScalarFieldEnum[];
+  include?: Prisma.UserInclude<ExtArgs> | null;
+  where?: Prisma.UserWhereInput;
 };
 
 /**
@@ -2785,6 +2756,35 @@ export type Brand$translationsArgs<
   distinct?:
     | Prisma.BrandTranslationScalarFieldEnum
     | Prisma.BrandTranslationScalarFieldEnum[];
+};
+
+/**
+ * Brand.products
+ */
+export type Brand$productsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Product
+   */
+  select?: Prisma.ProductSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Product
+   */
+  omit?: Prisma.ProductOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductInclude<ExtArgs> | null;
+  where?: Prisma.ProductWhereInput;
+  orderBy?:
+    | Prisma.ProductOrderByWithRelationInput
+    | Prisma.ProductOrderByWithRelationInput[];
+  cursor?: Prisma.ProductWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.ProductScalarFieldEnum | Prisma.ProductScalarFieldEnum[];
 };
 
 /**

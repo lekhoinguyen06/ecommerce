@@ -10,7 +10,7 @@ export class RoleService {
 
   async getClientRoleId() {
     if (this.clientRoleId) return this.clientRoleId;
-    const role = await this.prismaService.role.findUniqueOrThrow({
+    const role = await this.prismaService.role.findFirstOrThrow({
       where: {
         name: RoleName.Client,
       },

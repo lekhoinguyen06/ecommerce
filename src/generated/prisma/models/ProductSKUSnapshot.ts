@@ -268,8 +268,8 @@ export type ProductSKUSnapshotWhereInput = {
   skuId?: Prisma.IntFilter<'ProductSKUSnapshot'> | number;
   orderId?: Prisma.IntFilter<'ProductSKUSnapshot'> | number;
   createdAt?: Prisma.DateTimeFilter<'ProductSKUSnapshot'> | Date | string;
-  sku?: Prisma.XOR<Prisma.SKUScalarRelationFilter, Prisma.SKUWhereInput>;
   order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>;
+  sku?: Prisma.XOR<Prisma.SKUScalarRelationFilter, Prisma.SKUWhereInput>;
 };
 
 export type ProductSKUSnapshotOrderByWithRelationInput = {
@@ -281,8 +281,8 @@ export type ProductSKUSnapshotOrderByWithRelationInput = {
   skuId?: Prisma.SortOrder;
   orderId?: Prisma.SortOrder;
   createdAt?: Prisma.SortOrder;
-  sku?: Prisma.SKUOrderByWithRelationInput;
   order?: Prisma.OrderOrderByWithRelationInput;
+  sku?: Prisma.SKUOrderByWithRelationInput;
 };
 
 export type ProductSKUSnapshotWhereUniqueInput = Prisma.AtLeast<
@@ -302,11 +302,11 @@ export type ProductSKUSnapshotWhereUniqueInput = Prisma.AtLeast<
     skuId?: Prisma.IntFilter<'ProductSKUSnapshot'> | number;
     orderId?: Prisma.IntFilter<'ProductSKUSnapshot'> | number;
     createdAt?: Prisma.DateTimeFilter<'ProductSKUSnapshot'> | Date | string;
-    sku?: Prisma.XOR<Prisma.SKUScalarRelationFilter, Prisma.SKUWhereInput>;
     order?: Prisma.XOR<
       Prisma.OrderScalarRelationFilter,
       Prisma.OrderWhereInput
     >;
+    sku?: Prisma.XOR<Prisma.SKUScalarRelationFilter, Prisma.SKUWhereInput>;
   },
   'id'
 >;
@@ -356,8 +356,8 @@ export type ProductSKUSnapshotCreateInput = {
   images: string;
   skuValue: string;
   createdAt?: Date | string;
-  sku: Prisma.SKUCreateNestedOneWithoutProductSnapshotsInput;
   order: Prisma.OrderCreateNestedOneWithoutProductSnapshotsInput;
+  sku: Prisma.SKUCreateNestedOneWithoutProductSnapshotsInput;
 };
 
 export type ProductSKUSnapshotUncheckedCreateInput = {
@@ -377,8 +377,8 @@ export type ProductSKUSnapshotUpdateInput = {
   images?: Prisma.StringFieldUpdateOperationsInput | string;
   skuValue?: Prisma.StringFieldUpdateOperationsInput | string;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  sku?: Prisma.SKUUpdateOneRequiredWithoutProductSnapshotsNestedInput;
   order?: Prisma.OrderUpdateOneRequiredWithoutProductSnapshotsNestedInput;
+  sku?: Prisma.SKUUpdateOneRequiredWithoutProductSnapshotsNestedInput;
 };
 
 export type ProductSKUSnapshotUncheckedUpdateInput = {
@@ -932,8 +932,8 @@ export type ProductSKUSnapshotSelect<
     skuId?: boolean;
     orderId?: boolean;
     createdAt?: boolean;
-    sku?: boolean | Prisma.SKUDefaultArgs<ExtArgs>;
     order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>;
+    sku?: boolean | Prisma.SKUDefaultArgs<ExtArgs>;
   },
   ExtArgs['result']['productSKUSnapshot']
 >;
@@ -951,8 +951,8 @@ export type ProductSKUSnapshotSelectCreateManyAndReturn<
     skuId?: boolean;
     orderId?: boolean;
     createdAt?: boolean;
-    sku?: boolean | Prisma.SKUDefaultArgs<ExtArgs>;
     order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>;
+    sku?: boolean | Prisma.SKUDefaultArgs<ExtArgs>;
   },
   ExtArgs['result']['productSKUSnapshot']
 >;
@@ -970,8 +970,8 @@ export type ProductSKUSnapshotSelectUpdateManyAndReturn<
     skuId?: boolean;
     orderId?: boolean;
     createdAt?: boolean;
-    sku?: boolean | Prisma.SKUDefaultArgs<ExtArgs>;
     order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>;
+    sku?: boolean | Prisma.SKUDefaultArgs<ExtArgs>;
   },
   ExtArgs['result']['productSKUSnapshot']
 >;
@@ -1005,22 +1005,22 @@ export type ProductSKUSnapshotInclude<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  sku?: boolean | Prisma.SKUDefaultArgs<ExtArgs>;
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>;
+  sku?: boolean | Prisma.SKUDefaultArgs<ExtArgs>;
 };
 export type ProductSKUSnapshotIncludeCreateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  sku?: boolean | Prisma.SKUDefaultArgs<ExtArgs>;
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>;
+  sku?: boolean | Prisma.SKUDefaultArgs<ExtArgs>;
 };
 export type ProductSKUSnapshotIncludeUpdateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  sku?: boolean | Prisma.SKUDefaultArgs<ExtArgs>;
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>;
+  sku?: boolean | Prisma.SKUDefaultArgs<ExtArgs>;
 };
 
 export type $ProductSKUSnapshotPayload<
@@ -1029,8 +1029,8 @@ export type $ProductSKUSnapshotPayload<
 > = {
   name: 'ProductSKUSnapshot';
   objects: {
-    sku: Prisma.$SKUPayload<ExtArgs>;
     order: Prisma.$OrderPayload<ExtArgs>;
+    sku: Prisma.$SKUPayload<ExtArgs>;
   };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
@@ -1614,11 +1614,11 @@ export interface Prisma__ProductSKUSnapshotClient<
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise';
-  sku<T extends Prisma.SKUDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.SKUDefaultArgs<ExtArgs>>,
-  ): Prisma.Prisma__SKUClient<
+  order<T extends Prisma.OrderDefaultArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.OrderDefaultArgs<ExtArgs>>,
+  ): Prisma.Prisma__OrderClient<
     | runtime.Types.Result.GetResult<
-        Prisma.$SKUPayload<ExtArgs>,
+        Prisma.$OrderPayload<ExtArgs>,
         T,
         'findUniqueOrThrow',
         GlobalOmitOptions
@@ -1628,11 +1628,11 @@ export interface Prisma__ProductSKUSnapshotClient<
     ExtArgs,
     GlobalOmitOptions
   >;
-  order<T extends Prisma.OrderDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.OrderDefaultArgs<ExtArgs>>,
-  ): Prisma.Prisma__OrderClient<
+  sku<T extends Prisma.SKUDefaultArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.SKUDefaultArgs<ExtArgs>>,
+  ): Prisma.Prisma__SKUClient<
     | runtime.Types.Result.GetResult<
-        Prisma.$OrderPayload<ExtArgs>,
+        Prisma.$SKUPayload<ExtArgs>,
         T,
         'findUniqueOrThrow',
         GlobalOmitOptions
