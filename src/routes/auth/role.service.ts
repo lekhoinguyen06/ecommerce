@@ -10,11 +10,17 @@ export class RoleService {
 
   async getClientRoleId() {
     if (this.clientRoleId) return this.clientRoleId;
-    const role = await this.prismaService.role.findFirstOrThrow({
+    const role = await this.prismaService.role.findFirst({
       where: {
         name: RoleName.Client,
+        deletedAt: null,
       },
     });
+
+    if (!role) {
+      throw new Error(`Role with name ${RoleName.Client} not found`);
+    }
+
     this.clientRoleId = role.id;
     return this.clientRoleId;
   }
