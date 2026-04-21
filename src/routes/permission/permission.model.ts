@@ -39,6 +39,8 @@ export const GetPermissionResSchema = z.object({
   limit: z.number().int(),
 });
 
+export const GetPermissionDetailResSchema = PermissionSchema;
+
 // CREATE
 export const CreatePermissionBodySchema = PermissionSchema.pick({
   name: true,
@@ -54,6 +56,9 @@ export type PermissionType = z.infer<typeof PermissionSchema>;
 export type GetPermissionsBodyType = z.infer<typeof GetPermissionsBodySchema>;
 export type GetPermissionsParamType = z.infer<typeof GetPermissionsParamSchema>;
 export type GetPermissionResType = z.infer<typeof GetPermissionResSchema>;
+export type GetPermissionDetailResType = z.infer<
+  typeof GetPermissionDetailResSchema
+>;
 export type CreatePermissionBodyType = z.infer<
   typeof CreatePermissionBodySchema
 >;

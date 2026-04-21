@@ -12,6 +12,7 @@ import { PermissionService } from './permission.service';
 import { ZodSerializerDto } from 'nestjs-zod';
 import {
   CreatePermissionDTO,
+  GetPermissionDetailResDTO,
   GetPermissionResDTO,
   UpdatePermissionDTO,
 } from './permission.dto';
@@ -22,7 +23,7 @@ export class PermissionController {
   constructor(private readonly permissionService: PermissionService) {}
 
   @Get(':id')
-  @ZodSerializerDto(GetPermissionResDTO)
+  @ZodSerializerDto(GetPermissionDetailResDTO)
   get(@Param('id') id: string) {
     return this.permissionService.findOne(Number(id));
   }
@@ -30,12 +31,15 @@ export class PermissionController {
   // /permission?page=1&limit=10
   @Get()
   @ZodSerializerDto(GetPermissionResDTO)
-  getAll(@Query('page') page: number, @Query('limit') limit: number) {
-    return this.permissionService.paginate({ page, limit });
+  getAll(@Query('page') page: string, @Query('limit') limit: string) {
+    return this.permissionService.paginate({
+      page: Number(page),
+      limit: Number(limit),
+    });
   }
 
   @Post()
-  @ZodSerializerDto(GetPermissionResDTO)
+  @ZodSerializerDto(GetPermissionDetailResDTO)
   create(
     @Body() body: CreatePermissionDTO,
     @ActiveUser('userId') userId: number,
@@ -44,7 +48,7 @@ export class PermissionController {
   }
 
   @Patch(':id')
-  @ZodSerializerDto(GetPermissionResDTO)
+  @ZodSerializerDto(GetPermissionDetailResDTO)
   update(
     @Param('id') id: string,
     @Body() body: UpdatePermissionDTO,

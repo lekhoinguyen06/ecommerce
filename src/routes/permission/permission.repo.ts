@@ -20,7 +20,7 @@ export class PermissionRepository {
     return this.prisma.permission.findMany({
       where: { deletedAt: null },
       skip,
-      take: limit,
+      take: Number(limit),
     });
   }
 

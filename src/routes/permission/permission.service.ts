@@ -4,20 +4,21 @@ import { PermissionRepository } from './permission.repo';
 import { NotFoundRecord } from 'src/shared/error';
 import {
   CreatePermissionBodyType,
+  GetPermissionDetailResType,
   GetPermissionsBodyType,
-  PermissionType,
   UpdatePermissionBodyType,
 } from './permission.model';
 import {
   isRequiredRecordNotFoundPrisma2025Error,
   isUniqueConstraintPrisma2002Error,
 } from 'src/types/helper';
+import { PermissionAlreadyExistsError } from './permission.error';
 
 @Injectable()
 export class PermissionService {
   constructor(private readonly permissionRepository: PermissionRepository) {}
 
-  async findOne(id: number): Promise<PermissionType> {
+  async findOne(id: number): Promise<GetPermissionDetailResType> {
     const data = await this.permissionRepository.findOne(id);
 
     if (!data) throw NotFoundRecord;
@@ -48,12 +49,12 @@ export class PermissionService {
   }: {
     data: CreatePermissionBodyType;
     createdById: number;
-  }) {
+  }): Promise<GetPermissionDetailResType> {
     try {
       return await this.permissionRepository.create(data, createdById);
     } catch (error) {
       if (isUniqueConstraintPrisma2002Error(error)) {
-        throw new Error('Permission with the same name already exists');
+        throw PermissionAlreadyExistsError;
       }
       throw error;
     }
@@ -67,12 +68,12 @@ export class PermissionService {
     id: number;
     data: UpdatePermissionBodyType;
     updatedById: number;
-  }) {
+  }): Promise<GetPermissionDetailResType> {
     try {
       return await this.permissionRepository.update(id, data, updatedById);
     } catch (error) {
       if (isUniqueConstraintPrisma2002Error(error)) {
-        throw new Error('Permission with the same name already exists');
+        throw PermissionAlreadyExistsError;
       }
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
         throw NotFoundRecord;
