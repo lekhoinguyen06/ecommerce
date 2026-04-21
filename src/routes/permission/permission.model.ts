@@ -1,21 +1,5 @@
-import { HTTPMethod } from 'src/shared/constants/permission.constant';
+import { PermissionSchema } from 'src/shared/models/shared-permission.model';
 import z from 'zod';
-
-export const PermissionSchema = z.object({
-  id: z.number().int(),
-  name: z.string(),
-  description: z.string().default(''),
-  path: z.string(),
-  method: z.enum(HTTPMethod),
-
-  createdById: z.number().int().nullable(),
-  updatedById: z.number().int().nullable(),
-  deletedById: z.number().int().nullable(),
-
-  deletedAt: z.date().nullable(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
-});
 
 // QUERY
 export const GetPermissionsBodySchema = z

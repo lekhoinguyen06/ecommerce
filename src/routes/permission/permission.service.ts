@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { GetPermissionResDTO } from './permission.dto';
 import { PermissionRepository } from './permission.repo';
 import { NotFoundRecord } from 'src/shared/error';
 import {
   CreatePermissionBodyType,
   GetPermissionDetailResType,
+  GetPermissionResType,
   GetPermissionsBodyType,
   UpdatePermissionBodyType,
 } from './permission.model';
@@ -27,7 +27,7 @@ export class PermissionService {
     return data;
   }
 
-  async paginate(query: GetPermissionsBodyType): Promise<GetPermissionResDTO> {
+  async paginate(query: GetPermissionsBodyType): Promise<GetPermissionResType> {
     const data = await this.permissionRepository.paginate(
       query.page,
       query.limit,
