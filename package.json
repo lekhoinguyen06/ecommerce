@@ -6,7 +6,9 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "seed": "bun run ./script/seed/index.ts",
+    "seed:all": "bun run ./script/seed/index.ts",
+    "seed:role": "bun run ./script/seed/role.ts",
+    "seed:permission": "bun run ./script/seed/permission.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
