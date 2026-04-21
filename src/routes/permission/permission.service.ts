@@ -13,6 +13,7 @@ import {
   isUniqueConstraintPrisma2002Error,
 } from 'src/types/helper';
 import { PermissionAlreadyExistsError } from './permission.error';
+import { MessageResType } from 'src/shared/models/response.model';
 
 @Injectable()
 export class PermissionService {
@@ -82,9 +83,21 @@ export class PermissionService {
     }
   }
 
-  async delete({ id, deletedById }: { id: number; deletedById: number }) {
+  async delete({
+    id,
+    deletedById,
+  }: {
+    id: number;
+    deletedById: number;
+  }): Promise<MessageResType> {
     try {
-      return await this.permissionRepository.delete({ id, deletedById });
+      await this.permissionRepository.delete({
+        id,
+        deletedById,
+      });
+      return {
+        message: 'Permission deleted successfully',
+      };
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
         throw NotFoundRecord;
@@ -93,9 +106,21 @@ export class PermissionService {
     }
   }
 
-  async restore({ id, restoredById }: { id: number; restoredById: number }) {
+  async restore({
+    id,
+    restoredById,
+  }: {
+    id: number;
+    restoredById: number;
+  }): Promise<MessageResType> {
     try {
-      return await this.permissionRepository.restore({ id, restoredById });
+      await this.permissionRepository.restore({
+        id,
+        restoredById,
+      });
+      return {
+        message: 'Permission restored successfully',
+      };
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
         throw NotFoundRecord;

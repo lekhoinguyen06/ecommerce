@@ -17,6 +17,7 @@ import {
   UpdatePermissionDTO,
 } from './permission.dto';
 import { ActiveUser } from 'src/shared/decorators/active-user.decorator';
+import { MessageResDTO } from 'src/shared/dto/response.dto';
 
 @Controller('permission')
 export class PermissionController {
@@ -62,6 +63,7 @@ export class PermissionController {
   }
 
   @Delete(':id')
+  @ZodSerializerDto(MessageResDTO)
   delete(@Param('id') id: string, @ActiveUser('userId') userId: number) {
     return this.permissionService.delete({
       id: Number(id),
@@ -70,6 +72,7 @@ export class PermissionController {
   }
 
   @Post(':id/restore')
+  @ZodSerializerDto(MessageResDTO)
   restore(@Param('id') id: string, @ActiveUser('userId') userId: number) {
     return this.permissionService.restore({
       id: Number(id),

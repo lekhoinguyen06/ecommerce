@@ -45,11 +45,13 @@ export const GetPermissionDetailResSchema = PermissionSchema;
 export const CreatePermissionBodySchema = PermissionSchema.pick({
   name: true,
   path: true,
+  description: true,
   method: true,
 }).strict();
 
 // UPDATE
-export const UpdatePermissionBodySchema = CreatePermissionBodySchema;
+export const UpdatePermissionBodySchema =
+  CreatePermissionBodySchema.partial().strict();
 
 // Types
 export type PermissionType = z.infer<typeof PermissionSchema>;
