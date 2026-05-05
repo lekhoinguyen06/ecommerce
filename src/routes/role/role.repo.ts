@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/shared/services/prisma.service';
-import { CreateRoleType, GetRoleParamType, UpdateRoleType } from './role.model';
+import { CreateRoleType, UpdateRoleType } from './role.model';
 
 @Injectable()
 export class RoleRepository {
@@ -24,14 +24,18 @@ export class RoleRepository {
     });
   }
 
-  findOne(data: GetRoleParamType) {
+  findOne(roleId: number) {
     return this.prismaService.role.findFirst({
       where: {
-        ...data,
+        id: roleId,
         deletedAt: null,
       },
       include: {
-        permissions: true,
+        permissions: {
+          include: {
+            permission: true,
+          },
+        },
       },
     });
   }

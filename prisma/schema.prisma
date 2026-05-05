@@ -187,6 +187,7 @@ model Role {
   deletedBy   User?              @relation("RoleDeletedBy", fields: [deletedById], references: [id])
   updatedBy   User?              @relation("RoleUpdatedBy", fields: [updatedById], references: [id])
   users       User[]             @relation("UserRole")
+  // role_name_unique where deletedAt is not null
 
   @@index([deletedAt])
 }

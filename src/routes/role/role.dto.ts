@@ -3,12 +3,10 @@ import {
   CreateRoleBodySchema,
   GetRoleBodySchema,
   GetRoleDetailResSchema,
-  GetRoleParamSchema,
   GetRolesResSchema,
   UpdateRoleBodySchema,
 } from './role.model';
 
-export class GetRoleParamDTO extends createZodDto(GetRoleParamSchema) {}
 export class GetRoleBodyDTO extends createZodDto(GetRoleBodySchema) {}
 export class GetRoleDetailResDTO extends createZodDto(GetRoleDetailResSchema) {}
 export class GetRolesResDTO extends createZodDto(GetRolesResSchema) {}
