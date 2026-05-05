@@ -49,19 +49,19 @@ export class RoleRepository {
     data: UpdateRoleType;
     updatedById: number;
   }) {
+    const { permissionIds, ...rest } = data;
+
     return this.prismaService.role.update({
       where: { id },
       data: {
-        ...data,
+        ...rest,
         updatedById,
         permissions: {
-          set:
-            data.permissionIds?.map((permissionId) => ({
-              permission_id_role_id: {
-                permission_id: permissionId,
-                role_id: id,
-              },
-            })) || [],
+          create: permissionIds?.map((permissionId) => ({
+            permission: {
+              connect: { id: permissionId },
+            },
+          })),
         },
       },
     });

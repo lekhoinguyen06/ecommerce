@@ -25,23 +25,23 @@ export class RoleController {
   }
 
   @Get()
-  paginate(@Query('page') page: number, @Query('limit') limit: number) {
-    return this.roleService.paginate(page, limit);
+  paginate(@Query('page') page: string, @Query('limit') limit: string) {
+    return this.roleService.paginate(Number(page), Number(limit));
   }
 
   @Get(':roleId')
-  findOne(@Param('roleId') roleId: number) {
-    return this.roleService.findOne(roleId);
+  findOne(@Param('roleId') roleId: string) {
+    return this.roleService.findOne(Number(roleId));
   }
 
   @Patch(':roleId')
   update(
-    @Param('roleId') roleId: number,
+    @Param('roleId') roleId: string,
     @Body() body: UpdateRoleDTO,
     @ActiveUser('userId') userId: number,
   ) {
     return this.roleService.update({
-      id: roleId,
+      id: Number(roleId),
       data: body,
       updatedById: userId,
     });
@@ -49,17 +49,17 @@ export class RoleController {
 
   @Delete(':roleId')
   delete(
-    @Param('roleId') roleId: number,
+    @Param('roleId') roleId: string,
     @ActiveUser('userId') userId: number,
   ) {
-    return this.roleService.delete(roleId, userId);
+    return this.roleService.delete(Number(roleId), userId);
   }
 
   @Post(':roleId/restore')
   restore(
-    @Param('roleId') roleId: number,
+    @Param('roleId') roleId: string,
     @ActiveUser('userId') userId: number,
   ) {
-    return this.roleService.restore(roleId, userId);
+    return this.roleService.restore(Number(roleId), userId);
   }
 }
