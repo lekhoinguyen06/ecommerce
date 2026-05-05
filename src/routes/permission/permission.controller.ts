@@ -25,7 +25,7 @@ import { MessageResDTO } from 'src/shared/dto/response.dto';
 export class PermissionController {
   constructor(private readonly permissionService: PermissionService) {}
 
-  @Get(':id')
+  @Get(':permissionId')
   @ZodSerializerDto(GetPermissionDetailResDTO)
   get(@Param() param: GetPermissionParamsDTO) {
     return this.permissionService.findOne(param.permissionId);
@@ -65,7 +65,7 @@ export class PermissionController {
     });
   }
 
-  @Delete(':id')
+  @Delete(':permissionId')
   @ZodSerializerDto(MessageResDTO)
   delete(
     @Param() param: GetPermissionParamsDTO,
@@ -77,7 +77,7 @@ export class PermissionController {
     });
   }
 
-  @Post(':id/restore')
+  @Post(':permissionId/restore')
   @ZodSerializerDto(MessageResDTO)
   restore(
     @Param() param: GetPermissionParamsDTO,

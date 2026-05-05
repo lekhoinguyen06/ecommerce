@@ -6,6 +6,15 @@ import { CreateRoleType, UpdateRoleType } from './role.model';
 export class RoleRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
+  validatePermissionIds(permissionIds: number[]) {
+    return this.prismaService.permission.count({
+      where: {
+        id: { in: permissionIds },
+        deletedAt: null,
+      },
+    });
+  }
+
   create({ data, createdById }: { data: CreateRoleType; createdById: number }) {
     const { permissionIds, ...rest } = data;
     return this.prismaService.role.create({
@@ -22,6 +31,11 @@ export class RoleRepository {
       },
       include: {
         permissions: {
+          where: {
+            permission: {
+              deletedAt: null,
+            },
+          },
           include: {
             permission: true,
           },
@@ -36,6 +50,11 @@ export class RoleRepository {
       where: { deletedAt: null },
       include: {
         permissions: {
+          where: {
+            permission: {
+              deletedAt: null,
+            },
+          },
           include: {
             permission: true,
           },
@@ -54,6 +73,11 @@ export class RoleRepository {
       },
       include: {
         permissions: {
+          where: {
+            permission: {
+              deletedAt: null,
+            },
+          },
           include: {
             permission: true,
           },
@@ -89,6 +113,11 @@ export class RoleRepository {
       },
       include: {
         permissions: {
+          where: {
+            permission: {
+              deletedAt: null,
+            },
+          },
           include: {
             permission: true,
           },

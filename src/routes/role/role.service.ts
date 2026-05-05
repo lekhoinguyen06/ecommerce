@@ -27,6 +27,14 @@ export class RoleService {
     createdById: number;
   }): Promise<GetRoleDetailResType> {
     try {
+      // Check if permissions are soft-deleted
+      const validatedPermissionIds =
+        await this.roleRepository.validatePermissionIds(
+          data.permissionIds || [],
+        );
+      if (validatedPermissionIds !== (data.permissionIds?.length || 0)) {
+        throw NotFoundRecordException;
+      }
       const role = await this.roleRepository.create({ data, createdById });
       return {
         ...role,
@@ -85,6 +93,14 @@ export class RoleService {
     updatedById: number;
   }): Promise<GetRoleDetailResType> {
     try {
+      // Check if permissions are soft-deleted
+      const validatedPermissionIds =
+        await this.roleRepository.validatePermissionIds(
+          data.permissionIds || [],
+        );
+      if (validatedPermissionIds !== (data.permissionIds?.length || 0)) {
+        throw NotFoundRecordException;
+      }
       const role = await this.roleRepository.update({ id, data, updatedById });
       return {
         ...role,
