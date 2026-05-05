@@ -10,9 +10,9 @@ import {
   isRequiredRecordNotFoundPrisma2025Error,
   isUniqueConstraintPrisma2002Error,
 } from 'src/types/helper';
-import { LanguageAlreadyExistsError } from './language.error';
+import { LanguageAlreadyExistsException } from './language.error';
 import { MessageResType } from 'src/shared/models/response.model';
-import { NotFoundRecord } from 'src/shared/error';
+import { NotFoundRecordException } from 'src/shared/error';
 
 @Injectable()
 export class LanguageService {
@@ -28,7 +28,7 @@ export class LanguageService {
       });
     } catch (error) {
       if (isUniqueConstraintPrisma2002Error(error)) {
-        throw LanguageAlreadyExistsError;
+        throw LanguageAlreadyExistsException;
       }
       throw error;
     }
@@ -37,7 +37,7 @@ export class LanguageService {
   async findAll(): Promise<GetLanguagesResType | null> {
     const languages = await this.languageRepository.findAll();
     if (!languages) {
-      throw NotFoundRecord;
+      throw NotFoundRecordException;
     }
     return {
       data: languages,
@@ -48,7 +48,7 @@ export class LanguageService {
   async findOne(id: string): Promise<GetLanguageDetailResType | null> {
     const language = await this.languageRepository.findOne(id);
     if (!language) {
-      throw NotFoundRecord;
+      throw NotFoundRecordException;
     }
     return language;
   }
@@ -64,7 +64,7 @@ export class LanguageService {
       });
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
-        throw NotFoundRecord;
+        throw NotFoundRecordException;
       }
       throw error;
     }
@@ -78,7 +78,7 @@ export class LanguageService {
       });
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
-        throw NotFoundRecord;
+        throw NotFoundRecordException;
       }
       throw error;
     }
@@ -96,7 +96,7 @@ export class LanguageService {
       };
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
-        throw NotFoundRecord;
+        throw NotFoundRecordException;
       }
       throw error;
     }
@@ -110,7 +110,7 @@ export class LanguageService {
       };
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
-        throw NotFoundRecord;
+        throw NotFoundRecordException;
       }
       throw error;
     }

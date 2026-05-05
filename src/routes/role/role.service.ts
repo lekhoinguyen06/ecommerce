@@ -7,9 +7,12 @@ import {
   GetRolesResType,
   UpdateRoleType,
 } from './role.model';
-import { isUniqueConstraintPrisma2002Error } from 'src/types/helper';
-import { RoleAlreadyExistsError } from './role.error';
-import { NotFoundRecord } from 'src/shared/error';
+import {
+  isRequiredRecordNotFoundPrisma2025Error,
+  isUniqueConstraintPrisma2002Error,
+} from 'src/types/helper';
+import { RoleAlreadyExistsException } from './role.error';
+import { NotFoundRecordException } from 'src/shared/error';
 import { MessageResType } from 'src/shared/models/response.model';
 
 @Injectable()
@@ -32,7 +35,7 @@ export class RoleService {
       };
     } catch (error) {
       if (isUniqueConstraintPrisma2002Error(error)) {
-        throw RoleAlreadyExistsError;
+        throw RoleAlreadyExistsException;
       }
       throw error;
     }
@@ -59,7 +62,7 @@ export class RoleService {
       const result = await this.roleRepository.findOne(id);
 
       if (!result) {
-        throw NotFoundRecord;
+        throw NotFoundRecordException;
       }
 
       return {
@@ -89,8 +92,11 @@ export class RoleService {
         permissions: role.permissions?.map((item) => item.permission) || [],
       };
     } catch (error) {
+      if (isRequiredRecordNotFoundPrisma2025Error(error)) {
+        throw NotFoundRecordException;
+      }
       if (isUniqueConstraintPrisma2002Error(error)) {
-        throw RoleAlreadyExistsError;
+        throw RoleAlreadyExistsException;
       }
       throw error;
     }
@@ -105,6 +111,9 @@ export class RoleService {
       await this.roleRepository.delete({ id, deletedById }, isHard);
       return { message: 'Role deleted successfully' };
     } catch (error) {
+      if (isRequiredRecordNotFoundPrisma2025Error(error)) {
+        throw NotFoundRecordException;
+      }
       throw error;
     }
   }
@@ -114,8 +123,8 @@ export class RoleService {
       await this.roleRepository.restore({ id, restoredById });
       return { message: 'Role restored successfully' };
     } catch (error) {
-      if (isUniqueConstraintPrisma2002Error(error)) {
-        throw RoleAlreadyExistsError;
+      if (isRequiredRecordNotFoundPrisma2025Error(error)) {
+        throw NotFoundRecordException;
       }
       throw error;
     }

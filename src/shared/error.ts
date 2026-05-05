@@ -1,6 +1,6 @@
 import { UnprocessableEntityException } from '@nestjs/common';
 
-export const NotFoundRecord = new UnprocessableEntityException({
+export const NotFoundRecordException = new UnprocessableEntityException({
   message: 'Error.RecordNotFound',
   path: 'id',
 });

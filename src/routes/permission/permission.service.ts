@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PermissionRepository } from './permission.repo';
-import { NotFoundRecord } from 'src/shared/error';
+import { NotFoundRecordException } from 'src/shared/error';
 import {
   CreatePermissionBodyType,
   GetPermissionDetailResType,
@@ -12,7 +12,7 @@ import {
   isRequiredRecordNotFoundPrisma2025Error,
   isUniqueConstraintPrisma2002Error,
 } from 'src/types/helper';
-import { PermissionAlreadyExistsError } from './permission.error';
+import { PermissionAlreadyExistsException } from './permission.error';
 import { MessageResType } from 'src/shared/models/response.model';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class PermissionService {
   async findOne(id: number): Promise<GetPermissionDetailResType> {
     const data = await this.permissionRepository.findOne(id);
 
-    if (!data) throw NotFoundRecord;
+    if (!data) throw NotFoundRecordException;
 
     return data;
   }
@@ -35,7 +35,7 @@ export class PermissionService {
       query.limit,
     );
 
-    if (!data.length) throw NotFoundRecord;
+    if (!data.length) throw NotFoundRecordException;
 
     return {
       data,
@@ -57,7 +57,7 @@ export class PermissionService {
       return await this.permissionRepository.create(data, createdById);
     } catch (error) {
       if (isUniqueConstraintPrisma2002Error(error)) {
-        throw PermissionAlreadyExistsError;
+        throw PermissionAlreadyExistsException;
       }
       throw error;
     }
@@ -76,10 +76,10 @@ export class PermissionService {
       return await this.permissionRepository.update(id, data, updatedById);
     } catch (error) {
       if (isUniqueConstraintPrisma2002Error(error)) {
-        throw PermissionAlreadyExistsError;
+        throw PermissionAlreadyExistsException;
       }
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
-        throw NotFoundRecord;
+        throw NotFoundRecordException;
       }
       throw error;
     }
@@ -102,7 +102,7 @@ export class PermissionService {
       };
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
-        throw NotFoundRecord;
+        throw NotFoundRecordException;
       }
       throw error;
     }
@@ -125,7 +125,7 @@ export class PermissionService {
       };
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
-        throw NotFoundRecord;
+        throw NotFoundRecordException;
       }
       throw error;
     }
