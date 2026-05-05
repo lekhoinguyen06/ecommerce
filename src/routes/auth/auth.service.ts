@@ -150,7 +150,6 @@ export class AuthService {
       const user = await this.authRepository.findUniqueUserWithRole({
         email: body.email,
       });
-
       if (!user) throw EmailNotFoundException;
 
       const isPasswordMatch = await this.hashingService.compare(
@@ -206,7 +205,9 @@ export class AuthService {
     } catch (error) {
       throw error instanceof HttpException
         ? error
-        : new UnauthorizedException();
+        : new UnauthorizedException(
+            error instanceof Error ? error.message : 'Unknown error',
+          );
     }
   }
 

@@ -157,6 +157,7 @@ model Permission {
   description String             @default("")
   path        String
   method      HTTPMethod
+  module      String             @default("")
   createdById Int?
   updatedById Int?
   deletedAt   DateTime?

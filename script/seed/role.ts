@@ -50,11 +50,11 @@ const main = async () => {
 
   const adminUser = await prisma.user.create({
     data: {
-      email: envConfig.ADMIN_EMAIL || 'admin@example.com',
+      email: 'admin@example.com',
       password: hashedPassword,
-      name: envConfig.ADMIN_NAME || 'Admin User',
+      name: 'Admin User',
       roleId: adminRole.id,
-      phoneNumber: envConfig.ADMIN_PHONE_NUMBER || '1234567890',
+      phoneNumber: '1234567890',
     },
   });
 

@@ -80,7 +80,6 @@ export class AccessTokenGuard implements CanActivate {
       .catch(() => {
         throw new ForbiddenException();
       });
-
     if (role.permissions.length === 0) {
       throw new ForbiddenException();
     }

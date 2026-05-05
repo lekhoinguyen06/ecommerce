@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "seed:all": "bun run ./script/seed/index.ts",
+    "seed:all": "pnpm run seed:role && pnpm run seed:permission",
     "seed:role": "bun run ./script/seed/role.ts",
     "seed:permission": "bun run ./script/seed/permission.ts",
     "build": "nest build",

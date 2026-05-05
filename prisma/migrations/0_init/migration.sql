@@ -93,6 +93,7 @@ CREATE TABLE "Permission" (
     "description" TEXT NOT NULL DEFAULT '',
     "path" TEXT NOT NULL,
     "method" "HTTPMethod" NOT NULL,
+    "module" TEXT NOT NULL DEFAULT '',
     "createdById" INTEGER,
     "updatedById" INTEGER,
     "deletedAt" TIMESTAMP(3),
