@@ -11,9 +11,17 @@ import {
   isRequiredRecordNotFoundPrisma2025Error,
   isUniqueConstraintPrisma2002Error,
 } from 'src/types/helper';
-import { RoleAlreadyExistsException } from './role.error';
+import {
+  ProhibitActionOnBaseRoleException,
+  RoleAlreadyExistsException,
+} from './role.error';
 import { NotFoundRecordException } from 'src/shared/error';
 import { MessageResType } from 'src/shared/models/response.model';
+import {
+  baseRoles,
+  RoleName,
+  RoleNameType,
+} from 'src/shared/constants/role.constant';
 
 @Injectable()
 export class RoleService {
@@ -93,6 +101,15 @@ export class RoleService {
     updatedById: number;
   }): Promise<GetRoleDetailResType> {
     try {
+      // Base roles check (ADMIN role cannot be updated by anyone)
+      const base = await this.roleRepository.findOne(id);
+      if (!base) {
+        throw NotFoundRecordException;
+      }
+      if (base.name === RoleName.Admin) {
+        throw ProhibitActionOnBaseRoleException;
+      }
+
       // Check if permissions are soft-deleted
       const validatedPermissionIds =
         await this.roleRepository.validatePermissionIds(
@@ -124,6 +141,14 @@ export class RoleService {
     isHard = false,
   ): Promise<MessageResType> {
     try {
+      // Base roles check (base role cannot be deleted by anyone)
+      const role = await this.roleRepository.findOne(id);
+      if (!role) {
+        throw NotFoundRecordException;
+      }
+      if (baseRoles.has(role.name as RoleNameType)) {
+        throw ProhibitActionOnBaseRoleException;
+      }
       await this.roleRepository.delete({ id, deletedById }, isHard);
       return { message: 'Role deleted successfully' };
     } catch (error) {

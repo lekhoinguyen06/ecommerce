@@ -35,8 +35,6 @@ export class AuthenticationGuard implements CanActivate {
       options: { condition: GuardCondition.And },
     };
 
-    // console.log('Auth type: ', authTypeValue);
-
     const guards = authTypeValue.authTypes.map(
       (authType: string) => this.authTypeMap[authType],
     );
