@@ -5,7 +5,7 @@ import {
   CreatePermissionBodyType,
   GetPermissionDetailResType,
   GetPermissionResType,
-  GetPermissionsBodyType,
+  GetPermissionsQueryType,
   UpdatePermissionBodyType,
 } from './permission.model';
 import {
@@ -27,7 +27,9 @@ export class PermissionService {
     return data;
   }
 
-  async paginate(query: GetPermissionsBodyType): Promise<GetPermissionResType> {
+  async paginate(
+    query: GetPermissionsQueryType,
+  ): Promise<GetPermissionResType> {
     const data = await this.permissionRepository.paginate(
       query.page,
       query.limit,

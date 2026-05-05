@@ -12,7 +12,9 @@ import { PermissionService } from './permission.service';
 import { ZodSerializerDto } from 'nestjs-zod';
 import {
   CreatePermissionDTO,
+  GetPermissionQueryDTO,
   GetPermissionDetailResDTO,
+  GetPermissionParamsDTO,
   GetPermissionResDTO,
   UpdatePermissionDTO,
 } from './permission.dto';
@@ -25,17 +27,18 @@ export class PermissionController {
 
   @Get(':id')
   @ZodSerializerDto(GetPermissionDetailResDTO)
-  get(@Param('id') id: string) {
-    return this.permissionService.findOne(Number(id));
+  get(@Param() param: GetPermissionParamsDTO) {
+    return this.permissionService.findOne(param.permissionId);
   }
 
   // /permission?page=1&limit=10
   @Get()
   @ZodSerializerDto(GetPermissionResDTO)
-  getAll(@Query('page') page: string, @Query('limit') limit: string) {
+  getAll(@Query() query: GetPermissionQueryDTO) {
+    const { page, limit } = query;
     return this.permissionService.paginate({
-      page: Number(page),
-      limit: Number(limit),
+      page: page,
+      limit: limit,
     });
   }
 
@@ -51,12 +54,12 @@ export class PermissionController {
   @Patch(':id')
   @ZodSerializerDto(GetPermissionDetailResDTO)
   update(
-    @Param('id') id: string,
+    @Param() param: GetPermissionParamsDTO,
     @Body() body: UpdatePermissionDTO,
     @ActiveUser('userId') userId: number,
   ) {
     return this.permissionService.update({
-      id: Number(id),
+      id: param.permissionId,
       data: body,
       updatedById: userId,
     });
@@ -64,18 +67,24 @@ export class PermissionController {
 
   @Delete(':id')
   @ZodSerializerDto(MessageResDTO)
-  delete(@Param('id') id: string, @ActiveUser('userId') userId: number) {
+  delete(
+    @Param() param: GetPermissionParamsDTO,
+    @ActiveUser('userId') userId: number,
+  ) {
     return this.permissionService.delete({
-      id: Number(id),
+      id: param.permissionId,
       deletedById: userId,
     });
   }
 
   @Post(':id/restore')
   @ZodSerializerDto(MessageResDTO)
-  restore(@Param('id') id: string, @ActiveUser('userId') userId: number) {
+  restore(
+    @Param() param: GetPermissionParamsDTO,
+    @ActiveUser('userId') userId: number,
+  ) {
     return this.permissionService.restore({
-      id: Number(id),
+      id: param.permissionId,
       restoredById: userId,
     });
   }

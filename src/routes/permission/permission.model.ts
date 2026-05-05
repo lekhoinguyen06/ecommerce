@@ -2,7 +2,7 @@ import { PermissionSchema } from 'src/shared/models/shared-permission.model';
 import z from 'zod';
 
 // QUERY
-export const GetPermissionsBodySchema = z
+export const GetPermissionsQuerySchema = z
   .object({
     page: z.coerce.number().int().default(1),
     limit: z.coerce.number().int().default(10),
@@ -39,7 +39,7 @@ export const UpdatePermissionBodySchema =
 
 // Types
 export type PermissionType = z.infer<typeof PermissionSchema>;
-export type GetPermissionsBodyType = z.infer<typeof GetPermissionsBodySchema>;
+export type GetPermissionsQueryType = z.infer<typeof GetPermissionsQuerySchema>;
 export type GetPermissionsParamType = z.infer<typeof GetPermissionsParamSchema>;
 export type GetPermissionResType = z.infer<typeof GetPermissionResSchema>;
 export type GetPermissionDetailResType = z.infer<

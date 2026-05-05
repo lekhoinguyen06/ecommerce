@@ -2,10 +2,16 @@ import z from 'zod';
 import { RoleSchema } from 'src/shared/models/shared-role.model';
 
 // GET
-export const GetRoleBodySchema = z
+export const GetRoleQuerySchema = z
   .object({
     page: z.coerce.number().int().default(1),
     limit: z.coerce.number().int().default(10),
+  })
+  .strict();
+
+export const GetRoleParamSchema = z
+  .object({
+    roleId: z.coerce.number().int(),
   })
   .strict();
 
@@ -39,7 +45,8 @@ export const GetRolesResSchema = z.object({
 
 // Types
 export type RoleType = z.infer<typeof RoleSchema>;
-export type GetRoleBodyType = z.infer<typeof GetRoleBodySchema>;
+export type GetRoleQueryType = z.infer<typeof GetRoleQuerySchema>;
+export type GetRoleParamType = z.infer<typeof GetRoleParamSchema>;
 export type CreateRoleType = z.infer<typeof CreateRoleBodySchema>;
 export type UpdateRoleType = z.infer<typeof UpdateRoleBodySchema>;
 export type GetRoleDetailResType = z.infer<typeof GetRoleDetailResSchema>;
