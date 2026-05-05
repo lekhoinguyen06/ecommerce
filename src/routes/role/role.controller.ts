@@ -4,8 +4,8 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
-  Put,
   Query,
 } from '@nestjs/common';
 import { RoleService } from './role.service';
@@ -34,7 +34,7 @@ export class RoleController {
     return this.roleService.findOne(roleId);
   }
 
-  @Put(':roleId')
+  @Patch(':roleId')
   update(
     @Param('roleId') roleId: number,
     @Body() body: UpdateRoleDTO,
