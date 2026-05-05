@@ -7,10 +7,25 @@ export class RoleRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   create({ data, createdById }: { data: CreateRoleType; createdById: number }) {
+    const { permissionIds, ...rest } = data;
     return this.prismaService.role.create({
       data: {
-        ...data,
+        ...rest,
         createdById,
+        permissions: {
+          create: permissionIds?.map((permissionId) => ({
+            permission: {
+              connect: { id: permissionId },
+            },
+          })),
+        },
+      },
+      include: {
+        permissions: {
+          include: {
+            permission: true,
+          },
+        },
       },
     });
   }
@@ -19,6 +34,13 @@ export class RoleRepository {
     const skip = (page - 1) * limit;
     return this.prismaService.role.findMany({
       where: { deletedAt: null },
+      include: {
+        permissions: {
+          include: {
+            permission: true,
+          },
+        },
+      },
       skip,
       take: limit,
     });
@@ -57,11 +79,19 @@ export class RoleRepository {
         ...rest,
         updatedById,
         permissions: {
+          deleteMany: {}, // Delete all existing relations
           create: permissionIds?.map((permissionId) => ({
             permission: {
               connect: { id: permissionId },
             },
           })),
+        },
+      },
+      include: {
+        permissions: {
+          include: {
+            permission: true,
+          },
         },
       },
     });

@@ -24,7 +24,12 @@ export class RoleService {
     createdById: number;
   }): Promise<GetRoleDetailResType> {
     try {
-      return await this.roleRepository.create({ data, createdById });
+      const role = await this.roleRepository.create({ data, createdById });
+      return {
+        ...role,
+        // Mapping relations
+        permissions: role.permissions?.map((item) => item.permission) || [],
+      };
     } catch (error) {
       if (isUniqueConstraintPrisma2002Error(error)) {
         throw RoleAlreadyExistsError;
@@ -37,7 +42,11 @@ export class RoleService {
     try {
       const result = await this.roleRepository.paginate(page, limit);
       return {
-        data: result,
+        data: result.map((role) => ({
+          ...role,
+          // Mapping relations
+          permissions: role.permissions?.map((item) => item.permission) || [],
+        })),
         itemsCount: result.length,
       };
     } catch (error) {
@@ -73,7 +82,12 @@ export class RoleService {
     updatedById: number;
   }): Promise<GetRoleDetailResType> {
     try {
-      return await this.roleRepository.update({ id, data, updatedById });
+      const role = await this.roleRepository.update({ id, data, updatedById });
+      return {
+        ...role,
+        // Mapping relations
+        permissions: role.permissions?.map((item) => item.permission) || [],
+      };
     } catch (error) {
       if (isUniqueConstraintPrisma2002Error(error)) {
         throw RoleAlreadyExistsError;
@@ -100,6 +114,9 @@ export class RoleService {
       await this.roleRepository.restore({ id, restoredById });
       return { message: 'Role restored successfully' };
     } catch (error) {
+      if (isUniqueConstraintPrisma2002Error(error)) {
+        throw RoleAlreadyExistsError;
+      }
       throw error;
     }
   }

@@ -6,7 +6,7 @@ export const RoleSchema = z.object({
   name: z.string(),
   description: z.string().default(''),
   isActive: z.boolean().default(true),
-  permissions: z.array(PermissionSchema).nullable().optional(),
+  permissions: z.array(PermissionSchema).nullable(),
 
   createdById: z.number().nullable(),
   updatedById: z.number().nullable(),

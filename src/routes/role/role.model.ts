@@ -14,6 +14,8 @@ export const CreateRoleBodySchema = RoleSchema.pick({
   name: true,
   description: true,
   isActive: true,
+}).extend({
+  permissionIds: z.array(z.number()).optional(),
 });
 
 // UPDATE
@@ -24,7 +26,7 @@ export const UpdateRoleBodySchema = RoleSchema.partial()
     isActive: true,
   })
   .extend({
-    permissionIds: z.array(z.number()),
+    permissionIds: z.array(z.number()).optional(),
   });
 
 // RESPONSE
