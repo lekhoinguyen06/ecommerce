@@ -29,7 +29,7 @@ export const FailedToSentOTPException = new UnprocessableEntityException([
 export const RefreshTokenRevokedException = new UnauthorizedException([
   {
     message: 'Error.RefreshTokenRevoked',
-    path: 'Refresh token has been revoked',
+    path: 'refreshToken',
   },
 ]);
 

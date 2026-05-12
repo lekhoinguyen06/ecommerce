@@ -55,4 +55,17 @@ export class SharedUserRepository {
       },
     };
   }
+
+  async update({
+    uniqueObject,
+    data,
+  }: {
+    uniqueObject: UniqueObject;
+    data: Partial<UserType>;
+  }) {
+    return this.prismaService.user.update({
+      where: uniqueObject,
+      data,
+    });
+  }
 }

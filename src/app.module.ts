@@ -9,6 +9,7 @@ import { AuthModule } from './routes/auth/auth.module';
 import { LanguageModule } from './routes/language/language.module';
 import { PermissionModule } from './routes/permission/permission.module';
 import { RoleModule } from './routes/role/role.module';
+import { ProfileModule } from './routes/profile/profile.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { RoleModule } from './routes/role/role.module';
     LanguageModule,
     PermissionModule,
     RoleModule,
+    ProfileModule,
   ],
   controllers: [AppController],
   providers: [

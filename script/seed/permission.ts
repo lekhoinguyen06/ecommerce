@@ -13,6 +13,10 @@ async function bootstrap() {
   const server = app.getHttpAdapter().getInstance();
   const router = server.router;
 
+  // Delete all permissions (RESET)
+  await prisma.permissionsRoles.deleteMany();
+  await prisma.permission.deleteMany();
+
   // Get all permission records from the database
   const permissionsInDb = await prisma.permission.findMany({
     where: {
@@ -127,6 +131,22 @@ async function bootstrap() {
             connect: { id: permission.id },
           },
         })),
+
+        // connectOrCreate: seededPermissions.map((permission) => ({
+        //   where: {
+        //     permission_id_role_id: {
+        //       permission_id: permission.id,
+        //       role_id: adminRole.id,
+        //     },
+        //   },
+        //   create: {
+        //     permission: {
+        //       connect: {
+        //         id: permission.id,
+        //       },
+        //     },
+        //   },
+        // })),
       },
     },
   });
