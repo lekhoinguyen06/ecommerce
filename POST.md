@@ -1,6 +1,6 @@
 # Post project tasks
 
-- Testing basic route ability
-- Test client abilities (Postman)
-- Pattern check
-- Refactor profile page (merge with user because why do we need it)
+- TEST: basic module unit tests
+- TEST: client abilities (Postman)
+- REFACTOR: Pattern check
+- REFACTOR: Merge profile module with user because what is the point
