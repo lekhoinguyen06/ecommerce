@@ -11,6 +11,7 @@ import { SharedUserRepository } from './repositories/shared-user.repo';
 import { EmailService } from './services/email.service';
 import { Resend } from 'resend';
 import { TwoFactorService } from './services/2fa.service';
+import { SharedRoleRepository } from './repositories/shared-role.repo';
 
 const sharedServices = [
   PrismaService,
@@ -20,6 +21,7 @@ const sharedServices = [
   EmailService,
   Resend,
   TwoFactorService,
+  SharedRoleRepository,
 ];
 
 const guardProviders = [

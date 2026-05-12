@@ -7,6 +7,7 @@ import {
   VerificationCodeType,
 } from './auth.model';
 import { UserType } from 'src/shared/models/shared-user.model';
+import { UniqueUserObject } from 'src/shared/repositories/shared-user.repo';
 @Injectable()
 export class AuthRepository {
   constructor(private readonly prismaService: PrismaService) {}
@@ -91,7 +92,7 @@ export class AuthRepository {
   }
 
   findUniqueUserWithRole(
-    uniqueObject: { email: string } | { id: number },
+    uniqueObject: UniqueUserObject,
   ): Promise<(UserType & { role: RoleType }) | null> {
     return this.prismaService.user.findUnique({
       where: uniqueObject,
@@ -115,16 +116,6 @@ export class AuthRepository {
           },
         },
       },
-    });
-  }
-
-  updateUser(
-    where: { id: number } | { email: string },
-    data: Partial<Omit<UserType, 'id'>>,
-  ) {
-    return this.prismaService.user.update({
-      where,
-      data,
     });
   }
 

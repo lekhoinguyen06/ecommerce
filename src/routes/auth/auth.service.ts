@@ -19,7 +19,6 @@ import {
   SendOTPBodyType,
 } from './auth.model';
 import { AuthRepository } from './auth.repo';
-import { RoleService } from './role.service';
 import { SharedUserRepository } from 'src/shared/repositories/shared-user.repo';
 import { generateOTP } from 'src/shared/helpers';
 import envConfig from 'src/shared/config';
@@ -41,6 +40,7 @@ import {
 } from './auth.error';
 import { TwoFactorService } from 'src/shared/services/2fa.service';
 import { IncorrectPasswordException } from 'src/shared/error';
+import { SharedRoleRepository } from 'src/shared/repositories/shared-role.repo';
 
 @Injectable()
 export class AuthService {
@@ -48,8 +48,8 @@ export class AuthService {
     private readonly hashingService: HashingService,
     private readonly tokenService: TokenService,
     private readonly authRepository: AuthRepository,
-    private readonly sharedUserRepository: SharedUserRepository,
-    private readonly roleService: RoleService,
+    private readonly sharedUserRepo: SharedUserRepository,
+    private readonly sharedRoleRepo: SharedRoleRepository,
     private readonly emailService: EmailService,
     private readonly twoFactorService: TwoFactorService,
   ) {}
@@ -82,7 +82,7 @@ export class AuthService {
   async register(body: RegisterBodyType) {
     try {
       const hashedPassword = await this.hashingService.hash(body.password);
-      const clientRoleId = await this.roleService.getClientRoleId();
+      const clientRoleId = await this.sharedRoleRepo.getClientRoleId();
 
       await this.verifyOTP({
         email: body.email,
@@ -116,8 +116,9 @@ export class AuthService {
   }
 
   async sendOTP(body: SendOTPBodyType) {
-    const user = await this.sharedUserRepository.findUnique({
+    const user = await this.sharedUserRepo.findUnique({
       email: body.email,
+      deletedAt: null,
     });
 
     if (body.type === TypeOfVerificationCode.REGISTER && user)
@@ -336,7 +337,10 @@ export class AuthService {
     const { email, code, newPassword } = body;
 
     // Find user by email
-    const user = await this.sharedUserRepository.findUnique({ email });
+    const user = await this.sharedUserRepo.findUnique({
+      email,
+      deletedAt: null,
+    });
 
     if (!user) throw EmailNotFoundException;
 
@@ -351,12 +355,10 @@ export class AuthService {
     const hashedPassword = await this.hashingService.hash(newPassword);
 
     // Update
-    const $updateUser = this.authRepository.updateUser(
-      { id: user.id },
-      {
-        password: hashedPassword,
-      },
-    );
+    const $updateUser = this.sharedUserRepo.update({
+      uniqueObject: { id: user.id, deletedAt: null },
+      data: { password: hashedPassword },
+    });
     const $deleteVerificationCode = this.authRepository.deleteVerificationCode({
       email_code_type: {
         email,
@@ -372,7 +374,10 @@ export class AuthService {
 
   async setup2FA(userId: number) {
     // 1. Get user
-    const user = await this.sharedUserRepository.findUnique({ id: userId });
+    const user = await this.sharedUserRepo.findUnique({
+      id: userId,
+      deletedAt: null,
+    });
 
     if (!user) throw EmailNotFoundException;
 
@@ -384,10 +389,10 @@ export class AuthService {
     );
 
     // 3. Save TOTP secret to database
-    await this.authRepository.updateUser(
-      { id: userId },
-      { totpSecret: secret },
-    );
+    await this.sharedUserRepo.update({
+      uniqueObject: { id: userId, deletedAt: null },
+      data: { totpSecret: secret },
+    });
 
     return { secret, uri };
   }
@@ -395,7 +400,10 @@ export class AuthService {
   async disable2FA(data: Disable2FABodyType & { userId: number }) {
     const { totpCode, code, userId } = data;
     // 1. Get user
-    const user = await this.sharedUserRepository.findUnique({ id: userId });
+    const user = await this.sharedUserRepo.findUnique({
+      id: userId,
+      deletedAt: null,
+    });
 
     if (!user) throw EmailNotFoundException;
 
@@ -422,7 +430,10 @@ export class AuthService {
     }
 
     // 3. Disable 2FA
-    await this.authRepository.updateUser({ id: userId }, { totpSecret: null });
+    await this.sharedUserRepo.update({
+      uniqueObject: { id: userId, deletedAt: null },
+      data: { totpSecret: null },
+    });
 
     return { message: '2FA disabled successfully' };
   }
