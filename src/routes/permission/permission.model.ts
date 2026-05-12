@@ -39,7 +39,6 @@ export const UpdatePermissionBodySchema =
   CreatePermissionBodySchema.partial().strict();
 
 // Types
-export type PermissionType = z.infer<typeof PermissionSchema>;
 export type GetPermissionsQueryType = z.infer<typeof GetPermissionsQuerySchema>;
 export type GetPermissionsParamType = z.infer<typeof GetPermissionsParamSchema>;
 export type GetPermissionResType = z.infer<typeof GetPermissionResSchema>;

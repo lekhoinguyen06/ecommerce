@@ -44,7 +44,6 @@ export const GetRolesResSchema = z.object({
 });
 
 // Types
-export type RoleType = z.infer<typeof RoleSchema>;
 export type GetRoleQueryType = z.infer<typeof GetRoleQuerySchema>;
 export type GetRoleParamType = z.infer<typeof GetRoleParamSchema>;
 export type CreateRoleType = z.infer<typeof CreateRoleBodySchema>;

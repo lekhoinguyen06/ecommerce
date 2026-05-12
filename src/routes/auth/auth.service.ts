@@ -32,7 +32,6 @@ import {
   EmailNotFoundException,
   ExpiredOTPException,
   FailedToSentOTPException,
-  IncorrectPasswordException,
   InvalidOTPException,
   InvalidTOTPAndCodeException,
   InvalidTOTPException,
@@ -41,6 +40,7 @@ import {
   TOTPNotEnabledException,
 } from './auth.error';
 import { TwoFactorService } from 'src/shared/services/2fa.service';
+import { IncorrectPasswordException } from 'src/shared/error';
 
 @Injectable()
 export class AuthService {

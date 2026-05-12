@@ -48,14 +48,6 @@ export const EmailNotFoundException = new UnprocessableEntityException([
   },
 ]);
 
-// Password
-export const IncorrectPasswordException = new UnprocessableEntityException([
-  {
-    message: 'Error.IncorrectPassword',
-    path: 'password',
-  },
-]);
-
 // Google
 export const GoogleAuthenticationFailedException = new UnauthorizedException([
   {
