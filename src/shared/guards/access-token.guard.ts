@@ -69,6 +69,7 @@ export class AccessTokenGuard implements CanActivate {
                 path,
                 method: method as HTTPMethodType,
                 deletedAt: null,
+                isActive: true,
               },
             },
             include: {
