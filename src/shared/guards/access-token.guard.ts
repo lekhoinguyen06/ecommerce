@@ -7,7 +7,10 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { TokenService } from '../services/token.service';
-import { REQUEST_USER_KEY } from '../constants/auth.constant';
+import {
+  REQUEST_ROLE_PERMISSIONS_KEY,
+  REQUEST_USER_KEY,
+} from '../constants/auth.constant';
 import { AccessTokenPayload } from 'src/types/jwt.type';
 import { PrismaService } from '../services/prisma.service';
 import { HTTPMethodType } from '../constants/permission.constant';
@@ -83,5 +86,7 @@ export class AccessTokenGuard implements CanActivate {
     if (role.permissions.length === 0) {
       throw new ForbiddenException();
     }
+
+    request[REQUEST_ROLE_PERMISSIONS_KEY] = role;
   }
 }

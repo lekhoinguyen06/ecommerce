@@ -82,7 +82,7 @@ export class AuthService {
   async register(body: RegisterBodyType) {
     try {
       const hashedPassword = await this.hashingService.hash(body.password);
-      const clientRoleId = await this.sharedRoleRepo.getClientRoleId();
+      const adminRoleId = await this.sharedRoleRepo.getAdminRoleId();
 
       await this.verifyOTP({
         email: body.email,
@@ -96,7 +96,7 @@ export class AuthService {
           name: body.name,
           phoneNumber: body.phoneNumber,
           password: hashedPassword,
-          roleId: clientRoleId,
+          roleId: adminRoleId,
         }),
         this.authRepository.deleteVerificationCode({
           email_code_type: {

@@ -4,8 +4,10 @@ import {
   UpdateUserProfileResSchema,
 } from '../models/shared-user.model';
 
-export class GetProfileResDTO extends createZodDto(GetUserProfileResSchema) {}
+export class GetUserProfileResDTO extends createZodDto(
+  GetUserProfileResSchema,
+) {}
 
-export class UpdateProfileResDTO extends createZodDto(
+export class UpdateUserProfileResDTO extends createZodDto(
   UpdateUserProfileResSchema,
 ) {}

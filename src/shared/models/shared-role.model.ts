@@ -17,4 +17,9 @@ export const RoleSchema = z.object({
   deletedAt: z.date().nullable(),
 });
 
+export const RoleWithPermissionsSchema = RoleSchema.extend({
+  permissions: z.array(PermissionSchema),
+});
+
 export type RoleType = z.infer<typeof RoleSchema>;
+export type RoleWithPermissionsType = z.infer<typeof RoleWithPermissionsSchema>;
