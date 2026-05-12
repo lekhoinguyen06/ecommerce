@@ -99,7 +99,6 @@ export class UserService {
   async findById(userId: number): Promise<GetUserProfileResType> {
     const user = await this.sharedUserRepo.findUniqueWithRolePermissions({
       id: userId,
-      deletedAt: null,
     });
     if (!user) {
       throw NotFoundRecordException;
@@ -163,7 +162,7 @@ export class UserService {
       });
 
       const updatedUser = await this.sharedUserRepo.update({
-        uniqueObject: { id: userId, deletedAt: null },
+        id: userId,
         data: {
           ...data,
           updatedById,
@@ -233,7 +232,7 @@ export class UserService {
       });
 
       await this.sharedUserRepo.update({
-        uniqueObject: { id: userId },
+        id: userId,
         data: {
           deletedAt: null,
           updatedById: restoredById,

@@ -4,9 +4,7 @@ import { UserType } from '../models/shared-user.model';
 import { PermissionType } from '../models/shared-permission.model';
 import { RoleType } from '../models/shared-role.model';
 
-export type UniqueUserObject =
-  | { email: string }
-  | ({ id: number } & { deletedAt?: null });
+export type UniqueUserObject = { email: string } | { id: number };
 
 type UserWithRolePermissions = UserType & {
   role: RoleType & {
@@ -19,16 +17,16 @@ export class SharedUserRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   findUnique(uniqueObject: UniqueUserObject): Promise<UserType | null> {
-    return this.prismaService.user.findUnique({
-      where: uniqueObject,
+    return this.prismaService.user.findFirst({
+      where: { ...uniqueObject, deletedAt: null },
     });
   }
 
   async findUniqueWithRolePermissions(
     uniqueObject: UniqueUserObject,
   ): Promise<UserWithRolePermissions | null> {
-    const user = await this.prismaService.user.findUnique({
-      where: uniqueObject,
+    const user = await this.prismaService.user.findFirst({
+      where: { ...uniqueObject, deletedAt: null },
       include: {
         role: {
           include: {
@@ -58,15 +56,9 @@ export class SharedUserRepository {
     };
   }
 
-  async update({
-    uniqueObject,
-    data,
-  }: {
-    uniqueObject: UniqueUserObject;
-    data: Partial<UserType>;
-  }) {
+  async update({ id, data }: { id: number; data: Partial<UserType> }) {
     return this.prismaService.user.update({
-      where: uniqueObject,
+      where: { id, deletedAt: null },
       data,
     });
   }

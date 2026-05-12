@@ -461,10 +461,10 @@ export type UserOrderByWithRelationInput = {
 export type UserWhereUniqueInput = Prisma.AtLeast<
   {
     id?: number;
-    email?: string;
     AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[];
     OR?: Prisma.UserWhereInput[];
     NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[];
+    email?: Prisma.StringFilter<'User'> | string;
     name?: Prisma.StringFilter<'User'> | string;
     password?: Prisma.StringFilter<'User'> | string;
     phoneNumber?: Prisma.StringFilter<'User'> | string;
@@ -545,7 +545,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<
     deletedVariantOptions?: Prisma.VariantOptionListRelationFilter;
     updatedVariantOptions?: Prisma.VariantOptionListRelationFilter;
   },
-  'id' | 'email'
+  'id'
 >;
 
 export type UserOrderByWithAggregationInput = {

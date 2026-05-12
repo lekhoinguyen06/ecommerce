@@ -43,7 +43,7 @@ export class ProfileService {
 
     // Update
     return this.sharedUserRepo.update({
-      uniqueObject: { id: userId },
+      id: userId,
       data,
     });
   }
@@ -73,7 +73,7 @@ export class ProfileService {
     // Update
     const hashedPassword = await this.hashingService.hash(newPassword);
     return this.sharedUserRepo.update({
-      uniqueObject: { id: userId },
+      id: userId,
       data: { password: hashedPassword },
     });
   }

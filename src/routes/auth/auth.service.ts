@@ -118,7 +118,6 @@ export class AuthService {
   async sendOTP(body: SendOTPBodyType) {
     const user = await this.sharedUserRepo.findUnique({
       email: body.email,
-      deletedAt: null,
     });
 
     if (body.type === TypeOfVerificationCode.REGISTER && user)
@@ -339,7 +338,6 @@ export class AuthService {
     // Find user by email
     const user = await this.sharedUserRepo.findUnique({
       email,
-      deletedAt: null,
     });
 
     if (!user) throw EmailNotFoundException;
@@ -356,7 +354,7 @@ export class AuthService {
 
     // Update
     const $updateUser = this.sharedUserRepo.update({
-      uniqueObject: { id: user.id, deletedAt: null },
+      id: user.id,
       data: { password: hashedPassword },
     });
     const $deleteVerificationCode = this.authRepository.deleteVerificationCode({
@@ -376,7 +374,6 @@ export class AuthService {
     // 1. Get user
     const user = await this.sharedUserRepo.findUnique({
       id: userId,
-      deletedAt: null,
     });
 
     if (!user) throw EmailNotFoundException;
@@ -390,7 +387,7 @@ export class AuthService {
 
     // 3. Save TOTP secret to database
     await this.sharedUserRepo.update({
-      uniqueObject: { id: userId, deletedAt: null },
+      id: userId,
       data: { totpSecret: secret },
     });
 
@@ -402,7 +399,6 @@ export class AuthService {
     // 1. Get user
     const user = await this.sharedUserRepo.findUnique({
       id: userId,
-      deletedAt: null,
     });
 
     if (!user) throw EmailNotFoundException;
@@ -431,7 +427,7 @@ export class AuthService {
 
     // 3. Disable 2FA
     await this.sharedUserRepo.update({
-      uniqueObject: { id: userId, deletedAt: null },
+      id: userId,
       data: { totpSecret: null },
     });
 
