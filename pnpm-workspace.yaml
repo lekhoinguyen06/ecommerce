@@ -7,3 +7,6 @@ ignoredBuiltDependencies:
 onlyBuiltDependencies:
   - bcrypt
   - better-sqlite3
+
+packages:
+  - 'infra'

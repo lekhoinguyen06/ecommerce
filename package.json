@@ -26,7 +26,8 @@
     "email:export": "email export",
     "infra:dev": "docker compose up -d",
     "infra:stop": "docker compose stop",
-    "infra:down": "docker compose down"
+    "infra:down": "docker compose down",
+    "infra:deploy": "cd infra && pulumi up && cd .."
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
