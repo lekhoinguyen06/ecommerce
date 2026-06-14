@@ -4,6 +4,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import multer from 'multer';
 import { generateRandomFileName } from 'src/shared/helpers';
 import { UPLOAD_PATH } from 'src/shared/constants/media.constant';
+import { MediaService } from './media.service';
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -22,5 +23,6 @@ const storage = multer.diskStorage({
     }),
   ],
   controllers: [MediaController],
+  providers: [MediaService],
 })
 export class MediaModule {}

@@ -12,11 +12,11 @@ import {
 import { FilesInterceptor } from '@nestjs/platform-express';
 import type { Response } from 'express';
 import { UPLOAD_PATH } from 'src/shared/constants/media.constant';
-import { S3Service } from 'src/shared/services/s3.service';
+import { MediaService } from './media.service';
 
 @Controller('media')
 export class MediaController {
-  constructor(private readonly s3Service: S3Service) {}
+  constructor(private readonly mediaService: MediaService) {}
 
   @Post('images/upload')
   @UseInterceptors(
@@ -52,32 +52,11 @@ export class MediaController {
       },
     }),
   )
-  async uploadFile(
+  uploadFile(
     @UploadedFiles()
     files: Express.Multer.File[],
   ) {
-    const result = await Promise.all(
-      files.map((file) => {
-        return this.s3Service
-          .uploadFile({
-            fileName: `images/${file.filename}`,
-            filePath: file.path,
-            contentType: file.mimetype,
-          })
-          .then((res) => {
-            return {
-              url: res.Location,
-              key: res.Key,
-              bucket: res.Bucket,
-            };
-          });
-      }),
-    );
-
-    return {
-      message: 'Files uploaded successfully!',
-      files: result,
-    };
+    return this.mediaService.uploadFile(files);
   }
 
   @Get('static/:filename')
