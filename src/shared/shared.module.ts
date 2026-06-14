@@ -12,6 +12,7 @@ import { EmailService } from './services/email.service';
 import { Resend } from 'resend';
 import { TwoFactorService } from './services/2fa.service';
 import { SharedRoleRepository } from './repositories/shared-role.repo';
+import { S3Service } from './services/s3.service';
 
 const sharedServices = [
   PrismaService,
@@ -22,6 +23,7 @@ const sharedServices = [
   Resend,
   TwoFactorService,
   SharedRoleRepository,
+  S3Service,
 ];
 
 const guardProviders = [

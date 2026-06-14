@@ -26,6 +26,9 @@ const configSchema = z.object({
   // Secrets
   DATABASE_URL: z.string(),
   SECRET_API_KEY: z.string(),
+  S3_ACCESS_KEY_ID: z.string(),
+  S3_SECRET_ACCESS_KEY: z.string(),
+  S3_REGION: z.string(),
 
   // Services
   RESEND_API_KEY: z.string(),
