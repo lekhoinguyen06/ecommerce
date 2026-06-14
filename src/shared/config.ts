@@ -17,6 +17,12 @@ const configSchema = z.object({
   // Information
   APP_NAME: z.string(),
 
+  // Endpoints
+  STATIC_ENDPOINT: z.url(),
+  STATIC_PREFIX: z.string().startsWith('/'),
+  APP_PORT: z.string().regex(/^\d+$/, 'APP_PORT must be a number'),
+  APP_ENDPOINT: z.url(),
+
   // Secrets
   DATABASE_URL: z.string(),
   SECRET_API_KEY: z.string(),

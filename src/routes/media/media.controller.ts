@@ -2,19 +2,20 @@ import {
   BadRequestException,
   Controller,
   Post,
-  UploadedFile,
+  UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import envConfig from 'src/shared/config';
 
 @Controller('media')
 export class MediaController {
   @Post('images/upload')
   @UseInterceptors(
-    FileInterceptor('file', {
+    FilesInterceptor('files', 2, {
       limits: {
-        // VALIDATOR: Limit file size to 5 MB
-        fileSize: 5 * 1024 * 1024, // 5 MB
+        // VALIDATOR: Limit file size to 2 MB
+        fileSize: 2 * 1024 * 1024, // 2 MB
       },
       fileFilter(req, file, callback) {
         // VALIDATOR: Is the file an image?
@@ -45,9 +46,15 @@ export class MediaController {
     }),
   )
   uploadFile(
-    @UploadedFile()
-    file: Express.Multer.File,
+    @UploadedFiles()
+    files: Express.Multer.File[],
   ) {
-    console.log(file);
+    return {
+      message: 'Files uploaded successfully!',
+      files: files.map((file) => ({
+        originalname: file.originalname,
+        url: `${envConfig.STATIC_ENDPOINT}/${file.filename}`,
+      })),
+    };
   }
 }

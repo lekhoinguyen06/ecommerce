@@ -1,30 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-// import { TransformInterceptor } from './shared/interceptors/transform.interceptor';
-// import { UnprocessableEntityException, ValidationPipe } from '@nestjs/common';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { UPLOAD_PATH } from './shared/constants/media.constant';
+import envConfig from './shared/config';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors();
-  // app.useGlobalPipes(
-  //   new ValidationPipe({
-  //     whitelist: false,
-  //     forbidNonWhitelisted: false,
-  //     transform: true,
-  //     transformOptions: {
-  //       enableImplicitConversion: true,
-  //     },
-  //     exceptionFactory(errors) {
-  //       return new UnprocessableEntityException(
-  //         errors.map((error) => ({
-  //           field: error.property,
-  //           error: error.constraints,
-  //         })),
-  //       );
-  //     },
-  //   }),
-  // );
-  // app.useGlobalInterceptors(new TransformInterceptor());
-  await app.listen(process.env.PORT ?? 3000);
+  app.useStaticAssets(UPLOAD_PATH, {
+    prefix: envConfig.STATIC_PREFIX,
+  });
+  await app.listen(envConfig.APP_PORT ?? 3000);
 }
 bootstrap();
