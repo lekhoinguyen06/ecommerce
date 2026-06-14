@@ -1,6 +1,3 @@
--- CreateSchema
-CREATE SCHEMA IF NOT EXISTS "public";
-
 -- CreateEnum
 CREATE TYPE "OrderStatus" AS ENUM ('PENDING_CONFIRMATION', 'PENDING_PICKUP', 'PENDING_DELIVERY', 'DELIVERED', 'RETURNED', 'CANCELLED');
 
@@ -391,9 +388,6 @@ CREATE TABLE "SkusVariantOptions" (
 CREATE INDEX "Language_deletedAt_idx" ON "Language"("deletedAt");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
-
--- CreateIndex
 CREATE INDEX "User_deletedAt_idx" ON "User"("deletedAt");
 
 -- CreateIndex
@@ -710,4 +704,3 @@ ALTER TABLE "SkusVariantOptions" ADD CONSTRAINT "SkusVariantOptions_sku_id_fkey"
 
 -- AddForeignKey
 ALTER TABLE "SkusVariantOptions" ADD CONSTRAINT "SkusVariantOptions_variant_option_id_fkey" FOREIGN KEY ("variant_option_id") REFERENCES "VariantOption"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
