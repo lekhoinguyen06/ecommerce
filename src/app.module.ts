@@ -16,7 +16,6 @@ import { BrandModule } from './routes/brand/brand.module';
 import { BrandTranslationModule } from './routes/brand/brand-translation/brand-translation.module';
 import { AcceptLanguageResolver, I18nModule, QueryResolver } from 'nestjs-i18n';
 import path from 'path';
-import { ALL_LANGUAGE_CODE } from './shared/constants/language.const';
 
 @Module({
   imports: [
