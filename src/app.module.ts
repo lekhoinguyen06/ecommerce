@@ -16,6 +16,7 @@ import { BrandModule } from './routes/brand/brand.module';
 import { BrandTranslationModule } from './routes/brand/brand-translation/brand-translation.module';
 import { AcceptLanguageResolver, I18nModule, QueryResolver } from 'nestjs-i18n';
 import path from 'path';
+import { FALLBACK_LANGUAGE_CODE } from './shared/constants/language.const';
 
 @Module({
   imports: [
@@ -30,7 +31,7 @@ import path from 'path';
     BrandModule,
     BrandTranslationModule,
     I18nModule.forRoot({
-      fallbackLanguage: 'en',
+      fallbackLanguage: FALLBACK_LANGUAGE_CODE,
       loaderOptions: {
         path: path.resolve('src/i18n/'),
         watch: true,

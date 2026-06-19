@@ -13,6 +13,7 @@ import { isRequiredRecordNotFoundPrisma2025Error } from 'src/types/helper';
 import { NotFoundRecordException } from 'src/shared/error';
 import { I18nContext, I18nService } from 'nestjs-i18n';
 import { I18nTranslations } from 'src/generated/i18n.generated';
+import { FALLBACK_LANGUAGE_CODE } from 'src/shared/constants/language.const';
 
 @Injectable()
 export class BrandService {
@@ -30,7 +31,7 @@ export class BrandService {
       // );
       return this.brandRepository.paginate({
         ...body,
-        languageId: I18nContext.current()?.lang,
+        languageId: I18nContext.current()?.lang ?? FALLBACK_LANGUAGE_CODE,
       });
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
@@ -48,7 +49,10 @@ export class BrandService {
 
   async findById(id: number): Promise<BrandWithTranslationsType> {
     try {
-      const brand = await this.brandRepository.findById(id);
+      const brand = await this.brandRepository.findById(
+        id,
+        I18nContext.current()?.lang ?? FALLBACK_LANGUAGE_CODE,
+      );
       if (!brand) {
         throw NotFoundRecordException;
       }

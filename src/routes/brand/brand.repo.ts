@@ -18,7 +18,7 @@ export class BrandRepository {
     limit,
     languageId,
   }: PaginationQueryBodyType & {
-    languageId?: string;
+    languageId: string;
   }): Promise<GetBrandsResType> {
     console.log('languageId', languageId);
     const skip = (page - 1) * limit;
