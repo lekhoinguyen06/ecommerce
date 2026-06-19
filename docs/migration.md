@@ -14,6 +14,10 @@ WHERE "deletedAt" IS NULL;
 CREATE UNIQUE INDEX BrandTranslation_brandId_languageId_unique
 ON "BrandTranslation"("brandId", "languageId")
 WHERE "deletedAt" IS NULL;
+
+CREATE UNIQUE INDEX CategoryTranslation_categoryId_languageId_unique
+ON "CategoryTranslation"("categoryId", "languageId")
+WHERE "deletedAt" IS NULL;
 ```
 
 \*Note: Just use deleted boolean column instead.
