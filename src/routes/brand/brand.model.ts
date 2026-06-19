@@ -15,7 +15,7 @@ export const BrandSchema = z.object({
 });
 
 export const BrandWithTranslationsSchema = BrandSchema.extend({
-  translations: z.array(BrandTranslationSchema),
+  translations: z.array(BrandTranslationSchema).optional(),
 });
 
 // CRUD
@@ -41,7 +41,9 @@ export const GetBrandsResSchema = z.object({
 
 // Types
 export type BrandType = z.infer<typeof BrandSchema>;
-export type BrandTranslationsType = z.infer<typeof BrandWithTranslationsSchema>;
+export type BrandWithTranslationsType = z.infer<
+  typeof BrandWithTranslationsSchema
+>;
 export type CreateBrandBodyType = z.infer<typeof CreateBrandBodySchema>;
 export type UpdateBrandBodyType = z.infer<typeof UpdateBrandBodySchema>;
 export type GetBrandDetailResType = z.infer<typeof GetBrandDetailResSchema>;

@@ -1,7 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { PaginationQueryBodyType } from 'src/shared/models/request.model';
 import { PrismaService } from 'src/shared/services/prisma.service';
-import { CreateBrandBodyType, GetBrandsResType } from './brand.model';
+import {
+  BrandWithTranslationsType,
+  CreateBrandBodyType,
+  GetBrandsResType,
+  UpdateBrandBodyType,
+} from './brand.model';
 
 @Injectable()
 export class BrandRepository {
@@ -56,7 +61,10 @@ export class BrandRepository {
     });
   }
 
-  findById(id: number, languageId?: string) {
+  findById(
+    id: number,
+    languageId?: string,
+  ): Promise<BrandWithTranslationsType | null> {
     return this.prismaService.brand.findUnique({
       where: { id, deletedAt: null },
       include: {
@@ -74,7 +82,7 @@ export class BrandRepository {
     logo,
     id,
     updatedById,
-  }: CreateBrandBodyType & { id: number; updatedById?: number }) {
+  }: UpdateBrandBodyType & { id: number; updatedById?: number }) {
     return this.prismaService.brand.update({
       where: { id, deletedAt: null },
       data: {
