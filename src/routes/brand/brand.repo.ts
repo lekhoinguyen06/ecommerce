@@ -51,7 +51,7 @@ export class BrandRepository {
     name,
     logo,
     createdById,
-  }: CreateBrandBodyType & { createdById?: number }) {
+  }: CreateBrandBodyType & { createdById: number }) {
     return this.prismaService.brand.create({
       data: {
         name,
@@ -78,16 +78,18 @@ export class BrandRepository {
   }
 
   update({
-    name,
-    logo,
+    data,
     id,
     updatedById,
-  }: UpdateBrandBodyType & { id: number; updatedById?: number }) {
+  }: {
+    data: UpdateBrandBodyType;
+    id: number;
+    updatedById?: number;
+  }) {
     return this.prismaService.brand.update({
       where: { id, deletedAt: null },
       data: {
-        name,
-        logo,
+        ...data,
         updatedById: updatedById ?? undefined,
       },
     });

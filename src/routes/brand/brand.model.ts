@@ -29,6 +29,12 @@ export const UpdateBrandBodySchema = BrandSchema.pick({
   logo: true,
 });
 
+export const GetBrandParamSchema = z
+  .object({
+    brandId: z.coerce.number(),
+  })
+  .strict();
+
 export const GetBrandDetailResSchema = BrandWithTranslationsSchema;
 
 export const GetBrandsResSchema = z.object({

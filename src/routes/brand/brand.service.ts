@@ -17,7 +17,7 @@ export class BrandService {
   constructor(private readonly brandRepository: BrandRepository) {}
 
   list(
-    body: PaginationQueryBodyType & { languageId: string },
+    body: PaginationQueryBodyType & { languageId?: string },
   ): Promise<GetBrandsResType> {
     try {
       return this.brandRepository.paginate(body);
@@ -29,16 +29,15 @@ export class BrandService {
     }
   }
 
-  create(body: CreateBrandBodyType): Promise<BrandType> {
+  create(
+    body: CreateBrandBodyType & { createdById: number },
+  ): Promise<BrandType> {
     return this.brandRepository.create(body);
   }
 
-  async findById(
-    id: number,
-    languageId?: string,
-  ): Promise<BrandWithTranslationsType> {
+  async findById(id: number): Promise<BrandWithTranslationsType> {
     try {
-      const brand = await this.brandRepository.findById(id, languageId);
+      const brand = await this.brandRepository.findById(id);
       if (!brand) {
         throw NotFoundRecordException;
       }
@@ -51,9 +50,11 @@ export class BrandService {
     }
   }
 
-  async update(
-    body: UpdateBrandBodyType & { id: number; updatedById?: number },
-  ): Promise<BrandType> {
+  async update(body: {
+    data: UpdateBrandBodyType;
+    id: number;
+    updatedById?: number;
+  }): Promise<BrandType> {
     try {
       return await this.brandRepository.update(body);
     } catch (error) {

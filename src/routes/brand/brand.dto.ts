@@ -2,13 +2,15 @@ import { createZodDto } from 'nestjs-zod';
 import {
   CreateBrandBodySchema,
   GetBrandDetailResSchema,
+  GetBrandParamSchema,
   GetBrandsResSchema,
   UpdateBrandBodySchema,
 } from './brand.model';
 
-export class CreateBrandBodyDto extends createZodDto(CreateBrandBodySchema) {}
-export class UpdateBrandBodyDto extends createZodDto(UpdateBrandBodySchema) {}
-export class GetBrandDetailResDto extends createZodDto(
+export class CreateBrandBodyDTO extends createZodDto(CreateBrandBodySchema) {}
+export class UpdateBrandBodyDTO extends createZodDto(UpdateBrandBodySchema) {}
+export class GetBrandParamDTO extends createZodDto(GetBrandParamSchema) {}
+export class GetBrandDetailResDTO extends createZodDto(
   GetBrandDetailResSchema,
 ) {}
-export class GetBrandsResDto extends createZodDto(GetBrandsResSchema) {}
+export class GetBrandsResDTO extends createZodDto(GetBrandsResSchema) {}
