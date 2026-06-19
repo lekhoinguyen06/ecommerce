@@ -56,12 +56,14 @@ export class BrandRepository {
     });
   }
 
-  async findById(id: number) {
+  async findById(id: number, languageId?: string) {
     return this.prismaService.brand.findUnique({
       where: { id, deletedAt: null },
       include: {
         translations: {
-          where: { deletedAt: null },
+          where: languageId
+            ? { languageId, deletedAt: null }
+            : { deletedAt: null },
         },
       },
     });
