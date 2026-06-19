@@ -229,7 +229,7 @@ model BrandTranslation {
   brandId     Int
   languageId  String
   name        String
-  description String
+  description String?
   createdById Int?
   updatedById Int?
   deletedAt   DateTime?

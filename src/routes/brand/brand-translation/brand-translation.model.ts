@@ -16,30 +16,28 @@ export const BrandTranslationSchema = z.object({
 });
 
 // CRUD
-export const BrandTranslationCreateBodySchema = BrandTranslationSchema.pick({
+export const CreateBrandTranslationBodySchema = BrandTranslationSchema.pick({
   brandId: true,
   languageId: true,
   name: true,
   description: true,
 });
 
-export const BrandTranslationUpdateBodySchema = BrandTranslationSchema.pick({
-  brandId: true,
-  languageId: true,
+export const UpdateBrandTranslationBodySchema = BrandTranslationSchema.pick({
   name: true,
   description: true,
 });
 
-export const BrandTranslationDetailResSchema = BrandTranslationSchema;
+export const GetBrandTranslationDetailResSchema = BrandTranslationSchema;
 
 // Types
 export type BrandTranslationType = z.infer<typeof BrandTranslationSchema>;
-export type BrandTranslationCreateBodyType = z.infer<
-  typeof BrandTranslationCreateBodySchema
+export type CreateBrandTranslationBodyType = z.infer<
+  typeof CreateBrandTranslationBodySchema
 >;
-export type BrandTranslationUpdateBodyType = z.infer<
-  typeof BrandTranslationUpdateBodySchema
+export type UpdateBrandTranslationBodyType = z.infer<
+  typeof UpdateBrandTranslationBodySchema
 >;
-export type BrandTranslationDetailResType = z.infer<
-  typeof BrandTranslationDetailResSchema
+export type GetBrandTranslationDetailResType = z.infer<
+  typeof GetBrandTranslationDetailResSchema
 >;

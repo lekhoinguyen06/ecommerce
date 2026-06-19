@@ -42,7 +42,7 @@ export class BrandRepository {
     };
   }
 
-  async create({
+  create({
     name,
     logo,
     createdById,
@@ -56,7 +56,7 @@ export class BrandRepository {
     });
   }
 
-  async findById(id: number, languageId?: string) {
+  findById(id: number, languageId?: string) {
     return this.prismaService.brand.findUnique({
       where: { id, deletedAt: null },
       include: {
@@ -69,7 +69,7 @@ export class BrandRepository {
     });
   }
 
-  async update({
+  update({
     name,
     logo,
     id,
@@ -85,7 +85,7 @@ export class BrandRepository {
     });
   }
 
-  async delete(
+  delete(
     { id, deletedById }: { id: number; deletedById?: number },
     isHard?: boolean,
   ) {
