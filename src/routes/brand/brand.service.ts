@@ -11,16 +11,27 @@ import {
 import { MessageResType } from 'src/shared/models/response.model';
 import { isRequiredRecordNotFoundPrisma2025Error } from 'src/types/helper';
 import { NotFoundRecordException } from 'src/shared/error';
+import { I18nContext, I18nService } from 'nestjs-i18n';
+import { I18nTranslations } from 'src/generated/i18n.generated';
 
 @Injectable()
 export class BrandService {
-  constructor(private readonly brandRepository: BrandRepository) {}
+  constructor(
+    private readonly brandRepository: BrandRepository,
+    private readonly i18n: I18nService<I18nTranslations>,
+  ) {}
 
   list(
     body: PaginationQueryBodyType & { languageId?: string },
   ): Promise<GetBrandsResType> {
     try {
-      return this.brandRepository.paginate(body);
+      // console.log(
+      //   this.i18n.t('error.NOT_FOUND', { lang: I18nContext.current()?.lang }),
+      // );
+      return this.brandRepository.paginate({
+        ...body,
+        languageId: I18nContext.current()?.lang,
+      });
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
         throw NotFoundRecordException;
