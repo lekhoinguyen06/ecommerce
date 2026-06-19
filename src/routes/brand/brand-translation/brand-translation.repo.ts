@@ -36,18 +36,17 @@ export class BrandTranslationRepository {
 
   update({
     id,
-    name,
-    description,
+    data,
     updatedById,
-  }: UpdateBrandTranslationBodyType & {
+  }: {
     id: number;
+    data: UpdateBrandTranslationBodyType;
     updatedById?: number;
   }): Promise<BrandTranslationType> {
     return this.prismaService.brandTranslation.update({
       where: { id, deletedAt: null },
       data: {
-        name,
-        description,
+        ...data,
         updatedById,
       },
     });

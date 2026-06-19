@@ -39,9 +39,11 @@ export class BrandTranslationService {
     }
   }
 
-  update(
-    body: UpdateBrandTranslationBodyType & { id: number; updatedById?: number },
-  ): Promise<BrandTranslationType> {
+  update(body: {
+    data: UpdateBrandTranslationBodyType;
+    id: number;
+    updatedById?: number;
+  }): Promise<BrandTranslationType> {
     try {
       return this.brandTranslationRepo.update(body);
     } catch (error) {

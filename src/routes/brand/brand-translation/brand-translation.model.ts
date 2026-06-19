@@ -28,6 +28,9 @@ export const UpdateBrandTranslationBodySchema = BrandTranslationSchema.pick({
   description: true,
 });
 
+export const GetBrandTranslationParamSchema = z.object({
+  brandTranslationId: z.coerce.number(),
+});
 export const GetBrandTranslationDetailResSchema = BrandTranslationSchema;
 
 // Types
