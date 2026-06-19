@@ -2628,6 +2628,7 @@ export type DeviceScalarFieldEnum =
 
 export const BrandScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   logo: 'logo',
   createdById: 'createdById',
   updatedById: 'updatedById',

@@ -1,3 +1,6 @@
+-- CreateSchema
+CREATE SCHEMA IF NOT EXISTS "public";
+
 -- CreateEnum
 CREATE TYPE "OrderStatus" AS ENUM ('PENDING_CONFIRMATION', 'PENDING_PICKUP', 'PENDING_DELIVERY', 'DELIVERED', 'RETURNED', 'CANCELLED');
 
@@ -133,6 +136,7 @@ CREATE TABLE "Device" (
 -- CreateTable
 CREATE TABLE "Brand" (
     "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
     "logo" TEXT,
     "createdById" INTEGER,
     "updatedById" INTEGER,
@@ -704,3 +708,4 @@ ALTER TABLE "SkusVariantOptions" ADD CONSTRAINT "SkusVariantOptions_sku_id_fkey"
 
 -- AddForeignKey
 ALTER TABLE "SkusVariantOptions" ADD CONSTRAINT "SkusVariantOptions_variant_option_id_fkey" FOREIGN KEY ("variant_option_id") REFERENCES "VariantOption"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+

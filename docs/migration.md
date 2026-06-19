@@ -3,14 +3,20 @@
 We are using unsupported Prisma features like partial unique index.
 
 ```sql
-CREATE UNIQUE INDEX permission_path_method_unique
+CREATE UNIQUE INDEX Permission_path_method_unique
 ON "Permission"("path", "method")
 WHERE "deletedAt" IS NULL;
 
-CREATE UNIQUE INDEX role_name_unique
+CREATE UNIQUE INDEX Role_name_unique
 ON "Role"("name")
 WHERE "deletedAt" IS NULL;
+
+CREATE UNIQUE INDEX BrandTranslation_brandId_languageId_unique
+ON "BrandTranslation"("brandId", "languageId")
+WHERE "deletedAt" IS NULL;
 ```
+
+\*Note: Just use deleted boolean column instead.
 
 Therefore, we have to:
 

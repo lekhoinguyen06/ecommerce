@@ -207,6 +207,7 @@ model Device {
 
 model Brand {
   id           Int                @id @default(autoincrement())
+  name         String
   logo         String?
   createdById  Int?
   updatedById  Int?
