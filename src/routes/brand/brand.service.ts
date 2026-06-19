@@ -5,6 +5,7 @@ import {
   BrandType,
   BrandWithTranslationsType,
   CreateBrandBodyType,
+  GetBrandsResType,
   UpdateBrandBodyType,
 } from './brand.model';
 import { MessageResType } from 'src/shared/models/response.model';
@@ -15,7 +16,9 @@ import { NotFoundRecordException } from 'src/shared/error';
 export class BrandService {
   constructor(private readonly brandRepository: BrandRepository) {}
 
-  list(body: PaginationQueryBodyType & { languageId: string }) {
+  list(
+    body: PaginationQueryBodyType & { languageId: string },
+  ): Promise<GetBrandsResType> {
     try {
       return this.brandRepository.paginate(body);
     } catch (error) {
@@ -26,7 +29,7 @@ export class BrandService {
     }
   }
 
-  create(body: CreateBrandBodyType) {
+  create(body: CreateBrandBodyType): Promise<BrandType> {
     return this.brandRepository.create(body);
   }
 

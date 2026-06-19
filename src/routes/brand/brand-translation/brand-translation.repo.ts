@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/shared/services/prisma.service';
 import {
+  BrandTranslationType,
   CreateBrandTranslationBodyType,
   UpdateBrandTranslationBodyType,
 } from './brand-translation.model';
@@ -27,7 +28,7 @@ export class BrandTranslationRepository {
     });
   }
 
-  findById(id: number) {
+  findById(id: number): Promise<BrandTranslationType | null> {
     return this.prismaService.brandTranslation.findUnique({
       where: { id, deletedAt: null },
     });
@@ -38,7 +39,10 @@ export class BrandTranslationRepository {
     name,
     description,
     updatedById,
-  }: UpdateBrandTranslationBodyType & { id: number; updatedById?: number }) {
+  }: UpdateBrandTranslationBodyType & {
+    id: number;
+    updatedById?: number;
+  }): Promise<BrandTranslationType> {
     return this.prismaService.brandTranslation.update({
       where: { id, deletedAt: null },
       data: {
@@ -52,7 +56,7 @@ export class BrandTranslationRepository {
   delete(
     { id, deletedById }: { id: number; deletedById?: number },
     isHard?: boolean,
-  ) {
+  ): Promise<BrandTranslationType> {
     if (isHard) {
       return this.prismaService.brandTranslation.delete({
         where: { id },
