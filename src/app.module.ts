@@ -17,6 +17,8 @@ import { BrandTranslationModule } from './routes/brand/brand-translation/brand-t
 import { AcceptLanguageResolver, I18nModule, QueryResolver } from 'nestjs-i18n';
 import path from 'path';
 import { FALLBACK_LANGUAGE_CODE } from './shared/constants/language.const';
+import { CategoryModule } from './routes/category/category.module';
+import { CategoryTranslationModule } from './routes/category/category-translation/category-translation.module';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { FALLBACK_LANGUAGE_CODE } from './shared/constants/language.const';
     MediaModule,
     BrandModule,
     BrandTranslationModule,
+    CategoryModule,
+    CategoryTranslationModule,
     I18nModule.forRoot({
       fallbackLanguage: FALLBACK_LANGUAGE_CODE,
       loaderOptions: {

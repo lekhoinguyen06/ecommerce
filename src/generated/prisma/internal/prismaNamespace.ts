@@ -2694,6 +2694,7 @@ export type ProductTranslationScalarFieldEnum =
 
 export const CategoryScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   parentCategoryId: 'parentCategoryId',
   createdById: 'createdById',
   updatedById: 'updatedById',

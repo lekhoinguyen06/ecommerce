@@ -293,6 +293,7 @@ model ProductTranslation {
 
 model Category {
   id               Int                   @id @default(autoincrement())
+  name             String
   parentCategoryId Int?
   createdById      Int?
   updatedById      Int?

@@ -248,7 +248,7 @@ export type CategoryTranslationGroupByOutputType = {
   categoryId: number;
   languageId: string;
   name: string;
-  description: string;
+  description: string | null;
   createdById: number | null;
   updatedById: number | null;
   deletedAt: Date | null;
@@ -289,7 +289,10 @@ export type CategoryTranslationWhereInput = {
   categoryId?: Prisma.IntFilter<'CategoryTranslation'> | number;
   languageId?: Prisma.StringFilter<'CategoryTranslation'> | string;
   name?: Prisma.StringFilter<'CategoryTranslation'> | string;
-  description?: Prisma.StringFilter<'CategoryTranslation'> | string;
+  description?:
+    | Prisma.StringNullableFilter<'CategoryTranslation'>
+    | string
+    | null;
   createdById?: Prisma.IntNullableFilter<'CategoryTranslation'> | number | null;
   updatedById?: Prisma.IntNullableFilter<'CategoryTranslation'> | number | null;
   deletedAt?:
@@ -327,7 +330,7 @@ export type CategoryTranslationOrderByWithRelationInput = {
   categoryId?: Prisma.SortOrder;
   languageId?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
-  description?: Prisma.SortOrder;
+  description?: Prisma.SortOrderInput | Prisma.SortOrder;
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder;
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder;
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
@@ -354,7 +357,10 @@ export type CategoryTranslationWhereUniqueInput = Prisma.AtLeast<
     categoryId?: Prisma.IntFilter<'CategoryTranslation'> | number;
     languageId?: Prisma.StringFilter<'CategoryTranslation'> | string;
     name?: Prisma.StringFilter<'CategoryTranslation'> | string;
-    description?: Prisma.StringFilter<'CategoryTranslation'> | string;
+    description?:
+      | Prisma.StringNullableFilter<'CategoryTranslation'>
+      | string
+      | null;
     createdById?:
       | Prisma.IntNullableFilter<'CategoryTranslation'>
       | number
@@ -403,7 +409,7 @@ export type CategoryTranslationOrderByWithAggregationInput = {
   categoryId?: Prisma.SortOrder;
   languageId?: Prisma.SortOrder;
   name?: Prisma.SortOrder;
-  description?: Prisma.SortOrder;
+  description?: Prisma.SortOrderInput | Prisma.SortOrder;
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder;
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder;
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
@@ -432,8 +438,9 @@ export type CategoryTranslationScalarWhereWithAggregatesInput = {
     | string;
   name?: Prisma.StringWithAggregatesFilter<'CategoryTranslation'> | string;
   description?:
-    | Prisma.StringWithAggregatesFilter<'CategoryTranslation'>
-    | string;
+    | Prisma.StringNullableWithAggregatesFilter<'CategoryTranslation'>
+    | string
+    | null;
   createdById?:
     | Prisma.IntNullableWithAggregatesFilter<'CategoryTranslation'>
     | number
@@ -463,7 +470,7 @@ export type CategoryTranslationScalarWhereWithAggregatesInput = {
 
 export type CategoryTranslationCreateInput = {
   name: string;
-  description: string;
+  description?: string | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -479,7 +486,7 @@ export type CategoryTranslationUncheckedCreateInput = {
   categoryId: number;
   languageId: string;
   name: string;
-  description: string;
+  description?: string | null;
   createdById?: number | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
@@ -490,7 +497,7 @@ export type CategoryTranslationUncheckedCreateInput = {
 
 export type CategoryTranslationUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -510,7 +517,7 @@ export type CategoryTranslationUncheckedUpdateInput = {
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
   languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
@@ -528,7 +535,7 @@ export type CategoryTranslationCreateManyInput = {
   categoryId: number;
   languageId: string;
   name: string;
-  description: string;
+  description?: string | null;
   createdById?: number | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
@@ -539,7 +546,7 @@ export type CategoryTranslationCreateManyInput = {
 
 export type CategoryTranslationUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -554,7 +561,7 @@ export type CategoryTranslationUncheckedUpdateManyInput = {
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
   languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
@@ -1193,7 +1200,7 @@ export type CategoryTranslationUncheckedUpdateManyWithoutCategoryNestedInput = {
 
 export type CategoryTranslationCreateWithoutLanguageInput = {
   name: string;
-  description: string;
+  description?: string | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -1207,7 +1214,7 @@ export type CategoryTranslationUncheckedCreateWithoutLanguageInput = {
   id?: number;
   categoryId: number;
   name: string;
-  description: string;
+  description?: string | null;
   createdById?: number | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
@@ -1271,7 +1278,10 @@ export type CategoryTranslationScalarWhereInput = {
   categoryId?: Prisma.IntFilter<'CategoryTranslation'> | number;
   languageId?: Prisma.StringFilter<'CategoryTranslation'> | string;
   name?: Prisma.StringFilter<'CategoryTranslation'> | string;
-  description?: Prisma.StringFilter<'CategoryTranslation'> | string;
+  description?:
+    | Prisma.StringNullableFilter<'CategoryTranslation'>
+    | string
+    | null;
   createdById?: Prisma.IntNullableFilter<'CategoryTranslation'> | number | null;
   updatedById?: Prisma.IntNullableFilter<'CategoryTranslation'> | number | null;
   deletedAt?:
@@ -1286,7 +1296,7 @@ export type CategoryTranslationScalarWhereInput = {
 
 export type CategoryTranslationCreateWithoutCreatedByInput = {
   name: string;
-  description: string;
+  description?: string | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -1301,7 +1311,7 @@ export type CategoryTranslationUncheckedCreateWithoutCreatedByInput = {
   categoryId: number;
   languageId: string;
   name: string;
-  description: string;
+  description?: string | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
@@ -1326,7 +1336,7 @@ export type CategoryTranslationCreateManyCreatedByInputEnvelope = {
 
 export type CategoryTranslationCreateWithoutDeletedByInput = {
   name: string;
-  description: string;
+  description?: string | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -1341,7 +1351,7 @@ export type CategoryTranslationUncheckedCreateWithoutDeletedByInput = {
   categoryId: number;
   languageId: string;
   name: string;
-  description: string;
+  description?: string | null;
   createdById?: number | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
@@ -1366,7 +1376,7 @@ export type CategoryTranslationCreateManyDeletedByInputEnvelope = {
 
 export type CategoryTranslationCreateWithoutUpdatedByInput = {
   name: string;
-  description: string;
+  description?: string | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -1381,7 +1391,7 @@ export type CategoryTranslationUncheckedCreateWithoutUpdatedByInput = {
   categoryId: number;
   languageId: string;
   name: string;
-  description: string;
+  description?: string | null;
   createdById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
@@ -1490,7 +1500,7 @@ export type CategoryTranslationUpdateManyWithWhereWithoutUpdatedByInput = {
 
 export type CategoryTranslationCreateWithoutCategoryInput = {
   name: string;
-  description: string;
+  description?: string | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
@@ -1504,7 +1514,7 @@ export type CategoryTranslationUncheckedCreateWithoutCategoryInput = {
   id?: number;
   languageId: string;
   name: string;
-  description: string;
+  description?: string | null;
   createdById?: number | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
@@ -1560,7 +1570,7 @@ export type CategoryTranslationCreateManyLanguageInput = {
   id?: number;
   categoryId: number;
   name: string;
-  description: string;
+  description?: string | null;
   createdById?: number | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
@@ -1571,7 +1581,7 @@ export type CategoryTranslationCreateManyLanguageInput = {
 
 export type CategoryTranslationUpdateWithoutLanguageInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1589,7 +1599,7 @@ export type CategoryTranslationUncheckedUpdateWithoutLanguageInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
@@ -1606,7 +1616,7 @@ export type CategoryTranslationUncheckedUpdateManyWithoutLanguageInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
@@ -1624,7 +1634,7 @@ export type CategoryTranslationCreateManyCreatedByInput = {
   categoryId: number;
   languageId: string;
   name: string;
-  description: string;
+  description?: string | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
@@ -1637,7 +1647,7 @@ export type CategoryTranslationCreateManyDeletedByInput = {
   categoryId: number;
   languageId: string;
   name: string;
-  description: string;
+  description?: string | null;
   createdById?: number | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
@@ -1650,7 +1660,7 @@ export type CategoryTranslationCreateManyUpdatedByInput = {
   categoryId: number;
   languageId: string;
   name: string;
-  description: string;
+  description?: string | null;
   createdById?: number | null;
   deletedAt?: Date | string | null;
   createdAt?: Date | string;
@@ -1660,7 +1670,7 @@ export type CategoryTranslationCreateManyUpdatedByInput = {
 
 export type CategoryTranslationUpdateWithoutCreatedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1679,7 +1689,7 @@ export type CategoryTranslationUncheckedUpdateWithoutCreatedByInput = {
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
   languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
@@ -1696,7 +1706,7 @@ export type CategoryTranslationUncheckedUpdateManyWithoutCreatedByInput = {
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
   languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
@@ -1710,7 +1720,7 @@ export type CategoryTranslationUncheckedUpdateManyWithoutCreatedByInput = {
 
 export type CategoryTranslationUpdateWithoutDeletedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1729,7 +1739,7 @@ export type CategoryTranslationUncheckedUpdateWithoutDeletedByInput = {
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
   languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
@@ -1746,7 +1756,7 @@ export type CategoryTranslationUncheckedUpdateManyWithoutDeletedByInput = {
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
   languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
@@ -1760,7 +1770,7 @@ export type CategoryTranslationUncheckedUpdateManyWithoutDeletedByInput = {
 
 export type CategoryTranslationUpdateWithoutUpdatedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1779,7 +1789,7 @@ export type CategoryTranslationUncheckedUpdateWithoutUpdatedByInput = {
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
   languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
@@ -1796,7 +1806,7 @@ export type CategoryTranslationUncheckedUpdateManyWithoutUpdatedByInput = {
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number;
   languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
@@ -1812,7 +1822,7 @@ export type CategoryTranslationCreateManyCategoryInput = {
   id?: number;
   languageId: string;
   name: string;
-  description: string;
+  description?: string | null;
   createdById?: number | null;
   updatedById?: number | null;
   deletedAt?: Date | string | null;
@@ -1823,7 +1833,7 @@ export type CategoryTranslationCreateManyCategoryInput = {
 
 export type CategoryTranslationUpdateWithoutCategoryInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   deletedAt?:
     | Prisma.NullableDateTimeFieldUpdateOperationsInput
     | Date
@@ -1841,7 +1851,7 @@ export type CategoryTranslationUncheckedUpdateWithoutCategoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
@@ -1858,7 +1868,7 @@ export type CategoryTranslationUncheckedUpdateManyWithoutCategoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   languageId?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
-  description?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
   deletedAt?:
@@ -2026,7 +2036,7 @@ export type $CategoryTranslationPayload<
       categoryId: number;
       languageId: string;
       name: string;
-      description: string;
+      description: string | null;
       createdById: number | null;
       updatedById: number | null;
       deletedAt: Date | null;
