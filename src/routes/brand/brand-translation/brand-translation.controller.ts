@@ -17,6 +17,7 @@ import {
 } from './brand-translation.dto';
 import { IsPublic } from 'src/shared/decorators/auth.decorator';
 import { ActiveUser } from 'src/shared/decorators/active-user.decorator';
+import { MessageResDTO } from 'src/shared/dto/response.dto';
 
 @Controller('brand-translation')
 export class BrandTranslationController {
@@ -58,7 +59,7 @@ export class BrandTranslationController {
   }
 
   @Delete(':brandTranslationId')
-  @ZodSerializerDto(GetBrandTranslationDetailResDTO)
+  @ZodSerializerDto(MessageResDTO)
   delete(
     @Param() params: GetBrandTranslationParamDTO,
     @ActiveUser('userId') userId: number,

@@ -71,7 +71,7 @@ export class BrandService {
       return { message: 'Brand deleted successfully' };
     } catch (error) {
       if (isRequiredRecordNotFoundPrisma2025Error(error)) {
-        return { message: 'Brand not found' };
+        throw NotFoundRecordException;
       }
       throw error;
     }
